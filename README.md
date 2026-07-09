@@ -1,5 +1,10 @@
 # Matrix — mundo procedural com blocos sencientes
 
+<p align="center">
+  <img src="assets/matrix-rain.gif" alt="chuva de código verde estilo Matrix" width="100%">
+</p>
+<p align="center"><sub>o banner também é <code>f(seed)</code> — gerado por <a href="assets/gerar_rain.py"><code>assets/gerar_rain.py</code></a> com a seed default do universo (<code>20260628</code>), em loop perfeito</sub></p>
+
 Um experimento meio **filosófico**, meio **de programação**: construir uma "Matrix"
 de brinquedo onde "blocos" parecem vivos — sem nenhuma física hiper-realista.
 Tudo roda no terminal, em ASCII, e é um único arquivo C (`main.c`) sem
