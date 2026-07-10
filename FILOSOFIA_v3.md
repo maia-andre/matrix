@@ -58,6 +58,11 @@ O que já se sabe, medido:
 - `phi` não media integração: media **o segundo motivo** — e quando a seleção
   extingue o segundo motivo, a "integração" morre junto (nota 05). A luz acesa
   era, em quase toda a sua intensidade, o conflito entre motivos.
+- E o `relato` do eremita é **mudo** (nota 06) — por um mecanismo novo: a
+  maquinaria introspectiva é per-agente e funciona, mas um self de **um motivo
+  só não tem biografia** — nada a dizer acima do acaso. Os outros mostradores
+  zeram pela *sonda*; o relato zera pelo *conteúdo*. A costura engole até a
+  introspecção, pelo lado de dentro.
 
 **⛔ aguarda (decide a bifurcação):** a edição do auto-modelo de verdade — separar
 em `prever_valor` o próprio consumo do consumo dos rivais. Predição de (A): feito
@@ -108,15 +113,22 @@ rodados pelo **observador**. Três movimentos, em escada:
    vantagem, sobre a poltrona, de que aqui o determinismo é **literal e
    inspecionável** (`git show` da linha que decide).
 
-## 5. A dobradiça da confabulação *(item 5 — ⛔ aguarda a Fase 2, e é a abóbada)*
+## 5. A dobradiça da confabulação *(item 5 — a versão selvagem já existe; a forçada ⛔ aguarda)*
 
-Quando um bloco racionalizar uma ação que não escolheu, o projeto terá, em casa, o
+Quando um bloco racionaliza uma ação que não escolheu, o projeto tem, em casa, o
 fenômeno que torna o auto-relato humano pouco confiável (Gazzaniga; Nisbett &
-Wilson). E então: o último reduto do "mas eu *sei* que sou consciente, por dentro"
-**é ele próprio um relato**. Se relatos confabulam, quanto peso probatório sobra?
+Wilson). **E ele já aconteceu, sem ninguém instalá-lo**: `resolver()` nega células
+disputadas — uma intervenção que a física roda de graça — e o intérprete leigo
+racionaliza **~21%** dessas ações impostas ("fiquei porque aqui é o melhor"),
+dizendo "não sei" nos outros ~79% (nota 06). A racionalização não precisou ser
+programada: bastou um intérprete que lê comportamento e um mundo que às vezes
+desobedece o plano.
 
-*(Por isso a v3 não pode ser terminada antes da Fase 2: sem esta seção, o arco
-"régua → palavra → relato" fica sem o fecho.)*
+O que ⛔ aguarda: o **Bandersnatch forçado** com a comparação de arquiteturas
+(intérprete que lê a ação × que lê o plano — confabular × detectar), e então o
+fecho do arco: o último reduto do "mas eu *sei* que sou consciente, por dentro"
+**é ele próprio um relato**. Se relatos confabulam — e aqui, mensurável e
+selvagem, confabulam — quanto peso probatório sobra?
 
 ## 6. Função × experiência — a escolha que a v2 evita *(item 6)*
 
@@ -146,7 +158,7 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
 | `agencia` | eremita (sem rivais percebidos) | ✅ 0 exato, demonstrável (nota 01 §3) |
 | `modelo_do_outro` | eremita (sem pretendentes) | ✅ 0,0000 exato, média e máx (nota 04) |
 | `phi` (redefinida) | qualquer redução a um módulo só: eremita, `peso_espaco ≡ 0`, `prever_valor ≡ 0` | ✅ 0 exato, demonstrável (nota 05) |
-| `relato` | intérprete cego (relato ≡ constante): `relato = 0` **exato**, pela construção do κ | 📋 declarado antes de construir (ROADMAP §2.0, 2026-07-10) |
+| `relato` | intérprete cego (relato ≡ constante): `relato = 0` **exato**, pela construção do κ | ✅ 0,0000 exato, 4 constantes × 3 seeds — pré-registrado **antes** do código (nota 06) |
 
 ## Apêndice B — o que falta para tirar o rótulo "esqueleto"
 

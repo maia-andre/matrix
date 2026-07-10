@@ -362,6 +362,25 @@ Torná-lo causal (vizinhos lendo o sinal, mentira custando — Fase 4) é o pass
 seguinte, separado de propósito. E o risco de sempre: um relato bem calibrado é
 evidência de **calibração**, não de experiência.
 
+## 2.1 O mostrador entregue — e o placar do pré-registro ✅ *(nota 06)*
+
+Construído em `ffb3014` (o pré-registro acima é `eee9511`, commitado antes).
+Simulação bit-a-bit idêntica; coluna 18 do CSV.
+
+| predição | resultado |
+|---|---|
+| P1 intérprete cego → 0 exato | ✅ 0,0000 (4 constantes × 3 seeds, média e máx) |
+| P2 `0 < relato < 1` | ✅ κ ≈ **0,67** |
+| P3 confabulação selvagem | ✅ negados: calibração 0,78 → **0,47**; **~21% racionalizam**, ~79% dizem "não sei" |
+| P4 erros onde o mapa ≠ heurística | ✅ ~35% das escolhas *livres* recebem "não sei" |
+| P5 eremita não zera | ❌ **FALHOU** — o eremita fica **mudo** (κ ≈ 0,005): um self de um motivo só não tem o que relatar acima do acaso. A costura engole o quinto mostrador, pelo lado do **conteúdo** |
+
+O experimento do intérprete, abaixo, já tem a versão **selvagem** rodada de graça
+pela física (`resolver()` nega ≈ 6% das ações): a linha *honesto* domina (~79%) e
+a *confabula* existe (~21%), dosada pela geometria. O que falta é a versão
+**forçada** — e a comparação de arquiteturas (ler a ação × ler o plano), que
+transforma a tabela num resultado de seleção, não de design.
+
 ## O experimento do intérprete (Gazzaniga)
 
 Deve ser o **primeiro** experimento assim que o mostrador existir:
