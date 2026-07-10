@@ -781,6 +781,8 @@ typedef struct {
     float agencia;         /* ABLACAO "quer/escolhe": a decisao muda com a fome     */
     float modelo_do_outro; /* INTERVENCAO: antecipar os rivais muda a escolha? (NAO */
                            /* e "auto": mede o OUTRO — zero exato para um eremita)   */
+    float relato;          /* CALIBRACAO "diz de si": o motivo que o interprete     */
+                           /* leigo infere da ACAO bate com o motivo da DECISAO?     */
 } Bateria;
 
 static Bateria ultima_bateria;   /* ultimo tick medido; lido pelo HUD e pelo log */
@@ -940,6 +942,81 @@ static float modelo_do_outro_do_bloco(Bloco *b, int i) {
     return 0.0f;
 }
 
+/* Mostrador 'relato' (pre-registro no ROADMAP §2.0, commitado ANTES deste
+ * codigo): o bloco "diz" por que agiu — e quem fala e um interprete LEIGO.
+ *
+ * A restricao arquitetural e a tese de Nisbett & Wilson: introspeccao e
+ * percepcao do proprio comportamento. O interprete NAO le o estado interno
+ * (fome, urgencia, utilidade) nem o plano (intencao/alvo): le o 3x3 percebido
+ * na hora da decisao e a ACAO EXECUTADA, e infere dali o motivo — "fui para o
+ * argmax da comida CRUA, logo fome" / "do espaco, logo espaco" / "dos dois" /
+ * "de nenhum: nao sei". Comida crua, nao prever_valor: o interprete e um
+ * observador de nivel 2 assistindo a um planejador de nivel 3+.
+ *
+ * A VERDADE (lado do observador, acesso total): o motivo que explicaria a
+ * DECISAO — o alvo cognitivo, pre-resolver, comparado aos argmax de
+ * prever_valor (o mapa real do bloco) e de espaco. O canal do relato pode
+ * errar por dois caminhos legitimos: resolver() nega a acao (o interprete ve
+ * outra acao, nao o plano) e a heuristica leiga nao entende o mapa (rebrota,
+ * partilha, desconto). Um relato que nao pode errar nao relata (licao da
+ * Fase 1).
+ *
+ * Estatistica: concordancia ACIMA DO ACASO (kappa de Cohen, so aritmetica),
+ * clampada em [0,1]. Pela construcao do kappa, um interprete CEGO (relato
+ * constante, qualquer valor) le 0 EXATO: linha unica => concordancia
+ * observada == esperada pelo acaso. E a condicao P1 do pre-registro,
+ * demonstravel antes de rodar. Bloco encurralado (sem escolha) sai da media,
+ * como nos demais; bloco que morreu no tick nao relata. */
+#define REL_NAOSEI 0   /* a acao nao bate com motivo simples nenhum          */
+#define REL_FOME   1   /* a acao e o argmax da comida (crua, para o relato)  */
+#define REL_ESPACO 2   /* a acao e o argmax do espaco                        */
+#define REL_AMBOS  3   /* os dois argmax coincidem na acao                   */
+
+static int   rel_cx[MAX_AG], rel_cy[MAX_AG];  /* argmax LEIGO: comida crua   */
+static int   rel_ex[MAX_AG], rel_ey[MAX_AG];  /* argmax de espaco            */
+static int   rel_verdade[MAX_AG];             /* motivo da DECISAO, -1 = fora */
+static float relato_ultimo;
+
+/* Rotula uma posicao contra os dois argmax de motivo. Vale para o relato
+ * (acao executada x argmaxes leigos) e para a verdade (alvo x argmaxes reais). */
+static int rel_classifica(int x, int y, int fx, int fy, int ex, int ey) {
+    int f = (x == fx && y == fy), e = (x == ex && y == ey);
+    if (f && e) return REL_AMBOS;
+    if (f)      return REL_FOME;
+    if (e)      return REL_ESPACO;
+    return REL_NAOSEI;
+}
+
+/* FASE 1 do relato (na decisao, antes de resolver): fotografa os argmax que o
+ * interprete PODERA usar e computa o motivo verdadeiro da decisao. Mesma
+ * varredura e mesmo desempate de melhor_celula (ficar parado primeiro, '>'
+ * estrito) — o interprete e leigo no conteudo, nao na ordem de olhar. */
+static void relato_prepara(Bloco *b, int i) {
+    int fx = b->x, fy = b->y, ex = b->x, ey = b->y, vx = b->x, vy = b->y;
+    float mf = comida[b->y][b->x];
+    float me = (8 - rivais_em(b->x, b->y, b->x, b->y)) / 8.0f;
+    float mv = prever_valor(b->x, b->y, b);
+    int n = 1;
+    for (int dy = -1; dy <= 1; dy++)
+        for (int dx = -1; dx <= 1; dx++) {
+            if (dx == 0 && dy == 0) continue;
+            int nx = b->x + dx, ny = b->y + dy;
+            if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
+            if (ocup[ny][nx] != -1) continue;        /* ocupada: inalcancavel */
+            float f = comida[ny][nx];
+            float e = (8 - rivais_em(nx, ny, b->x, b->y)) / 8.0f;
+            float v = prever_valor(nx, ny, b);
+            if (f > mf) { mf = f; fx = nx; fy = ny; }
+            if (e > me) { me = e; ex = nx; ey = ny; }
+            if (v > mv) { mv = v; vx = nx; vy = ny; }
+            n++;
+        }
+    if (n < 2) { rel_verdade[i] = -1; return; }      /* encurralado: sem escolha */
+    rel_cx[i] = fx; rel_cy[i] = fy;
+    rel_ex[i] = ex; rel_ey[i] = ey;
+    rel_verdade[i] = rel_classifica(alvo_x[i], alvo_y[i], vx, vy, ex, ey);
+}
+
 /* FASE 1 (apos decidir, ANTES de resolver): os dois mostradores de ablacao, e
  * guarda a previsao do modelo. Le o alvo COGNITIVO — antes de resolver() trocar
  * alvos negados pela posicao atual (queremos o efeito da mente, nao do bloqueio). */
@@ -969,6 +1046,10 @@ static void medir_decisao(void) {
             restam[i]      = blocos[i].horizonte;
         }
         energia_antes[i] = blocos[i].energia;
+
+        /* RELATO, fase 1: fotografa os argmax do interprete e a verdade da
+         * decisao; o relato em si so existe depois que a acao for executada. */
+        relato_prepara(&blocos[i], i);
     }
     ultima_bateria.agencia         = n_ag ? ag / n_ag : 0.0f;  /* so quem tinha escolha */
     ultima_bateria.modelo_do_outro = n_mo ? mo / n_mo : 0.0f;  /* idem: eremita fora  */
@@ -1010,6 +1091,41 @@ static void medir_modelo(void) {
     }
     if (n) modelo_ultimo = acc / n;
     ultima_bateria.modelo = modelo_ultimo;
+}
+
+/* FASE 2 do relato (apos aplicar_e_comer, ANTES de reproduzir reciclar slots):
+ * o interprete leigo ve onde o bloco DE FATO esta — o plano pode ter sido
+ * negado por resolver(), e ele nao tem como saber — e "explica" a acao. O
+ * kappa compara o relato com o motivo verdadeiro da decisao (fase 1). */
+static void medir_relato(void) {
+    int conf[4][4] = {{0}};
+    int n = 0;
+    for (int i = 0; i < n_blocos; i++) {
+        if (!blocos[i].vivo) continue;           /* morreu no tick: nao relata */
+        if (rel_verdade[i] < 0) continue;        /* encurralado: sem escolha   */
+        int r = rel_classifica(blocos[i].x, blocos[i].y,
+                               rel_cx[i], rel_cy[i], rel_ex[i], rel_ey[i]);
+        conf[r][rel_verdade[i]]++;
+        n++;
+    }
+    if (n > 0) {
+        /* kappa de Cohen: (po - pe) / (1 - pe). Somas inteiras cabem exatas
+         * num float (n <= 1408, produtos < 2^24), entao a propriedade "relato
+         * constante => po == pe => kappa 0" vale EXATA, nao aproximada. */
+        float po = 0.0f, pe = 0.0f;
+        for (int k = 0; k < 4; k++) {
+            int lin = 0, col = 0;
+            for (int j = 0; j < 4; j++) { lin += conf[k][j]; col += conf[j][k]; }
+            po += (float)conf[k][k];
+            pe += (float)lin * (float)col;
+        }
+        po /= (float)n;
+        pe /= (float)n * (float)n;
+        float kappa = pe < 1.0f ? (po - pe) / (1.0f - pe) : 0.0f;
+        if (kappa < 0.0f) kappa = 0.0f;          /* mostradores moram em [0,1] */
+        relato_ultimo = kappa;
+    }
+    ultima_bateria.relato = relato_ultimo;       /* tick sem relator: repete   */
 }
 
 /* Desenha um frame inteiro num buffer e cospe de uma vez (menos piscada). */
@@ -1067,10 +1183,12 @@ static void desenhar(uint32_t seed, long tick) {
         st.urg_m, st.urg_sd, st.esp_m, st.esp_sd);
     /* bateria de desbotamento (0..1): quanto cada faculdade carrega o comportamento.
      * modelo = mapa bate com o territorio; agencia = decisao muda com a fome;
-     * modelo-do-outro = antecipar os rivais podia mudar a escolha. */
+     * modelo-do-outro = antecipar os rivais podia mudar a escolha;
+     * relato = o motivo que o bloco "diz" bate com o motivo da decisao. */
     p += sprintf(buf + p,
-        "  bateria (0..1):  modelo %.2f   agencia %.2f   modelo-do-outro %.2f\n",
-        ultima_bateria.modelo, ultima_bateria.agencia, ultima_bateria.modelo_do_outro);
+        "  bateria (0..1):  modelo %.2f   agencia %.2f   modelo-do-outro %.2f   relato %.2f\n",
+        ultima_bateria.modelo, ultima_bateria.agencia,
+        ultima_bateria.modelo_do_outro, ultima_bateria.relato);
     p += sprintf(buf + p,
         "  legenda: \033[92m@\033[0m forte  \033[93m@\033[0m ok  \033[91m@\033[0m fraco"
         "   \033[2;32m. : *\033[0m comida    (Ctrl+C para sair)\n");
@@ -1276,7 +1394,7 @@ int main(int argc, char **argv) {
         }
         fprintf(logf, "seed,tick,pop,energia_media,comida_total,"
                       "hor_m,hor_sd,desc_m,desc_sd,urg_m,urg_sd,esp_m,esp_sd,"
-                      "modelo,agencia,modelo_do_outro,phi\n");
+                      "modelo,agencia,modelo_do_outro,phi,relato\n");
     }
 
     rng_estado = seed ? seed : 1u;   /* o RNG do universo nasce da seed      */
@@ -1343,20 +1461,22 @@ int main(int argc, char **argv) {
                 fprintf(logf,
                     "%u,%ld,%d,%.3f,%.1f,"
                     "%.3f,%.3f,%.4f,%.4f,%.3f,%.3f,%.3f,%.3f,"
-                    "%.3f,%.3f,%.3f,%.3f\n",
+                    "%.3f,%.3f,%.3f,%.3f,%.3f\n",
                     seed, t, st.pop, st.energia_media, st.comida_total,
                     st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
                     st.urg_m, st.urg_sd, st.esp_m, st.esp_sd,
                     ultima_bateria.modelo, ultima_bateria.agencia,
-                    ultima_bateria.modelo_do_outro, st.phi_media);
+                    ultima_bateria.modelo_do_outro, st.phi_media,
+                    ultima_bateria.relato);
                 fflush(logf);   /* descarrega ja: Ctrl+C no meio nao perde a cauda */
             }
 
             resolver();
             aplicar_e_comer();
             /* FASE 2: agora que os blocos comeram (mas ANTES de reproduzir reusar
-             * slots), confere a previsao do modelo contra a colheita real. */
-            if (interativo || logf) medir_modelo();
+             * slots), confere a previsao do modelo contra a colheita real — e o
+             * interprete leigo explica a acao executada (relato). */
+            if (interativo || logf) { medir_modelo(); medir_relato(); }
             reproduzir();
             rebrotar();
             t++;

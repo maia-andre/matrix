@@ -86,7 +86,7 @@ combina com os posicionais em qualquer posição:
 Colunas: `seed, tick, pop, energia_media, comida_total`; para cada um dos 4
 traços do nível 6, a **média** (`_m`) e o **desvio-padrão** (`_sd`)
 (`hor_*, desc_*, urg_*, esp_*`); e os **mostradores da bateria** (abaixo),
-todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi`. Como o universo é
+todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi, relato`. Como o universo é
 `f(seed)` (ver abaixo), o CSV é **reproduzível bit-a-bit**: qualquer pessoa
 regenera o mesmo dataset a partir da seed. É a base para virar instrumento de
 pesquisa — varrer seeds/parâmetros e medir o que a evolução faz, em vez de só
@@ -108,6 +108,7 @@ projeto e o desfecho honesto — está em [`FILOSOFIA_v2.md`](./FILOSOFIA_v2.md)
 | `agencia` | "quer / escolhe" | ablação | fração cuja decisão muda em **algum** ponto do domínio da fome. Como `utilidade` é, por célula, uma reta em `λ = peso_espaco·(1−fome)/(1+urgencia·fome)`, varrer `λ ∈ [0, peso_espaco]` percorre o domínio interno inteiro — sem ponto de sonda arbitrário |
 | `modelo_do_outro` | "o outro também decide" | ablação (intervenção) | fração (não-encurralada) cuja escolha mudaria ao antecipar que rivais miram a mesma célula — varre a força da antecipação por **todo** o domínio `[0,∞)`, não no ponto arbitrário `ANTECIPACAO`. **Zero exato sem rivais**: mede o outro, não o self |
 | `phi` (`Φ~`) | "integra" | calibração | a **menor** distância de Kendall entre a ordem integrada (`utilidade`) e a ordem de **cada módulo isolado** (comida-agora, espaço, mapa), em `[0,1]`. Se um módulo sozinho reproduz a decisão, `phi = 0`: integrar uma coisa só não é integrar (redefinida na nota 05; a 1ª versão, contra a comida só, era infalseável) |
+| `relato` | "diz de si" | calibração | κ de Cohen (concordância **acima do acaso**) entre o motivo que o **intérprete leigo** infere da ação executada e o motivo real da decisão. O intérprete não lê o estado interno nem o plano — só o 3×3 e o que o bloco *fez* (introspecção como percepção do próprio comportamento, Nisbett & Wilson). Pré-registrado antes de construir (`ROADMAP.md` §2.0; nota 06) |
 
 > ⚠️ **A primeira versão de `modelo` estava quebrada**, e a conclusão que ela
 > sustentava ("o bloco modela a física com exatidão; o único buraco é o social")
@@ -160,8 +161,22 @@ profundidade de planejamento) estava **errada** — era co-tendência de 30 000
 ticks, não acoplamento; congelar a profundidade não segura `phi`. Ver
 [`papers/notes/05-phi-media-o-segundo-motivo.md`](./papers/notes/05-phi-media-o-segundo-motivo.md).
 
-Pendente: `relato` (a fidelidade do auto-relato sob intervenção — o experimento
-"Bandersnatch").
+E o `relato` entregou, já na primeira medição, o embrião do experimento do
+intérprete: `resolver()` **intervém de graça** nas ações (nega células
+disputadas), e nos blocos negados a calibração desaba (0,78 → 0,47) — o
+intérprete explica a ação imposta, não a decisão. Ele não confabula sempre:
+barrado, diz **"não sei"** em ~79% dos casos e **racionaliza nos ~21%** ("fiquei
+porque aqui é o melhor" — sem ter escolhido ficar). E não entende ~35% das
+próprias escolhas *livres* — as movidas pelo planejador que a heurística leiga
+não acompanha. O eremita, contra a predição P5, fica **mudo** (κ ≈ 0,005): sem
+segundo motivo, toda decisão tem o mesmo porquê, e não há informação *acima do
+acaso* a relatar. Escopo honesto da v1: o sinal é medido, mas **nenhum vizinho o
+consome ainda** — o relato é epifenomenal por construção, e isso é resultado,
+não defeito. Ver [`papers/notes/06-o-interprete-leigo.md`](./papers/notes/06-o-interprete-leigo.md).
+
+Pendente: tornar o `relato` **causal** (vizinhos lendo o sinal, mentira custando —
+Fase 4) e o Bandersnatch **forçado** (sobrescrever a escolha e comparar arquiteturas
+de introspecção: ler a ação × ler o plano).
 
 ### A pílula vermelha 🔴 — entrar num bloco
 
