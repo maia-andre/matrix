@@ -146,6 +146,15 @@ static int alvo_y[MAX_AG];
 static int intencao_x[MAX_AG];
 static int intencao_y[MAX_AG];
 
+/* (relato causal — pre-registro ROADMAP §4.0) O SINAL que cada bloco emite
+ * sobre a propria intencao. Ate aqui pretendentes_em lia intencao_* direto:
+ * TELEPATIA, acesso perfeito a mente alheia. Agora ha uma passagem 'emitir'
+ * entre declarar e decidir — cada bloco escreve aqui o que ESCOLHE contar, e
+ * os vizinhos leem o sinal, nao a mente. Com todos honestos (sinal ==
+ * intencao) o mundo e bit-a-bit identico ao da telepatia (verificado; S1). */
+static int sinal_x[MAX_AG];
+static int sinal_y[MAX_AG];
+
 static int reivindicado[ALT][LARG];  /* quem ganhou o direito de entrar aqui */
 
 /* Gerador pseudo-aleatorio do proprio universo (LCG). Semeado pela seed,
@@ -351,10 +360,11 @@ static float utilidade(int cx, int cy, Bloco *b) {
          + b->peso_espaco * espaco * (1.0f - fome);
 }
 
-/* (nivel 5) Quantos OUTROS blocos declararam que querem entrar em (cx,cy)?
+/* (nivel 5) Quantos OUTROS blocos SINALIZARAM que querem entrar em (cx,cy)?
  * So vizinhos imediatos de (cx,cy) podem mira-la (ninguem anda mais que um
- * passo), entao basta varrer o 3x3 ao redor e ler a intencao de cada um. E o
- * bloco "lendo a mente" dos vizinhos a partir das intencoes ja declaradas. */
+ * passo), entao basta varrer o 3x3 ao redor e ler o sinal de cada um. Antes
+ * isto lia intencao_* — telepatia. Agora le o que o vizinho ESCOLHEU contar
+ * (sinal_*, escrito por emitir): comunicacao, com direito a mentira. */
 static int pretendentes_em(int cx, int cy, int self_i) {
     int n = 0;
     for (int dy = -1; dy <= 1; dy++) {
@@ -363,7 +373,7 @@ static int pretendentes_em(int cx, int cy, int self_i) {
             if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
             int j = ocup[ny][nx];
             if (j == -1 || j == self_i) continue;       /* vazio ou eu mesmo  */
-            if (intencao_x[j] == cx && intencao_y[j] == cy) n++;
+            if (sinal_x[j] == cx && sinal_y[j] == cy) n++;
         }
     }
     return n;
@@ -401,6 +411,16 @@ static void melhor_celula(Bloco *b, int i, int antecipar, int *bx, int *by) {
  * pretende ir — e exatamente a decisao do nivel 4. */
 static void declarar(int i) {
     melhor_celula(&blocos[i], i, 0, &intencao_x[i], &intencao_y[i]);
+}
+
+/* Passagem intermediaria (relato causal): cada bloco EMITE o sinal sobre a
+ * propria intencao. Nesta versao todos sao honestos — sinal = intencao — e o
+ * mundo e bit-a-bit identico ao da telepatia: a fisica nao mudou, so a
+ * epistemologia (o que os vizinhos leem deixou de ser a mente e passou a ser
+ * uma declaracao). A mentira vira possivel aqui; usada, custa (§4.0). */
+static void emitir(int i) {
+    sinal_x[i] = intencao_x[i];
+    sinal_y[i] = intencao_y[i];
 }
 
 /* 2a passagem (nivel 5): cada bloco RECONSIDERA, agora antecipando a disputa
@@ -1446,6 +1466,8 @@ int main(int argc, char **argv) {
         if (!pausado) {
             for (int i = 0; i < n_blocos; i++)
                 if (blocos[i].vivo) declarar(i);
+            for (int i = 0; i < n_blocos; i++)
+                if (blocos[i].vivo) emitir(i);      /* o sinal, nao a mente  */
             for (int i = 0; i < n_blocos; i++)
                 if (blocos[i].vivo) decidir(i);
 
