@@ -86,7 +86,7 @@ combina com os posicionais em qualquer posição:
 Colunas: `seed, tick, pop, energia_media, comida_total`; para cada um dos 4
 traços do nível 6, a **média** (`_m`) e o **desvio-padrão** (`_sd`)
 (`hor_*, desc_*, urg_*, esp_*`); e os **mostradores da bateria** (abaixo),
-todos normalizados em `[0,1]`: `modelo, agencia, automodelo, phi`. Como o universo é
+todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi`. Como o universo é
 `f(seed)` (ver abaixo), o CSV é **reproduzível bit-a-bit**: qualquer pessoa
 regenera o mesmo dataset a partir da seed. É a base para virar instrumento de
 pesquisa — varrer seeds/parâmetros e medir o que a evolução faz, em vez de só
@@ -106,7 +106,7 @@ projeto e o desfecho honesto — está em [`FILOSOFIA_v2.md`](./FILOSOFIA_v2.md)
 |-----------|---------|---------|-----------|
 | `modelo` | "prevê / sabe" | calibração | o **mapa do bloco** (`prever_valor`: horizonte, desconto, partilha) promete uma colheita descontada ao entrar no alvo; ao longo dos seus próprios `horizonte` ticks compara-se com a colheita real, descontada igual — `1 − |pred−real|/(pred+real)` |
 | `agencia` | "quer / escolhe" | ablação | fração cuja decisão muda em **algum** ponto do domínio da fome. Como `utilidade` é, por célula, uma reta em `λ = peso_espaco·(1−fome)/(1+urgencia·fome)`, varrer `λ ∈ [0, peso_espaco]` percorre o domínio interno inteiro — sem ponto de sonda arbitrário |
-| `automodelo` | "eu, um entre outros" | ablação | fração cuja decisão muda ao **antecipar os rivais** (`intencao` pré-social ≠ `alvo` pós-social) |
+| `modelo_do_outro` | "o outro também decide" | ablação (intervenção) | fração (não-encurralada) cuja escolha mudaria ao antecipar que rivais miram a mesma célula — varre a força da antecipação por **todo** o domínio `[0,∞)`, não no ponto arbitrário `ANTECIPACAO`. **Zero exato sem rivais**: mede o outro, não o self |
 | `phi` (`Φ~/10`) | "integra" | calibração | distância entre a ordem de valor *integrada* e a *reativa* (ver [`FILOSOFIA.md`](./FILOSOFIA.md) §5) |
 
 > ⚠️ **A primeira versão de `modelo` estava quebrada**, e a conclusão que ela
@@ -128,10 +128,19 @@ carrega o valor adaptativo de enxergar rivais é o termo `espaco`, não a partil
 — um bloco que ignora os rivais por completo prevê melhor (`0,78`) e paga só
 ~2,4% de população.
 
-`automodelo` **acende com a lotação** — começa em `0` (mundo esparso, ninguém
-disputa) e sobe a ~`0.35` conforme a população adensa. Cuidado com a leitura: ele
-é identicamente **zero** para um bloco que não percebe rivais, e portanto mede uma
-relação, não uma posse (o *teste do eremita*, em [`ROADMAP.md`](./ROADMAP.md) §1.5).
+`modelo_do_outro` **acende com a lotação** — começa em `0` (mundo esparso, ninguém
+disputa) e sobe a ~`0.35` conforme a população adensa. Ele nasceu com três defeitos:
+era uma **observação** lida de graça (`intencao ≠ alvo`, subproduto de `decidir()`),
+não uma intervenção; a leitura **escalava com a constante `ANTECIPACAO`** (varrê-la
+de `0` a `∞` leva a leitura de `0` até a assíntota — `0.5` era só um ponto no meio);
+e o nome mentia. O conserto o torna uma **intervenção ancorada** — pergunta se
+antecipar os rivais *poderia* mudar a escolha, varrendo a força da antecipação por
+todo o seu domínio, sem depender de `ANTECIPACAO` (o critério é exato, sem
+amostragem). E assume o nome honesto: é identicamente **zero** para um bloco que não
+percebe rivais (o *teste do eremita*), logo mede um modelo do **outro**, não de si —
+uma relação, não uma posse. Um `automodelo` de verdade (o self na simulação) é outra
+coisa, ainda por construir (ver "Aprofundar o auto-modelo", abaixo).
+→ [`papers/notes/04-o-automodelo-era-um-modelo-do-outro.md`](./papers/notes/04-o-automodelo-era-um-modelo-do-outro.md).
 
 E o achado mais duro do projeto até aqui: **a evolução extingue a agência.** Ao
 longo de 30 000 ticks `peso_espaco` desaba de 3,0 para 0,08, e `agencia` desaba
@@ -211,7 +220,7 @@ tudo (servindo de teste de regressão: diff não-vazio = comportamento mudou).
   da população (`horizonte`, `desconto`, `urgencia`, `espaco`) — a média deriva
   (evolução do nível 6 ao vivo) e o **desvio** mostra se a população *converge*
   (todos parecidos, desvio→0) ou *diversifica* em nichos (desvio cresce); (3) a
-  **bateria** (`modelo`, `agencia`, `auto-modelo`) — os mostradores de desbotamento
+  **bateria** (`modelo`, `agencia`, `modelo_do_outro`) — os mostradores de desbotamento
   descritos acima, ao vivo; (4) a legenda.
 
 Dá pra ver emergir: manadas em torno de manchas férteis, colapsos por escassez,
@@ -370,7 +379,12 @@ A segunda é **mais simulação**. Algumas ideias, da mais barata à mais ambici
 
 - **Aprofundar o auto-modelo (nv5):** em `prever_valor`, separar o **próprio**
   consumo do consumo dos rivais (hoje ambos entram juntos via `partilha`),
-  modelando que a célula escolhida fica deprimida *pelo próprio bloco*.
+  modelando que a célula escolhida fica deprimida *pelo próprio bloco*. É o que
+  falta para haver um `automodelo` **de verdade**: o mostrador atual mede um modelo
+  do *outro* (zero para um eremita — ver a nota 04). **Predição falseável:** feita
+  essa edição, um mostrador do self ficaria `> 0` na solidão. Ao contrário das
+  outras ideias desta lista, esta **mexe na simulação** (a decisão muda), então não
+  é conserto de régua — é a bifurcação da Fase 5 do [`ROADMAP.md`](./ROADMAP.md).
 - **Variância no HUD:** além da média dos traços, mostrar o desvio — dá pra ver
   a população *convergir* (todos parecidos) ou *se diversificar* (nichos).
 - **Genealogia / espécies:** colorir o `@` pelo traço dominante (ex.: horizonte)

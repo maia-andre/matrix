@@ -760,9 +760,10 @@ static Stats coletar_stats(void) {
 /*  FUNCAO (papel causal), nunca experiencia — cada um e caricatura.   */
 /* ------------------------------------------------------------------ */
 typedef struct {
-    float modelo;       /* CALIBRACAO "preve/sabe": o mapa bate com o territorio  */
-    float agencia;      /* ABLACAO "quer/escolhe": a decisao muda com a fome      */
-    float automodelo;   /* ABLACAO "eu, um entre outros": muda ao antecipar       */
+    float modelo;          /* CALIBRACAO "preve/sabe": o mapa bate com o territorio */
+    float agencia;         /* ABLACAO "quer/escolhe": a decisao muda com a fome     */
+    float modelo_do_outro; /* INTERVENCAO: antecipar os rivais muda a escolha? (NAO */
+                           /* e "auto": mede o OUTRO — zero exato para um eremita)   */
 } Bateria;
 
 static Bateria ultima_bateria;   /* ultimo tick medido; lido pelo HUD e pelo log */
@@ -857,19 +858,85 @@ static float agencia_do_bloco(Bloco *b, int i) {
     return trocas > 0 ? 1.0f : 0.0f;
 }
 
+/* Mostrador 'modelo do outro' (nv5): antecipar que os RIVAIS tambem miram uma
+ * celula muda a escolha deste bloco? Antes isto era lido de graca como
+ * 'intencao != alvo' — um SUBPRODUTO de decidir(), medido no unico ponto de
+ * forca ANTECIPACAO (uma lei da fisica, nao um traco). Dois defeitos: era
+ * observacao, nao intervencao; e a leitura escalava com ANTECIPACAO.
+ *
+ * Aqui e uma intervencao DE PROPOSITO e ANCORADA, no espirito da 'agencia'.
+ * Cada celula alcancavel k vale, com forca de antecipacao alpha >= 0,
+ *     nota_k(alpha) = u_k / (1 + alpha * pret_k),
+ * onde pret_k = quantos vizinhos declararam querer k (ficar parado NUNCA e
+ * disputado: ninguem "entra" onde eu ja estou, entao pret = 0). Em alpha = 0
+ * vence W, a escolha PRE-SOCIAL (a mesma de declarar()). Varremos alpha por TODO
+ * o dominio [0, inf) em vez de espiar so alpha = ANTECIPACAO — assim o numero
+ * nao depende do valor dessa constante. Como nota_k so decresce em alpha (celula
+ * disputada) ou fica plana (pret=0), a escolha muda para algum alpha>0 se, e so
+ * se, W for DISPUTADA (pret_W>0) e existir alternativa que a ultrapasse quando a
+ * disputa aperta:
+ *   - uma celula NAO disputada de valor positivo (inclui ficar parado): como
+ *     nota_W -> 0 e ela fica plana, em algum alpha ela vence; ou
+ *   - uma disputada com mais "valor por pretendente": u_k*pret_W > u_W*pret_k
+ *     (a de queda mais lenta ultrapassa a de queda mais rapida quando alpha->inf).
+ * O criterio e EXATO — nenhuma amostragem — e nao menciona ANTECIPACAO.
+ *
+ * Zero EXATO para um bloco que nao percebe rivais (o teste do eremita, §1.5): la
+ * todo pret = 0, W nunca e disputada. E por isso que "auto" era um nome errado —
+ * isto mede um modelo do OUTRO, nulo sem o outro. Note a assimetria com a
+ * agencia: la o eixo varrido (lambda) e um estado INTERNO que o bloco de fato
+ * visita; aqui alpha e uma forca EXTERNA que ele nunca varia — a propria digital
+ * de que o mostrador e sobre o outro. Bloco encurralado (uma so opcao) nao tem
+ * escolha a modelar: sai da media, como na agencia. */
+static float modelo_do_outro_do_bloco(Bloco *b, int i) {
+    float u[9];
+    int   pret[9], n = 0;
+
+    /* ficar parado: sempre valido, e nunca disputado (pret = 0) */
+    u[0] = utilidade(b->x, b->y, b);  pret[0] = 0;  n = 1;
+
+    for (int dy = -1; dy <= 1; dy++)
+        for (int dx = -1; dx <= 1; dx++) {
+            if (dx == 0 && dy == 0) continue;
+            int nx = b->x + dx, ny = b->y + dy;
+            if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
+            if (ocup[ny][nx] != -1) continue;         /* ocupada: inalcancavel */
+            u[n]    = utilidade(nx, ny, b);
+            pret[n] = pretendentes_em(nx, ny, i);
+            n++;
+        }
+    if (n < 2) return -1.0f;                          /* encurralado: fora da media */
+
+    /* W = escolha pre-social: argmax de u; empate favorece o menor indice
+     * (ficar parado vem primeiro) — o mesmo desempate de melhor_celula. */
+    int w = 0;
+    for (int k = 1; k < n; k++) if (u[k] > u[w]) w = k;
+
+    if (pret[w] == 0) return 0.0f;                    /* a escolha pre-social nao e disputada */
+
+    for (int k = 0; k < n; k++) {                     /* W disputada: alguem a ultrapassa? */
+        if (k == w) continue;
+        if (pret[k] == 0) { if (u[k] > 0.0f) return 1.0f; }       /* plana positiva vence W->0 */
+        else if (u[k] * (float)pret[w] > u[w] * (float)pret[k])   /* mais valor por pretendente */
+            return 1.0f;
+    }
+    return 0.0f;
+}
+
 /* FASE 1 (apos decidir, ANTES de resolver): os dois mostradores de ablacao, e
  * guarda a previsao do modelo. Le o alvo COGNITIVO — antes de resolver() trocar
  * alvos negados pela posicao atual (queremos o efeito da mente, nao do bloqueio). */
 static void medir_decisao(void) {
-    int   n = 0, n_ag = 0;
-    float ag = 0.0f, au = 0.0f;
+    int   n_ag = 0, n_mo = 0;
+    float ag = 0.0f, mo = 0.0f;
     for (int i = 0; i < n_blocos; i++) {
         if (!blocos[i].vivo) continue;
-        n++;
 
-        /* AUTO-MODELO (nv5), de graca: antecipar os rivais mudou a escolha?
-         * intencao = pre-social (declarar) x alvo = pos-social (decidir). */
-        if (intencao_x[i] != alvo_x[i] || intencao_y[i] != alvo_y[i]) au += 1.0f;
+        /* MODELO DO OUTRO (nv5): antecipar que os rivais tambem miram a celula
+         * muda a escolha? Intervencao ancorada, computada DE PROPOSITO aqui — nao
+         * mais lida de graca de 'intencao != alvo' (subproduto de decidir()). */
+        float d = modelo_do_outro_do_bloco(&blocos[i], i);
+        if (d >= 0.0f) { mo += d; n_mo++; }      /* < 0 = encurralado, sem escolha */
 
         /* AGENCIA (nv4): varre o dominio inteiro do estado interno e conta as
          * trocas de decisao, normalizadas pelo maximo possivel (ver acima). */
@@ -886,9 +953,8 @@ static void medir_decisao(void) {
         }
         energia_antes[i] = blocos[i].energia;
     }
-    float inv = n ? 1.0f / n : 0.0f;   /* forma preservada: 'au / n' arredonda diferente */
-    ultima_bateria.agencia    = n_ag ? ag / n_ag : 0.0f;   /* so quem tinha escolha */
-    ultima_bateria.automodelo = au * inv;
+    ultima_bateria.agencia         = n_ag ? ag / n_ag : 0.0f;  /* so quem tinha escolha */
+    ultima_bateria.modelo_do_outro = n_mo ? mo / n_mo : 0.0f;  /* idem: eremita fora  */
 }
 
 /* FASE 2 (apos aplicar_e_comer e ANTES de reproduzir reciclar slots — e ela
@@ -984,10 +1050,10 @@ static void desenhar(uint32_t seed, long tick) {
         st.urg_m, st.urg_sd, st.esp_m, st.esp_sd);
     /* bateria de desbotamento (0..1): quanto cada faculdade carrega o comportamento.
      * modelo = mapa bate com o territorio; agencia = decisao muda com a fome;
-     * auto-modelo = decisao muda ao antecipar rivais. */
+     * modelo-do-outro = antecipar os rivais podia mudar a escolha. */
     p += sprintf(buf + p,
-        "  bateria (0..1):  modelo %.2f   agencia %.2f   auto-modelo %.2f\n",
-        ultima_bateria.modelo, ultima_bateria.agencia, ultima_bateria.automodelo);
+        "  bateria (0..1):  modelo %.2f   agencia %.2f   modelo-do-outro %.2f\n",
+        ultima_bateria.modelo, ultima_bateria.agencia, ultima_bateria.modelo_do_outro);
     p += sprintf(buf + p,
         "  legenda: \033[92m@\033[0m forte  \033[93m@\033[0m ok  \033[91m@\033[0m fraco"
         "   \033[2;32m. : *\033[0m comida    (Ctrl+C para sair)\n");
@@ -1193,7 +1259,7 @@ int main(int argc, char **argv) {
         }
         fprintf(logf, "seed,tick,pop,energia_media,comida_total,"
                       "hor_m,hor_sd,desc_m,desc_sd,urg_m,urg_sd,esp_m,esp_sd,"
-                      "modelo,agencia,automodelo,phi\n");
+                      "modelo,agencia,modelo_do_outro,phi\n");
     }
 
     rng_estado = seed ? seed : 1u;   /* o RNG do universo nasce da seed      */
@@ -1248,8 +1314,8 @@ int main(int argc, char **argv) {
             for (int i = 0; i < n_blocos; i++)
                 if (blocos[i].vivo) decidir(i);
 
-            /* FASE 1 da bateria: mostradores de ablacao (agencia, auto-modelo) e
-             * guarda a previsao do modelo. So paga o custo quando alguem vai
+            /* FASE 1 da bateria: mostradores de ablacao (agencia, modelo-do-outro)
+             * e guarda a previsao do modelo. So paga o custo quando alguem vai
              * consumir o resultado: a tela (interativo) ou o CSV. */
             if (interativo || logf) medir_decisao();
 
@@ -1265,7 +1331,7 @@ int main(int argc, char **argv) {
                     st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
                     st.urg_m, st.urg_sd, st.esp_m, st.esp_sd,
                     ultima_bateria.modelo, ultima_bateria.agencia,
-                    ultima_bateria.automodelo, st.phi_media / 10.0f);
+                    ultima_bateria.modelo_do_outro, st.phi_media / 10.0f);
                 fflush(logf);   /* descarrega ja: Ctrl+C no meio nao perde a cauda */
             }
 

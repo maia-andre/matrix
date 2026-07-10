@@ -63,7 +63,7 @@ Quase toda evolução do projeto mexe **só na PART 2** (cognição) ou na repro
 
 ## Bateria de desbotamento e CSV
 
-Os mostradores (`modelo`, `agencia`, `automodelo`, `phi`), todos em `[0,1]`, medem se uma faculdade **carrega o comportamento** (famílias: ablação e calibração) — função, nunca experiência. Aparecem no HUD e no CSV (`--log`). Colunas do CSV: `seed, tick, pop, energia_media, comida_total`, média e desvio dos 4 traços (`*_m`, `*_sd`), e os 4 mostradores. Ao adicionar coluna, manter a reprodutibilidade e atualizar o README. Mostrador pendente documentado: `relato`.
+Os mostradores (`modelo`, `agencia`, `modelo_do_outro`, `phi`), todos em `[0,1]`, medem se uma faculdade **carrega o comportamento** (famílias: ablação e calibração) — função, nunca experiência. Aparecem no HUD e no CSV (`--log`). Colunas do CSV: `seed, tick, pop, energia_media, comida_total`, média e desvio dos 4 traços (`*_m`, `*_sd`), e os 4 mostradores. Ao adicionar/renomear coluna, manter a reprodutibilidade e atualizar o README (e o notebook, que lê colunas por nome). Mostrador pendente documentado: `relato`. (`modelo_do_outro` era `automodelo` — renomeado na nota 04: mede o outro, não o self.)
 
 ## Commits
 

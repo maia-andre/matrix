@@ -29,3 +29,10 @@ os CSVs **no mesmo commit** da mudança — assim o `git log` acima continua exa
 (`modelo` lia o array do mundo, não o mapa do bloco) trazem valores `~0,97` que
 não são comparáveis com os `~0,63` de hoje. Ver
 [`../papers/notes/01-quatro-modos-de-errar.md`](../papers/notes/01-quatro-modos-de-errar.md).
+
+⚠️ **A coluna `automodelo` foi renomeada `modelo_do_outro` e mudou de definição.**
+Deixou de ser a observação `intencao ≠ alvo` (lida no ponto fixo `ANTECIPACAO`) e
+virou uma **intervenção ancorada**, varrida por todo o domínio da antecipação — sem
+depender daquela constante. Os valores sobem de leve (`~0,34 → ~0,35`); a simulação
+é bit-a-bit idêntica (só o mostrador mudou). Ver
+[`../papers/notes/04-o-automodelo-era-um-modelo-do-outro.md`](../papers/notes/04-o-automodelo-era-um-modelo-do-outro.md).
