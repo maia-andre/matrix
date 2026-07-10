@@ -42,3 +42,12 @@ notas.
 | nota | achado | serve ao paper |
 |---|---|---|
 | [01](./01-quatro-modos-de-errar.md) | os quatro mostradores da bateria falham de quatro maneiras independentes; `modelo` consertado | 1 — metrologia da mente |
+| [02](./02-o-teto-de-nascimentos.md) | um teto de nascimentos congelava a evolução; havia uma regra de senioridade implícita; `hor_m` não é identificável sozinho | 2 — bem posicional (+ erratas do 1) |
+
+## Erratas
+
+Notas são datadas, não sagradas. Quando um achado posterior derruba um número de
+uma nota anterior, a nota antiga recebe um bloco **Errata** apontando para a nova —
+o texto original **não é reescrito para parecer que sempre esteve certo**. A nota 02
+corrigiu as comparações de população da nota 01; a nota 01 diz isso, em voz alta,
+no lugar onde errou.
