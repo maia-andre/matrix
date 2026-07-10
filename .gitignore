@@ -1,0 +1,7 @@
+# binario de build (gerado por datasets/gerar.sh ou compilacao manual)
+/matrix
+
+# CSVs soltos de experimentos na raiz (datasets congelados vivem em datasets/)
+/*.csv
+
+notebooks/.ipynb_checkpoints/

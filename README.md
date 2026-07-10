@@ -150,6 +150,27 @@ Pra conferir a população num tick específico sem assistir à animação:
 
 ---
 
+## Estrutura do repositório
+
+```
+main.c            a simulação inteira (um arquivo, só libc)
+README.md         o como — arquitetura, parâmetros, efeitos medidos
+FILOSOFIA.md      o porquê, v1 — o manifesto da escada
+FILOSOFIA_v2.md   o porquê, v2 — a bateria de desbotamento
+CLAUDE.md         guia para Claude Code
+assets/           imagens do README
+datasets/         CSVs congelados + gerar.sh (proveniência: comando + commit)
+notebooks/        análise dos datasets (commitados sem outputs)
+papers/           escrita formal (fonte + PDF)
+```
+
+Como o universo é `f(seed, código)`, um CSV congelado só é reproduzível no
+commit de `main.c` que o gerou — o manifesto em `datasets/README.md` registra
+o comando e o commit exatos de cada arquivo, e `datasets/gerar.sh` regenera
+tudo (servindo de teste de regressão: diff não-vazio = comportamento mudou).
+
+---
+
 ## O que aparece na tela
 
 - `@` colorido = um bloco. A cor é a energia (valência):
