@@ -99,6 +99,13 @@
 /* Parametro do AUTO-MODELO (nivel 5): o bloco se ve entre os concorrentes. */
 #define ANTECIPACAO 0.5f    /* quanto cada vizinho que MIRA a mesma celula a desvaloriza */
 
+/* Estrategias de SINALIZACAO (relato causal, ROADMAP §4.0): o que o bloco
+ * conta aos vizinhos sobre a propria intencao. E um traco herdado com mutacao
+ * (nivel 6) — a selecao natural decide se a honestidade sobrevive. */
+#define SIN_HONESTO 0   /* sinal = intencao (a verdade)                       */
+#define SIN_MUDO    1   /* sinal = propria celula (silencio: ninguem a mira)  */
+#define SIN_BLEFE   2   /* sinal = o melhor alvo que NAO e a intencao         */
+
 /* Parametros do APRENDIZADO (nivel 6): os 4 tracos acima sao herdados COM
  * MUTACAO a cada nascimento; a selecao natural (quem sobrevive e se reproduz
  * mais) faz a media da populacao evoluir sozinha — sem gradiente, so vida. */
@@ -126,6 +133,7 @@ typedef struct {
     float peso_espaco;  /* desejo de espaco livre (era #define PESO_ESPACO) */
     float desconto;     /* desconto do futuro     (era #define DESCONTO)    */
     int   horizonte;    /* profundidade do plano  (era #define HORIZONTE)   */
+    int   estrategia;   /* de sinalizacao: honesto, mudo ou blefe (§4.0)    */
 } Bloco;
 
 static Bloco blocos[MAX_AG];
@@ -257,6 +265,8 @@ static void semear_blocos(void) {
         b->desconto    = DESCONTO + (rng01() - 0.5f) * 0.2f;      /* +-0.1       */
         b->horizonte   = 1 + (int)(rng01() * HORIZONTE_MAX);      /* 1..MAX      */
         if (b->horizonte > HORIZONTE_MAX) b->horizonte = HORIZONTE_MAX;
+        b->estrategia  = (int)(rng01() * 3.0f);                   /* tercos      */
+        if (b->estrategia > SIN_BLEFE) b->estrategia = SIN_BLEFE;
         ocup[y][x] = n_blocos;
         n_blocos++;
     }
@@ -413,13 +423,46 @@ static void declarar(int i) {
     melhor_celula(&blocos[i], i, 0, &intencao_x[i], &intencao_y[i]);
 }
 
-/* Passagem intermediaria (relato causal): cada bloco EMITE o sinal sobre a
- * propria intencao. Nesta versao todos sao honestos — sinal = intencao — e o
- * mundo e bit-a-bit identico ao da telepatia: a fisica nao mudou, so a
- * epistemologia (o que os vizinhos leem deixou de ser a mente e passou a ser
- * uma declaracao). A mentira vira possivel aqui; usada, custa (§4.0). */
+/* Passagem intermediaria (relato causal, §4.0): cada bloco EMITE um sinal
+ * sobre a propria intencao — e o que ele conta e a ESTRATEGIA dele, um traco
+ * herdado com mutacao. O sinal so REPELE (via ANTECIPACAO os vizinhos
+ * desvalorizam a celula sinalizada), e dai vem o custo endogeno de cada
+ * mentira: o MUDO abre mao da deterrencia (sinaliza a propria celula, que
+ * ninguem pode mirar); o BLEFE gasta a deterrencia no melhor alvo que ele NAO
+ * vai tomar — e expoe o alvo verdadeiro a disputa. Nao ha multa artificial:
+ * se mentir compensar, a mentira fixa, e isso e resultado (Maynard Smith). */
 static void emitir(int i) {
-    sinal_x[i] = intencao_x[i];
+    Bloco *b = &blocos[i];
+
+    if (b->estrategia == SIN_MUDO) {             /* silencio               */
+        sinal_x[i] = b->x;
+        sinal_y[i] = b->y;
+        return;
+    }
+
+    if (b->estrategia == SIN_BLEFE) {            /* mentira com conteudo   */
+        int   bx = b->x, by = b->y;              /* sem opcao: vira silencio */
+        float melhor = -1e30f;
+        if (!(b->x == intencao_x[i] && b->y == intencao_y[i])) {
+            melhor = utilidade(b->x, b->y, b);   /* "vou ficar" como blefe  */
+        }
+        for (int dy = -1; dy <= 1; dy++) {
+            for (int dx = -1; dx <= 1; dx++) {
+                if (dx == 0 && dy == 0) continue;
+                int nx = b->x + dx, ny = b->y + dy;
+                if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
+                if (ocup[ny][nx] != -1) continue;
+                if (nx == intencao_x[i] && ny == intencao_y[i]) continue;
+                float u = utilidade(nx, ny, b);
+                if (u > melhor) { melhor = u; bx = nx; by = ny; }
+            }
+        }
+        sinal_x[i] = bx;
+        sinal_y[i] = by;
+        return;
+    }
+
+    sinal_x[i] = intencao_x[i];                  /* honesto                */
     sinal_y[i] = intencao_y[i];
 }
 
@@ -513,6 +556,16 @@ static int muta_horizonte(int h) {
     return h;
 }
 
+/* (nivel 6 + §4.0) Mutacao da estrategia de sinalizacao: de vez em quando, a
+ * cria nasce com outra politica de fala — e a selecao decide se ela dura. */
+static int muta_estrategia(int e) {
+    if (rng01() < 2.0f * MUTACAO) {
+        e = (int)(rng01() * 3.0f);
+        if (e > SIN_BLEFE) e = SIN_BLEFE;
+    }
+    return e;
+}
+
 /* Um slot para a cria: reaproveita o BURACO de menor indice deixado por um morto
  * e so estende o array quando nao ha buraco nenhum. Varrer do menor indice pra
  * cima e uma politica deterministica, a mesma do desempate de resolver().
@@ -577,6 +630,7 @@ static void reproduzir(void) {
         cria->peso_espaco = muta_traco(pai->peso_espaco, 2.0f * MUTACAO, 0.0f, 8.0f);
         cria->desconto    = muta_traco(pai->desconto,    0.4f * MUTACAO, 0.30f, 0.98f);
         cria->horizonte   = muta_horizonte(pai->horizonte);
+        cria->estrategia  = muta_estrategia(pai->estrategia);
         ocup[ly[e]][lx[e]] = j;
     }
 }
@@ -742,6 +796,8 @@ typedef struct {
     float desc_m, desc_sd;
     float urg_m,  urg_sd;
     float esp_m,  esp_sd;
+    /* fracao da populacao por estrategia de sinalizacao (mudo = 1 - h - b) */
+    float hon_f,  blef_f;
 } Stats;
 
 static Stats coletar_stats(void) {
@@ -749,6 +805,7 @@ static Stats coletar_stats(void) {
 
     /* 1a passagem: somas -> medias. Precisamos da media ANTES da variancia. */
     float se = 0, su = 0, sp = 0, sd = 0, sh = 0, sphi = 0;
+    int   nhon = 0, nblef = 0;
     for (int i = 0; i < n_blocos; i++) if (blocos[i].vivo) {
         s.pop++;
         se   += blocos[i].energia;
@@ -757,12 +814,15 @@ static Stats coletar_stats(void) {
         sd   += blocos[i].desconto;
         sh   += blocos[i].horizonte;     /* int -> float na soma              */
         sphi += phi_proxy(&blocos[i]);
+        if      (blocos[i].estrategia == SIN_HONESTO) nhon++;
+        else if (blocos[i].estrategia == SIN_BLEFE)   nblef++;
     }
     float inv = s.pop ? 1.0f / s.pop : 0.0f;
     s.energia_media = se   * inv;
     s.phi_media     = sphi * inv;
     s.hor_m  = sh * inv;  s.desc_m = sd * inv;
     s.urg_m  = su * inv;  s.esp_m  = sp * inv;
+    s.hon_f  = nhon * inv;  s.blef_f = nblef * inv;
 
     /* 2a passagem: variancia = media dos desvios ao quadrado. Populacional
      * (/N, nao /N-1) porque temos a populacao INTEIRA, nao uma amostra dela.
@@ -1198,9 +1258,9 @@ static void desenhar(uint32_t seed, long tick) {
      * desvio -> 0) ou se DIVERSIFICA em nichos (desvio cresce). */
     p += sprintf(buf + p,
         "  tracos media±desvio:  horizonte %4.1f±%-3.1f  desconto %4.2f±%-4.2f"
-        "  urgencia %4.1f±%-3.1f  espaco %4.1f±%-3.1f\n",
+        "  urgencia %4.1f±%-3.1f  espaco %4.1f±%-3.1f  sinal h%.2f b%.2f\n",
         st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
-        st.urg_m, st.urg_sd, st.esp_m, st.esp_sd);
+        st.urg_m, st.urg_sd, st.esp_m, st.esp_sd, st.hon_f, st.blef_f);
     /* bateria de desbotamento (0..1): quanto cada faculdade carrega o comportamento.
      * modelo = mapa bate com o territorio; agencia = decisao muda com a fome;
      * modelo-do-outro = antecipar os rivais podia mudar a escolha;
@@ -1414,7 +1474,7 @@ int main(int argc, char **argv) {
         }
         fprintf(logf, "seed,tick,pop,energia_media,comida_total,"
                       "hor_m,hor_sd,desc_m,desc_sd,urg_m,urg_sd,esp_m,esp_sd,"
-                      "modelo,agencia,modelo_do_outro,phi,relato\n");
+                      "modelo,agencia,modelo_do_outro,phi,relato,hon_f,blef_f\n");
     }
 
     rng_estado = seed ? seed : 1u;   /* o RNG do universo nasce da seed      */
@@ -1483,13 +1543,13 @@ int main(int argc, char **argv) {
                 fprintf(logf,
                     "%u,%ld,%d,%.3f,%.1f,"
                     "%.3f,%.3f,%.4f,%.4f,%.3f,%.3f,%.3f,%.3f,"
-                    "%.3f,%.3f,%.3f,%.3f,%.3f\n",
+                    "%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f\n",
                     seed, t, st.pop, st.energia_media, st.comida_total,
                     st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
                     st.urg_m, st.urg_sd, st.esp_m, st.esp_sd,
                     ultima_bateria.modelo, ultima_bateria.agencia,
                     ultima_bateria.modelo_do_outro, st.phi_media,
-                    ultima_bateria.relato);
+                    ultima_bateria.relato, st.hon_f, st.blef_f);
                 fflush(logf);   /* descarrega ja: Ctrl+C no meio nao perde a cauda */
             }
 
