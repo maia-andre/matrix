@@ -122,9 +122,11 @@ Com o mostrador corrigido (a previsão sai de `prever_valor`, o mapa do bloco),
 território **não** é só social, é uma **crença falsa** sobre o social. O bloco
 acredita, via `partilha`, que os rivais dividem a comida da célula que ele ocupa;
 mas `ocup[][]` guarda **um** bloco por célula, e ninguém divide nada. Zerar só
-`COMPETICAO` recupera a calibração (`0,63 → 0,79`) sem mudar a população. E um
-bloco que **ignora** os rivais prevê ainda melhor (`0,78`) enquanto morre 35%
-mais: aqui, acurácia e aptidão são coisas diferentes.
+`COMPETICAO` recupera a calibração (`0,63 → 0,79`) **sem mexer na população**
+(290,3 × 290,0): ao nível do grupo, `partilha` é puro custo epistêmico. Quem
+carrega o valor adaptativo de enxergar rivais é o termo `espaco`, não a partilha
+— um bloco que ignora os rivais por completo prevê melhor (`0,78`) e paga só
+~2,4% de população.
 
 `automodelo` **acende com a lotação** — começa em `0` (mundo esparso, ninguém
 disputa) e sobe a ~`0.35` conforme a população adensa. Cuidado com a leitura: ele

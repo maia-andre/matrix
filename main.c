@@ -493,16 +493,39 @@ static int muta_horizonte(int h) {
     return h;
 }
 
+/* Um slot para a cria: reaproveita o BURACO de menor indice deixado por um morto
+ * e so estende o array quando nao ha buraco nenhum. Varrer do menor indice pra
+ * cima e uma politica deterministica, a mesma do desempate de resolver().
+ *
+ * Antes isto era 'j = n_blocos++', que nunca reusava buraco. Como MAX_AG e um
+ * bloco por celula (1408), havia um teto de ~1348 NASCIMENTOS na vida inteira de
+ * uma simulacao: por volta do tick 10 000 a reproducao parava PARA SEMPRE, a
+ * evolucao congelava (sem cria, sem mutacao, sem selecao) e a energia media
+ * divergia — 986 no tick 30 000, contra ~6 no regime saudavel. Corridas longas
+ * eram silenciosamente ininterpretaveis. */
+static int alocar_slot(void) {
+    for (int i = 0; i < n_blocos; i++)
+        if (!blocos[i].vivo) return i;
+    return n_blocos < MAX_AG ? n_blocos++ : -1;   /* -1: um bloco por celula */
+}
+
 /* D. Reproducao: um bloco saciado se divide num vizinho vazio, partilhando a
  * energia. No nivel 6 isto deixa de ser "so uma lei do mundo": e o canal da
  * HERANCA — a cria recebe os tracos do pai com mutacao, e a selecao natural
  * que daqui emerge e o que faz a populacao APRENDER ao longo das geracoes. */
 static void reproduzir(void) {
-    int total = n_blocos;   /* fixa o limite ANTES de adicionar filhotes    */
-    for (int i = 0; i < total; i++) {
-        if (!blocos[i].vivo) continue;
+    /* Fotografa os pais ANTES de nascer alguem. Com o reuso de slots uma cria
+     * pode cair num indice baixo, e sem esta foto o laco a visitaria no mesmo
+     * tick — recem-nascido se reproduzindo. Ninguem morre aqui, entao a foto e
+     * exatamente o conjunto que o laco antigo visitava. */
+    static int pais[MAX_AG];
+    int npais = 0;
+    for (int i = 0; i < n_blocos; i++)
+        if (blocos[i].vivo) pais[npais++] = i;
+
+    for (int p = 0; p < npais; p++) {
+        int i = pais[p];
         if (blocos[i].energia < REPRO) continue;
-        if (n_blocos >= MAX_AG) break;
 
         /* Coleta as celulas vizinhas livres. */
         int lx[8], ly[8], nlivres = 0;
@@ -520,7 +543,8 @@ static void reproduzir(void) {
         int e = (int)(rng01() * nlivres);
         if (e >= nlivres) e = nlivres - 1;
 
-        int j = n_blocos++;                  /* novo slot                   */
+        int j = alocar_slot();
+        if (j < 0) break;                    /* mundo cheio de verdade      */
         Bloco *pai = &blocos[i], *cria = &blocos[j];
         pai->energia *= 0.5f;                /* a energia se divide         */
         cria->x = lx[e]; cria->y = ly[e];
@@ -802,7 +826,8 @@ static void medir_decisao(void) {
     ultima_bateria.automodelo = au * inv;
 }
 
-/* FASE 2 (apos aplicar_e_comer): a colheita real do tick entra na janela aberta,
+/* FASE 2 (apos aplicar_e_comer e ANTES de reproduzir reciclar slots — e ela
+ * recicla: ver alocar_slot): a colheita real do tick entra na janela aberta,
  * descontada pelo mesmo peso que o bloco usou pra imaginar aquele passo. A
  * garfada real e a variacao de energia mais o metabolismo pago (Δe = garfada -
  * METABOLISMO). Quando o horizonte se esgota, confere mapa contra territorio;

@@ -45,13 +45,18 @@ compara aquilo com `garfada = menor(comida[y][x], INGESTAO)` — **a mesma fórm
 sobre a mesma célula**. Se o bloco chegou ao alvo, `real == pred` por construção.
 `modelo ≈ 0,97` significa apenas "97% dos blocos não foram barrados".
 
-Medido, em três seeds (`main.c` @ `6da8c3a`, 3000 ticks, ablações fora do repo):
+Medido, em três seeds, 3000 ticks (`sh papers/notes/01-ablacoes.sh`):
 
-| condição | modelo | destino da população |
+| condição | modelo (@ `6da8c3a`) | destino da população |
 |---|---|---|
-| controle (intacto) | **0,975** | ~300, estável |
-| `horizonte = 1` (lookahead lobotomizado) | **0,994** ↑ | ~220, cai ~25% |
+| controle (intacto) | **0,973** | ~290, estável |
+| `horizonte = 1` (lookahead lobotomizado) | **0,994** ↑ | ~300, estável |
 | `prever_valor() ≡ 0` (sem modelo nenhum) | **1,000** ↑↑ | **extinção em 74–105 ticks** |
+
+*(A coluna `modelo` é histórica — o mostrador quebrado, reprodutível com
+`git show 6da8c3a:main.c`. A coluna da população foi **remedida** depois do
+conserto do §1.6: o "cai ~25%" que eu havia reportado para `horizonte = 1` era
+contaminação do teto de nascimentos.)*
 
 Um bloco cego para comida, marchando para a extinção, tira **nota máxima** no
 mostrador chamado "modelo". A leitura é **monotonicamente anti-correlacionada**
@@ -87,9 +92,9 @@ outras colunas do CSV são bit-a-bit idênticas.
 Achado colateral, registrado na nota 01: com o mostrador funcionando, o bloco
 revela uma **crença falsa**. Via `partilha`, ele acredita que os rivais dividem a
 comida da célula que ele ocupa — e `ocup[][]` guarda **um** bloco por célula.
-Zerar só `COMPETICAO` recupera a calibração (0,638 → 0,795) sem mudar a
-população. Um bloco que ignora rivais prevê melhor (0,783) e morre 35% mais:
-acurácia e aptidão dissociam.
+Zerar só `COMPETICAO` recupera a calibração (0,625 → 0,786) **sem mexer na
+população** (290,3 × 290,0): ao nível do grupo, `partilha` é puro custo
+epistêmico, e quem carrega o valor adaptativo de ver rivais é o termo `espaco`.
 
 → [`papers/notes/01-quatro-modos-de-errar.md`](./papers/notes/01-quatro-modos-de-errar.md)
 
@@ -97,9 +102,10 @@ acurácia e aptidão dissociam.
 
 `agencia` reroda a decisão em dois clones (faminto × saciado) e conta quantos
 mudam de escolha. Mas em `utilidade()` a fome só troca o peso entre comida e
-`peso_espaco` — e `peso_espaco` **evolui**. Medido: `esp_m` cai de ~3,1 para
-0,5–1,5 ao longo de 30 000 ticks, e a correlação entre `esp_m` e `agencia` é
-**+0,93 / +0,94 / +0,38** (seeds 7 / 1234 / 42). O mostrador desce junto.
+`peso_espaco` — e `peso_espaco` **evolui**. Medido em 30 000 ticks válidos:
+`esp_m` **desaba** de ~3,1 para **0,07–0,09**, e a correlação entre `esp_m` e
+`agencia` é **+0,982 / +0,984 / +0,974** (seeds 7 / 42 / 1234). O mostrador desce
+junto, quase perfeitamente.
 
 Ou seja: a escala da régua **deriva com a população que ela mede**. Comparar
 `agencia` no tick 100 e no tick 20 000 é comparar réguas diferentes. Um
@@ -119,9 +125,15 @@ modelo **do outro**, não de si — o self entra só como "sou um dos pretendent
 `[0,1]`. Se a discordância passar de 10%, `phi > 1`. Nas corridas feitas o máximo
 observado foi 0,372 — é uma **fragilidade latente**, não um bug que disparou. Mas
 o `10.0f` é um fator de escala escolhido para o número *parecer* morar em `[0,1]`,
-o que torna o valor absoluto sem significado. Além disso `corr(hor_m, phi)` fica
-entre **+0,56 e +0,80**: `phi` acompanha a profundidade de planejamento — talvez
-por design, mas então não é uma medida independente das outras.
+o que torna o valor absoluto sem significado.
+
+E `phi` **não é independente** dos outros traços: ele acompanha a **profundidade
+efetiva** de planejamento, `min(horizonte, 1/(1−desconto))` — `corr(efetiva, phi)`
+= **+0,96 / +0,75 / +0,93**, sinal consistente nas três seeds. Contra o `hor_m`
+bruto a correlação **troca de sinal** (**−0,94** na seed 7, **+0,97** na 1234), o
+que é mais um sintoma de que `hor_m` sozinho não é identificável (Fase 3). Se `phi`
+mede "integração" e integração é só profundidade efetiva com outro nome, o
+mostrador não acrescenta uma dimensão — acrescenta um sinônimo. Testar.
 
 ## 1.5 O teste do eremita — três dos quatro mostradores são sociais
 
@@ -129,10 +141,10 @@ Ablação: o bloco deixa de **perceber** outros blocos (`rivais_em ≡ 0`,
 `pretendentes_em ≡ 0`); eles continuam existindo e bloqueando fisicamente. Um
 solipsista num mundo povoado. Média de 3 seeds, ticks 200–3000:
 
-| | `modelo` | `agencia` | `automodelo` | `phi` | pop final |
+| | `modelo` | `agencia` | `automodelo` | `phi` | pop média |
 |---|---|---|---|---|---|
-| controle | 0,972 | 0,383 | 0,334 | 0,253 | ~290 |
-| **solipsista** | 0,790 | **0,0000** | **0,0000** | 0,029 | ~184 |
+| controle | 0,636 | 0,383 | 0,332 | 0,255 | 290,0 |
+| **solipsista** | 0,783 | **0,0000** | **0,0000** | 0,039 | 283,1 |
 
 `agencia` e `automodelo` não caem: dão **zero exato**. E isso é demonstrável antes
 de rodar. Sem rivais, `espaco = (8 − 0)/8 ≡ 1` em toda célula, então o termo
@@ -149,41 +161,45 @@ Consequências, em ordem de gravidade:
   **agência** e **auto-modelo** — não medem nada que o bloco *tenha*. Medem algo
   que acontece **entre** blocos. `automodelo`, aliás, sempre foi um modelo *do
   outro* (ver 1.3); agora sabemos que sem o outro ele é identicamente nulo.
-- `phi`, o proxy de integração, perde **88%** do valor na solidão: a "luz acesa"
+- `phi`, o proxy de integração, perde **85%** do valor na solidão: a "luz acesa"
   era social em quase toda a sua intensidade.
-- E `modelo` **cai** (0,972 → 0,790) quando o bloco fica cognitivamente sozinho —
-  porque, sem aversão a multidão nem antecipação, os blocos se amontoam nas mesmas
-  células e a taxa de conflito sobe. É a **terceira** confirmação independente de
-  que `modelo` é um medidor de congestionamento: lobotomizar o horizonte o faz
-  **subir**, cegar o bloco para rivais o faz **descer**, e nenhuma das duas coisas
-  tem a ver com a qualidade de um modelo de mundo.
+- `modelo` (já consertado) **sobe** (0,636 → 0,783): o solipsista prevê melhor,
+  porque não carrega a crença falsa da `partilha` (§1.1). *(Com o mostrador ainda
+  quebrado, esta mesma ablação o fazia **descer** — a terceira confirmação
+  independente de que ele media congestionamento; ver a nota 01.)*
 
-Perceber os outros é adaptativo: a população cai ~35%.
+Perceber os outros custa pouco em aptidão de grupo: a população cai ~**2,4%**
+(283,1 × 290,0). Não os perceber custa muito em vocabulário: dois mostradores
+zeram.
 
 **O teste do eremita como protocolo.** Isto generaliza para além do brinquedo:
 *rode a ablação da solidão em qualquer métrica por-agente*. Se a métrica zera
 para um agente sozinho, ela media uma relação, não uma posse — e nenhuma
 quantidade de refinamento por-agente vai consertá-la.
 
-## 1.6 Bug conhecido — a reprodução morre por volta do tick 10 000
+## 1.6 O bug que congelava a evolução ✅ *corrigido*
 
-Independente da bateria, e descoberto ao consertá-la. `reproduzir()` faz
-`j = n_blocos++` e **nunca reaproveita o slot de um bloco morto**, parando em
-`MAX_AG = 1408`. Há portanto um teto de ~1348 **nascimentos** na vida inteira de
-uma simulação. Entre os ticks **~10 000 e ~12 400** (seed-dependente) a reprodução
-morre: a evolução congela, ninguém mais se divide, e `energia_media` diverge —
-**361** no tick 20 000, **986** no tick 29 999, contra ~6 no regime saudável.
+Independente da bateria, e descoberto ao consertá-la. `reproduzir()` fazia
+`j = n_blocos++` e **nunca reaproveitava o slot de um bloco morto**, parando em
+`MAX_AG = 1408`: um teto de ~1348 **nascimentos** na vida inteira de uma
+simulação. Medido com instrumentação, os slots esgotavam nos ticks **11 647 /
+9 473 / 9 487** (seeds 7 / 42 / 1234). Dali em diante a reprodução parava para
+sempre — sem cria, sem mutação, sem seleção — e `energia_media` divergia: **986**
+no tick 30 000, contra ~6 no regime saudável.
 
-Consequências:
+`alocar_slot()` agora reaproveita o buraco de menor índice. Depois: energia
+estável em ~6 e população em ~280–310 por 30 000 ticks, reprodução nunca para.
 
-- **Corridas acima de ~10 000 ticks não são interpretáveis evolutivamente.** Os
-  "platôs" de `hor_m` nos ticks 20 000 e 29 999 citados na Fase 3 são uma
-  população **congelada**, não um equilíbrio. As conclusões da Fase 3 se apoiam em
-  corridas de ≤ 4000 ticks e nas leituras de ≤ 10 000, e sobrevivem.
-- Consertar exige uma lista de slots livres, e **muda o comportamento**: em
-  `resolver()` a célula disputada vai para o pretendente de **menor índice**, logo
-  reaproveitar índices altera o desempate. É uma mudança das leis da física — merece
-  commit próprio, A/B, e regeneração dos datasets.
+**O preço, e ele é conceitual.** `resolver()` concede a célula disputada ao
+pretendente de **menor índice**. No código antigo o índice era a ordem de
+nascimento — logo o mais **velho** vencia toda disputa. Havia uma **regra de
+senioridade que ninguém escreveu**, e que dava vantagem sistemática a quem já
+tinha sobrevivido. Reaproveitar slots a destrói (uma cria pode herdar um índice
+baixo e ganhar de um ancião). Trocamos um desempate arbitrário por outro; nenhum
+dos dois é principiado. Um desempate *escolhido* — por energia, ou por um hash
+determinístico de `(x, y, tick)` — é uma decisão de física em aberto.
+
+→ nota 02.
 
 ## 1.7 O protocolo, daqui em diante
 
@@ -238,109 +254,131 @@ garrafais antes de o primeiro `@` "falar".
 
 **Pergunta:** quando vale a pena pensar?
 
-Esta seção foi reescrita três vezes porque a simulação derrubou três hipóteses
-minhas seguidas. Vale registrar as três, porque o cadáver de cada uma aponta para
-a próxima — e porque a cultura do projeto é essa: **medir, não achar**.
+Esta seção foi reescrita quatro vezes porque a simulação derrubou três hipóteses
+minhas — e depois o conserto do bug §1.6 invalidou metade dos números da quarta.
+Vale registrar o cemitério, porque o cadáver de cada hipótese apontou a próxima, e
+porque a cultura do projeto é essa: **medir, não achar**.
+
+Todos os números abaixo vêm do `main.c` **com a reprodução consertada**.
 
 ## Três hipóteses mortas
 
-**H1 — "pensar é de graça, logo o horizonte cresce até o teto."** Falso. No tick
-10 000 — o último ainda **evolutivamente válido**, ver o bug em 1.6 — `hor_m` vale
-**8,05 / 8,93 / 4,15** (seeds 7 / 42 / 1234): longe de `HORIZONTE_MAX = 12`, e
-escandalosamente diferentes entre si. (A "subida inicial" que eu tinha visto em
-2000 ticks é transiente: `semear_blocos` sorteia `horizonte` **uniforme em 1..12**,
-média 6,5 — não 6, como o `#define HORIZONTE` sugere.)
+**H1 — "pensar é de graça, logo o horizonte cresce até o teto."** Falso, mas
+quase me enganou duas vezes. Em 30 000 ticks agora evolutivamente válidos, `hor_m`
+termina em **11,04 / 4,88 / 3,40** (seeds 7 / 42 / 1234). A seed 7 encosta em
+`HORIZONTE_MAX = 12`; as outras duas **caem**. Se eu tivesse olhado só a seed 7,
+teria "confirmado" H1. *(A "subida inicial" que vi lá atrás em 2000 ticks é
+transiente: `semear_blocos` sorteia `horizonte` **uniforme em 1..12**, média 6,5 —
+não 6, como o `#define HORIZONTE` sugere.)*
 
 **H2 — "a paisagem adaptativa é plana, o traço deriva."** Não sustentada. `hor_sd`
-cai de ~3,45 (uniforme inicial) para 1,44–1,92, e as médias ficam *paradas*. Algo
-segura o traço. *(Cautela: parte da estabilidade tardia que eu havia citado vinha
-do regime congelado — ver 1.6. A queda de `hor_sd` já está consumada bem antes do
-tick 10 000.)*
+cai de ~3,45 (uniforme inicial) para 0,70–3,10, e as médias se estabilizam. Algo
+segura o traço.
 
 **H3 — "o freio é a competição: você planeja rebrota que o rival come antes."**
 Falso, e ao contrário. Com `COMPETICAO = 0` os horizontes evoluídos ficam **mais
-rasos** (−1,33 / −1,44 / −0,68). A competição não freia o pensamento: **alimenta**
-o pensamento.
+rasos**. A competição não freia o pensamento: **alimenta** o pensamento.
+
+## E uma quarta descoberta, que explica as três
+
+`horizonte` e `desconto` são **traços compensatórios**. No regime tardio,
+`corr(hor_m, desc_m)` = **−0,93 / −0,46 / −0,72**. Um bloco com horizonte 11 e
+desconto 0,66 pesa o 3º passo em `0,66³ ≈ 0,29` e o 11º em `0,01`: ele *declara*
+um horizonte fundo e **pensa raso**. A profundidade que de fato importa é
+`min(horizonte, 1/(1−desconto))`:
+
+| seed | `hor_m` | `desc_m` | `1/(1−δ)` | **profundidade efetiva** |
+|---|---|---|---|---|
+| 7 | 11,04 | 0,661 | 2,95 | **2,95** |
+| 42 | 4,88 | 0,873 | 7,86 | **4,88** |
+| 1234 | 3,40 | 0,898 | 9,80 | **3,40** |
+
+O `hor_m` bruto varia **3,2×** entre as seeds; a profundidade efetiva varia
+**1,7×**. Boa parte da "divergência entre seeds" que matou H1, H2 e H3 era um
+artefato de olhar um traço **não identificável** isoladamente. **`hor_m` sozinho
+não mede o quanto um bloco planeja.** Qualquer conclusão sobre profundidade de
+planejamento precisa do par `(horizonte, desconto)`.
 
 ## O que os dados dizem de fato
 
 **Paisagem de grupo.** Fixando `horizonte = h` para toda a população (preservando
 o fluxo do RNG, então mundo e demais traços ficam idênticos), a população de
-equilíbrio (média das 3 seeds, ticks 500–3000):
+equilíbrio (média das 3 seeds, ticks 500–3000) cai **monotonicamente**:
 
-| h | 1 | **2** | 3 | 4 | 6 | 8 | 10 | 12 |
+| h | 1 | 2 | 3 | 4 | 6 | 8 | 10 | 12 |
 |---|---|---|---|---|---|---|---|---|
-| pop | 271,7 | **294,5** | 293,9 | 292,4 | 290,8 | 290,1 | 289,8 | 289,2 |
+| pop | **295,9** | 295,0 | 293,6 | 292,7 | 290,6 | 289,8 | 289,4 | 289,3 |
 
-O ótimo **de grupo** é raso: `h = 2–3`. De 2 a 12 a população cai de forma suave
-(~1,8%). *(`h = 1` é um artefato: blocos míopes se empacotam, ficam sem célula
-vizinha livre e não conseguem se reproduzir — daí `energia_media = 21,3`, muito
-acima de `REPRO`, com população baixa.)*
+Quanto mais fundo a população pensa, **menor** ela é. O ótimo de grupo é `h = 1`.
+*(Com o bug §1.6, esta curva tinha um falso pico em `h = 2` e um vale artificial em
+`h = 1`: blocos míopes se empacotam, nascem muito, esgotavam os slots primeiro.)*
 
-**Aptidão individual.** Ensaio de invasão: população 50/50 de `h = 3` (ótimo de
-grupo) e `h = 9` (planejador fundo), **sem mutação**, herança exata. Frequência
-de `h = 9`:
+**Aptidão individual.** Ensaio de invasão: população 50/50 de `h = 3` e `h = 9`,
+**sem mutação**, herança exata. Frequência de `h = 9`:
 
-| tick | 0 | 500 | 1000 | 2000 | 4000 |
-|---|---|---|---|---|---|
-| seed 7 | 0,42 | 0,57 | 0,68 | 0,81 | **0,87** |
-| seed 42 | 0,55 | 0,71 | 0,77 | 0,81 | **0,85** |
-| seed 1234 | 0,42 | 0,56 | 0,63 | 0,73 | **0,82** |
+| tick | 0 | 1000 | 2000 | 4000 |
+|---|---|---|---|---|
+| seed 7 | 0,42 | 0,71 | 0,84 | **0,91** |
+| seed 42 | 0,55 | 0,76 | 0,83 | **0,87** |
+| seed 1234 | 0,42 | 0,73 | 0,83 | **0,85** |
 
-O planejador fundo **desloca** o raso, monotonicamente, nas três seeds (ainda
-subindo no tick 4000; não chegou a fixar).
+O planejador fundo **desloca** o raso, monotonicamente, nas três seeds.
 
 ## A conclusão, e ela é forte
 
-> Pensar mais fundo é **individualmente vantajoso** e **coletivamente levemente
-> ruim**. O horizonte cognitivo é um **bem posicional** — uma corrida armamentista.
+> Pensar mais fundo é **individualmente vantajoso** e **coletivamente ruim**. O
+> horizonte cognitivo é um **bem posicional** — uma corrida armamentista.
 
 É por isso que a competição alimenta o pensamento em vez de freá-lo (H3): o ganho
 de olhar fundo está principalmente em **ganhar a célula disputada do vizinho**,
-não em fazer o bolo crescer. É um jogo de soma quase zero. Cada bloco precisa
-pensar mais fundo só para permanecer no lugar — Rainha Vermelha.
+não em fazer o bolo crescer. Cada bloco precisa pensar mais fundo só para
+permanecer no lugar — Rainha Vermelha.
 
-E o freio (H1, H2) não é energia nem deriva: é o **decaimento geométrico da
-vantagem posicional** (`desconto^h`). Passada uma profundidade rasa, o ganho
-marginal some no ruído e a deriva assume — daí platôs diferentes por seed.
+E o freio (H1, H2) não é energia nem deriva: é o **decaimento geométrico do peso
+do futuro** — e, sobretudo, a compensação via `desconto`. Uma população pode
+"comprar" horizonte barato baixando `desconto`, e é exatamente o que a seed 7 faz.
 
-**Ressalvas honestas.** População de equilíbrio é proxy de *grupo*; o ensaio de
-invasão mede aptidão *relativa*. O descasamento entre os dois **é** o achado. Só
-testei o par 3×9, e bens posicionais são intrinsecamente **frequência-dependentes**
-— o que provavelmente explica por que o equilíbrio mutação-seleção difere por seed
-(4,1 / 7,7 / 9,1) em vez de convergir. O ESS do horizonte é **desconhecido**.
+**Ressalvas honestas.** População de equilíbrio é proxy de *grupo*; a invasão mede
+aptidão *relativa*. O descasamento entre os dois **é** o achado. Só testei o par
+3×9, e bens posicionais são intrinsecamente **frequência-dependentes**. `HORIZONTE_MAX`
+= 12 **censura** a seed 7 (`hor_m` 11,04). O ESS do horizonte é **desconhecido**.
 
 ## O que fazer, então
 
-1. **Torneio de invasão par-a-par** (`h_i` × `h_j`, matriz 12×12, por seed): o
-   instrumento já dá isso quase de graça — com só dois valores na população,
-   `hor_m` no CSV *é* a frequência. Sai daí o ESS e o grau de dependência de
-   frequência. Este é o experimento mais barato e mais informativo do projeto.
+1. **Torneio de invasão par-a-par** (`h_i` × `h_j`, matriz 12×12, por seed): com só
+   dois valores na população, `hor_m` no CSV *é* a frequência. Sai daí o ESS e o
+   grau de dependência de frequência. Barato e informativo. Fixar `desconto` no
+   torneio — senão a compensação contamina o resultado.
 2. **O custo de pensar**, agora com um significado preciso. Ele não "cria um
    gradiente onde não há" (H2, morta) nem "contém uma catraca" (H1, morta). Ele
    **internaliza uma externalidade**: hoje o planejador fundo impõe ao comum um
-   custo que não paga. `METABOLISMO + c · horizonte` faz o pensador pagar a
-   própria corrida armamentista. É um **imposto pigouviano sobre a cognição**.
+   custo que não paga. `METABOLISMO + c · horizonte` faz o pensador pagar a própria
+   corrida armamentista. É um **imposto pigouviano sobre a cognição**.
 
    Predições falseáveis:
-   - o `h` evoluído deve **cair em direção ao ótimo de grupo (2–3)** conforme `c`
-     sobe — uma curva dose-resposta `h*(c)`;
+   - o `h` evoluído deve **cair em direção ao ótimo de grupo** conforme `c` sobe —
+     uma curva dose-resposta `h*(c)`;
    - existe um `c` em que o `h` evoluído **coincide** com o ótimo de grupo:
      interesse individual e coletivo alinhados. Uma coincidência *prevista* é um
      teste forte;
-   - a **variância entre seeds** de `hor_m` (hoje 4,1 → 9,1) deve encolher;
-   - `hor_sd` deve diminuir (canalização);
+   - a **profundidade efetiva** (não o `hor_m` bruto) deve encolher, e a
+     compensação via `desconto` deve aparecer como uma resposta correlacionada;
    - em manchas ricas a corrida vale o imposto; em manchas pobres, não → **nichos
      espaciais**, sem ninguém programar nicho. É a ponte para a Fase 4, e a razão
      de o custo vir antes dela.
+3. **Cuidado com o custo escolhido.** Se `c` for cobrado por *passo declarado*
+   (`horizonte`), um bloco escapa do imposto baixando `desconto` e mantendo o
+   horizonte — pagaria por passos que já não pesam. Cobrar pela profundidade
+   *efetiva* é mais honesto e mais difícil. A escolha é uma tese, não um detalhe.
 
 ## Corolário desconfortável
 
-A narrativa "a evolução aprende a planejar mais longe" é verdadeira e **não é a
-boa notícia que parece**. A inteligência, aqui, não torna a população melhor: é
-uma corrida que cada indivíduo precisa correr para ficar parado, e que sai
-ligeiramente cara para todos. Se isso vale para o bicho de 56 KB, vale a pergunta
-para os outros.
+A narrativa "a evolução aprende a planejar mais longe" é, na melhor das hipóteses,
+mal formulada — `hor_m` não é identificável sozinho. E na parte em que é
+verdadeira, **não é a boa notícia que parece**: a inteligência, aqui, não torna a
+população melhor. É uma corrida que cada indivíduo precisa correr para ficar
+parado, e que sai cara para todos. Se isso vale para o bicho de 56 KB, vale a
+pergunta para os outros.
 
 # Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos**
 

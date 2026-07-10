@@ -35,11 +35,17 @@ prova que o conserto tocou o medidor e não a simulação.
 
 | condição | `modelo` (quebrado) | `modelo` (consertado) | `agencia` | `automodelo` | `phi` | pop |
 |---|---|---|---|---|---|---|
-| controle | 0,973 | 0,638 | 0,385 | 0,327 | 0,256 | 307 |
-| **A.** `horizonte = 1` | **0,994** ↑ | 0,508 | 0,328 | 0,135 | 0,285 | 245 |
+| controle | 0,973 | 0,636 | 0,383 | 0,332 | 0,255 | 312 |
+| **A.** `horizonte = 1` | **0,994** ↑ | 0,505 | 0,296 | 0,170 | 0,263 | 321 |
 | **B.** `prever_valor ≡ 0` | **1,000** ↑↑ | **0,000** | 0,000 | 0,000 | 0,131 | **extinta** |
-| **C.** solipsista | 0,789 | 0,783 | **0,0000** | **0,0000** | 0,031 | 199 |
-| **D.** `COMPETICAO = 0` | 0,955 | 0,795 | 0,578 | 0,432 | 0,198 | 306 |
+| **C.** solipsista | 0,789 | 0,783 | **0,0000** | **0,0000** | 0,039 | 314 |
+| **D.** `COMPETICAO = 0` | 0,955 | 0,790 | 0,570 | 0,441 | 0,192 | 315 |
+
+> **Errata (nota 02).** A primeira versão desta tabela trazia populações de
+> 199–307 e falava em quedas de 25–35%. Eram contaminação do teto de nascimentos
+> (`reproduzir()` não reciclava slots), corrigido depois. As leituras dos
+> **mostradores** praticamente não mudaram; as de **população** mudaram muito.
+> Nada nas conclusões abaixo dependia delas, exceto onde marcado.
 
 ## 2. Modo 1 — `modelo`: um mapa que não podia errar
 
@@ -152,14 +158,20 @@ subestima sistematicamente a própria colheita.
 
 Duas observações, e uma delas eu quis fazer e os dados não deixaram:
 
-- **Acurácia e aptidão dissociam.** O solipsista modela melhor e morre 35% mais
-  (pop 199 × 307). Prever bem não é viver bem.
-- **Não é (ainda) uma "crença falsa adaptativa".** Removê-la não muda a população
-  (290,1 × 290,5): ao nível do grupo, `partilha` é redundante com `espaco` do
-  ponto de vista comportamental, e é **puro custo epistêmico**. Se ela é
-  *individualmente* vantajosa é outra pergunta — e uma que exige `COMPETICAO`
+- **`partilha` é puro custo epistêmico ao nível do grupo.** Removê-la (D) recupera
+  0,16 de calibração e **não muda a população** (290,3 × 290,0). Quem carrega o
+  valor adaptativo de enxergar rivais é o outro termo, `espaco`: o solipsista, que
+  perde os dois, paga só **2,4%** de população (283,1 × 290,0).
+- **Não é (ainda) uma "crença falsa adaptativa".** Ela não paga, ao nível do grupo.
+  Se é *individualmente* vantajosa é outra pergunta — e uma que exige `COMPETICAO`
   como traço por bloco e um ensaio de invasão. É a pergunta de McKay & Dennett
   (*The evolution of misbelief*, 2009), executável.
+
+> **Errata (nota 02).** Aqui eu havia escrito que "o solipsista modela melhor e
+> **morre 35% mais** — acurácia e aptidão dissociam". Era artefato do teto de
+> nascimentos: o solipsista se amontoa, nasce muito, esgotava os slots antes. Com
+> a reprodução consertada o custo é de 2,4%, e a frase perde a força. **Retirada.**
+> O que sobrevive é mais modesto: `partilha` custa calibração e não paga nada.
 
 ## 6. Dois morais que sobrevivem ao brinquedo
 
@@ -181,14 +193,11 @@ Duas observações, e uma delas eu quis fazer e os dados não deixaram:
   janela de comparação continua durando `blocos[i].horizonte` ticks. A queda de
   `modelo` (0,638 → 0,508) mistura "mapa raso" com "janela mais longa que o mapa".
   As conclusões desta nota não dependem de A: dependem de **B** e **C**.
-- **Bug conhecido no simulador (independente da bateria).** `reproduzir()` faz
-  `j = n_blocos++` e nunca reaproveita o slot de um bloco morto, parando em
-  `MAX_AG = 1408`. Há, portanto, um teto de ~1348 **nascimentos** na vida inteira
-  de uma simulação. Entre os ticks **~10 000 e ~12 400** (seed-dependente) a
-  reprodução morre: a evolução congela, ninguém mais se divide e `energia_media`
-  diverge (361 no tick 20 000, 986 no tick 29 999, contra ~6 no regime saudável).
-  **Corridas acima de ~10 000 ticks não são interpretáveis evolutivamente.** Todos
-  os números desta nota vêm de corridas de 3000 ticks, no regime saudável.
+- **Bug no simulador, descoberto ao consertar a bateria — hoje corrigido.**
+  `reproduzir()` fazia `j = n_blocos++` e nunca reaproveitava o slot de um morto,
+  impondo um teto de ~1348 **nascimentos** por simulação. Ele **contaminou todas as
+  comparações de população** desta nota (ver as erratas acima); as leituras dos
+  mostradores sobreviveram quase intactas. Ver [nota 02](./02-o-teto-de-nascimentos.md).
 
 ## 8. Em aberto
 
