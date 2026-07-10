@@ -296,7 +296,7 @@ Cinco regras, cada uma paga com um erro cometido:
 
 ---
 
-# Fase 2 — Fechar a bateria: `relato` *(em andamento)*
+# Fase 2 — Fechar a bateria: `relato` *(concluída em 2026-07-10)*
 
 **Pergunta:** um bloco pode dizer algo *sobre si* que carregue comportamento?
 
@@ -416,6 +416,29 @@ motivo, diferindo só **no que leem**:
   *"fui forçado pelo espectador"*. De dentro de `f(seed)`, a intervenção de fora
   do mundo é indistinguível de física. O "detecta" de C é o teto epistêmico de um
   bloco: *algo* me moveu — nunca *quem*.
+
+## 2.3 O placar do Bandersnatch ✅ *(nota 07 — as cinco predições confirmaram)*
+
+Com ~25% forçado (média de 3 seeds): **A** (lê a ação) desaba a 0,244 nos
+forçados e ainda nomeia motivo positivo em ~26% deles — confabula, nunca percebe;
+**B** (lê o plano) fica em 0,806 ≈ livres — imune ao dedo, e descrevendo um passo
+que não aconteceu; **C** (monitor) detecta 100% das negações da física e 99% dos
+dedos, com **zero falso alarme** — e o mesmo sinal para os dois: *detecção sem
+atribuição de fonte*. Dose-resposta do κ canônico: 0,67 → 0,62 → 0,48 → 0,29
+(frações 0, 1/16, 1/4, 1/2), monotônica; com fração 0 o patch é **bit-a-bit
+inerte**. A tabela de Gazzaniga virou **uma linha por arquitetura**.
+
+Dois achados não encomendados: `accB` dos *negados* (0,888) supera a dos livres —
+**as brigas acontecem onde todo mundo entende o porquê** (célula disputada é
+célula legível); e ~1% dos dedos é **indetectável por princípio** — o dedo que
+`resolver()` desfaz não deixa rastro contrafactual, e detectabilidade é
+propriedade do rastro, não da introspecção.
+
+**O que a Fase 2 deixa herdado à Fase 4:** tornar o relato **causal** (vizinhos
+consumindo o sinal, mentira custando); instalar as arquiteturas A/B/C como
+**traço herdável** e deixar a seleção escolher (predição registrada na nota 07:
+com leitores que punem incoerência, C invade A); e o segundo vocabulário de
+relato (separar "intérprete mudo" de "self sem biografia", nota 06 §4).
 
 ## O experimento do intérprete (Gazzaniga)
 

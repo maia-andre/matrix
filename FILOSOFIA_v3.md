@@ -103,15 +103,22 @@ rodados pelo **observador**. Três movimentos, em escada:
    escolhas). Substrato de "eu poderia ter ido para a esquerda": uma crença modal
    **falsa** num universo `f(seed)` — e funcionalmente indispensável. ⛔ mexe na
    simulação (faculdade nova, não régua); entra pela Fase 4/5.
-2. **O experimento Bandersnatch** — o intérprete de Gazzaniga girado do espaço
-   para o tempo: no instante entre `intencao` e `alvo`, o *espectador* sobrescreve
-   a escolha. O relato nota? confabula uma razão que nunca operou? ⛔ aguarda o
-   `relato` (Fase 2) — é a versão temporal do experimento do intérprete.
+2. **O experimento Bandersnatch** — ✅ **rodou** (nota 07). O espectador
+   sobrescreveu ~25% das escolhas, e a tabela de Gazzaniga virou **uma linha por
+   arquitetura de introspecção**: quem lê a ação confabula (e nomeia motivo
+   positivo para ~26% das ações impostas); quem lê o plano não percebe (e
+   descreve um passo que não aconteceu); quem monitora os dois detecta 99–100% —
+   **sem falso alarme, e sem autoria**. E ~1% dos dedos é indetectável **por
+   princípio**: intervenção que a física desfaz não deixa rastro contrafactual.
+   *Detectabilidade é propriedade do rastro, não da introspecção.*
 3. **A posição** que a v3 tem de assumir sobre "eu poderia ter agido de outro
    modo" num mundo determinístico: crença falsa, ficção útil, ou verdade sobre o
    *tipo* e falsidade sobre a *ocorrência*? Compatibilismo executável — com a
    vantagem, sobre a poltrona, de que aqui o determinismo é **literal e
-   inspecionável** (`git show` da linha que decide).
+   inspecionável** (`git show` da linha que decide). A nota 07 (B5) já entrega a
+   esta seção o seu teto: de dentro, *física* e *espectador* entram pelo mesmo
+   barramento — "algo me moveu" é o máximo que qualquer introspecção relata;
+   "*quem* me moveu", nunca.
 
 ## 5. A dobradiça da confabulação *(item 5 — a versão selvagem já existe; a forçada ⛔ aguarda)*
 
@@ -124,11 +131,15 @@ dizendo "não sei" nos outros ~79% (nota 06). A racionalização não precisou s
 programada: bastou um intérprete que lê comportamento e um mundo que às vezes
 desobedece o plano.
 
-O que ⛔ aguarda: o **Bandersnatch forçado** com a comparação de arquiteturas
-(intérprete que lê a ação × que lê o plano — confabular × detectar), e então o
-fecho do arco: o último reduto do "mas eu *sei* que sou consciente, por dentro"
-**é ele próprio um relato**. Se relatos confabulam — e aqui, mensurável e
-selvagem, confabulam — quanto peso probatório sobra?
+E o **Bandersnatch forçado rodou** (nota 07): sob o dedo do espectador, a tabela
+honesto/detecta/confabula deixou de ser tipologia e virou **uma linha por
+arquitetura** — confabular ou detectar não é um mistério do sujeito, é uma
+consequência de *o que o intérprete lê*. O que ⛔ aguarda: a versão
+**evolutiva** (as arquiteturas como traço herdável, com o relato custando —
+Fase 4), e então o fecho do arco: o último reduto do "mas eu *sei* que sou
+consciente, por dentro" **é ele próprio um relato**. Se relatos confabulam — e
+aqui, mensurável e selvagem, confabulam — quanto peso probatório sobra? E se
+confabular × detectar é só arquitetura de leitura, que arquitetura é a *nossa*?
 
 ## 6. Função × experiência — a escolha que a v2 evita *(item 6)*
 

@@ -47,6 +47,7 @@ notas.
 | [04](./04-o-automodelo-era-um-modelo-do-outro.md) | `automodelo` era observação, não intervenção; escalava com `ANTECIPACAO`; e media o **outro** (zero para um eremita). Vira `modelo_do_outro`, intervenção ancorada | 1 — metrologia da mente |
 | [05](./05-phi-media-o-segundo-motivo.md) | `phi` era **infalseável** (nenhuma ablação a zerava) e a suspeita "= profundidade" era artefato de janela; media o **segundo motivo**. Redefinida: menor distância aos módulos isolados; **a evolução extingue a integração** | 1 — metrologia (+ `FILOSOFIA_v3` §2) |
 | [06](./06-o-interprete-leigo.md) | `relato` entregue com **pré-registro antes do código**; κ do intérprete leigo ≈ 0,67; **confabulação selvagem** em ~21% das ações negadas; P5 falhou — o eremita fica **mudo** (self de um motivo só não tem o que relatar) | 1 — metrologia (+ `FILOSOFIA_v3` §2 e §5) |
+| [07](./07-o-dedo-do-espectador.md) | Bandersnatch forçado: a tabela de Gazzaniga vira **uma linha por arquitetura** (lê-ação confabula, lê-plano não percebe, monitor detecta **sem autoria**); dose-resposta do κ; o dedo sem rastro é **indetectável por princípio** | 1 — metrologia (+ `FILOSOFIA_v3` §4 e §5) |
 
 ## Erratas
 
