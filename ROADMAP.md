@@ -596,7 +596,7 @@ população melhor. É uma corrida que cada indivíduo precisa correr para ficar
 parado, e que sai cara para todos. Se isso vale para o bicho de 56 KB, vale a
 pergunta para os outros.
 
-# Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos**
+# Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos** *(em andamento)*
 
 **Pergunta:** que comportamentos emergem, sem que ninguém os programe?
 
@@ -621,6 +621,46 @@ grátis, a mentira domina e o sinal degenera em ruído (Maynard Smith; as saída
 clássicas são custo — Zahavi — ou interesse comum, como parentesco). Um sinal
 que ninguém é *pressionado* a ler, e cuja mentira não *custa*, é decoração
 determinística: o experimento nasce respondido.
+
+## 4.0 Pré-registro do sinal de intenção — o relato causal *(2026-07-10, antes de rodar)*
+
+**O mecanismo.** O nível 5 sempre teve um leitor embutido: `pretendentes_em()` lê
+`intencao_*` dos vizinhos — **telepatia**, acesso perfeito à mente alheia. O
+relato causal a substitui por **comunicação**: entre `declarar` e `decidir`, cada
+bloco **emite** um sinal sobre a própria intenção (`emitir`, arrays `sinal_*`), e
+`pretendentes_em` passa a ler o *sinal*, não a mente. O canal satisfaz as duas
+cláusulas anti-cheap-talk sem nenhuma multa artificial: os leitores **já são
+pressionados a ler** (o efeito medido de `ANTECIPACAO` — pop +5–7%), e a mentira
+**custa endogenamente** — o sinal só *repele* (via `ANTECIPACAO`); blefar gasta a
+deterrência numa célula que o blefador não vai tomar e **expõe o alvo verdadeiro**
+à disputa.
+
+**A estratégia é traço herdável** (nível 6, com mutação): `HONESTO` (sinal =
+intenção), `MUDO` (sinal = própria célula — silêncio: ninguém mira célula
+ocupada), `BLEFE` (sinal = o melhor alvo que **não** é a intenção). Semeadura em
+terços; a seleção decide.
+
+**Predições, declaradas antes de rodar:**
+
+- **S1 (refactor inócuo):** com todos honestos, sinal ≡ intenção e o mundo é
+  **bit-a-bit idêntico** ao da telepatia. Demonstrável; verificar. *(É o passo 1,
+  commitado separado: a física não muda, só a epistemologia.)*
+- **S2 (o canal carrega comportamento):** mundo todo-MUDO × todo-HONESTO
+  reproduz o efeito `ANTECIPACAO` (população maior e mais enxuta com o canal
+  aberto). A família *ablação* do relato ganha dentes: **silêncio muda o mundo**
+  — fim do epifenomenalismo da v1.
+- **S3 (silêncio = eremita epistêmico):** no mundo todo-MUDO, `pret ≡ 0` e
+  `modelo_do_outro` lê **0 exato** (demonstrável). Não perceber o outro e o
+  outro não falar são, para a régua, o mesmo estado.
+- **S4 (honestidade fixa contra o silêncio):** invasão 50/50 sem mutação →
+  `HONESTO` desloca `MUDO`. Mecanismo: quem sinaliza o alvo o ganha sem disputa
+  (deterrência); quem cala disputa e perde metade dos empates.
+- **S5 (honestidade resiste ao blefe):** 50/50 `HONESTO` × `BLEFE` → `HONESTO`
+  vence, pelo custo endógeno do blefe. **Risco declarado, em voz alta:** se o
+  blefe vencer, o canal degenera em ruído — cheap talk instável, Maynard Smith
+  reproduzido no brinquedo — **e isso é o resultado**, não um fracasso.
+- **S6 (do início diverso):** semeando em terços com mutação, `hon_f → ~1` em
+  30 000 ticks, nas 3 seeds.
 
 ---
 
