@@ -743,13 +743,24 @@ typedef struct {
 
 static Bateria ultima_bateria;   /* ultimo tick medido; lido pelo HUD e pelo log */
 
-/* Estado do mostrador 'modelo' (arrays paralelos a blocos[]): ao decidir, cada
- * bloco PREVE a colheita do 1o passo na celula escolhida; um tick depois a gente
- * confere com o que ele DE FATO colheu. So da pra pontuar uma previsao depois do
- * desfecho — dai o atraso natural de 1 tick. */
-static float pred_colheita[MAX_AG];   /* colheita prevista no alvo cognitivo */
+/* Estado do mostrador 'modelo' (arrays paralelos a blocos[]). Uma "janela" de
+ * previsao por bloco: ao abri-la, guarda o que o MAPA DO BLOCO promete — a
+ * colheita descontada que 'prever_valor' enxerga entrando no alvo, com o
+ * horizonte, o desconto e a partilha DELE. Durante os seus proprios 'horizonte'
+ * ticks a janela acumula a colheita REAL, descontada pelo mesmo desconto. Ao
+ * fechar, compara mapa com territorio.
+ *
+ * A versao anterior deste mostrador lia 'comida[alvo]' — o array do mundo — e
+ * comparava com a garfada tirada da mesma celula: a mesma formula dos dois lados.
+ * Dava nota ~1 para qualquer bloco que chegasse ao alvo, inclusive para blocos
+ * sem modelo de mundo nenhum. Um mapa que nao pode discordar do territorio nao
+ * e um mapa. Aqui a previsao sai da cabeca do bloco, e por isso pode errar. */
+static float pred_valor[MAX_AG];      /* o que o mapa do bloco prometeu      */
+static float real_acum[MAX_AG];       /* colheita real, ja descontada        */
+static float peso_janela[MAX_AG];     /* desconto^h corrente da janela       */
+static int   restam[MAX_AG];          /* ticks ate fechar (0 = sem janela)   */
 static float energia_antes[MAX_AG];   /* energia na hora de decidir          */
-static int   pred_valido[MAX_AG];     /* este slot previu algo neste tick?   */
+static float modelo_ultimo;           /* carrega a leitura se ninguem fechar */
 
 /* FASE 1 (apos decidir, ANTES de resolver): os dois mostradores de ablacao, e
  * guarda a previsao do modelo. Le o alvo COGNITIVO — antes de resolver() trocar
@@ -758,7 +769,7 @@ static void medir_decisao(void) {
     int   n = 0;
     float ag = 0.0f, au = 0.0f;
     for (int i = 0; i < n_blocos; i++) {
-        if (!blocos[i].vivo) { pred_valido[i] = 0; continue; }
+        if (!blocos[i].vivo) continue;
         n++;
 
         /* AUTO-MODELO (nv5), de graca: antecipar os rivais mudou a escolha?
@@ -776,37 +787,56 @@ static void medir_decisao(void) {
         melhor_celula(&saciado, i, 1, &sx, &sy);
         if (fx != sx || fy != sy) ag += 1.0f;
 
-        /* MODELO (nv3): guarda a colheita prevista (1 passo, so o recurso) no
-         * alvo escolhido. O 'real' chega no medir_modelo, depois de comer. */
-        pred_colheita[i] = menor(comida[alvo_y[i]][alvo_x[i]], INGESTAO);
+        /* MODELO (nv3): se nao ha janela aberta, abre uma. A previsao sai de
+         * 'prever_valor' — o mapa do bloco — e nao do array do mundo. */
+        if (restam[i] == 0) {
+            pred_valor[i]  = prever_valor(alvo_x[i], alvo_y[i], &blocos[i]);
+            real_acum[i]   = 0.0f;
+            peso_janela[i] = 1.0f;
+            restam[i]      = blocos[i].horizonte;
+        }
         energia_antes[i] = blocos[i].energia;
-        pred_valido[i]   = 1;
     }
     float inv = n ? 1.0f / n : 0.0f;
     ultima_bateria.agencia    = ag * inv;
     ultima_bateria.automodelo = au * inv;
 }
 
-/* FASE 2 (apos aplicar_e_comer, ANTES de reproduzir reusar slots): confere a
- * previsao contra a colheita real. real = variacao de energia + metabolismo pago
- * (Δe = colheita - METABOLISMO). Erro simetrico normalizado -> acc em [0,1]:
- * 1 = previu certo, 0 = errou tudo. Quem chegou ao alvo acerta na mosca (nada
- * mexe na comida ali no meio-tempo); o erro vem de quem foi BARRADO e colheu
- * noutra celula — o mapa nao previu perder a disputa. */
+/* FASE 2 (apos aplicar_e_comer): a colheita real do tick entra na janela aberta,
+ * descontada pelo mesmo peso que o bloco usou pra imaginar aquele passo. A
+ * garfada real e a variacao de energia mais o metabolismo pago (Δe = garfada -
+ * METABOLISMO). Quando o horizonte se esgota, confere mapa contra territorio;
+ * se o bloco morreu antes, a janela fecha ali mesmo — morrer e a previsao mais
+ * errada que existe, e o mostrador tem que sentir isso.
+ *
+ * Erro simetrico normalizado -> nota em [0,1]: 1 = previu certo, 0 = errou tudo.
+ * O bloco erra por tres motivos, todos legitimos: perdeu a disputa e colheu
+ * noutra celula; mudou de ideia e saiu do alvo; ou o mapa dele e ruim mesmo
+ * (horizonte curto demais, desconto torto, partilha que superestima os rivais).
+ * Num tick em que ninguem fecha janela, o mostrador repete a ultima leitura. */
 static void medir_modelo(void) {
     int   n = 0;
     float acc = 0.0f;
     for (int i = 0; i < n_blocos; i++) {
-        if (!pred_valido[i]) continue;
-        n++;
-        float real = (blocos[i].energia - energia_antes[i]) + METABOLISMO;
-        if (real < 0.0f) real = 0.0f;
-        float pred = pred_colheita[i];
+        if (restam[i] == 0) continue;              /* sem janela aberta       */
+
+        float garfada = (blocos[i].energia - energia_antes[i]) + METABOLISMO;
+        if (garfada < 0.0f) garfada = 0.0f;
+        real_acum[i]   += peso_janela[i] * garfada;
+        peso_janela[i] *= blocos[i].desconto;
+        restam[i]--;
+
+        if (!blocos[i].vivo) restam[i] = 0;        /* morreu: fecha agora     */
+        if (restam[i] > 0)   continue;             /* janela segue aberta     */
+
+        float pred = pred_valor[i], real = real_acum[i];
         float soma = pred + real;
         float dif  = pred > real ? pred - real : real - pred;
-        acc += soma > 0.0f ? 1.0f - dif / soma : 1.0f;  /* previu 0 e colheu 0 = ok */
+        acc += soma > 0.0f ? 1.0f - dif / soma : 1.0f;  /* previu 0, colheu 0 = ok */
+        n++;
     }
-    ultima_bateria.modelo = n ? acc / n : 0.0f;
+    if (n) modelo_ultimo = acc / n;
+    ultima_bateria.modelo = modelo_ultimo;
 }
 
 /* Desenha um frame inteiro num buffer e cospe de uma vez (menos piscada). */

@@ -8,6 +8,7 @@ Experimento meio filosófico, meio de programação: uma "Matrix" de brinquedo n
 
 - `README.md` é o *como* (arquitetura, parâmetros, efeitos medidos) — mantê-lo em dia faz parte de qualquer mudança de comportamento.
 - `FILOSOFIA.md` e `FILOSOFIA_v2.md` são o *porquê* (o manifesto; a bateria de desbotamento). Docs e UI em pt-BR; **código e commits sem acentos**.
+- `ROADMAP.md` é o *para onde*: os eixos de pesquisa, os riscos de cada um, e o que o projeto escolhe **não** ser (paralelização/SIMD quebram o determinismo; um arquivo por experimento quebra a comparabilidade dos datasets).
 - `datasets/` guarda CSVs congelados com manifesto de proveniência (comando + commit de `main.c`, em `datasets/README.md`); `datasets/gerar.sh` regenera tudo. Após mudança de comportamento intencional, regenerar e atualizar o manifesto. `notebooks/` analisa os datasets (commitar **sem outputs**); `papers/` é a escrita formal (fonte + PDF).
 
 ## Compilar e rodar

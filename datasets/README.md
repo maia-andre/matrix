@@ -5,12 +5,27 @@ do commit que o gerou. Este manifesto é a proveniência; `./gerar.sh` (rodado
 da raiz ou daqui) regenera tudo — e serve de teste de regressão: se o diff
 contra os CSVs commitados não for vazio, o comportamento da simulação mudou.
 
-| arquivo | comando | `main.c` em | descrição |
-|---------|---------|-------------|-----------|
-| `seed7.csv` | `./matrix 7 2000 0 --log datasets/seed7.csv` | `36fc587` | 2000 ticks da seed 7, a seed de verificação do projeto |
+| arquivo | comando | descrição |
+|---------|---------|-----------|
+| `seed7.csv` | `./matrix 7 2000 0 --log datasets/seed7.csv` | 2000 ticks da seed 7, a seed de verificação do projeto |
+
+**Qual `main.c` gerou cada CSV?** O commit em que o arquivo foi atualizado pela
+última vez — o próprio git responde, e a resposta nunca envelhece:
+
+```sh
+git log -1 --oneline -- datasets/seed7.csv
+```
+
+Um hash escrito à mão nesta tabela mentiria no dia em que alguém regenerasse o
+CSV sem editar a linha. Por isso não há coluna de hash.
 
 Colunas: ver a seção "Registrar dados (`--log`)" do `README.md` da raiz.
 
-Para adicionar um dataset: acrescente o comando ao `gerar.sh`, rode-o e
-registre a linha nova aqui com o commit corrente de `main.c`. Depois de uma
-mudança de comportamento intencional, regenere e atualize a coluna do commit.
+Para adicionar um dataset: acrescente o comando ao `gerar.sh`, rode-o e registre
+a linha nova aqui. Depois de uma mudança de comportamento intencional, regenere
+os CSVs **no mesmo commit** da mudança — assim o `git log` acima continua exato.
+
+⚠️ **`modelo` mudou de definição.** CSVs gerados antes do conserto do mostrador
+(`modelo` lia o array do mundo, não o mapa do bloco) trazem valores `~0,97` que
+não são comparáveis com os `~0,63` de hoje. Ver
+[`../papers/notes/01-quatro-modos-de-errar.md`](../papers/notes/01-quatro-modos-de-errar.md).

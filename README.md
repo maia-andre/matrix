@@ -104,19 +104,34 @@ projeto e o desfecho honesto — está em [`FILOSOFIA_v2.md`](./FILOSOFIA_v2.md)
 
 | Mostrador | Palavra | Família | Como mede |
 |-----------|---------|---------|-----------|
-| `modelo` | "prevê / sabe" | calibração | o bloco prevê a colheita do 1º passo na célula escolhida; 1 tick depois compara com o que **de fato** colheu — `1 − |pred−real|/(pred+real)` |
+| `modelo` | "prevê / sabe" | calibração | o **mapa do bloco** (`prever_valor`: horizonte, desconto, partilha) promete uma colheita descontada ao entrar no alvo; ao longo dos seus próprios `horizonte` ticks compara-se com a colheita real, descontada igual — `1 − |pred−real|/(pred+real)` |
 | `agencia` | "quer / escolhe" | ablação | fração cuja decisão muda se só a **fome** muda (mesmo mundo, dois clones faminto×saciado) |
 | `automodelo` | "eu, um entre outros" | ablação | fração cuja decisão muda ao **antecipar os rivais** (`intencao` pré-social ≠ `alvo` pós-social) |
 | `phi` (`Φ~/10`) | "integra" | calibração | distância entre a ordem de valor *integrada* e a *reativa* (ver [`FILOSOFIA.md`](./FILOSOFIA.md) §5) |
 
-Dois achados que já saltam do dado (seed 7): `automodelo` **acende com a
-lotação** — começa em `0` (mundo esparso, ninguém disputa) e sobe a ~`0.35`
-conforme a população adensa; e `modelo` fica **quase perfeito** (`~0.99`),
-caindo de leve com a lotação. Juntos dizem algo forte sobre este universo: o
-bloco modela a *física* (comida, rebrota) com exatidão — o **único** buraco
-entre o mapa e o território é o **social**, o que os outros vão fazer. A "fresta"
-inteira é a disputa. Pendente: `relato` (a fidelidade do auto-relato sob
-intervenção — o experimento "Bandersnatch").
+> ⚠️ **A primeira versão de `modelo` estava quebrada**, e a conclusão que ela
+> sustentava ("o bloco modela a física com exatidão; o único buraco é o social")
+> era falsa. Aquele mostrador lia `comida[alvo]` — o array do **mundo** — e
+> comparava com a garfada tirada da mesma célula: a mesma fórmula dos dois lados.
+> Dava `1,000` até para um bloco sem modelo de mundo nenhum, marchando para a
+> extinção. Um mapa que não pode discordar do território não é um mapa. Ver
+> [`papers/notes/01-quatro-modos-de-errar.md`](./papers/notes/01-quatro-modos-de-errar.md).
+
+Com o mostrador corrigido (a previsão sai de `prever_valor`, o mapa do bloco),
+`modelo` lê **~0,63** — e o achado se inverte: o buraco entre o mapa e o
+território **não** é só social, é uma **crença falsa** sobre o social. O bloco
+acredita, via `partilha`, que os rivais dividem a comida da célula que ele ocupa;
+mas `ocup[][]` guarda **um** bloco por célula, e ninguém divide nada. Zerar só
+`COMPETICAO` recupera a calibração (`0,63 → 0,79`) sem mudar a população. E um
+bloco que **ignora** os rivais prevê ainda melhor (`0,78`) enquanto morre 35%
+mais: aqui, acurácia e aptidão são coisas diferentes.
+
+`automodelo` **acende com a lotação** — começa em `0` (mundo esparso, ninguém
+disputa) e sobe a ~`0.35` conforme a população adensa. Cuidado com a leitura: ele
+é identicamente **zero** para um bloco que não percebe rivais, e portanto mede uma
+relação, não uma posse (o *teste do eremita*, em [`ROADMAP.md`](./ROADMAP.md) §1.5).
+Pendente: `relato` (a fidelidade do auto-relato sob intervenção — o experimento
+"Bandersnatch").
 
 ### A pílula vermelha 🔴 — entrar num bloco
 
@@ -356,6 +371,10 @@ A segunda é **mais simulação**. Algumas ideias, da mais barata à mais ambici
 
 > Cada uma mexe só na PART 2 (cognição) ou na fase de reprodução — o resto do
 > pipeline (mundo, render, tick) segue de pé.
+
+Depois da v2 o espaço abriu bem mais do que essas duas direções: as linhas de
+pesquisa possíveis — e as que o projeto deliberadamente **não** vai seguir —
+estão em **[`ROADMAP.md`](./ROADMAP.md)**.
 
 ---
 
