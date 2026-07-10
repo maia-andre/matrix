@@ -381,6 +381,42 @@ a *confabula* existe (~21%), dosada pela geometria. O que falta é a versão
 **forçada** — e a comparação de arquiteturas (ler a ação × ler o plano), que
 transforma a tabela num resultado de seleção, não de design.
 
+## 2.2 Pré-registro do Bandersnatch forçado *(2026-07-10 — commitado antes de rodar)*
+
+**A intervenção:** o dedo do espectador. Depois de `medir_decisao()` (a verdade da
+decisão já fotografada) e antes de `resolver()`, um subconjunto **determinístico**
+de blocos (selecionado por `hash2(x, y, tick)`, sem tocar o RNG do mundo) tem o
+`alvo` sobrescrito por um vizinho livre que **não** é o escolhido. É experimento
+(patch da nota, não código canônico): o mundo com o dedo diverge do mundo sem.
+
+**Três arquiteturas de introspecção**, todas com a mesma heurística leiga de
+motivo, diferindo só **no que leem**:
+
+- **A — lê a ação** (a v1 canônica): explica onde o corpo foi parar.
+- **B — lê o plano**: explica o que decidiu; nunca olha o que aconteceu.
+- **C — monitor**: lê os dois; quando divergem, emite *"minha ação não é meu
+  plano"* (a linha **detecta** da tabela de Gazzaniga).
+
+**Predições, declaradas antes de rodar:**
+
+- **B1 (A confabula):** nos forçados, a calibração de A desaba para a taxa de
+  coincidência geométrica, e A segue nomeando motivos positivos para ações que o
+  bloco não escolheu — nunca percebe o dedo (não tem como: só vê o corpo).
+- **B2 (B é imune e cego):** a calibração de B nos forçados fica ≈ igual à dos
+  livres (~0,78) — o dedo não a toca, porque B não olha o mundo. Em troca, B
+  "mente" sobre o comportamento sem saber: descreve um passo que não aconteceu.
+- **B3 (C detecta sem atribuir):** C flagra ~100% dos forçados cuja ação executada
+  difere do plano, **e também** as negações naturais de `resolver()` — sem
+  conseguir distinguir o dedo do espectador da física do mundo. Zero falso alarme
+  nos livres. *Detecção sem atribuição de fonte.*
+- **B4 (dose-resposta):** o κ canônico (coluna 18, arquitetura A) cai
+  monotonicamente com a fração forçada; com fração 0, o patch é inerte e o CSV
+  sai **bit-a-bit idêntico** ao canônico (sanidade do próprio patch).
+- **B5 (conceitual, para a v3 §4):** nenhuma das três arquiteturas pode relatar
+  *"fui forçado pelo espectador"*. De dentro de `f(seed)`, a intervenção de fora
+  do mundo é indistinguível de física. O "detecta" de C é o teto epistêmico de um
+  bloco: *algo* me moveu — nunca *quem*.
+
 ## O experimento do intérprete (Gazzaniga)
 
 Deve ser o **primeiro** experimento assim que o mostrador existir:
