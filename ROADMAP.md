@@ -296,7 +296,7 @@ Cinco regras, cada uma paga com um erro cometido:
 
 ---
 
-# Fase 2 — Fechar a bateria: `relato`
+# Fase 2 — Fechar a bateria: `relato` *(em andamento)*
 
 **Pergunta:** um bloco pode dizer algo *sobre si* que carregue comportamento?
 
@@ -309,6 +309,58 @@ no HUD da primeira pessoa, que narra o bloco em texto — **mas nada o mede**.
 computado do estado interno; vizinhos leem o 3×3. Inteiro, sem `math.h`,
 `f(seed)`, percepção estritamente local. Duas famílias, como sempre — e desta vez
 com a lição da Fase 1: a calibração só vale se o sinal **puder estar errado**.
+
+## 2.0 Pré-registro *(2026-07-10 — commitado antes de escrever o mostrador)*
+
+**Arquitetura escolhida (v1): o intérprete interno é um observador leigo.** O
+módulo de relato **não tem acesso ao estado interno** (fome, urgência, o cálculo
+de `utilidade`) nem ao plano (`intencao`): ele vê o que um vizinho veria — o 3×3
+percebido no início do tick e **a ação executada** — e infere dali o próprio
+motivo. É a tese de Nisbett & Wilson e da self-perception (Bem) como restrição
+arquitetural: *introspecção é percepção do próprio comportamento*. O relato tem
+quatro valores: `fome` (a ação bate com o argmax da comida **crua** — a heurística
+leiga, não `prever_valor`), `espaco` (bate com o argmax de espaço), `ambos`,
+`nao_sei` (não bate com nenhum — o resíduo irredutível, o eco por-bloco da `phi`).
+
+**A verdade (lado do observador):** o motivo que de fato explicaria a **decisão**
+(`alvo` cognitivo, pré-`resolver`) — comparada aos argmax de `prever_valor` (o
+mapa real, com horizonte/desconto/partilha) e de `espaco`, com os traços
+verdadeiros. O canal do relato é **faliível por construção**: lê a ação executada
+(não o plano — `resolver` pode ter negado), e lê comida crua (não o mapa — que
+enxerga rebrota e partilha).
+
+**A estatística:** concordância acima do acaso (κ de Cohen, só aritmética, sem
+`math.h`), clampada em `[0,1]`.
+
+**Condições de sanidade e predições, declaradas antes de rodar:**
+
+- **P1 (a ablação que TEM de zerar):** intérprete cego — relato ≡ constante
+  (qualquer uma das quatro). Pela construção do κ, concordância = acaso ⇒
+  `relato = 0` **exato**. Demonstrável antes de rodar; verificar mesmo assim.
+- **P2 (anti-fotocópia):** no mundo intacto, `0 < relato < 1`. Se ler 1, o canal
+  não pode errar e o mostrador está quebrado (lição do `modelo`); se ler 0, o
+  intérprete é cego e a arquitetura não sustenta a palavra.
+- **P3 (confabulação selvagem):** `resolver` já **intervém** nas ações (nega a
+  célula disputada) — um Bandersnatch que a física roda de graça. Predição: nos
+  blocos **negados**, o relato continua coerente com a ação executada (a
+  arquitetura garante) mas a calibração contra o motivo da *decisão* **cai** em
+  relação aos obedecidos. Se cair, há confabulação sem nenhum patch — o intérprete
+  racionaliza uma ação que o bloco não escolheu.
+- **P4 (exploratória):** os erros de relato se concentram onde `prever_valor`
+  diverge da comida crua — o intérprete leigo não entende o planejador. *"Quanto
+  mais fundo o bloco pensa, menos ele se entende."*
+- **P5 (a costura):** o eremita **não** zera o `relato` — seria o primeiro
+  mostrador da bateria a medir algo que um bloco solitário *tem* (degraus 0–3 da
+  costura, v3 §2). Se zerar, a costura engole o relato e a leitura (B) leva mais
+  um ponto.
+
+**Escopo honesto da v1 (em letras garrafais):** o sinal é **emitido e medido, mas
+ainda não consumido** — nenhum vizinho o lê, nenhuma decisão muda com ele. A
+família *ablação* do `relato` lê zero hoje **por construção**: o relato v1 é
+epifenomenal, e isso é um *resultado* (epifenomenalismo, medido), não um defeito.
+Torná-lo causal (vizinhos lendo o sinal, mentira custando — Fase 4) é o passo
+seguinte, separado de propósito. E o risco de sempre: um relato bem calibrado é
+evidência de **calibração**, não de experiência.
 
 ## O experimento do intérprete (Gazzaniga)
 

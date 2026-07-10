@@ -146,7 +146,7 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
 | `agencia` | eremita (sem rivais percebidos) | ✅ 0 exato, demonstrável (nota 01 §3) |
 | `modelo_do_outro` | eremita (sem pretendentes) | ✅ 0,0000 exato, média e máx (nota 04) |
 | `phi` (redefinida) | qualquer redução a um módulo só: eremita, `peso_espaco ≡ 0`, `prever_valor ≡ 0` | ✅ 0 exato, demonstrável (nota 05) |
-| `relato` | ⛔ a declarar **antes** de construí-lo (regra 2 do protocolo) | — |
+| `relato` | intérprete cego (relato ≡ constante): `relato = 0` **exato**, pela construção do κ | 📋 declarado antes de construir (ROADMAP §2.0, 2026-07-10) |
 
 ## Apêndice B — o que falta para tirar o rótulo "esqueleto"
 
