@@ -45,6 +45,7 @@ notas.
 | [02](./02-o-teto-de-nascimentos.md) | um teto de nascimentos congelava a evolução; havia uma regra de senioridade implícita; `hor_m` não é identificável sozinho | 2 — bem posicional (+ erratas do 1) |
 | [03](./03-a-evolucao-extingue-a-agencia.md) | `agencia` consertada (varredura do domínio, não dois pontos); a queda dela não era defeito de régua — o **reflexo fixa contra o agente** | 1 — metrologia (+ `FILOSOFIA_v3`) |
 | [04](./04-o-automodelo-era-um-modelo-do-outro.md) | `automodelo` era observação, não intervenção; escalava com `ANTECIPACAO`; e media o **outro** (zero para um eremita). Vira `modelo_do_outro`, intervenção ancorada | 1 — metrologia da mente |
+| [05](./05-phi-media-o-segundo-motivo.md) | `phi` era **infalseável** (nenhuma ablação a zerava) e a suspeita "= profundidade" era artefato de janela; media o **segundo motivo**. Redefinida: menor distância aos módulos isolados; **a evolução extingue a integração** | 1 — metrologia (+ `FILOSOFIA_v3` §2) |
 
 ## Erratas
 
