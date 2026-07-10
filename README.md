@@ -86,7 +86,9 @@ combina com os posicionais em qualquer posição:
 Colunas: `seed, tick, pop, energia_media, comida_total`; para cada um dos 4
 traços do nível 6, a **média** (`_m`) e o **desvio-padrão** (`_sd`)
 (`hor_*, desc_*, urg_*, esp_*`); e os **mostradores da bateria** (abaixo),
-todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi, relato`. Como o universo é
+todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi, relato`; e a
+fração da população por estratégia de sinalização, `hon_f` (honesta) e `blef_f`
+(blefe) — o resto é muda. Como o universo é
 `f(seed)` (ver abaixo), o CSV é **reproduzível bit-a-bit**: qualquer pessoa
 regenera o mesmo dataset a partir da seed. É a base para virar instrumento de
 pesquisa — varrer seeds/parâmetros e medir o que a evolução faz, em vez de só
@@ -174,9 +176,19 @@ acaso* a relatar. Escopo honesto da v1: o sinal é medido, mas **nenhum vizinho 
 consome ainda** — o relato é epifenomenal por construção, e isso é resultado,
 não defeito. Ver [`papers/notes/06-o-interprete-leigo.md`](./papers/notes/06-o-interprete-leigo.md).
 
-Pendente: tornar o `relato` **causal** (vizinhos lendo o sinal, mentira custando —
-Fase 4) e o Bandersnatch **forçado** (sobrescrever a escolha e comparar arquiteturas
-de introspecção: ler a ação × ler o plano).
+E o `relato` **virou causal** (Fase 4): até aqui `pretendentes_em` lia a
+`intencao` dos vizinhos — **telepatia**. Agora cada bloco **emite um sinal** sobre
+a própria intenção e os vizinhos leem o sinal, não a mente; a estratégia de fala
+(`honesto`/`mudo`/`blefe`) é um **traço herdável**. O canal deixou de ser
+epifenomenal — silenciar a população muda o mundo (energia ≈ 6,5 muda × 5,7
+honesta) — e, sem nenhuma multa artificial, a **honestidade evolui**: fixa contra
+o silêncio (0,50 → 0,95) e resiste ao blefe (0,50 → 0,87), sobrando um polimorfismo
+estável de ~10% de blefe. O `modelo_do_outro` de um mundo todo-mudo é **zero
+exato**: silêncio e cegueira são, para a régua, o mesmo estado. Ver
+[`papers/notes/08-o-sinal-e-a-mentira.md`](./papers/notes/08-o-sinal-e-a-mentira.md).
+
+Pendente: o Bandersnatch **evolutivo** (as arquiteturas de introspecção como traço)
+e o custo de pensar (Fase 3).
 
 ### A pílula vermelha 🔴 — entrar num bloco
 
@@ -318,14 +330,18 @@ só essa parte mudou:
   a própria valência — isso é agência, não reação.
 - **Nível 5 (auto-modelo):** até aqui o bloco modelava o mundo mas se esquecia de
   **si** — avaliava uma célula como se fosse o único a cobiçá-la. Agora o tick tem
-  **duas passagens** (`declarar` → `decidir`): primeiro todos declaram a intenção
-  (a decisão do nível 4, escrita em `intencao_x/y`), depois cada um **reconsidera
-  lendo a intenção dos vizinhos** (`pretendentes_em`) e desvaloriza alvos que
-  outros também miram — só um entra (`resolver`), então cede para a célula livre, a
-  menos que o alvo disputado seja *muito* melhor (peso `ANTECIPACAO`). É um lampejo
-  de **teoria da mente**: decidir contando que os outros também decidem. As duas
-  passagens leem o mesmo estado estável (arrays separados) pra não reintroduzir a
-  "física fantasma" da ordem de varredura.
+  **três passagens** (`declarar` → `emitir` → `decidir`): primeiro todos declaram a
+  intenção (a decisão do nível 4, em `intencao_x/y`), depois cada um **emite um
+  sinal** sobre ela (`emitir`, em `sinal_x/y`), e por fim cada um **reconsidera
+  lendo os sinais dos vizinhos** (`pretendentes_em`) e desvaloriza alvos que outros
+  também miram — só um entra (`resolver`), então cede para a célula livre, a menos
+  que o alvo disputado seja *muito* melhor (peso `ANTECIPACAO`). É um lampejo de
+  **teoria da mente**: decidir contando que os outros também decidem. O que os
+  vizinhos leem já **não é a intenção crua** (isso seria telepatia) e sim o sinal —
+  que pode mentir: a estratégia de fala é um traço herdável (nível 6), e a
+  honestidade **evolui** porque a mentira custa (nota 08). As passagens leem o
+  mesmo estado estável (arrays separados) pra não reintroduzir a "física fantasma"
+  da ordem de varredura.
 
   *Efeito medido* (A/B com `ANTECIPACAO` 0 vs 0.5, 5 seeds, tick 300): a população
   sobe ~5–7 % e a energia média **cai** (≈6 → ≈4). Lendo as intenções, os blocos

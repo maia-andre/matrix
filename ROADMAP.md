@@ -662,6 +662,31 @@ terços; a seleção decide.
 - **S6 (do início diverso):** semeando em terços com mutação, `hon_f → ~1` em
   30 000 ticks, nas 3 seeds.
 
+## 4.1 O placar do sinal ✅ *(nota 08 — e dois erros de direção que viraram achado)*
+
+Construído em `bde0946` (S1) e `c924fbd` (a estratégia como traço). S1 ✅
+bit-a-bit; S3 ✅ todo-mudo → `modelo_do_outro` = **0,0000** exato; S4 ✅ honesto
+fixa contra mudo (0,50 → **0,95/0,97/0,95**); S5 ✅ honesto resiste ao blefe (0,50
+→ **0,81/0,96/0,87**) — **o cheap talk não degenerou o canal**.
+
+Dois desvios do pré-registro, ambos informativos:
+
+- **S2 acertou o fato, errou a direção.** O canal carrega comportamento — mas o
+  que ele move é a **energia** (~5,7 honesto × ~6,5 mudo, 3 seeds), **não a
+  população** (fica igual). Coordenar não faz caber mais gente no alimento finito;
+  faz a mesma gente viver mais apertada. Eu teria "confirmado" S2 na direção
+  errada olhando só a demografia.
+- **S6 não fixou: é polimorfismo.** `hon_f → 0,83/0,90/0,88` (domina), o **mudo é
+  varrido**, mas o **blefe persiste em ~10%** estável — equilíbrio misto
+  frequência-dependente, a assinatura de sinalização com honestidade custosa
+  parcial. Mais realista que a fixação que previ.
+
+**Fim do epifenomenalismo do relato:** silenciar a população muda o mundo. E a
+honestidade é ESS sem ninguém decretá-la — a matéria do **superego** da v3 §3.
+Herda à Fase 4: o blefe residual como ESS (varrer a frequência), memória de
+sinais (reputação) como 2ª rota anti-cheap-talk, e o **Bandersnatch evolutivo**
+(a arquitetura de *escuta* como traço, ao lado da de *fala*).
+
 ---
 
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper

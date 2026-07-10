@@ -30,8 +30,13 @@ os CSVs **no mesmo commit** da mudança — assim o `git log` acima continua exa
 não são comparáveis com os `~0,63` de hoje. Ver
 [`../papers/notes/01-quatro-modos-de-errar.md`](../papers/notes/01-quatro-modos-de-errar.md).
 
+⚠️ **Colunas novas: `hon_f`, `blef_f`** (fração honesta/blefe da população — o
+relato causal, nota 08). CSVs pós-nota-06 têm 18 colunas; os atuais, 20. As 18
+primeiras seguem bit-a-bit compatíveis (a passagem `emitir` com todos honestos é
+idêntica à telepatia antiga).
+
 ⚠️ **Coluna nova: `relato`** (κ do intérprete leigo, nota 06). CSVs anteriores têm
-17 colunas; os atuais, 18. As 17 primeiras são bit-a-bit compatíveis com a era
+17 colunas; os pós-nota-06, 18. As 17 primeiras são bit-a-bit compatíveis com a era
 pós-nota-05.
 
 ⚠️ **`phi` mudou de definição.** A 1ª versão era a distância da ordem integrada à

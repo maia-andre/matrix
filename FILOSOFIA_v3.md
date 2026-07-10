@@ -82,7 +82,7 @@ entrada que toda palavra mental paga neste projeto:
 |---|---|---|
 | **id** | a pulsão: `energia`/fome/`urgencia`, o termo `comida_prev·(1+urgencia·fome)` | existe (nv2–4) |
 | **ego** | a prova de realidade: `prever_valor` + a arbitragem de `utilidade`/`decidir` | existe (nv3–5) |
-| **superego** | uma **inibição herdada** que sacrifica utilidade sem rival à vista — norma internalizada | ⛔ não existe; só é instalável como *pressão* (Fase 4: parentesco, reciprocidade, custo do sinal), nunca como `float superego` |
+| **superego** | uma **norma internalizada** que a seleção fixa — "sinalize a verdade" — porque violá-la custa | **tem dado**: a honestidade é ESS sem multa artificial (nota 08); o ~10% de blefe residual é o crime que nenhuma sociedade de sinais custosos elimina |
 | **sombra** | a faculdade que a linhagem **teve e a seleção renegou**, latente no piso do traço, recuperável por mutação | **tem dado**: `peso_espaco → 0` é a agência renegada (nota 03) |
 | **self** | a totalidade integrada | o mostrador que a nomearia (`phi`) mede **mistura de motivos**, não posse (nota 05); um self medível aguarda a edição do auto-modelo |
 
