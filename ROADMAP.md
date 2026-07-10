@@ -28,6 +28,17 @@ Este é o **portão**. Refinar `modelo` ou `Φ~` antes de tentar quebrá-los é
 refinar no escuro; construir um quarto mostrador (`relato`) com uma metodologia
 não validada é multiplicar o erro por quatro.
 
+**Placar:**
+
+| mostrador | estado | veredito |
+|---|---|---|
+| `modelo` | ✅ consertado (§1.1) | era um medidor de **taxa de conflito** |
+| `agencia` | ✅ consertado (§1.2) | a sonda tinha defeito; **o desbotamento era real** |
+| `automodelo` | ⬅ **próximo** (§1.3) | observação, não intervenção; e mede o **outro** |
+| `phi` | pendente (§1.4) | não normalizado; talvez sinônimo de profundidade efetiva |
+
+Bug do simulador achado no caminho: §1.6. Protocolo destilado dos erros: §1.7.
+
 ## 1.0 O primeiro resultado negativo do projeto
 
 `modelo` não mede o modelo de mundo do bloco. Ele mede **taxa de conflito**.
@@ -129,13 +140,56 @@ agente (`3,0`) em ~6000 ticks: 0,997 / 1,000 / 1,000.
 
 → [`papers/notes/03-a-evolucao-extingue-a-agencia.md`](./papers/notes/03-a-evolucao-extingue-a-agencia.md)
 
-## 1.3 `automodelo` não é uma intervenção
+## 1.3 `automodelo` não é uma intervenção ⬅ **próximo**
 
-`automodelo` é `intencao != alvo` — lido de graça do estado que já existe. É uma
-**observação**, não uma ablação. `agencia`, ao lado, faz um contrafactual de
-verdade (dois clones, rerodagem). Plotar os dois no mesmo eixo `[0,1]` é somar
-laranjas com maçãs. E, a rigor, "antecipar os rivais mudou minha escolha" é um
-modelo **do outro**, não de si — o self entra só como "sou um dos pretendentes".
+`automodelo` é `intencao != alvo` — lido **de graça** do estado que já existe. É
+uma **observação**, não uma ablação. `agencia`, ao lado, varre o domínio inteiro do
+estado interno e conta trocas de decisão: uma intervenção de verdade. Plotar os
+dois no mesmo eixo `[0,1]` é somar laranjas com maçãs.
+
+Três defeitos a atacar, na ordem:
+
+1. **Não é intervenção.** A versão-ablação: rodar `melhor_celula` com
+   `antecipar = 0` e com `antecipar = 1`, e perguntar se a antecipação **carrega**
+   a decisão. É quase o que `intencao != alvo` já mede — mas de propósito, e não
+   como subproduto de `decidir()`.
+2. **A sonda tem um parâmetro escondido.** A força da antecipação é `ANTECIPACAO`
+   (0,5), uma lei da física, não uma propriedade do bloco. A leitura escala com
+   ela. Ancorar a unidade (como `agencia` foi ancorada em `[0, peso_espaco]`), ou
+   varrer `ANTECIPACAO` e reportar a curva.
+3. **O nome está errado.** "Antecipar os rivais mudou minha escolha" é um modelo
+   **do outro**, não de si — o self entra só como "sou um dos pretendentes". E o
+   teste do eremita (§1.5) mostra que sem o outro ele é **identicamente zero**.
+   Renomear para `modelo_do_outro` é a leitura honesta; um `automodelo` de verdade
+   exigiria o item pendente do README: separar, em `prever_valor`, o **próprio**
+   consumo do consumo dos rivais. Isso é a mesma linha de código que decide a
+   bifurcação da Fase 5 (item 9). **Não é um detalhe — é uma tese.**
+
+## 1.4 `phi` não está normalizado ⬅ **depois**
+
+`phi_proxy()` devolve `10.0f * disc/tot`, sem clamp, e a documentação afirma
+`[0,1]`. Se a discordância passar de 10%, `phi > 1`. Nas corridas feitas o máximo
+observado foi 0,372 — é uma **fragilidade latente**, não um bug que disparou. Mas
+o `10.0f` é um fator de escala escolhido para o número *parecer* morar em `[0,1]`,
+o que torna o valor absoluto sem significado.
+
+E `phi` **não é independente** dos outros traços: ele acompanha a **profundidade
+efetiva** de planejamento, `min(horizonte, 1/(1−desconto))` — `corr(efetiva, phi)`
+= **+0,96 / +0,75 / +0,93**, sinal consistente nas três seeds. Contra o `hor_m`
+bruto a correlação **troca de sinal** (**−0,94** na seed 7, **+0,97** na 1234), o
+que é mais um sintoma de que `hor_m` sozinho não é identificável (Fase 3).
+
+Plano:
+
+1. **Normalizar de verdade**: `disc/tot` já mora em `[0,1]`. O `10.0f` é maquiagem;
+   tirá-lo e reportar a fração crua, ou dividir por um máximo teórico defensável.
+2. **O teste da redundância**: se `phi` mede "integração" e integração for só
+   profundidade efetiva com outro nome, o mostrador não acrescenta uma dimensão —
+   acrescenta um **sinônimo**. Congelar `horizonte` e `desconto` (como se congelou
+   `peso_espaco` na nota 03) e ver se `phi` fica plano. Se ficar, `phi` é redundante
+   e deve morrer ou mudar de definição.
+3. `phi` perde **85%** na solidão (§1.5): decidir se um `Φ` social é `Φ` ou outra
+   coisa.
 
 ## 1.4 `phi` não está normalizado
 
@@ -221,10 +275,23 @@ determinístico de `(x, y, tick)` — é uma decisão de física em aberto.
 
 ## 1.7 O protocolo, daqui em diante
 
-Toda ablação reporta **duas** coisas: a leitura do mostrador **e** o efeito em
-aptidão (população, sobrevivência). Foi o descasamento entre as duas que revelou
-o problema. Um mostrador cuja leitura sobe enquanto a população morre está
-medindo outra coisa.
+Cinco regras, cada uma paga com um erro cometido:
+
+1. **Toda ablação reporta duas coisas**: a leitura do mostrador **e** o efeito em
+   aptidão (população, sobrevivência). Foi o descasamento entre as duas que revelou
+   o `modelo` quebrado. Um mostrador cuja leitura sobe enquanto a população morre
+   está medindo outra coisa.
+2. **Condição de sanidade declarada antes de rodar.** Para cada mostrador: *que
+   ablação tem de derrubá-lo a zero?* Se nenhuma derruba, ele não mede nada.
+3. **Um conserto de mostrador não pode mexer na simulação.** O teste é literal:
+   todas as outras colunas do CSV têm de sair **bit-a-bit idênticas**. Foi assim
+   que se pegou um `au / n` que arredondava diferente de `au * (1.0f/n)`.
+4. **Antes de acusar a régua, congele o traço.** Se a leitura correlaciona com um
+   traço que evolui, congele o traço: régua contaminada continua derivando, régua
+   boa fica plana. Na nota 03 isso salvou o achado — a agência desbotava de
+   verdade, e nós íamos "consertar" o instrumento até ele parar de dizer isso.
+5. **Mude uma coisa por vez.** Trocar a sonda **e** a estatística no mesmo passo
+   torna as duas mudanças inseparáveis.
 
 ---
 
