@@ -44,6 +44,7 @@ notas.
 | [01](./01-quatro-modos-de-errar.md) | os quatro mostradores da bateria falham de quatro maneiras independentes; `modelo` consertado | 1 — metrologia da mente |
 | [02](./02-o-teto-de-nascimentos.md) | um teto de nascimentos congelava a evolução; havia uma regra de senioridade implícita; `hor_m` não é identificável sozinho | 2 — bem posicional (+ erratas do 1) |
 | [03](./03-a-evolucao-extingue-a-agencia.md) | `agencia` consertada (varredura do domínio, não dois pontos); a queda dela não era defeito de régua — o **reflexo fixa contra o agente** | 1 — metrologia (+ `FILOSOFIA_v3`) |
+| [04](./04-o-automodelo-era-um-modelo-do-outro.md) | `automodelo` era observação, não intervenção; escalava com `ANTECIPACAO`; e media o **outro** (zero para um eremita). Vira `modelo_do_outro`, intervenção ancorada | 1 — metrologia da mente |
 
 ## Erratas
 
