@@ -16,11 +16,13 @@ O projeto subiu uma escada (níveis 0–6) e então **parou de subir e construiu
 régua**. Antes de usar a régua para medir qualquer coisa, é preciso descobrir se
 a régua mede.
 
-Ela não mede. Pelo menos não `modelo`. Ver a Fase 1.
+Ela não media. Nenhum dos quatro mostradores saiu ileso — quatro modos de errar
+independentes, dois deles escondendo achados que a régua consertada revelou
+(notas 01–05). Ver o placar da Fase 1.
 
 ---
 
-# Fase 1 — Quebrar a régua *(em andamento)*
+# Fase 1 — Quebrar a régua *(concluída em 2026-07-10)*
 
 **Pergunta:** os mostradores medem a coisa, ou um correlato dela?
 
@@ -35,7 +37,7 @@ não validada é multiplicar o erro por quatro.
 | `modelo` | ✅ consertado (§1.1) | era um medidor de **taxa de conflito** |
 | `agencia` | ✅ consertado (§1.2) | a sonda tinha defeito; **o desbotamento era real** |
 | `automodelo` | ✅ consertado (§1.3) | vira `modelo_do_outro`: mede o **outro**, não o self |
-| `phi` | ⬅ **próximo** (§1.4) | não normalizado; talvez sinônimo de profundidade efetiva |
+| `phi` | ✅ consertado (§1.4) | era **infalseável**; a suspeita ("= profundidade") estava errada — media o **segundo motivo** |
 
 Bug do simulador achado no caminho: §1.6. Protocolo destilado dos erros: §1.7.
 
@@ -171,31 +173,40 @@ construção. O conserto do mostrador e a posição filosófica são a mesma lin
 
 → [`papers/notes/04-o-automodelo-era-um-modelo-do-outro.md`](./papers/notes/04-o-automodelo-era-um-modelo-do-outro.md)
 
-## 1.4 `phi` não está normalizado ⬅ **próximo**
+## 1.4 `phi` era infalseável — e a suspeita estava errada de novo ✅ *feito*
 
-`phi_proxy()` devolve `10.0f * disc/tot`, sem clamp, e a documentação afirma
-`[0,1]`. Se a discordância passar de 10%, `phi > 1`. Nas corridas feitas o máximo
-observado foi 0,372 — é uma **fragilidade latente**, não um bug que disparou. Mas
-o `10.0f` é um fator de escala escolhido para o número *parecer* morar em `[0,1]`,
-o que torna o valor absoluto sem significado.
+A suspeita central desta seção ("`phi` = sinônimo de profundidade efetiva",
+`corr = +0,94/+0,70/+0,90`) **morreu no teste do traço congelado** — segunda vez
+que a regra 4 do §1.7 salva um achado. A correlação só existe na janela de 30 000
+ticks; nos primeiros 3 000 dos *mesmos dados* é fraca e negativa. Era
+**co-tendência** (duas séries afundando sob a mesma evolução), não acoplamento:
+**congelar a profundidade não segura a `phi`** (0,33 → 0,15, desaba como o
+controle); **congelar `peso_espaco` a segura** (0,33 → 0,29). Quem carrega a `phi`
+é o mesmo traço que carrega a `agencia` (nota 03): ela media, sobretudo, a
+presença do **segundo motivo**.
 
-E `phi` **não é independente** dos outros traços: ele acompanha a **profundidade
-efetiva** de planejamento, `min(horizonte, 1/(1−desconto))` — `corr(efetiva, phi)`
-= **+0,96 / +0,75 / +0,93**, sinal consistente nas três seeds. Contra o `hor_m`
-bruto a correlação **troca de sinal** (**−0,94** na seed 7, **+0,97** na 1234), o
-que é mais um sintoma de que `hor_m` sozinho não é identificável (Fase 3).
+O defeito real era pior que o suspeitado: a `phi` velha era **infalseável**.
+Nenhuma ablação a zerava — `prever_valor ≡ 0` (bloco sem modelo, morrendo) lia
+**0,131**, e `horizonte = 1` a fazia **subir**. Pela regra 2, ela não media nada.
+Motivo estrutural: "discordar da ordem da comida" não é irredutibilidade — uma
+decisão 100% explicada pelo espaço lia alto, sendo redutível a **um** módulo.
+(E o `10.0f` era maquiagem de escala, como suspeitado.)
 
-Plano:
+Conserto (`e151c45`): `phi` = a **menor** distância de Kendall entre a ordem
+integrada e a ordem de **cada módulo isolado** — comida-agora (nv2), espaço (nv4),
+mapa (nv3) — já em `[0,1]`, sem fator de escala. Se um módulo sozinho reproduz a
+decisão, `phi = 0`: integrar uma coisa só não é integrar. Três zeros
+**demonstráveis e verificados exatos** (eremita, `peso_espaco ≡ 0`,
+`prever_valor ≡ 0`; média e máximo, 3 seeds); simulação bit-a-bit idêntica;
+controle ≈ 0,065 (não-degenerada).
 
-1. **Normalizar de verdade**: `disc/tot` já mora em `[0,1]`. O `10.0f` é maquiagem;
-   tirá-lo e reportar a fração crua, ou dividir por um máximo teórico defensável.
-2. **O teste da redundância**: se `phi` mede "integração" e integração for só
-   profundidade efetiva com outro nome, o mostrador não acrescenta uma dimensão —
-   acrescenta um **sinônimo**. Congelar `horizonte` e `desconto` (como se congelou
-   `peso_espaco` na nota 03) e ver se `phi` fica plano. Se ficar, `phi` é redundante
-   e deve morrer ou mudar de definição.
-3. `phi` perde **85%** na solidão (§1.5): decidir se um `Φ` social é `Φ` ou outra
-   coisa.
+E a régua honesta repete a nota 03 um andar acima: **a evolução extingue a
+integração** (0,044 → 0,005 em 30 000 ticks, junto com `esp_m` → 0,08; com o
+traço congelado, fica de pé). O eremita zera — o "Φ social" do item 3 do plano
+antigo se resolveu sozinho: nesta implementação a integração *é* social, porque o
+segundo motivo só pesa quando há vizinhos.
+
+→ [`papers/notes/05-phi-media-o-segundo-motivo.md`](./papers/notes/05-phi-media-o-segundo-motivo.md)
 
 ## 1.5 O teste do eremita — três dos quatro mostradores são sociais
 
