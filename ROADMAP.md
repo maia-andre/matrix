@@ -34,8 +34,8 @@ não validada é multiplicar o erro por quatro.
 |---|---|---|
 | `modelo` | ✅ consertado (§1.1) | era um medidor de **taxa de conflito** |
 | `agencia` | ✅ consertado (§1.2) | a sonda tinha defeito; **o desbotamento era real** |
-| `automodelo` | ⬅ **próximo** (§1.3) | observação, não intervenção; e mede o **outro** |
-| `phi` | pendente (§1.4) | não normalizado; talvez sinônimo de profundidade efetiva |
+| `automodelo` | ✅ consertado (§1.3) | vira `modelo_do_outro`: mede o **outro**, não o self |
+| `phi` | ⬅ **próximo** (§1.4) | não normalizado; talvez sinônimo de profundidade efetiva |
 
 Bug do simulador achado no caminho: §1.6. Protocolo destilado dos erros: §1.7.
 
@@ -140,32 +140,38 @@ agente (`3,0`) em ~6000 ticks: 0,997 / 1,000 / 1,000.
 
 → [`papers/notes/03-a-evolucao-extingue-a-agencia.md`](./papers/notes/03-a-evolucao-extingue-a-agencia.md)
 
-## 1.3 `automodelo` não é uma intervenção ⬅ **próximo**
+## 1.3 `automodelo` era um modelo do outro ✅ *feito*
 
-`automodelo` é `intencao != alvo` — lido **de graça** do estado que já existe. É
-uma **observação**, não uma ablação. `agencia`, ao lado, varre o domínio inteiro do
-estado interno e conta trocas de decisão: uma intervenção de verdade. Plotar os
-dois no mesmo eixo `[0,1]` é somar laranjas com maçãs.
+`automodelo` tinha **três defeitos**, e o conserto de todos foi a mesma edição.
+Era (1) uma **observação** lida de graça — `intencao != alvo`, subproduto de
+`decidir()` — e não uma intervenção; (2) uma sonda com um **parâmetro escondido**,
+a força `ANTECIPACAO = 0,5`, uma lei da física; e (3) **mal nomeado** — o teste do
+eremita (§1.5) o faz **zero exato**, logo ele mede o **outro**, não o self.
 
-Três defeitos a atacar, na ordem:
+O conserto (`modelo_do_outro_do_bloco`) é uma intervenção **de propósito** e
+**ancorada**, no espírito da `agencia`: pergunta se antecipar os rivais *poderia*
+mudar a escolha, por **todo** o domínio da força `[0, ∞)`, com um critério **exato**
+(sem amostragem) que não menciona `ANTECIPACAO`. Ele é a assíntota `α → ∞` da curva
+— e a forma fechada bate com o limite numérico a **4 casas**. O mostrador vira
+`modelo_do_outro`.
 
-1. **Não é intervenção.** A versão-ablação: rodar `melhor_celula` com
-   `antecipar = 0` e com `antecipar = 1`, e perguntar se a antecipação **carrega**
-   a decisão. É quase o que `intencao != alvo` já mede — mas de propósito, e não
-   como subproduto de `decidir()`.
-2. **A sonda tem um parâmetro escondido.** A força da antecipação é `ANTECIPACAO`
-   (0,5), uma lei da física, não uma propriedade do bloco. A leitura escala com
-   ela. Ancorar a unidade (como `agencia` foi ancorada em `[0, peso_espaco]`), ou
-   varrer `ANTECIPACAO` e reportar a curva.
-3. **O nome está errado.** "Antecipar os rivais mudou minha escolha" é um modelo
-   **do outro**, não de si — o self entra só como "sou um dos pretendentes". E o
-   teste do eremita (§1.5) mostra que sem o outro ele é **identicamente zero**.
-   Renomear para `modelo_do_outro` é a leitura honesta; um `automodelo` de verdade
-   exigiria o item pendente do README: separar, em `prever_valor`, o **próprio**
-   consumo do consumo dos rivais. Isso é a mesma linha de código que decide a
-   bifurcação da Fase 5 (item 9). **Não é um detalhe — é uma tese.**
+Ao contrário de `modelo` (§1.1), **o número quase não muda** (`0,34 → 0,35`): o
+defeito era de **método** e de **nome**, não de valor. Um mostrador pode acertar o
+número e ainda assim não medir o que diz. Sanidade cumprida: eremita = **0,000
+exato** (média e máximo, 3 seeds); simulação bit-a-bit idêntica (só a coluna muda).
 
-## 1.4 `phi` não está normalizado ⬅ **depois**
+**A assimetria que denuncia o nome:** na `agencia` o eixo varrido (`λ`) é um estado
+**interno** que o bloco visita; aqui `α` é uma força **externa** que ele nunca
+varia. Não há estado interno para ancorar porque não há nada interno sendo medido —
+o que varia é o outro. Um `automodelo` **de verdade** exigiria separar, em
+`prever_valor`, o próprio consumo do dos rivais — o que **muda a simulação**, e por
+isso pertence à Fase 5 (item 9), não à régua. **Predição registrada:** feita essa
+edição, um mostrador do *self* ficaria `> 0` na solidão — enquanto este é zero por
+construção. O conserto do mostrador e a posição filosófica são a mesma linha de código.
+
+→ [`papers/notes/04-o-automodelo-era-um-modelo-do-outro.md`](./papers/notes/04-o-automodelo-era-um-modelo-do-outro.md)
+
+## 1.4 `phi` não está normalizado ⬅ **próximo**
 
 `phi_proxy()` devolve `10.0f * disc/tot`, sem clamp, e a documentação afirma
 `[0,1]`. Se a discordância passar de 10%, `phi > 1`. Nas corridas feitas o máximo
@@ -190,22 +196,6 @@ Plano:
    e deve morrer ou mudar de definição.
 3. `phi` perde **85%** na solidão (§1.5): decidir se um `Φ` social é `Φ` ou outra
    coisa.
-
-## 1.4 `phi` não está normalizado
-
-`phi_proxy()` devolve `10.0f * disc/tot`, sem clamp, e a documentação afirma
-`[0,1]`. Se a discordância passar de 10%, `phi > 1`. Nas corridas feitas o máximo
-observado foi 0,372 — é uma **fragilidade latente**, não um bug que disparou. Mas
-o `10.0f` é um fator de escala escolhido para o número *parecer* morar em `[0,1]`,
-o que torna o valor absoluto sem significado.
-
-E `phi` **não é independente** dos outros traços: ele acompanha a **profundidade
-efetiva** de planejamento, `min(horizonte, 1/(1−desconto))` — `corr(efetiva, phi)`
-= **+0,96 / +0,75 / +0,93**, sinal consistente nas três seeds. Contra o `hor_m`
-bruto a correlação **troca de sinal** (**−0,94** na seed 7, **+0,97** na 1234), o
-que é mais um sintoma de que `hor_m` sozinho não é identificável (Fase 3). Se `phi`
-mede "integração" e integração é só profundidade efetiva com outro nome, o
-mostrador não acrescenta uma dimensão — acrescenta um sinônimo. Testar.
 
 ## 1.5 O teste do eremita — três dos quatro mostradores são sociais
 
