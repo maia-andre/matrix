@@ -105,7 +105,7 @@ projeto e o desfecho honesto — está em [`FILOSOFIA_v2.md`](./FILOSOFIA_v2.md)
 | Mostrador | Palavra | Família | Como mede |
 |-----------|---------|---------|-----------|
 | `modelo` | "prevê / sabe" | calibração | o **mapa do bloco** (`prever_valor`: horizonte, desconto, partilha) promete uma colheita descontada ao entrar no alvo; ao longo dos seus próprios `horizonte` ticks compara-se com a colheita real, descontada igual — `1 − |pred−real|/(pred+real)` |
-| `agencia` | "quer / escolhe" | ablação | fração cuja decisão muda se só a **fome** muda (mesmo mundo, dois clones faminto×saciado) |
+| `agencia` | "quer / escolhe" | ablação | fração cuja decisão muda em **algum** ponto do domínio da fome. Como `utilidade` é, por célula, uma reta em `λ = peso_espaco·(1−fome)/(1+urgencia·fome)`, varrer `λ ∈ [0, peso_espaco]` percorre o domínio interno inteiro — sem ponto de sonda arbitrário |
 | `automodelo` | "eu, um entre outros" | ablação | fração cuja decisão muda ao **antecipar os rivais** (`intencao` pré-social ≠ `alvo` pós-social) |
 | `phi` (`Φ~/10`) | "integra" | calibração | distância entre a ordem de valor *integrada* e a *reativa* (ver [`FILOSOFIA.md`](./FILOSOFIA.md) §5) |
 
@@ -132,6 +132,17 @@ carrega o valor adaptativo de enxergar rivais é o termo `espaco`, não a partil
 disputa) e sobe a ~`0.35` conforme a população adensa. Cuidado com a leitura: ele
 é identicamente **zero** para um bloco que não percebe rivais, e portanto mede uma
 relação, não uma posse (o *teste do eremita*, em [`ROADMAP.md`](./ROADMAP.md) §1.5).
+
+E o achado mais duro do projeto até aqui: **a evolução extingue a agência.** Ao
+longo de 30 000 ticks `peso_espaco` desaba de 3,0 para 0,08, e `agencia` desaba
+junto, de 0,43 para 0,05. Não é defeito da régua: congelando `peso_espaco`, o
+mostrador fica **plano** (0,46 → 0,44). É seleção — num ensaio de invasão, o
+**reflexo** (`peso_espaco = 0`) **fixa** contra o agente em ~6000 ticks
+(0,997 / 1,000 / 1,000). Neste mundo, ter um segundo motivo pesado pelo estado
+interno é individualmente caro; a população converge para uma política que não
+depende de nada que se passe dentro dela. Ver
+[`papers/notes/03-a-evolucao-extingue-a-agencia.md`](./papers/notes/03-a-evolucao-extingue-a-agencia.md).
+
 Pendente: `relato` (a fidelidade do auto-relato sob intervenção — o experimento
 "Bandersnatch").
 

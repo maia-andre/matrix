@@ -786,11 +786,82 @@ static int   restam[MAX_AG];          /* ticks ate fechar (0 = sem janela)   */
 static float energia_antes[MAX_AG];   /* energia na hora de decidir          */
 static float modelo_ultimo;           /* carrega a leitura se ninguem fechar */
 
+/* Mostrador 'agencia' (nv4): a decisao deste bloco depende do proprio estado
+ * interno, ou so do mundo? Um bloco cuja escolha nao muda com nada que se passe
+ * dentro dele e um REFLEXO, por mais elaborado que seja o calculo.
+ *
+ * A versao anterior sondava a fome em DOIS pontos arbitrarios (0.1*SACIADO e
+ * SACIADO) e contava quem trocava de alvo. A leitura crescia com o tamanho do
+ * chute, e dependia de 'urgencia' — um traco que evolui. Media o cutucao, nao a
+ * faculdade.
+ *
+ * Aqui usamos a estrutura da propria utilidade. Dividindo-a pelo fator positivo
+ * (1 + urgencia*fome), que e o mesmo para todas as celulas e nao muda o argmax:
+ *
+ *     nota(celula) = comida_prev + lambda * espaco,     lambda = P(1-f)/(1+u*f)
+ *
+ * com P = peso_espaco, u = urgencia, f = fome. Cada celula vira uma RETA em
+ * lambda; a escolha e o envelope superior dessas retas. Como lambda decresce
+ * estritamente com a fome e varre exatamente [0, P] quando a fome varre [0,1],
+ * percorrer lambda e percorrer TODO o dominio canonico do estado interno — sem
+ * chute de escala, e sem depender de 'urgencia', que so reparametriza o caminho.
+ *
+ * No envelope superior cada reta vence no maximo UM intervalo contiguo, logo ha
+ * no maximo (opcoes - 1) trocas — e amostrar lambda densamente so pode SUBESTIMAR
+ * as trocas, nunca inventar uma. Dai a amostragem ser segura.
+ *
+ * A estatistica continua a mesma de antes, de proposito (mudar a sonda E a
+ * estatistica no mesmo passo confundiria as duas mudancas): a FRACAO dos blocos
+ * cuja decisao muda em algum ponto do dominio. 0 = a populacao e reflexa.
+ * A variante graduada, trocas/(opcoes-1), esta explorada na nota 03.
+ *
+ * Bloco encurralado (uma so opcao) nao tem decisao a tomar: sai da media. */
+#define AG_PASSOS 33      /* amostras do eixo lambda (32 intervalos) */
+
+static float agencia_do_bloco(Bloco *b, int i) {
+    float C[9], E[9], K[9];      /* nota(k) = (C[k] + lambda*E[k]) / K[k] */
+    int n = 0;
+
+    /* ficar parado e sempre uma opcao, e melhor_celula a pontua sem antecipacao */
+    C[n] = prever_valor(b->x, b->y, b);
+    E[n] = (8 - rivais_em(b->x, b->y, b->x, b->y)) / 8.0f;
+    K[n] = 1.0f;
+    n++;
+
+    for (int dy = -1; dy <= 1; dy++)
+        for (int dx = -1; dx <= 1; dx++) {
+            if (dx == 0 && dy == 0) continue;
+            int nx = b->x + dx, ny = b->y + dy;
+            if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
+            if (ocup[ny][nx] != -1) continue;
+            C[n] = prever_valor(nx, ny, b);
+            E[n] = (8 - rivais_em(nx, ny, b->x, b->y)) / 8.0f;
+            K[n] = 1.0f + ANTECIPACAO * pretendentes_em(nx, ny, i);
+            n++;
+        }
+    if (n < 2) return -1.0f;                     /* encurralado: fora da media */
+
+    int trocas = 0, anterior = -1;
+    for (int p = 0; p < AG_PASSOS; p++) {
+        float lam = b->peso_espaco * (float)p / (float)(AG_PASSOS - 1);
+        int   arg = 0;
+        float melhor = (C[0] + lam * E[0]) / K[0];
+        for (int k = 1; k < n; k++) {            /* '>' estrito: mesmo desempate
+                                                  * de melhor_celula (fica parado) */
+            float nota = (C[k] + lam * E[k]) / K[k];
+            if (nota > melhor) { melhor = nota; arg = k; }
+        }
+        if (anterior >= 0 && arg != anterior) trocas++;
+        anterior = arg;
+    }
+    return trocas > 0 ? 1.0f : 0.0f;
+}
+
 /* FASE 1 (apos decidir, ANTES de resolver): os dois mostradores de ablacao, e
  * guarda a previsao do modelo. Le o alvo COGNITIVO — antes de resolver() trocar
  * alvos negados pela posicao atual (queremos o efeito da mente, nao do bloqueio). */
 static void medir_decisao(void) {
-    int   n = 0;
+    int   n = 0, n_ag = 0;
     float ag = 0.0f, au = 0.0f;
     for (int i = 0; i < n_blocos; i++) {
         if (!blocos[i].vivo) continue;
@@ -800,16 +871,10 @@ static void medir_decisao(void) {
          * intencao = pre-social (declarar) x alvo = pos-social (decidir). */
         if (intencao_x[i] != alvo_x[i] || intencao_y[i] != alvo_y[i]) au += 1.0f;
 
-        /* AGENCIA (nv4): so mudando a fome, a decisao muda? Reroda a escolha em
-         * dois clones (faminto x saciado) no mesmo mundo. melhor_celula nao tem
-         * efeito colateral (so escreve nos out-params): o contrafactual e seguro. */
-        Bloco faminto = blocos[i], saciado = blocos[i];
-        faminto.energia = 0.10f * SACIADO;   /* a beira da morte */
-        saciado.energia = 1.00f * SACIADO;   /* fome zero        */
-        int fx, fy, sx, sy;
-        melhor_celula(&faminto, i, 1, &fx, &fy);
-        melhor_celula(&saciado, i, 1, &sx, &sy);
-        if (fx != sx || fy != sy) ag += 1.0f;
+        /* AGENCIA (nv4): varre o dominio inteiro do estado interno e conta as
+         * trocas de decisao, normalizadas pelo maximo possivel (ver acima). */
+        float a = agencia_do_bloco(&blocos[i], i);
+        if (a >= 0.0f) { ag += a; n_ag++; }      /* < 0 = encurralado */
 
         /* MODELO (nv3): se nao ha janela aberta, abre uma. A previsao sai de
          * 'prever_valor' — o mapa do bloco — e nao do array do mundo. */
@@ -821,8 +886,8 @@ static void medir_decisao(void) {
         }
         energia_antes[i] = blocos[i].energia;
     }
-    float inv = n ? 1.0f / n : 0.0f;
-    ultima_bateria.agencia    = ag * inv;
+    float inv = n ? 1.0f / n : 0.0f;   /* forma preservada: 'au / n' arredonda diferente */
+    ultima_bateria.agencia    = n_ag ? ag / n_ag : 0.0f;   /* so quem tinha escolha */
     ultima_bateria.automodelo = au * inv;
 }
 

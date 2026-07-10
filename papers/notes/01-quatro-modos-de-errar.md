@@ -47,6 +47,14 @@ prova que o conserto tocou o medidor e não a simulação.
 > **mostradores** praticamente não mudaram; as de **população** mudaram muito.
 > Nada nas conclusões abaixo dependia delas, exceto onde marcado.
 
+> **Errata (nota 03).** A coluna `agencia` acima vem do mostrador **antigo** (dois
+> pontos de sonda). Com a sonda varrendo o domínio inteiro, o controle lê **0,435**
+> em vez de 0,383. O `0,0000` do solipsista **sobrevive** (e agora tem prova: sem
+> rivais todas as retas têm a mesma inclinação). E a seção 3 abaixo diagnostica
+> `agencia` como "unidade que coevolui com o objeto" — **diagnóstico errado**. A
+> correlação `+0,98` com `esp_m` é mecanismo, não contaminação: a agência
+> **realmente desbota**, e a régua estava certa. Ver a nota 03.
+
 ## 2. Modo 1 — `modelo`: um mapa que não podia errar
 
 A "previsão" era

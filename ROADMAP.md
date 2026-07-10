@@ -98,18 +98,36 @@ epistêmico, e quem carrega o valor adaptativo de ver rivais é o termo `espaco`
 
 → [`papers/notes/01-quatro-modos-de-errar.md`](./papers/notes/01-quatro-modos-de-errar.md)
 
-## 1.2 Descontaminar `agencia`
+## 1.2 Descontaminar `agencia` ✅ *feito — e a suspeita estava errada*
 
-`agencia` reroda a decisão em dois clones (faminto × saciado) e conta quantos
-mudam de escolha. Mas em `utilidade()` a fome só troca o peso entre comida e
-`peso_espaco` — e `peso_espaco` **evolui**. Medido em 30 000 ticks válidos:
-`esp_m` **desaba** de ~3,1 para **0,07–0,09**, e a correlação entre `esp_m` e
-`agencia` é **+0,982 / +0,984 / +0,974** (seeds 7 / 42 / 1234). O mostrador desce
-junto, quase perfeitamente.
+O mostrador antigo sondava a fome em **dois pontos arbitrários** (`0,1·SACIADO` e
+`SACIADO`). Isso tem um defeito real: dividindo `utilidade` pelo fator positivo
+`(1 + urgencia·fome)`, comum a todas as células, a decisão vira
+`argmax(comida_prev + λ·espaco)` com `λ = peso_espaco·(1−fome)/(1+urgencia·fome)`.
+Os dois pontos visitavam `λ ∈ [0,034·P, P]`, com o **extremo inferior dependendo de
+`urgencia`** — um traço que evolui. A sonda media parcialmente a si mesma.
 
-Ou seja: a escala da régua **deriva com a população que ela mede**. Comparar
-`agencia` no tick 100 e no tick 20 000 é comparar réguas diferentes. Um
-mostrador precisa de uma unidade que não coevolua com o objeto.
+O conserto usa a estrutura: cada célula é uma **reta** em `λ`, a escolha é o
+envelope superior dessas retas, e `λ` varre exatamente `[0, peso_espaco]` quando a
+fome varre `[0,1]`. Varremos `λ` inteiro. A estatística continua a mesma de
+propósito — trocar a sonda **e** a estatística no mesmo passo confundiria as duas
+mudanças. Leitura: **0,388 → 0,435** (a sonda antiga perdia ~12% dos blocos). Só a
+coluna `agencia` do CSV muda; a simulação é bit-a-bit idêntica. E o novo mostrador
+não menciona `urgencia`: esse traço só desliza *onde* na fome a troca acontece, não
+*se* ela acontece.
+
+**Mas a suspeita central estava errada.** Eu disse que `corr(esp_m, agencia) = +0,98`
+provava contaminação. Não prova. Congelando `peso_espaco` em 3,0, o mostrador fica
+**plano** por 30 000 ticks (0,464 → 0,440); com o traço livre, desaba (0,430 →
+0,049) junto com `esp_m` (2,76 → 0,08). A correlação é **mecanismo, não
+contaminação**: `peso_espaco` é o *único* canal pelo qual o estado interno pode
+mudar uma decisão, e quando ele morre a política vira reflexo.
+
+O que a régua estava reportando, e ninguém ouviu: **a evolução extingue a
+agência.** No ensaio de invasão, o reflexo (`peso_espaco = 0`) **fixa** contra o
+agente (`3,0`) em ~6000 ticks: 0,997 / 1,000 / 1,000.
+
+→ [`papers/notes/03-a-evolucao-extingue-a-agencia.md`](./papers/notes/03-a-evolucao-extingue-a-agencia.md)
 
 ## 1.3 `automodelo` não é uma intervenção
 
@@ -513,6 +531,13 @@ estica: apenas estica a palavra.
    que um laboratório de filosofia da mente pode fazer e uma poltrona não pode.
    A v3 não escolhe um lado por gosto: ela **localiza a costura** e reporta de que
    lado cada palavra caiu.
+
+   **E há agora um dado duro para a v3 digerir** (§1.2, nota 03): a evolução
+   **apaga um degrau**. A agência não desbota porque nós a ablacionamos — desbota
+   porque a seleção natural a ablaciona, e o reflexo fixa contra o agente em 6000
+   ticks. A escada, então, não é só "não-progressiva": ela é **reversível sob
+   seleção**. Uma filosofia que trate os degraus como aquisições permanentes está
+   descrevendo um mundo que não é este.
 
 ## Dois papers, não um
 
