@@ -30,6 +30,12 @@ os CSVs **no mesmo commit** da mudança — assim o `git log` acima continua exa
 não são comparáveis com os `~0,63` de hoje. Ver
 [`../papers/notes/01-quatro-modos-de-errar.md`](../papers/notes/01-quatro-modos-de-errar.md).
 
+⚠️ **`phi` mudou de definição.** A 1ª versão era a distância da ordem integrada à
+comida do instante (×10, depois ÷10 no CSV) e lia ~`0,25`; a atual é a **menor**
+distância aos três módulos isolados (comida, espaço, mapa) e lê ~`0,06` — os
+valores não são comparáveis. Ver
+[`../papers/notes/05-phi-media-o-segundo-motivo.md`](../papers/notes/05-phi-media-o-segundo-motivo.md).
+
 ⚠️ **A coluna `automodelo` foi renomeada `modelo_do_outro` e mudou de definição.**
 Deixou de ser a observação `intencao ≠ alvo` (lida no ponto fixo `ANTECIPACAO`) e
 virou uma **intervenção ancorada**, varrida por todo o domínio da antecipação — sem

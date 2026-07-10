@@ -107,7 +107,7 @@ projeto e o desfecho honesto — está em [`FILOSOFIA_v2.md`](./FILOSOFIA_v2.md)
 | `modelo` | "prevê / sabe" | calibração | o **mapa do bloco** (`prever_valor`: horizonte, desconto, partilha) promete uma colheita descontada ao entrar no alvo; ao longo dos seus próprios `horizonte` ticks compara-se com a colheita real, descontada igual — `1 − |pred−real|/(pred+real)` |
 | `agencia` | "quer / escolhe" | ablação | fração cuja decisão muda em **algum** ponto do domínio da fome. Como `utilidade` é, por célula, uma reta em `λ = peso_espaco·(1−fome)/(1+urgencia·fome)`, varrer `λ ∈ [0, peso_espaco]` percorre o domínio interno inteiro — sem ponto de sonda arbitrário |
 | `modelo_do_outro` | "o outro também decide" | ablação (intervenção) | fração (não-encurralada) cuja escolha mudaria ao antecipar que rivais miram a mesma célula — varre a força da antecipação por **todo** o domínio `[0,∞)`, não no ponto arbitrário `ANTECIPACAO`. **Zero exato sem rivais**: mede o outro, não o self |
-| `phi` (`Φ~/10`) | "integra" | calibração | distância entre a ordem de valor *integrada* e a *reativa* (ver [`FILOSOFIA.md`](./FILOSOFIA.md) §5) |
+| `phi` (`Φ~`) | "integra" | calibração | a **menor** distância de Kendall entre a ordem integrada (`utilidade`) e a ordem de **cada módulo isolado** (comida-agora, espaço, mapa), em `[0,1]`. Se um módulo sozinho reproduz a decisão, `phi = 0`: integrar uma coisa só não é integrar (redefinida na nota 05; a 1ª versão, contra a comida só, era infalseável) |
 
 > ⚠️ **A primeira versão de `modelo` estava quebrada**, e a conclusão que ela
 > sustentava ("o bloco modela a física com exatidão; o único buraco é o social")
@@ -151,6 +151,14 @@ mostrador fica **plano** (0,46 → 0,44). É seleção — num ensaio de invasã
 interno é individualmente caro; a população converge para uma política que não
 depende de nada que se passe dentro dela. Ver
 [`papers/notes/03-a-evolucao-extingue-a-agencia.md`](./papers/notes/03-a-evolucao-extingue-a-agencia.md).
+
+E `phi` conta a mesma história um andar acima: **a evolução extingue a
+integração.** O mesmo `peso_espaco` que carrega a agência é o que mantém a decisão
+irredutível a um módulo só — quando ele morre, `phi` desaba (0,044 → 0,005);
+congelado, ela fica de pé. A suspeita do ROADMAP (que `phi` fosse sinônimo de
+profundidade de planejamento) estava **errada** — era co-tendência de 30 000
+ticks, não acoplamento; congelar a profundidade não segura `phi`. Ver
+[`papers/notes/05-phi-media-o-segundo-motivo.md`](./papers/notes/05-phi-media-o-segundo-motivo.md).
 
 Pendente: `relato` (a fidelidade do auto-relato sob intervenção — o experimento
 "Bandersnatch").
@@ -216,7 +224,8 @@ tudo (servindo de teste de regressão: diff não-vazio = comportamento mudou).
 - ` ` (vazio) = deserto / comida quase zero.
 - HUD embaixo, quatro linhas: (1) `seed`, `tick`, `pop` (população viva),
   `energia media`, `comida` (total no mundo) e **`Φ~`** (a "luz acesa" — um proxy
-  de integração, ver [`FILOSOFIA.md`](./FILOSOFIA.md) §5); (2) **traços `média±desvio`**
+  de integração; a intuição está em [`FILOSOFIA.md`](./FILOSOFIA.md) §5, a
+  definição atual na nota 05); (2) **traços `média±desvio`**
   da população (`horizonte`, `desconto`, `urgencia`, `espaco`) — a média deriva
   (evolução do nível 6 ao vivo) e o **desvio** mostra se a população *converge*
   (todos parecidos, desvio→0) ou *diversifica* em nichos (desvio cresce); (3) a

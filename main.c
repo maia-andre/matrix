@@ -651,43 +651,60 @@ static int populacao(void) {
 /*  Phi (Φ): a "luz acesa" — um PROXY de integracao, sabor IIT.        */
 /*                                                                     */
 /*  A IIT (Tononi) diz que consciencia e informacao INTEGRADA: o       */
-/*  quanto o todo e irredutivel a soma das partes. O Phi de verdade e  */
+/*  quanto o todo e IRREDUTIVEL as partes. O Phi de verdade e          */
 /*  incomputavel aqui (e, a rigor, em quase tudo) — entao isto e uma   */
-/*  CARICATURA honesta, nao a coisa. Mede UMA intuicao: o quanto a     */
-/*  escolha integrada e IRREDUTIVEL ao reflexo puro (ir a celula com   */
-/*  mais comida AGORA, o nivel 2). Sobre as jogadas possiveis, compara */
-/*  a ordem de preferencia do valor COMPLETO (modelo de mundo+agencia  */
-/*  +auto-modelo+tracos) com a do valor REATIVO (so a comida do        */
-/*  instante). Quanto mais as duas ordens discordam, mais "trabalho de */
-/*  integracao" entrou na decisao. Reflexo puro -> 0; muita reorgani-  */
-/*  zacao -> alto. (distancia de Kendall entre as ordens, escala 0..10) */
+/*  CARICATURA honesta, nao a coisa.                                   */
+/*                                                                     */
+/*  A 1a versao media a distancia da ordem integrada a UMA referencia  */
+/*  so (a comida do instante) e multiplicava por 10.0f para o numero   */
+/*  "parecer" morar em [0,1]. Dois defeitos (nota 05): a escala era    */
+/*  maquiagem; e "discordar da comida" nao e irredutibilidade — uma    */
+/*  decisao 100% explicada pelo espaco lia ALTO, embora redutivel a um */
+/*  unico modulo, e nenhuma ablacao a zerava (um bloco sem modelo de   */
+/*  mundo, morrendo, lia 0,13).                                        */
+/*                                                                     */
+/*  Agora a caricatura leva a irredutibilidade a serio: compara a      */
+/*  ordem INTEGRADA (utilidade) com a ordem de CADA modulo isolado —   */
+/*  comida do instante (nv2), espaco (nv4), mapa/planejamento (nv3) —  */
+/*  e devolve a MENOR das distancias (fracao de pares discordantes,    */
+/*  Kendall, ja em [0,1]). Se UM modulo sozinho reproduz a decisao,    */
+/*  phi = 0: integrar uma coisa so nao e integrar. Zero EXATO,         */
+/*  demonstravel, para: eremita (espaco constante entre as celulas),   */
+/*  peso_espaco = 0 (utilidade = escalar positivo x mapa) e            */
+/*  prever_valor = 0 (so resta o espaco).                              */
 /* ------------------------------------------------------------------ */
 
-/* Coleta as jogadas alcancaveis (ficar + vizinhos vazios) e devolve, em 0..10,
- * o quanto a ordem de preferencia INTEGRADA (utilidade) discorda da ordem
- * REATIVA (comida do instante) — a distancia de Kendall entre as duas. */
+/* Coleta as jogadas alcancaveis (ficar + vizinhos vazios) e devolve, em [0,1],
+ * a MENOR distancia de Kendall entre a ordem integrada (utilidade) e a ordem
+ * de cada modulo isolado. 0 = a decisao e redutivel a um modulo so. */
 static float phi_proxy(Bloco *b) {
-    float u[9], f[9];
+    float u[9], f[9], e[9], m[9];
     int n = 0;
     for (int dy = -1; dy <= 1; dy++)
         for (int dx = -1; dx <= 1; dx++) {
             int nx = b->x + dx, ny = b->y + dy;
             if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
             if (!(dx == 0 && dy == 0) && ocup[ny][nx] != -1) continue;  /* inalcancavel */
-            u[n] = utilidade(nx, ny, b);     /* valor integrado (modelo+agencia+...) */
-            f[n] = comida[ny][nx];           /* valor reativo  (so a comida de agora) */
+            u[n] = utilidade(nx, ny, b);      /* a decisao integrada (nv3+nv4)     */
+            f[n] = comida[ny][nx];            /* modulo reflexo: comida de agora   */
+            e[n] = (8 - rivais_em(nx, ny, b->x, b->y)) / 8.0f;  /* modulo espaco   */
+            m[n] = prever_valor(nx, ny, b);   /* modulo mapa: so o planejamento    */
             n++;
         }
     if (n < 2) return 0.0f;
 
-    int disc = 0, tot = 0;
+    int df = 0, de = 0, dm = 0, tot = 0;
     for (int i = 0; i < n; i++)
         for (int j = i + 1; j < n; j++) {
-            float du = u[i] - u[j], df = f[i] - f[j];
-            if (du * df < 0.0f) disc++;     /* as duas ordens discordam neste par */
+            float du = u[i] - u[j];
+            if (du * (f[i] - f[j]) < 0.0f) df++;   /* discorda do reflexo  */
+            if (du * (e[i] - e[j]) < 0.0f) de++;   /* discorda do espaco   */
+            if (du * (m[i] - m[j]) < 0.0f) dm++;   /* discorda do mapa     */
             tot++;
         }
-    return tot ? 10.0f * (float)disc / (float)tot : 0.0f;
+    int menor_disc = df < de ? df : de;
+    if (dm < menor_disc) menor_disc = dm;
+    return tot ? (float)menor_disc / (float)tot : 0.0f;
 }
 
 /* ------------------------------------------------------------------ */
@@ -1039,7 +1056,7 @@ static void desenhar(uint32_t seed, long tick) {
     Stats st = coletar_stats();
 
     p += sprintf(buf + p,
-        "  seed %-10u  tick %-6ld  pop %-4d  energia media %5.1f  comida %6.0f  Φ~ %4.1f\n",
+        "  seed %-10u  tick %-6ld  pop %-4d  energia media %5.1f  comida %6.0f  Φ~ %4.2f\n",
         seed, tick, st.pop, st.energia_media, st.comida_total, st.phi_media);
     /* media ± desvio: o desvio revela se a populacao CONVERGE (todos parecidos,
      * desvio -> 0) ou se DIVERSIFICA em nichos (desvio cresce). */
@@ -1164,8 +1181,8 @@ static void desenhar_1p(uint32_t seed, long tick, int f) {
                  b->horizonte, b->desconto, b->urgencia, b->peso_espaco);
     char bphi[11];
     float phi = phi_proxy(b);
-    barra(bphi, phi / 8.0f);
-    p += sprintf(buf + p, "      integracao (Φ proxy) %4.1f  [%s]"
+    barra(bphi, phi);
+    p += sprintf(buf + p, "      integracao (Φ proxy) %4.2f  [%s]"
                           "   <- a decisao depende do todo?\n", phi, bphi);
 
     /* 3) O que ele QUER: a utilidade imaginada de cada jogada possivel. */
@@ -1331,7 +1348,7 @@ int main(int argc, char **argv) {
                     st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
                     st.urg_m, st.urg_sd, st.esp_m, st.esp_sd,
                     ultima_bateria.modelo, ultima_bateria.agencia,
-                    ultima_bateria.modelo_do_outro, st.phi_media / 10.0f);
+                    ultima_bateria.modelo_do_outro, st.phi_media);
                 fflush(logf);   /* descarrega ja: Ctrl+C no meio nao perde a cauda */
             }
 
