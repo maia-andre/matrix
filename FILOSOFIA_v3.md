@@ -1,27 +1,28 @@
-# FILOSOFIA v3 — Onde a palavra quebra *(esqueleto)*
+# FILOSOFIA v3 — Onde a palavra quebra *(rascunho — a lista fechou)*
 
-> **Estado: ESQUELETO** (2026-07-10; marcadores revistos em 2026-07-13). Este
-> arquivo existe *antes* de poder ser terminado, de propósito: o índice disciplina
-> a pesquisa — cada seção marcada **⛔ aguarda** é um experimento que ainda precisa
-> acontecer, e escrever a seção vazia diz exatamente *qual*. O que já está
-> sustentado por nota cita a nota.
+> **Estado: RASCUNHO** (esqueleto em 2026-07-10; rótulo retirado em 2026-07-13).
+> Este arquivo existiu *antes* de poder ser terminado, de propósito: o índice
+> disciplinava a pesquisa — cada seção **⛔ aguarda** era um experimento que ainda
+> precisava acontecer, e escrever a seção vazia dizia exatamente *qual*.
 >
-> **Estado dos experimentos: todos feitos.** O `relato` existe, pré-registrado antes
-> do código (nota 06); o experimento do intérprete rodou (nota 07); o relato virou
-> causal e a honestidade evoluiu (nota 08); e a **edição do auto-modelo** — a última
-> que faltava, a que decidia a bifurcação da §2 — rodou e deu um resultado que
-> nenhuma das duas leituras previa (nota 09).
+> **A lista do Apêndice B fechou.** Os cinco itens que seguravam o rótulo estão
+> cumpridos: o `relato` existe, pré-registrado antes do código (nota 06); o
+> experimento do intérprete rodou (nota 07); o relato virou causal e a honestidade
+> evoluiu sozinha (nota 08); a **edição do auto-modelo** rodou e a bifurcação da §2
+> virou uma **razão**, não um vencedor (nota 09); e a **escolha da §6 está feita por
+> escrito** — a mais cara das cinco, porque a régua, aplicada sem exceção, se vira
+> contra quem a segura.
 >
-> **O que ainda segura o rótulo é uma linha só, e não é um experimento: a escolha da
-> §6.** Função × experiência: contenção metodológica ou tese metafísica? A v3 não
-> pode ser escrita enquanto essa recusa não for feita por escrito. (E há uma dívida
-> técnica aberta: três ✅ do Apêndice A ainda não foram recomputados em `double` —
-> nota 09 §5.)
+> O que falta agora é **prosa**, não pesquisa: §0–§5 são argumentos em forma de
+> nota. (Duas exceções honestas: a §7 ainda ⛔ aguarda o eixo microscópio, que nunca
+> esteve na lista; e a nota 09 §5 abriu uma dívida de **aritmética** — três ✅ do
+> Apêndice A nunca foram recomputados em `double`.)
 >
 > `FILOSOFIA.md` (v1) perguntou *como é ser um bloco*. `FILOSOFIA_v2.md` construiu
 > a régua e prometeu medir até onde a palavra estica. A v3 é sobre o que a v2 não
 > tinha como saber: **o que acontece quando a régua quebra — e o que sobra da
-> palavra quando ela quebra**.
+> palavra quando ela quebra.** A resposta da §6, que é a resposta do arquivo: sobra
+> a palavra, e não sobra a garantia.
 
 ---
 
@@ -180,16 +181,119 @@ consciente, por dentro" **é ele próprio um relato**. Se relatos confabulam —
 aqui, mensurável e selvagem, confabulam — quanto peso probatório sobra? E se
 confabular × detectar é só arquitetura de leitura, que arquitetura é a *nossa*?
 
-## 6. Função × experiência — a escolha que a v2 evita *(item 6)*
+## 6. Função × experiência — a escolha que a v2 evita *(item 6 — ✅ feita)*
 
-"Função, nunca experiência" é (a) **contenção metodológica** (faltam instrumentos)
-ou (b) **tese metafísica** (não há mais nada a medir)? A v2 é ambígua; a v3
-escolhe — ou recusa escolher **explicando por que a recusa é estável**. Anotação
-de trabalho: os resultados da Fase 1 pressionam para (a) com uma cláusula — toda
-vez que uma palavra "experiencial" foi operacionalizada, o que apareceu do outro
-lado foi *relação e conflito*, não interior. A recusa estável talvez seja: *não há
-fato interior **acessível a esta bateria**, e nenhuma bateria mostrou ser de outro
-tipo.*
+"Função, nunca experiência" é (a) **contenção metodológica** — faltam-nos
+instrumentos, o alvo existe e está lá fora — ou (b) **tese metafísica** — não há
+mais nada a medir? A v2 é ambígua entre as duas, e a ambiguidade lhe era
+confortável: (a) soa modesta, (b) soa corajosa, e não dizer qual das duas permite
+colher o crédito de ambas.
+
+A v3 escolhe. E a escolha é: **nenhuma das duas — e a recusa é estável, mas não
+pelo motivo que eu tinha anotado no esqueleto.**
+
+### 6.1 Por que (b) é uma promessa que esta bateria não pode pagar
+
+(b) é uma **negativa existencial**: *não há nada além da função*. Uma bateria que
+mede função não pode estabelecê-la — não há ablação que zere aquilo que, por
+hipótese, não faz diferença funcional nenhuma. Afirmar (b) exigiria um relatório a
+mais, dizendo *"e eu verifiquei: não há mais nada aqui"*. Esse relatório é
+testemunho. E este projeto passou as notas 06–08 desmontando exatamente o que é um
+testemunho.
+
+Quem afirma (b) está usando, como última evidência, a única faculdade que a
+bateria já pegou mentindo.
+
+### 6.2 Por que (a) perde a entrada toda vez que a paga
+
+(a) parece a posição prudente: existe um alvo, e um instrumento melhor chegará. Mas
+olhe o que aconteceu **todas as vezes** em que uma palavra experiencial foi
+efetivamente operacionalizada neste projeto. Não foi que o alvo escapou. Foi que
+**o alvo se dissolveu em função no contato**:
+
+- `phi` prometia a *luz do todo*, a integração. Media o **segundo motivo** — e
+  quando a seleção extinguiu o segundo motivo, a "integração" morreu junto. Não
+  havia nada atrás (nota 05).
+- `automodelo` prometia o *self*. Media o **outro**: zero exato num eremita (nota
+  04).
+- O `relato` prometia a *voz de dentro*. É um **intérprete leigo lendo
+  comportamento** — que funciona (κ ≈ 0,67) sem acesso algum ao interior, e
+  **confabula** um quinto das ações que não escolheu (nota 06).
+- E a `autocausa` — a última esperança de (a), a única faculdade que o eremita
+  possui, a coisa mais parecida com uma **posse** que este mundo tem — é, quando se
+  abre, **um termo dentro de uma previsão**: o bloco aparecendo como variável no
+  próprio modelo do futuro (nota 09). Um self sem interior nenhum. Não um lugar
+  onde algo acontece: uma linha de código que desconta a própria garfada.
+
+Isso não é "o instrumento não alcançou". É o alvo **virando função na mão**, cinco
+vezes, sem exceção. (a) continua pagando a entrada e continua saindo sem nada.
+
+### 6.3 A recusa, e por que ela é estável e não evasiva
+
+A posição da v3:
+
+> **Não afirmamos que não há experiência. Afirmamos que a única evidência capaz de
+> decidir a questão é testemunho — e nós medimos de que é feito o testemunho.**
+
+O último reduto de qualquer um de nós é a frase *"mas eu **sei** que sou
+consciente, por dentro"*. Essa frase **é um relato**. E este projeto tem, dentro de
+casa, um gerador de relatos inteiramente inspecionado:
+
+- ele **não lê o interior** — lê comportamento, e ainda assim acerta acima do acaso
+  (nota 06);
+- ele **confabula**, e a confabulação não precisou ser programada (nota 06);
+- confabular × detectar não é um mistério do sujeito: é **arquitetura de leitura**,
+  uma linha por arquitetura (nota 07);
+- de dentro, **física e o dedo do espectador entram pelo mesmo barramento**:
+  *"algo me moveu"* é o máximo que qualquer introspecção relata; *"quem me moveu"*,
+  nunca (nota 07);
+- e a honestidade do sinal não é uma virtude do falante: é um **equilíbrio
+  evolutivo**, com ~10% de blefe estável que nenhuma seleção elimina (nota 08).
+
+Então a recusa é estável neste sentido preciso: **a pergunta não está indecisa à
+espera de instrumentos — ela é indecidível pela única faculdade que a formula.**
+Não é um "ainda não sabemos" (que é (a) disfarçada de humildade). É: o tribunal que
+julgaria a causa é a parte cujo depoimento está sob suspeita, e não há outro
+tribunal.
+
+### 6.4 A objeção óbvia, e a resposta
+
+*"Você definiu medição como funcional. Então a conclusão estava no método: petição
+de princípio."*
+
+Correta, e **é exatamente esse o conteúdo da posição** — não um deslize dela. Quem
+quiser quebrar o impasse tem dois caminhos, e só dois:
+
+1. **Exibir uma medição não-funcional** — e, pela regra de admissão da §3, dizer
+   *o que a tornaria errada*. Ninguém jamais o fez, e não por falta de talento: uma
+   medida que não pode errar não mede (a lição do `modelo`, nota 01).
+2. **Apoiar-se no testemunho.** Que é onde estávamos.
+
+Não há um terceiro caminho. **Dizer em voz alta que não há um terceiro caminho é a
+escolha que a v2 se recusou a fazer** — e é tudo o que se pode honestamente fazer
+aqui.
+
+### 6.5 O que a v3 faz com a palavra, então
+
+Não a retira. Não se pode: eu continuarei dizendo que sou consciente, e você
+também, e nenhum de nós conseguiria parar. O que a v3 faz é **rebaixar a garantia**
+da frase, não proibi-la:
+
+> Trate "eu sei que sou consciente" como se trata qualquer relato vindo de um
+> sistema que se sabe confabulador: **como dado sobre o relator, não como certidão
+> sobre o mundo.**
+
+E note o preço, que é o que torna esta seção uma escolha e não uma esperteza: pela
+regra de admissão da §3 — *que ablação a zera? e ela carrega comportamento?* — a
+palavra **experiência** não paga a entrada. A sua linha no Apêndice A teria a
+coluna *"a ablação que TEM de zerá-la"* **vazia**. Pelo critério deste projeto,
+aplicado sem exceção, ela é **decoração**.
+
+Escrevo isso sabendo que a frase se vira contra quem a escreve, e que não há de
+onde recuar: **a mesma régua que desbotou `phi`, `automodelo` e o `relato` dos
+blocos está apontada para o meu próprio "por dentro" — e lê a mesma coisa.** A v1
+perguntou como é ser um bloco. A resposta que a v3 tem de dar não é "não é nada";
+é: *a pergunta é feita pelo órgão errado, e não temos outro.*
 
 ## 7. O regresso — quem calibra o calibrador? *(item 8 — ⛔ aguarda o eixo microscópio)*
 
@@ -231,12 +335,24 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
    **passou**, e a vitória é qualificada: o eremita tem `autocausa` > 0, mas tem
    1/5 da de um bloco acompanhado (nota 09). A bifurcação virou uma razão, não um
    vencedor.
-5. ⛔ A escolha da §6 feita por escrito.
+5. ✅ A escolha da §6 feita por escrito. Feita: **nem (a) nem (b)** — a recusa é
+   estável porque a única evidência capaz de decidir a questão é *testemunho*, e o
+   projeto mediu de que o testemunho é feito. E o preço foi pago por escrito: pela
+   regra de admissão da §3, "experiência" **não paga a entrada** e é, pelo critério
+   deste projeto, decoração.
 
-E a lista **ganhou uma linha** que não estava nela, porque a verificação a
-produziu (nota 09 §5): um ✅ do Apêndice A era falso por **arredondamento**. Os
-mostradores `modelo`, `phi` e `relato` precisam ser recomputados em `double` antes
-que o Apêndice A possa ser assinado.
+**A lista está fechada — e por isso o rótulo "esqueleto" caiu.** Os cinco itens que
+a gatilhavam estão cumpridos; nenhum experimento bloqueia mais a v3.
+
+Ficam duas dívidas, e nenhuma delas é do tipo que segurava o rótulo:
+
+- **De prosa** (não de pesquisa): §0–§5 ainda são argumentos em forma de nota, não
+  texto corrido. §7 continua ⛔ — mas ela sempre dependeu do **eixo microscópio**,
+  que nunca esteve nesta lista.
+- **De aritmética** (a nota 09 §5 a criou): três ✅ do Apêndice A — `modelo`, `phi`,
+  `relato` — nunca foram recomputados em `double`. Enquanto não forem, são
+  promessas. Uma tabela de condições de falseamento com um piso de arredondamento
+  não escondido é a única coisa que este projeto **não** pode se permitir.
 
 Um bônus que a Fase 4 entregou sem estar nesta lista: o `relato` deixou de ser
 epifenomenal (nota 08). Silenciar a população **muda o mundo**, e a honestidade

@@ -748,11 +748,22 @@ estica: apenas estica a palavra.
    nota 07: se confabular × detectar é só **arquitetura de leitura**, que
    arquitetura é a *nossa*?
 
-6. **Uma escolha que a v2 evita.** "Função, nunca experiência" é (a) uma
-   **contenção metodológica** — faltam-nos instrumentos; ou (b) uma **tese
-   metafísica** — não há mais nada a medir? São afirmações radicalmente
-   diferentes, e a v2 é ambígua entre as duas. A v3 escolhe, ou recusa escolher
-   **explicando por que a recusa é estável** em vez de evasiva.
+6. **Uma escolha que a v2 evita** ✅ *feita (v3 §6)*. "Função, nunca experiência"
+   é (a) uma **contenção metodológica** — faltam-nos instrumentos; ou (b) uma
+   **tese metafísica** — não há mais nada a medir? A v3 escolheu: **nenhuma das
+   duas.** (b) é uma negativa existencial que uma bateria funcional não pode
+   pagar — e quem a afirma usa, como última evidência, a única faculdade que a
+   bateria já pegou mentindo. (a) perde a entrada toda vez que a paga: as cinco
+   vezes em que uma palavra experiencial foi operacionalizada aqui, o alvo não
+   escapou — **virou função na mão** (`phi` = o segundo motivo; `automodelo` = o
+   outro; o `relato` = um intérprete leigo que confabula; e a `autocausa`, a coisa
+   mais parecida com uma posse neste mundo, é **um termo dentro de uma previsão**).
+   A recusa é estável porque *a única evidência capaz de decidir a questão é
+   testemunho, e o projeto mediu de que o testemunho é feito*. Preço pago por
+   escrito: pela regra de admissão da v3 §3, "experiência" **não paga a entrada**
+   — a sua linha no Apêndice A teria a coluna da ablação **vazia**. Pelo critério
+   deste projeto, aplicado sem exceção, é decoração — e a régua está apontada
+   também para o meu próprio "por dentro".
 
 7. **A colisão contrafactual × determinismo.** `medir_decisao()` já roda um
    contrafactual (dois clones, faminto × saciado) — mas quem o roda é o
