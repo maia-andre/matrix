@@ -991,9 +991,16 @@ em 500 corridas**. As direcionais seguram — a mais forte é a nota 09 P4:
 blocos-tick, cinco ordens abaixo do sinal — o piso é fenômeno do regime
 eremita. O que a replicação **moveu**: a extinção do pv0 alarga para 51–121
 ticks (errata na nota 01); `modelo_do_outro` recalibrou para 0,27 ± 0,05 (efeito
-da nota 08, não deriva de régua). Pendência que sobrou: os fenômenos de **30 000
-ticks** (traço congelado da nota 05; `hon_f` final da nota 08) não entraram —
-lote de janela longa é 10× o custo.
+da nota 08, não deriva de régua). ~~Pendência que sobrou: os fenômenos de **30 000
+ticks**~~ ✅ **fechada (nota 12)**: 3 variantes × 50 seeds × 30 000 ticks
+(`datasets/janela30k.csv`). `hon_f` = 0,898 ± 0,028 — a nota 08 estava certa no
+horizonte certo; o traço congelado replica **sem uma exceção em 150 corridas**;
+o artefato de janela ganhou controle por intervenção (congelar o traço faz a
+correlação *cair* com a janela). E uma errata de mecanismo na nota 09 P4: o
+motor do crescimento da `autocausa` **não é o horizonte** (pregado em 6, ela
+sobe *mais*) — é o estreitamento do motivo, o mesmo `peso_espaco → 0` que apaga
+a agência. **Um processo, não dois.** Fica em aberto o fatorial de L5 (pregar
+motivo *e* horizonte juntos).
 
 **Paper 2 — "Cognição como bem posicional."** *(a meio caminho)*
 Público: vida artificial, evolução da cognição. Tese: o horizonte de planejamento

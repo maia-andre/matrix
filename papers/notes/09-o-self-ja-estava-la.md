@@ -163,6 +163,17 @@ A nota 03 disse: *a escada é reversível sob seleção*. A nota 09 corrige para
 mais duro: **a escada não sobe nem desce como um bloco — degraus diferentes andam
 em sentidos opostos sob a mesma pressão.** Não há uma seta. Há um campo.
 
+> **Errata (nota 12) — o mecanismo estava mal atribuído.** O fenômeno desta
+> seção replica em 50/50 seeds e até 30 000 ticks (notas 11 e 12). Mas a frase
+> "o que o sustenta é o horizonte, e o horizonte sobe" confundiu a dependência
+> **estrutural** (`horizonte = 1` zera — P2, que fica) com o **motor do
+> crescimento**. Com o horizonte **pregado em 6** a autocausa sobe *mais* que no
+> controle (0,100 → 0,226); com o horizonte subindo a ~9,7 mas o motivo pregado
+> largo, sobe *menos* (0,088 → 0,148). O motor dominante é o **estreitamento do
+> motivo** — o mesmo `peso_espaco → 0` que apaga a agência. O achado "a mesma
+> seleção que apaga a agência constrói o self" sai mais forte: é **um** processo,
+> não dois. Ver [`12-a-janela-longa.md`](./12-a-janela-longa.md) §4.
+
 ## 5. P5 — a errata que apareceu na verificação: a régua tem um piso
 
 Não estava no pré-registro. Ao rodar o eremita, a `agencia` deu máximo **0,0030** e

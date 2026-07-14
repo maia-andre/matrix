@@ -148,8 +148,10 @@ e **auto-modelo** — não medem nada que o bloco *tenha*. Medem algo que aconte
 
 Há ainda um segundo defeito em `agencia`: sua escala **deriva com a população que
 ela mede**. A fome só troca o peso entre comida e `peso_espaco`, e `peso_espaco`
-evolui (cai de ~3,1 para 0,5–1,5 em 30 000 ticks); a correlação entre `esp_m` e
-`agencia` é **+0,93 / +0,94 / +0,38**. Comparar `agencia` no tick 100 e no tick
+evolui (cai de ~3,1 para 0,5–1,5 em 30 000 ticks — *errata, nota 12: esse
+intervalo era da era do teto de nascimentos; com a reprodução consertada,
+30 000 ticks levam `esp_m` a 0,095 ± 0,018 em 50 seeds — o "→ 0" literal*); a
+correlação entre `esp_m` e `agencia` é **+0,93 / +0,94 / +0,38**. Comparar `agencia` no tick 100 e no tick
 20 000 é comparar réguas diferentes. A ablação **D** mostra o mesmo por outro
 lado: mexer em `COMPETICAO`, que nada tem a ver com agência, move `agencia` de
 0,385 para 0,578.
