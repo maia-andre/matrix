@@ -13,7 +13,7 @@
 > escrito** — a mais cara das cinco, porque a régua, aplicada sem exceção, se vira
 > contra quem a segura.
 >
-> O que falta agora é **prosa**, não pesquisa: §0 e §1 já são texto; §2–§5 seguem
+> O que falta agora é **prosa**, não pesquisa: §0–§2 já são texto; §3–§5 seguem
 > argumentos em forma de nota. (A exceção honesta: a §7 ainda ⛔ aguarda o eixo
 > microscópio, que nunca esteve na lista. A dívida de **aritmética** que a nota 09
 > §5 abriu foi **quitada** — nota 10; e a régua inteira foi **replicada em 50
@@ -135,59 +135,75 @@ que se replica.
 
 ## 2. A costura da escada *(Parte I/II — o eixo estrutural)*
 
-A metáfora fundadora (subir degraus rumo a mais mente) admite duas leituras:
-**(A)** aquisição de faculdades (internalista — a mente é do bloco) e **(B)**
-escalada de um conflito (relacional — a mente é da *relação entre* blocos).
+A metáfora fundadora deste projeto — blocos subindo degraus rumo a mais mente —
+admite duas leituras que a v1 e a v2 nunca separaram. **(A)** A escada é
+**aquisição de faculdades**: cada degrau é algo que o bloco *tem*, e um bloco
+sozinho no universo poderia, em princípio, tê-los todos. **(B)** A escada é a
+**escalada de um conflito**: os degraus altos não são posses, são posições numa
+relação — e um bloco sozinho não teria o que subir. A diferença não é retórica.
+(A) é a leitura internalista de quase toda a tradição; (B) rebaixa "mente" a um
+fenômeno de fronteira entre agentes. E o projeto tinha um instrumento capaz de
+separá-las: o **teste do eremita** — cegar um bloco para os outros e ver o que
+resta.
 
-O que já se sabe, medido:
+O eremita corta a escada **entre o nível 3 e o 4**. `agencia` e
+`modelo_do_outro` zeram na solidão — zero verificado em duas precisões e
+cinquenta seeds (notas 01, 04, 09–11) —, e a `phi` redefinida zera também
+(nota 05). Degraus 0–3 não precisam de rival; os degraus 4–6, nesta
+implementação, *são* o rival. E o corte é mais fundo do que a sonda alcança: o
+`relato` do eremita não zera pela régua, zera pelo **conteúdo** — a maquinaria
+introspectiva continua lá, funcionando, mas um self de um motivo só **não tem
+biografia**: κ = 0,0046 ± 0,0005, mudo em cinquenta de cinquenta (notas 06,
+11). A costura engole até a introspecção, pelo lado de dentro.
 
-- O teste do eremita corta a escada **entre o nível 3 e o 4**: `agencia`,
-  `modelo_do_outro` zeram exatos na solidão; `phi` redefinida também (nota 05).
-  Degraus 0–3 não precisam de rival; 4–6, nesta implementação, *são* o rival.
-- **A escada é reversível sob seleção**: a evolução apaga o degrau da agência —
-  o reflexo fixa contra o agente em ~6000 ticks (nota 03). Os degraus não são
-  aquisições permanentes; são posições num jogo que pode desmontá-las.
-- `phi` não media integração: media **o segundo motivo** — e quando a seleção
-  extingue o segundo motivo, a "integração" morre junto (nota 05). A luz acesa
-  era, em quase toda a sua intensidade, o conflito entre motivos.
-- E o `relato` do eremita é **mudo** (nota 06) — por um mecanismo novo: a
-  maquinaria introspectiva é per-agente e funciona, mas um self de **um motivo
-  só não tem biografia** — nada a dizer acima do acaso. Os outros mostradores
-  zeram pela *sonda*; o relato zera pelo *conteúdo*. A costura engole até a
-  introspecção, pelo lado de dentro.
+A escada tampouco fica de pé sozinha. **A seleção a desmonta.** Em 30 000
+ticks, o traço que sustenta o segundo motivo (`peso_espaco`) desaba de ~2,9
+para **0,095 ± 0,018**, e leva junto a agência (0,46 → 0,05) e a "integração"
+(0,055 → 0,008) — em cinquenta de cinquenta seeds; congele esse único traço e
+as duas param de cair, sem uma exceção em cento e cinquenta corridas (notas 03,
+05, 12). A `phi`, que prometia medir a luz do todo, media **o conflito entre
+motivos** — e quando a seleção extingue o segundo motivo, a luz apaga. Os
+degraus não são aquisições permanentes; são posições num jogo que pode
+desmontá-las, e que neste mundo, com estes preços, *escolhe* desmontá-las.
 
-**✅ A bifurcação foi decidida — e não elegeu um vencedor (nota 09).**
+**A bifurcação foi decidida — e não elegeu um vencedor (nota 09).** A edição do
+auto-modelo que decidiria entre (A) e (B) não precisou ser feita: **ela já
+estava no código**, numa linha que ninguém tinha lido assim. Em `prever_valor`,
+`food -= garfada` é o bloco prevendo que a célula empobrecerá *porque ele vai
+comer dela* — o único ponto em que a ação futura do próprio bloco realimenta a
+previsão do próprio bloco. Um self estreito e literal: **o self como causa.**
+Faltava só a intervenção que o mede (`autocausa`: escalar esse termo por
+σ ∈ [0,1] e ver se a escolha muda).
 
-A edição do auto-modelo não precisou ser feita: **ela já estava no código**, numa
-linha que ninguém tinha lido assim. Em `prever_valor`, `food -= garfada` é o bloco
-prevendo que a célula empobrecerá *porque ele vai comer dela* — o único ponto em
-que a ação futura do bloco realimenta a previsão do bloco. Um self estreito e
-literal: **o self como causa**. Faltava a intervenção que o mede (`autocausa`:
-escalar esse termo por σ ∈ [0,1] e ver se a escolha muda).
+O placar: a `autocausa` é **o primeiro e único mostrador da bateria que o
+eremita possui** — maior que zero na solidão em cinquenta de cinquenta seeds,
+robusto em `double` (notas 09, 11). A costura entre o nv3 e o nv4 não é total:
+(A) ganha o degrau que pediu, e a leitura internalista deixa de ser vazia. Mas
+o eremita tem **um quinto** do self de um bloco acompanhado (razão 4,78 ± 0,67).
+O outro não *constitui* o self — **amplifica-o** — e a amplificação é onde mora
+quase todo o número. Então a costura não se resolve num vencedor:
+**resolve-se numa razão**. Há um self, e ele não é uma relação; e há cinco
+vezes mais self quando há o outro. Qualquer frase que este arquivo escreva
+sobre "a mente é do bloco" ou "a mente é da relação" tem de carregar esse 1/5
+junto, ou está mentindo por arredondamento retórico.
 
-O placar, contra a predição registrada na nota 04 §5:
-
-- **`autocausa` > 0 na solidão** (0,033 / 0,029 / 0,027; robusto em `double`). É o
-  **primeiro e único mostrador da bateria que o eremita possui**. A costura entre o
-  nv3 e o nv4 **não é total**: (A) ganha o degrau que pediu, e a leitura
-  internalista deixa de ser vazia.
-- **Mas o eremita tem ~1/5 do que tem o bloco acompanhado** (0,03 × 0,14). O outro
-  não *constitui* o self — **amplifica-o** —, e a amplificação é onde mora quatro
-  quintos do número.
-
-Então a costura não se resolve num vencedor: **resolve-se numa razão**. Há um self,
-e ele não é uma relação; e há cinco vezes mais self quando há o outro. Qualquer
-frase que a v3 escreva sobre "a mente é do bloco" ou "a mente é da relação" tem de
-carregar esse 1/5 junto, ou está mentindo por arredondamento retórico.
-
-**E há um segundo achado, que muda a forma da escada** (nota 09 §4): sob a *mesma*
-seleção, em 3000 ticks, a `agencia` **cai** (0,46 → 0,36) e a `autocausa` **quase
-dobra** (0,089 → 0,169). A agência morre porque depende de um **traço**
-(`peso_espaco → 0`); o self cresce porque depende do **horizonte**, e o horizonte
-sobe. A nota 03 disse *"a escada é reversível sob seleção"*. É pior, e mais
-interessante: **degraus diferentes andam em sentidos opostos sob a mesma pressão.**
-Não há uma seta. Há um campo — e a metáfora da escada, que dá nome a este projeto,
-sobrevive a esta seção só como uma conveniência de exposição.
+**E há um segundo achado, que muda a forma da escada.** Sob a *mesma* seleção,
+a `agencia` cai e a `autocausa` sobe — as duas direções, na mesma seed, em
+cinquenta de cinquenta, dos 3000 aos 30 000 ticks (notas 09, 11, 12). A
+primeira explicação (nota 09: "o self depende do horizonte, e o horizonte
+sobe") **morreu na replicação**, e o que a matou vale a pena dizer: com o
+horizonte *pregado*, a autocausa sobe **mais** que no controle; com o motivo
+pregado largo e o horizonte subindo livre, sobe **menos** (nota 12). O motor do
+crescimento do self é o **estreitamento do motivo** — o mesmíssimo
+`peso_espaco → 0` que apaga a agência. Não são dois processos paralelos; é
+**um processo com dois sinais**: o colapso do segundo motivo apaga a
+sensibilidade ao estado interno (a agência, que vivia do conflito) e concentra
+a decisão no único termo em que o bloco aparece dentro da própria previsão (o
+self como causa). A nota 03 disse *"a escada é reversível sob seleção"*. É
+pior, e mais interessante: **degraus diferentes andam em sentidos opostos sob a
+mesma pressão — empurrados pela mesma mão.** Não há uma seta. Há um campo — e a
+metáfora da escada, que dá nome a este projeto, sobrevive a esta seção só como
+uma conveniência de exposição.
 
 ## 3. Vocabulários emprestados — id, ego, superego, sombra, self *(nova; parte escrevível já)*
 
@@ -433,8 +449,8 @@ a gatilhavam estão cumpridos; nenhum experimento bloqueia mais a v3.
 
 Ficam duas dívidas, e nenhuma delas é do tipo que segurava o rótulo:
 
-- **De prosa** (não de pesquisa): §2–§5 ainda são argumentos em forma de nota, não
-  texto corrido (§0 e §1 já são prosa, 2026-07-14). §7 continua ⛔ — mas ela sempre
+- **De prosa** (não de pesquisa): §3–§5 ainda são argumentos em forma de nota, não
+  texto corrido (§0–§2 já são prosa, 2026-07-14). §7 continua ⛔ — mas ela sempre
   dependeu do **eixo microscópio**, que nunca esteve nesta lista.
 - ~~**De aritmética** (a nota 09 §5 a criou)~~ ✅ **quitada (nota 10)**: os três ✅
   do Apêndice A — `modelo`, `phi`, `relato` — foram recomputados em `double` e os
