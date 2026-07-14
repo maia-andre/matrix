@@ -1,11 +1,15 @@
 # FILOSOFIA v3 — Onde a palavra quebra *(esqueleto)*
 
-> **Estado: ESQUELETO** (2026-07-10). Este arquivo existe *antes* de poder ser
-> terminado, de propósito: o índice disciplina a Fase 2 — cada seção marcada
-> **⛔ aguarda** é um experimento que ainda precisa acontecer, e escrever a seção
-> vazia diz exatamente *qual*. A v3 só perde este rótulo depois do `relato` e do
-> experimento do intérprete (`ROADMAP.md`, Fase 2). O que já está sustentado por
-> nota cita a nota.
+> **Estado: ESQUELETO** (2026-07-10; marcadores revistos em 2026-07-13). Este
+> arquivo existe *antes* de poder ser terminado, de propósito: o índice disciplina
+> a pesquisa — cada seção marcada **⛔ aguarda** é um experimento que ainda precisa
+> acontecer, e escrever a seção vazia diz exatamente *qual*. O que já está
+> sustentado por nota cita a nota.
+>
+> **As duas condições originais foram cumpridas:** o `relato` existe, pré-registrado
+> antes do código (nota 06), e o experimento do intérprete rodou (nota 07). O que
+> ainda segura o rótulo são as duas linhas do Apêndice B que sobraram: a **edição do
+> auto-modelo** (§2 — um experimento) e a **escolha da §6** (uma decisão de escrita).
 >
 > `FILOSOFIA.md` (v1) perguntou *como é ser um bloco*. `FILOSOFIA_v2.md` construiu
 > a régua e prometeu medir até onde a palavra estica. A v3 é sobre o que a v2 não
@@ -120,7 +124,7 @@ rodados pelo **observador**. Três movimentos, em escada:
    barramento — "algo me moveu" é o máximo que qualquer introspecção relata;
    "*quem* me moveu", nunca.
 
-## 5. A dobradiça da confabulação *(item 5 — a versão selvagem já existe; a forçada ⛔ aguarda)*
+## 5. A dobradiça da confabulação *(item 5 — selvagem ✅ e forçada ✅; a evolutiva ⛔ aguarda)*
 
 Quando um bloco racionaliza uma ação que não escolheu, o projeto tem, em casa, o
 fenômeno que torna o auto-relato humano pouco confiável (Gazzaniga; Nisbett &
@@ -173,8 +177,18 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
 
 ## Apêndice B — o que falta para tirar o rótulo "esqueleto"
 
-1. `relato` construído com condição de sanidade declarada antes (Fase 2).
-2. O experimento do intérprete rodado — e o desfecho registrado, seja qual for.
-3. A variante Bandersnatch (§4.2) rodada.
-4. A edição do auto-modelo de verdade (§2) — a predição de (A) testada.
-5. A escolha da §6 feita por escrito.
+1. ✅ `relato` construído com condição de sanidade declarada antes (Fase 2) — o
+   pré-registro foi commitado antes do mostrador; κ ≈ 0,67, e o intérprete cego
+   zera exato (nota 06).
+2. ✅ O experimento do intérprete rodado — e o desfecho registrado, seja qual for.
+   Rodou, e o desfecho não foi o previsto: a tabela de Gazzaniga não é uma
+   tipologia de sujeitos, é **uma linha por arquitetura de leitura** (nota 07).
+3. ✅ A variante Bandersnatch (§4.2) rodada — as cinco predições confirmaram, e
+   ~1% dos dedos é indetectável **por princípio** (nota 07).
+4. ⛔ A edição do auto-modelo de verdade (§2) — a predição de (A) testada.
+5. ⛔ A escolha da §6 feita por escrito.
+
+Um bônus que a Fase 4 entregou sem estar nesta lista: o `relato` deixou de ser
+epifenomenal (nota 08). Silenciar a população **muda o mundo**, e a honestidade
+é ESS sem multa artificial — a matéria do superego da §3, que a v3 já pode
+escrever com dado em vez de promessa.

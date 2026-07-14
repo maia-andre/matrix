@@ -440,9 +440,14 @@ consumindo o sinal, mentira custando); instalar as arquiteturas A/B/C como
 com leitores que punem incoerência, C invade A); e o segundo vocabulário de
 relato (separar "intérprete mudo" de "self sem biografia", nota 06 §4).
 
-## O experimento do intérprete (Gazzaniga)
+## O experimento do intérprete (Gazzaniga) ✅ *feito — rodou como §2.2/§2.3 (nota 07)*
 
-Deve ser o **primeiro** experimento assim que o mostrador existir:
+Deve ser o **primeiro** experimento assim que o mostrador existir — e foi. O
+desenho abaixo é o que estava escrito **antes** de rodar; o placar está em §2.3.
+A tabela de desfechos, em particular, não sobreviveu como escrita: ela previa
+três *tipos de sujeito* e o que se mediu foram três **arquiteturas de leitura** —
+quem lê a ação confabula, quem lê o plano não percebe, quem monitora os dois
+detecta. O desfecho é propriedade do intérprete, não do bloco.
 
 1. O bloco decide — e a separação leitura×escrita do tick já isola o instante
    exato (`intencao_*` antes de `alvo_*`).
@@ -596,9 +601,16 @@ população melhor. É uma corrida que cada indivíduo precisa correr para ficar
 parado, e que sai cara para todos. Se isso vale para o bicho de 56 KB, vale a
 pergunta para os outros.
 
-# Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos** *(em andamento)*
+# Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos** *(em andamento — §4.0/4.1 fechados)*
 
 **Pergunta:** que comportamentos emergem, sem que ninguém os programe?
+
+> **Onde esta fase está** (2026-07-13): o sinal de intenção foi pré-registrado
+> (§4.0) e entregue (§4.1, nota 08) — o relato virou causal e a honestidade
+> evoluiu sozinha. Seguem **abertas** as três frentes que a nota 08 herdou: o
+> blefe residual como ESS (varrer a frequência), a **memória de sinais**
+> (reputação) como 2ª rota anti-*cheap talk*, e o **Bandersnatch evolutivo** (a
+> arquitetura de *escuta* como traço herdável, ao lado da de *fala*).
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
@@ -725,12 +737,16 @@ estica: apenas estica a palavra.
    exige a possibilidade de des-representação.** Isso é Dretske e Millikan caindo
    de um `sed` em C.
 
-5. **A dobradiça da confabulação** (depende da Fase 2). Quando um bloco
-   racionalizar uma ação que não escolheu, o projeto terá, dentro de casa, o
-   fenômeno que torna o auto-relato humano pouco confiável (Gazzaniga; Nisbett &
-   Wilson). E então a v3 tem de encarar o último reduto do "mas eu *sei* que sou
-   consciente, por dentro" — porque esse reduto **é ele próprio um relato**. Se
-   relatos confabulam, quanto peso probatório sobra ali?
+5. **A dobradiça da confabulação** ✅ *(a dependência da Fase 2 está paga —
+   notas 06 e 07)*. Não é mais um "quando": o bloco **já** racionaliza ações que
+   não escolheu — ~21% das negadas pela física, sem ninguém instalar isso (nota
+   06), e ~26% das impostas pelo dedo do espectador (nota 07). O projeto tem,
+   dentro de casa, o fenômeno que torna o auto-relato humano pouco confiável
+   (Gazzaniga; Nisbett & Wilson). A v3 tem de encarar o último reduto do "mas eu
+   *sei* que sou consciente, por dentro" — porque esse reduto **é ele próprio um
+   relato**. Se relatos confabulam, quanto peso probatório sobra ali? E, com a
+   nota 07: se confabular × detectar é só **arquitetura de leitura**, que
+   arquitetura é a *nossa*?
 
 6. **Uma escolha que a v2 evita.** "Função, nunca experiência" é (a) uma
    **contenção metodológica** — faltam-nos instrumentos; ou (b) uma **tese
@@ -818,11 +834,15 @@ qualquer métrica **por-agente** de uma faculdade **relacional** lê zero num ag
 sozinho, e nenhum refinamento por-agente conserta isso (o *teste do eremita* como
 protocolo geral).
 
-Falta, e é essencial: **consertar `modelo`** (Fase 1.1) e mostrar a régua corrigida
-desabando a ~0 sob `prever_valor ≡ 0`. Sem isso temos um relatório de bug, não um
-método — a primeira pergunta de qualquer revisor é "e como deveria ser?". Falta
-também **replicação** (3 seeds é pouco; a infraestrutura torna 50 baratas: relatar
-média ± dispersão).
+✅ O que era essencial e faltava — **consertar `modelo`** (Fase 1.1) e mostrar a
+régua corrigida desabando a ~0 sob `prever_valor ≡ 0` — está feito: 0,000 exato
+(nota 01). O paper deixou de ser um relatório de bug e virou um método, que é o
+que a primeira pergunta de qualquer revisor ("e como deveria ser?") exigia. A
+bateria fechou em cinco mostradores, cada um com a sua condição de falseamento
+verificada (Apêndice A da `FILOSOFIA_v3.md`).
+
+Falta: **replicação** (3 seeds é pouco; a infraestrutura torna 50 baratas —
+relatar média ± dispersão).
 
 **Paper 2 — "Cognição como bem posicional."** *(a meio caminho)*
 Público: vida artificial, evolução da cognição. Tese: o horizonte de planejamento
