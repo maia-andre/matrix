@@ -927,14 +927,33 @@ achado mais desconfortável da nota.
   demonstração da nota 01 §3 vale em ℝ; a régua roda em `float32`. **Um quinto modo
   de errar** — não o desenho da sonda, a sua **aritmética** — e ele caiu exatamente
   sobre uma **condição de falseamento**, que é o coração do método. `modelo`, `phi`
-  e `relato` ainda não foram recomputados em double: até que sejam, os seus ✅ no
-  Apêndice A são promessas.
+  e `relato` foram recomputados em double na sequência — ver §5.2.
+
+## 5.2 A auditoria em `double` ✅ *(nota 10 — os três zeros eram estruturais)*
+
+A dívida da P5, quitada em 2026-07-14. `modelo` (sob `prever_valor ≡ 0`), `phi`
+(sob as três reduções a um módulo) e `relato` (sob o intérprete cego, 4
+constantes) recomputados com a comparação da sonda em `double`, instrumentados
+**na fonte** a nove casas — máximo por janela, por bloco, e |κ| **antes do
+clamp**, fora dos três esconderijos do CSV (`%.3f`, média populacional, clamp).
+**Os três zeros são zeros nas duas precisões**, máximo e média, 3 seeds; os
+controles não se movem um dígito.
+
+O achado é o porquê da assimetria: **float32 não inverte ordens — cria
+empates.** A `agencia` vazou porque conta trocas de argmax sob desempate
+estrito, e um empate fantasma troca o vencedor; `modelo`, `phi` e `relato` têm
+zeros **estruturais** (identidade `x/x`, monotonia da multiplicação, igualdade
+de quociente), onde o arredondamento não tem por onde entrar. Vira regra de
+desenho para qualquer mostrador futuro que conte trocas: a condição de
+falseamento tem de produzir **o mesmo float em todo o eixo** (como a
+`autocausa`), não "termos que se cancelam em ℝ" (como a `agencia`).
 
 **Herda à Fase 5:** a edição "honesta" da partilha (o bloco acredita que os rivais
 roubam dele, mas não que eles esvaziam a célula — a previsão é internamente
-inconsistente; corrigir **muda a simulação**), a auditoria em `double` dos três
-mostradores restantes, e a varredura de densidade populacional (a razão de 5× é um
-piso ou o começo de uma curva?).
+inconsistente; corrigir **muda a simulação**), a varredura de densidade
+populacional (a razão de 5× é um piso ou o começo de uma curva?), e o piso da
+`agencia` **fora** do eremita — numa população normal não há verdade algébrica
+contra a qual comparar, e a pergunta segue aberta.
 
 ---
 

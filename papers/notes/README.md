@@ -51,6 +51,7 @@ notas.
 | [08](./08-o-sinal-e-a-mentira.md) | o `relato` vira **causal**: sinal no lugar da telepatia do nv5, estratégia herdável; a **honestidade evolui** (ESS sem multa), sobra ~10% de blefe (polimorfismo); silêncio = eremita epistêmico. S2/S6 erraram a direção — achados | 1 — metrologia (+ Paper 3 futuro; `FILOSOFIA_v3` §3) |
 
 | [09](./09-o-self-ja-estava-la.md) | o auto-modelo **já estava no código** (`food -= garfada`: "a célula empobrece porque EU vou comer"). `autocausa` é o **único mostrador que o eremita possui** — mas ele tem só **1/5** do de um bloco acompanhado: a bifurcação da escada vira uma **razão**, não um vencedor. `horizonte=1` o zera exato (**o self exige um futuro**); e a mesma seleção que **apaga a agência constrói o self**. Errata: a `agencia` do eremita não era "0 exato" — tinha um **piso de arredondamento** em float32 | 1 — metrologia (+ `FILOSOFIA_v3` §2, §3 e Apêndice A) |
+| [10](./10-o-zero-estrutural.md) | a dívida da nota 09 §5 quitada: `modelo`, `phi` e `relato` recomputados em `double` — **os três zeros são zeros nas duas precisões**, a nove casas, no máximo e fora do clamp. E o piso ganha mecanismo: **float32 não inverte ordens, cria empates** — só vaza a sonda que conta trocas de argmax sob desempate (`agencia`); zeros por identidade, monotonia ou quociente igual são **estruturais**. Regra de desenho para mostradores futuros | 1 — metrologia (+ Apêndice A da `FILOSOFIA_v3`) |
 
 ## Erratas
 

@@ -308,18 +308,23 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
 
 | mostrador | a ablação que TEM de zerá-lo | verificado |
 |---|---|---|
-| `modelo` | `prever_valor ≡ 0` | ✅ 0,000 exato (nota 01) |
+| `modelo` | `prever_valor ≡ 0` | ✅ 0,000 exato (nota 01) — **auditado em `double`** (nota 10): 0 exato nas duas precisões, média e pior janela |
 | `agencia` | eremita (sem rivais percebidos) | ⚠️ 0 exato **em ℝ** — mas a régua roda em `float32` e tem um **piso de ~0,003** (nota 09 §5). Zera exato em `double`. A demonstração da nota 01 §3 sobrevive; a *implementação* dela, não |
 | `modelo_do_outro` | eremita (sem pretendentes) | ✅ 0,0000 exato, média e máx (nota 04). Imune ao piso: critério exato, sem varredura |
 | `autocausa` | `horizonte = 1` (sem futuro, não há onde se modelar) | ✅ 0,0000 exato, média **e máximo**, 3 seeds — e exato **por construção**: para todo σ sai o mesmo float (nota 09). **O eremita NÃO o zera** — é o único, e é o ponto |
-| `phi` (redefinida) | qualquer redução a um módulo só: eremita, `peso_espaco ≡ 0`, `prever_valor ≡ 0` | ✅ 0 exato, demonstrável (nota 05) — **não testado em `double`** |
-| `relato` | intérprete cego (relato ≡ constante): `relato = 0` **exato**, pela construção do κ | ✅ 0,0000 exato, 4 constantes × 3 seeds — pré-registrado **antes** do código (nota 06) |
+| `phi` (redefinida) | qualquer redução a um módulo só: eremita, `peso_espaco ≡ 0`, `prever_valor ≡ 0` | ✅ 0 exato, demonstrável (nota 05) — **auditado em `double`** (nota 10): 0 exato nas duas precisões, bloco a bloco, nas três reduções |
+| `relato` | intérprete cego (relato ≡ constante): `relato = 0` **exato**, pela construção do κ | ✅ 0,0000 exato, 4 constantes × 3 seeds — pré-registrado **antes** do código (nota 06); **auditado em `double`** (nota 10): κ = +0 exato, inclusive **antes do clamp** |
 
-> **A tabela adquiriu um rodapé, e ele é a nota 09 §5.** Um ✅ desta tabela era
-> falso — não por erro de conceito, mas de **aritmética**: `float32` tem um piso, e
-> ele caiu exatamente sobre uma condição de falseamento. Um mostrador cujo zero não
-> é zero não pode ser falseado com limpeza. `phi`, `modelo` e `relato` ainda não
-> foram recomputados em `double`; até que sejam, os seus ✅ são promessas.
+> **A tabela adquiriu um rodapé, e ele é a nota 09 §5 — fechado pela nota 10.**
+> Um ✅ desta tabela era falso — não por erro de conceito, mas de **aritmética**:
+> `float32` tem um piso, e ele caiu exatamente sobre uma condição de falseamento.
+> A auditoria em `double` (nota 10) recomputou os três ✅ restantes: **os três
+> zeros são zeros nas duas precisões**. E o piso ganhou mecanismo: float32 não
+> inverte ordens, **cria empates** — só vaza a sonda que dá significado a um
+> empate (a `agencia` conta trocas de argmax sob desempate estrito; `modelo`,
+> `phi` e `relato` têm zeros **estruturais** — identidade `x/x`, monotonia da
+> multiplicação, igualdade de quociente). A régua desta tabela está, agora,
+> auditada por inteiro.
 
 ## Apêndice B — o que falta para tirar o rótulo "esqueleto"
 
@@ -349,10 +354,11 @@ Ficam duas dívidas, e nenhuma delas é do tipo que segurava o rótulo:
 - **De prosa** (não de pesquisa): §0–§5 ainda são argumentos em forma de nota, não
   texto corrido. §7 continua ⛔ — mas ela sempre dependeu do **eixo microscópio**,
   que nunca esteve nesta lista.
-- **De aritmética** (a nota 09 §5 a criou): três ✅ do Apêndice A — `modelo`, `phi`,
-  `relato` — nunca foram recomputados em `double`. Enquanto não forem, são
-  promessas. Uma tabela de condições de falseamento com um piso de arredondamento
-  não escondido é a única coisa que este projeto **não** pode se permitir.
+- ~~**De aritmética** (a nota 09 §5 a criou)~~ ✅ **quitada (nota 10)**: os três ✅
+  do Apêndice A — `modelo`, `phi`, `relato` — foram recomputados em `double` e os
+  três zeros são zeros nas duas precisões, a nove casas, no máximo e não só na
+  média. O piso da `agencia` segue sendo o único — e agora com mecanismo: só vaza
+  a sonda que dá significado a empates. A dívida de prosa é a última.
 
 Um bônus que a Fase 4 entregou sem estar nesta lista: o `relato` deixou de ser
 epifenomenal (nota 08). Silenciar a população **muda o mundo**, e a honestidade
