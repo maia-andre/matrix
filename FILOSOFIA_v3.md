@@ -13,10 +13,11 @@
 > escrito** — a mais cara das cinco, porque a régua, aplicada sem exceção, se vira
 > contra quem a segura.
 >
-> O que falta agora é **prosa**, não pesquisa: §0–§5 são argumentos em forma de
-> nota. (Duas exceções honestas: a §7 ainda ⛔ aguarda o eixo microscópio, que nunca
-> esteve na lista; e a nota 09 §5 abriu uma dívida de **aritmética** — três ✅ do
-> Apêndice A nunca foram recomputados em `double`.)
+> O que falta agora é **prosa**, não pesquisa: §0 e §1 já são texto; §2–§5 seguem
+> argumentos em forma de nota. (A exceção honesta: a §7 ainda ⛔ aguarda o eixo
+> microscópio, que nunca esteve na lista. A dívida de **aritmética** que a nota 09
+> §5 abriu foi **quitada** — nota 10; e a régua inteira foi **replicada em 50
+> seeds** sem uma violação — nota 11.)
 >
 > `FILOSOFIA.md` (v1) perguntou *como é ser um bloco*. `FILOSOFIA_v2.md` construiu
 > a régua e prometeu medir até onde a palavra estica. A v3 é sobre o que a v2 não
@@ -26,32 +27,111 @@
 
 ---
 
-## 0. Abertura — o fato epistêmico central *(pronta para escrever)*
+## 0. Abertura — o fato epistêmico central
 
-Construímos um medidor de "modelo". Ele deu nota **máxima** a um agente sem modelo
-nenhum, marchando para a extinção (nota 01). Isto não é um bug que corrigimos e
-seguimos em frente; é o fato epistêmico central do projeto. A mesma estrutura
-ameaça todo mostrador — inclusive os que consertamos depois, e inclusive os que se
-usam em humanos.
+Construímos um medidor de "modelo de mundo". A ideia parecia sã: o bloco prevê o
+que vai colher; compare-se a previsão com a colheita; a concordância é a nota. O
+medidor deu **1,000** — o teto da escala — para um bloco cujo modelo de mundo
+tinha sido arrancado por inteiro, e cuja população marchava para a extinção em
+cem ticks (nota 01; em cinquenta seeds: 51–121 ticks, sem uma exceção — nota 11).
 
-A Fase 1 inteira coube nesta forma: **quatro mostradores, quatro modos de errar**
-(notas 01–05) — e em **dois** deles (agência, phi) a primeira reação foi acusar a
-régua, e a régua estava *certa*: era o mundo que estava dizendo algo incômodo.
+O defeito, visto depois, é de uma banalidade que machuca: a sonda lia a previsão
+do **array do mundo**, não do mapa do bloco. Um mapa que é fotocópia do
+território não pode discordar dele — e um mapa que não pode errar não é um mapa.
+O medidor tinha sido construído removendo exatamente a condição que faria dele
+um medidor.
+
+Isto não é um bug que corrigimos e seguimos em frente. É o fato epistêmico
+central do projeto, por três razões.
+
+Primeira: **ninguém percebeu na construção.** Nem quem escreveu a sonda, nem quem
+leu 0,97 no HUD por milhares de ticks e assentiu. O número era plausível,
+estável, alto — tudo o que se costuma pedir a um número. Só a ablação o
+desmascarou: a pergunta *"o que esta sonda lê quando a faculdade não está lá?"*,
+que ninguém faz enquanto o mostrador diz o que se espera dele.
+
+Segunda: **a mesma estrutura ameaça todo mostrador** — os quatro que consertamos
+depois, cada um errando de um jeito próprio (notas 01–05); o quinto, que nasceu
+com pré-registro e ainda assim falhou uma predição (nota 06); e — aqui o
+brinquedo deixa de ser brinquedo — os que se usam em humanos. Qualquer métrica
+da família *calibração* pode ser satisfeita por uma sonda que lê o ambiente em
+vez da representação. Qualquer métrica *por-agente* de uma faculdade relacional
+lê zero num agente sozinho. Isso não é folclore da Matrix; são propriedades de
+réguas, e valem onde houver régua.
+
+Terceira, a mais desconfortável: quando a régua enfim ficou boa, **ela disse
+coisas que o instrumentista não queria ouvir — e a primeira reação, duas vezes,
+foi acusar a régua** (notas 03 e 05). A agência desbotava sob seleção; o
+instinto foi "conserte o mostrador" até ele parar de dizer isso. O mostrador
+estava certo. Cada regra do protocolo de medição deste projeto (ROADMAP §1.7) é
+a cicatriz de um desses episódios — nenhuma veio de manual.
+
+E quando tudo isso estava resolvido — sondas redesenhadas, condições de
+falseamento verificadas — a régua quebrou de novo, num lugar aonde cuidado
+conceitual não chega: **a aritmética**. Um "zero exato", demonstrado em álgebra,
+vazava 0,003 em `float32`; a prova valia em ℝ, e a régua roda num corpo finito
+(nota 09 §5). Auditados em `double`, os zeros restantes se mostraram
+estruturais e seguraram (nota 10) — e seguraram de novo sob cinquenta seeds,
+quinhentas corridas, zero violações (nota 11). A lição não encolhe por isso: há
+um modo de errar **abaixo do desenho da sonda**, e ele foi encontrado morando
+numa célula ✅ de uma tabela chamada *condições de falseamento*.
+
+O que este documento é, então. A v1 perguntou *como é ser um bloco*; a v2
+construiu a régua e prometeu medir até onde a palavra mental estica. A v3 é o
+relatório de quem mediu — e viu o instrumento, o instrumentista e a própria
+pergunta quebrarem antes da palavra. **Onde a palavra quebra** não é onde ela
+encontra um fenômeno que a excede; é onde a régua que a licenciava confessa o
+que estava lendo. O resto do arquivo percorre as quebras uma a uma — a régua
+(§1), a escada (§2), os vocabulários emprestados (§3), o tempo (§4), o relato
+(§5) — até a escolha que não se pôde adiar (§6): o que fazer com a palavra
+"experiência" quando a última evidência a favor dela é um relato, e relatos são
+o que este projeto melhor aprendeu a desmontar.
 
 ## 1. A régua e a palavra *(Parte I — sustentada pela Fase 1)*
 
-- **O resultado negativo** como credencial: uma filosofia do limite escrita por
-  alguém que nunca encontrou um limite é publicidade. Temos quatro. [notas 01–05]
-- **Uma condição de falseamento por palavra.** Para cada palavra mental, a
-  pergunta: *que leitura me obrigaria a retirá-la?* Enquanto uma palavra não puder
-  ser retirada, ela não foi testada. → Apêndice A (a tabela, viva).
-- **A hierarquia das famílias**: calibração sem ablação não vale nada, porque a
-  calibração pode ser satisfeita por um mapa que é fotocópia do território — isto
-  é, por não ser mapa. **Representação exige a possibilidade de
-  des-representação** (Dretske, Millikan — caindo de um `sed` em C). [nota 01]
-- **O que a régua diz quando ninguém quer ouvir**: duas vezes o instrumento
-  reportou um desbotamento real e o instrumentista tentou "consertá-lo" até parar
-  de dizer isso. O protocolo (§1.7 do ROADMAP) é a cicatriz. [notas 03, 05]
+**O resultado negativo é a credencial.** Uma filosofia do limite escrita por quem
+nunca encontrou um limite é publicidade. Este projeto encontrou cinco: a sonda
+que lia o território em vez do mapa (`modelo`, nota 01); as duas que mediam uma
+relação e se anunciavam como posse (`agencia` e o então `automodelo`, notas
+01–04); a escala inventada que nenhuma ablação derrubava (`phi`, notas 01 e 05);
+e, depois de tudo consertado, o piso de arredondamento — o erro que mora abaixo
+do desenho, na aritmética (notas 09–10). Cada um tem mecanismo, ablação e
+conserto; nenhum era visível antes de se tentar quebrar o mostrador.
+
+**Uma condição de falseamento por palavra.** Para cada palavra mental que este
+projeto usa, uma pergunta com resposta escrita: *que leitura me obrigaria a
+retirá-la deste bloco?* Enquanto uma palavra não puder ser retirada, ela não foi
+testada — está decorando o relatório. O Apêndice A é essa disciplina em forma de
+tabela, e é **tabela viva**: uma célula ✅ já se revelou falsa (o piso da
+`agencia`), foi rebaixada a ⚠️ em público, e as demais foram auditadas em outra
+precisão e replicadas em cinquenta seeds por causa disso (notas 09–11). Note o
+desenho: a tabela tem hoje **uma linha cuja célula de ablação está vazia** — a
+palavra "experiência", e a §6 é sobre o preço de mantê-la assim.
+
+**Calibração sem ablação não vale nada.** As duas famílias de medição podem
+apontar para lados opostos, e apontaram: a calibração deu nota máxima a um
+cadáver enquanto a ablação dizia a verdade (nota 01). O mecanismo é geral. A
+calibração pergunta *"o mapa concorda com o território?"* — e um mapa que é
+fotocópia do território concorda sempre, precisamente por não ser mapa.
+**Representação exige a possibilidade de des-representação** — Dretske e
+Millikan caindo de um `sed` em C. A ablação é a família mais fundamental porque
+é a única que pergunta o que a sonda lê *quando não há nada para ler*.
+
+**O que a régua diz quando ninguém quer ouvir.** Duas vezes o instrumento
+reportou um desbotamento verdadeiro e o instrumentista partiu para "consertá-lo"
+(notas 03 e 05). A regra que ficou — *antes de acusar a régua, congele o traço* —
+é o que separa este projeto de um gerador de números confortáveis: régua
+contaminada continua derivando com o traço congelado; régua boa fica plana. Foi
+assim que "a evolução extingue a agência" sobreviveu à tentação de ser tratada
+como defeito do aparelho — e virou o achado que sustenta a §2.
+
+**E a régua, replicada.** Tudo acima foi medido primeiro em três seeds. "Uma seed
+não é um resultado" custou caro três vezes antes de virar regra; a nota 11 pagou
+a regra inteira: cinquenta seeds por condição, os dez zeros do Apêndice A sem
+uma violação em quinhentas corridas, e as barras de dispersão que o Paper 1
+exigia. Duas coisas *se moveram* com a amostra maior — um intervalo de extinção
+mais largo, uma referência recalibrada — e é exatamente para mover essas coisas
+que se replica.
 
 ## 2. A costura da escada *(Parte I/II — o eixo estrutural)*
 
@@ -353,9 +433,9 @@ a gatilhavam estão cumpridos; nenhum experimento bloqueia mais a v3.
 
 Ficam duas dívidas, e nenhuma delas é do tipo que segurava o rótulo:
 
-- **De prosa** (não de pesquisa): §0–§5 ainda são argumentos em forma de nota, não
-  texto corrido. §7 continua ⛔ — mas ela sempre dependeu do **eixo microscópio**,
-  que nunca esteve nesta lista.
+- **De prosa** (não de pesquisa): §2–§5 ainda são argumentos em forma de nota, não
+  texto corrido (§0 e §1 já são prosa, 2026-07-14). §7 continua ⛔ — mas ela sempre
+  dependeu do **eixo microscópio**, que nunca esteve nesta lista.
 - ~~**De aritmética** (a nota 09 §5 a criou)~~ ✅ **quitada (nota 10)**: os três ✅
   do Apêndice A — `modelo`, `phi`, `relato` — foram recomputados em `double` e os
   três zeros são zeros nas duas precisões, a nove casas, no máximo e não só na
