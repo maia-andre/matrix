@@ -125,6 +125,18 @@ não pode mudar a escolha de um bloco solitário**, e `agencia ≡ 0`. Já `auto
 é `intencao != alvo`, e as duas passagens só divergem via `pretendentes_em`; logo
 `automodelo ≡ 0`.
 
+> **Errata (nota 09).** Esta demonstração está correta — **em ℝ**. A régua roda em
+> `float32`, e lá "some do argmax" **vaza**: somar a mesma constante a duas
+> utilidades quase empatadas pode inverter qual é estritamente maior, porque o
+> arredondamento cria e destrói empates. Medido no eremita, a `agencia` tem um piso
+> de **0,0030 / 0,0040** (máximo, seeds 42 e 1234); recomputando só a comparação em
+> `double`, cai a **0,0000 exato** nas três seeds. O "zero exato" desta seção — e o
+> ✅ correspondente no Apêndice A da `FILOSOFIA_v3.md` — vale na álgebra e falha na
+> régua **como ela foi construída**. Não é um defeito do *desenho* da sonda (os
+> quatro modos desta nota); é um defeito da sua **aritmética**, e caiu justamente
+> sobre uma condição de falseamento. Ver
+> [`09-o-self-ja-estava-la.md`](./09-o-self-ja-estava-la.md) §5.
+
 Os dois mostradores que nomeiam as faculdades mais "mentais" da escada — **agência**
 e **auto-modelo** — não medem nada que o bloco *tenha*. Medem algo que acontece
 **entre** blocos.

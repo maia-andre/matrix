@@ -50,6 +50,8 @@ notas.
 | [07](./07-o-dedo-do-espectador.md) | Bandersnatch forçado: a tabela de Gazzaniga vira **uma linha por arquitetura** (lê-ação confabula, lê-plano não percebe, monitor detecta **sem autoria**); dose-resposta do κ; o dedo sem rastro é **indetectável por princípio** | 1 — metrologia (+ `FILOSOFIA_v3` §4 e §5) |
 | [08](./08-o-sinal-e-a-mentira.md) | o `relato` vira **causal**: sinal no lugar da telepatia do nv5, estratégia herdável; a **honestidade evolui** (ESS sem multa), sobra ~10% de blefe (polimorfismo); silêncio = eremita epistêmico. S2/S6 erraram a direção — achados | 1 — metrologia (+ Paper 3 futuro; `FILOSOFIA_v3` §3) |
 
+| [09](./09-o-self-ja-estava-la.md) | o auto-modelo **já estava no código** (`food -= garfada`: "a célula empobrece porque EU vou comer"). `autocausa` é o **único mostrador que o eremita possui** — mas ele tem só **1/5** do de um bloco acompanhado: a bifurcação da escada vira uma **razão**, não um vencedor. `horizonte=1` o zera exato (**o self exige um futuro**); e a mesma seleção que **apaga a agência constrói o self**. Errata: a `agencia` do eremita não era "0 exato" — tinha um **piso de arredondamento** em float32 | 1 — metrologia (+ `FILOSOFIA_v3` §2, §3 e Apêndice A) |
+
 ## Erratas
 
 Notas são datadas, não sagradas. Quando um achado posterior derruba um número de

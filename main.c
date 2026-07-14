@@ -334,7 +334,12 @@ static int rivais_em(int cx, int cy, int self_x, int self_y) {
  * futuro pelo proprio b->desconto e partilhando a colheita com os rivais.
  * Quanto enxerga adiante (horizonte) e quanto liga pro futuro (desconto) sao
  * tracos individuais: cada bloco "imagina" o futuro de um jeito. */
-static float prever_valor(int cx, int cy, const Bloco *b) {
+/* O parametro 'sigma' escala o TERMO DO SELF — o quanto o bloco modela que a
+ * celula empobrece PORQUE ELE VAI COMER dela (veja 'autocausa_do_bloco'). Ele
+ * NAO e um traco nem uma lei da fisica: e o eixo de uma intervencao. A simulacao
+ * roda sempre em sigma = 1 (via prever_valor), onde '1.0f * garfada == garfada'
+ * exato — o mundo continua bit-a-bit o mesmo. So o mostrador varre sigma. */
+static float prever_valor_sigma(int cx, int cy, const Bloco *b, float sigma) {
     int rivais = rivais_em(cx, cy, b->x, b->y);
     float partilha = 1.0f / (1.0f + COMPETICAO * rivais);
 
@@ -344,30 +349,38 @@ static float prever_valor(int cx, int cy, const Bloco *b) {
     for (int h = 0; h < b->horizonte; h++) {
         float garfada = menor(food, INGESTAO) * partilha;
         valor += peso * garfada;
-        food  -= garfada;
+        food  -= sigma * garfada;         /* o self como CAUSA: "eu vou comer" */
         food  += REGROW * (cap - food);   /* a regra de rebrota, prevista  */
         peso  *= b->desconto;
     }
     return valor;
 }
 
+static float prever_valor(int cx, int cy, const Bloco *b) {
+    return prever_valor_sigma(cx, cy, b, 1.0f);
+}
+
 /* (nivel 4, com tracos do nivel 6) Utilidade de uma celula para ESTE bloco
  * agora: combina os dois motivos com pesos que dependem da fome E dos tracos
  * herdados (b->urgencia, b->peso_espaco). E aqui que mora a agencia — e e
  * exatamente aqui que a personalidade herdada muda quem o bloco e. */
-static float utilidade(int cx, int cy, Bloco *b) {
+static float utilidade_sigma(int cx, int cy, Bloco *b, float sigma) {
     /* fome em 0..1: 1 = a beira da morte, 0 = saciado. */
     float fome = 1.0f - b->energia / SACIADO;
     if (fome < 0.0f) fome = 0.0f;
     if (fome > 1.0f) fome = 1.0f;
 
-    float comida_prev = prever_valor(cx, cy, b);
+    float comida_prev = prever_valor_sigma(cx, cy, b, sigma);
     float espaco = (8 - rivais_em(cx, cy, b->x, b->y)) / 8.0f;   /* 0..1 */
 
     /* Faminto: a comida vale ainda mais (urgencia escala com a fome).
      * Saciado: a comida pesa pouco e entra o desejo de espaco aberto. */
     return comida_prev * (1.0f + b->urgencia * fome)
          + b->peso_espaco * espaco * (1.0f - fome);
+}
+
+static float utilidade(int cx, int cy, Bloco *b) {
+    return utilidade_sigma(cx, cy, b, 1.0f);
 }
 
 /* (nivel 5) Quantos OUTROS blocos SINALIZARAM que querem entrar em (cx,cy)?
@@ -861,6 +874,9 @@ typedef struct {
     float agencia;         /* ABLACAO "quer/escolhe": a decisao muda com a fome     */
     float modelo_do_outro; /* INTERVENCAO: antecipar os rivais muda a escolha? (NAO */
                            /* e "auto": mede o OUTRO — zero exato para um eremita)   */
+    float autocausa;       /* INTERVENCAO: modelar-se como CAUSA ("a celula vai      */
+                           /* empobrecer porque EU vou comer") muda a escolha? O     */
+                           /* unico que NAO zera no eremita — o self nao pede rival  */
     float relato;          /* CALIBRACAO "diz de si": o motivo que o interprete     */
                            /* leigo infere da ACAO bate com o motivo da DECISAO?     */
 } Bateria;
@@ -1022,6 +1038,74 @@ static float modelo_do_outro_do_bloco(Bloco *b, int i) {
     return 0.0f;
 }
 
+/* Mostrador 'autocausa' (pre-registro no ROADMAP §5.0, commitado ANTES deste
+ * codigo): o bloco modela A SI MESMO COMO CAUSA no mundo?
+ *
+ * O auto-modelo nao precisou ser construido — ele ja morava em prever_valor, na
+ * linha 'food -= garfada': o bloco prevendo que a celula estara mais pobre no
+ * proximo tick PORQUE ELE vai ter comido dela. E o unico ponto do codigo em que
+ * a acao futura do proprio bloco realimenta a previsao do proprio bloco. Self
+ * estreito, mas literal: o self como CAUSA — nao como sujeito. Dai o nome; o
+ * velho 'automodelo' ja mentiu uma vez (nota 04) e nao ganha segunda chance.
+ *
+ * A intervencao, no espirito da agencia (varrer o eixo por TODO o dominio, nunca
+ * espiar um ponto): escalar o termo do self por sigma e ver se a ESCOLHA muda.
+ *     sigma = 0  previsor cego a si — come, e nao modela que come: acha que a
+ *                celula rica continua rica para sempre.
+ *     sigma = 1  a regra do mundo aplicada a si mesmo. E o codigo de hoje.
+ * O dominio [0,1] e "quanto de mim entra no meu modelo do futuro", exatamente o
+ * formato do eixo lambda da agencia ("quanto do meu motivo de espaco entra na
+ * minha nota"). Pontuamos com a regra de decisao COMPLETA (utilidade + a divisao
+ * por 1+ANTECIPACAO*pret, e o mesmo desempate '>' que favorece ficar parado),
+ * para que o numero seja sobre a escolha que o bloco de fato faz.
+ *
+ * A assimetria que justifica o nome: na agencia o eixo (lambda) e um estado
+ * INTERNO; no modelo_do_outro (alpha) e uma forca EXTERNA — a digital de que
+ * aquilo media o outro. Sigma nao e nem um nem outro: e a presenca do PROPRIO
+ * BLOCO na sua previsao. Por isso — predicao P1, escrita antes — este e o
+ * primeiro mostrador da bateria que NAO zera no eremita: quem vive sozinho
+ * tambem esvazia a propria celula.
+ *
+ * Sanidade P2 (a ablacao que TEM de zera-lo): horizonte = 1. O laco fecha antes
+ * de o termo do self entrar no valor — quem nao olha alem da propria garfada nao
+ * tem onde se modelar. O SELF EXIGE UM FUTURO. Encurralado sai da media. */
+#define AC_PASSOS 33      /* amostras do eixo sigma em [0,1] (32 intervalos) */
+
+static float autocausa_do_bloco(Bloco *b, int i) {
+    int   cx[9], cy[9], pret[9], n = 0;
+
+    /* ficar parado: sempre valido, e melhor_celula o pontua SEM antecipacao */
+    cx[0] = b->x; cy[0] = b->y; pret[0] = 0; n = 1;
+
+    for (int dy = -1; dy <= 1; dy++)
+        for (int dx = -1; dx <= 1; dx++) {
+            if (dx == 0 && dy == 0) continue;
+            int nx = b->x + dx, ny = b->y + dy;
+            if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
+            if (ocup[ny][nx] != -1) continue;         /* ocupada: inalcancavel */
+            cx[n] = nx; cy[n] = ny;
+            pret[n] = pretendentes_em(nx, ny, i);
+            n++;
+        }
+    if (n < 2) return -1.0f;                          /* encurralado: fora da media */
+
+    int trocas = 0, anterior = -1;
+    for (int p = 0; p < AC_PASSOS; p++) {
+        float sig = (float)p / (float)(AC_PASSOS - 1);   /* 0 .. 1 */
+        int   arg = 0;
+        float melhor = utilidade_sigma(cx[0], cy[0], b, sig);   /* parado: K = 1 */
+        for (int k = 1; k < n; k++) {
+            float u = utilidade_sigma(cx[k], cy[k], b, sig);
+            u /= 1.0f + ANTECIPACAO * (float)pret[k];
+            if (u > melhor) { melhor = u; arg = k; }  /* '>' estrito: mesmo
+                                                       * desempate de melhor_celula */
+        }
+        if (anterior >= 0 && arg != anterior) trocas++;
+        anterior = arg;
+    }
+    return trocas > 0 ? 1.0f : 0.0f;
+}
+
 /* Mostrador 'relato' (pre-registro no ROADMAP §2.0, commitado ANTES deste
  * codigo): o bloco "diz" por que agiu — e quem fala e um interprete LEIGO.
  *
@@ -1101,10 +1185,15 @@ static void relato_prepara(Bloco *b, int i) {
  * guarda a previsao do modelo. Le o alvo COGNITIVO — antes de resolver() trocar
  * alvos negados pela posicao atual (queremos o efeito da mente, nao do bloqueio). */
 static void medir_decisao(void) {
-    int   n_ag = 0, n_mo = 0;
-    float ag = 0.0f, mo = 0.0f;
+    int   n_ag = 0, n_mo = 0, n_ac = 0;
+    float ag = 0.0f, mo = 0.0f, ac = 0.0f;
     for (int i = 0; i < n_blocos; i++) {
         if (!blocos[i].vivo) continue;
+
+        /* AUTOCAUSA: modelar que a PROPRIA garfada empobrece a celula muda a
+         * escolha? Varre sigma em [0,1] — de cego a si ate a regra do mundo. */
+        float s = autocausa_do_bloco(&blocos[i], i);
+        if (s >= 0.0f) { ac += s; n_ac++; }      /* < 0 = encurralado */
 
         /* MODELO DO OUTRO (nv5): antecipar que os rivais tambem miram a celula
          * muda a escolha? Intervencao ancorada, computada DE PROPOSITO aqui — nao
@@ -1133,6 +1222,7 @@ static void medir_decisao(void) {
     }
     ultima_bateria.agencia         = n_ag ? ag / n_ag : 0.0f;  /* so quem tinha escolha */
     ultima_bateria.modelo_do_outro = n_mo ? mo / n_mo : 0.0f;  /* idem: eremita fora  */
+    ultima_bateria.autocausa       = n_ac ? ac / n_ac : 0.0f;  /* este NAO zera sozinho */
 }
 
 /* FASE 2 (apos aplicar_e_comer e ANTES de reproduzir reciclar slots — e ela
@@ -1263,11 +1353,15 @@ static void desenhar(uint32_t seed, long tick) {
         st.urg_m, st.urg_sd, st.esp_m, st.esp_sd, st.hon_f, st.blef_f);
     /* bateria de desbotamento (0..1): quanto cada faculdade carrega o comportamento.
      * modelo = mapa bate com o territorio; agencia = decisao muda com a fome;
+     * autocausa = modelar que EU vou esvaziar a celula muda a escolha;
      * modelo-do-outro = antecipar os rivais podia mudar a escolha;
-     * relato = o motivo que o bloco "diz" bate com o motivo da decisao. */
+     * relato = o motivo que o bloco "diz" bate com o motivo da decisao.
+     * Duas linhas: cinco mostradores nao cabem em 70 colunas. */
     p += sprintf(buf + p,
-        "  bateria (0..1):  modelo %.2f   agencia %.2f   modelo-do-outro %.2f   relato %.2f\n",
-        ultima_bateria.modelo, ultima_bateria.agencia,
+        "  bateria (0..1):  modelo %.2f   agencia %.2f   autocausa %.2f\n",
+        ultima_bateria.modelo, ultima_bateria.agencia, ultima_bateria.autocausa);
+    p += sprintf(buf + p,
+        "                   modelo-do-outro %.2f   relato %.2f\n",
         ultima_bateria.modelo_do_outro, ultima_bateria.relato);
     p += sprintf(buf + p,
         "  legenda: \033[92m@\033[0m forte  \033[93m@\033[0m ok  \033[91m@\033[0m fraco"
@@ -1472,9 +1566,13 @@ int main(int argc, char **argv) {
             fprintf(stderr, "matrix: nao consegui abrir '%s' para escrita\n", log_path);
             return 1;
         }
+        /* 'autocausa' entra no FIM, nao ao lado dos irmaos da bateria: assim as 20
+         * colunas anteriores seguem compativeis por prefixo com os CSVs antigos —
+         * a mesma convencao de quando entraram 'relato' e 'hon_f'/'blef_f'. */
         fprintf(logf, "seed,tick,pop,energia_media,comida_total,"
                       "hor_m,hor_sd,desc_m,desc_sd,urg_m,urg_sd,esp_m,esp_sd,"
-                      "modelo,agencia,modelo_do_outro,phi,relato,hon_f,blef_f\n");
+                      "modelo,agencia,modelo_do_outro,phi,relato,hon_f,blef_f,"
+                      "autocausa\n");
     }
 
     rng_estado = seed ? seed : 1u;   /* o RNG do universo nasce da seed      */
@@ -1543,13 +1641,15 @@ int main(int argc, char **argv) {
                 fprintf(logf,
                     "%u,%ld,%d,%.3f,%.1f,"
                     "%.3f,%.3f,%.4f,%.4f,%.3f,%.3f,%.3f,%.3f,"
-                    "%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f\n",
+                    "%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,"
+                    "%.3f\n",
                     seed, t, st.pop, st.energia_media, st.comida_total,
                     st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
                     st.urg_m, st.urg_sd, st.esp_m, st.esp_sd,
                     ultima_bateria.modelo, ultima_bateria.agencia,
                     ultima_bateria.modelo_do_outro, st.phi_media,
-                    ultima_bateria.relato, st.hon_f, st.blef_f);
+                    ultima_bateria.relato, st.hon_f, st.blef_f,
+                    ultima_bateria.autocausa);
                 fflush(logf);   /* descarrega ja: Ctrl+C no meio nao perde a cauda */
             }
 

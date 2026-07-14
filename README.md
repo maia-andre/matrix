@@ -86,9 +86,9 @@ combina com os posicionais em qualquer posição:
 Colunas: `seed, tick, pop, energia_media, comida_total`; para cada um dos 4
 traços do nível 6, a **média** (`_m`) e o **desvio-padrão** (`_sd`)
 (`hor_*, desc_*, urg_*, esp_*`); e os **mostradores da bateria** (abaixo),
-todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi, relato`; e a
+todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi, relato`; a
 fração da população por estratégia de sinalização, `hon_f` (honesta) e `blef_f`
-(blefe) — o resto é muda. Como o universo é
+(blefe) — o resto é muda; e, na última coluna, `autocausa`. Como o universo é
 `f(seed)` (ver abaixo), o CSV é **reproduzível bit-a-bit**: qualquer pessoa
 regenera o mesmo dataset a partir da seed. É a base para virar instrumento de
 pesquisa — varrer seeds/parâmetros e medir o que a evolução faz, em vez de só
@@ -111,6 +111,7 @@ projeto e o desfecho honesto — está em [`FILOSOFIA_v2.md`](./FILOSOFIA_v2.md)
 | `modelo_do_outro` | "o outro também decide" | ablação (intervenção) | fração (não-encurralada) cuja escolha mudaria ao antecipar que rivais miram a mesma célula — varre a força da antecipação por **todo** o domínio `[0,∞)`, não no ponto arbitrário `ANTECIPACAO`. **Zero exato sem rivais**: mede o outro, não o self |
 | `phi` (`Φ~`) | "integra" | calibração | a **menor** distância de Kendall entre a ordem integrada (`utilidade`) e a ordem de **cada módulo isolado** (comida-agora, espaço, mapa), em `[0,1]`. Se um módulo sozinho reproduz a decisão, `phi = 0`: integrar uma coisa só não é integrar (redefinida na nota 05; a 1ª versão, contra a comida só, era infalseável) |
 | `relato` | "diz de si" | calibração | κ de Cohen (concordância **acima do acaso**) entre o motivo que o **intérprete leigo** infere da ação executada e o motivo real da decisão. O intérprete não lê o estado interno nem o plano — só o 3×3 e o que o bloco *fez* (introspecção como percepção do próprio comportamento, Nisbett & Wilson). Pré-registrado antes de construir (`ROADMAP.md` §2.0; nota 06) |
+| `autocausa` | "eu sou uma causa" | ablação (intervenção) | fração (não-encurralada) cuja escolha muda ao escalar por `σ ∈ [0,1]` o termo em que o bloco modela que **ele próprio** vai esvaziar a célula (`food -= σ·garfada`, em `prever_valor`). `σ=1` é o código de hoje; `σ=0` é um previsor cego a si. **O único mostrador que o eremita possui** — e `horizonte = 1` o zera exato: o self exige um futuro. Pré-registrado antes de construir (`ROADMAP.md` §5.0; nota 09) |
 
 > ⚠️ **A primeira versão de `modelo` estava quebrada**, e a conclusão que ela
 > sustentava ("o bloco modela a física com exatidão; o único buraco é o social")
@@ -187,8 +188,33 @@ estável de ~10% de blefe. O `modelo_do_outro` de um mundo todo-mudo é **zero
 exato**: silêncio e cegueira são, para a régua, o mesmo estado. Ver
 [`papers/notes/08-o-sinal-e-a-mentira.md`](./papers/notes/08-o-sinal-e-a-mentira.md).
 
-Pendente: o Bandersnatch **evolutivo** (as arquiteturas de introspecção como traço)
-e o custo de pensar (Fase 3).
+E o **self já estava no código**, sem que ninguém o tivesse notado. Em
+`prever_valor`, a linha `food -= garfada` é o bloco prevendo que a célula vai
+empobrecer *porque ele próprio vai comer dela* — o único ponto em que a ação
+futura do bloco realimenta a previsão do bloco. O mostrador `autocausa` mede isso
+(escalando o termo por `σ` e vendo se a escolha muda), e o resultado decide a
+pergunta que a `FILOSOFIA_v3.md` chama de "a costura da escada":
+
+- **É o único mostrador que o eremita possui** (0,03 na solidão, contra `0,0000`
+  exato de `agencia` e `modelo_do_outro`). Existe, sim, uma faculdade que é do
+  bloco e não da relação.
+- **Mas o eremita tem 1/5 do que tem um bloco acompanhado** (0,03 × 0,14). O outro
+  não *constitui* o self — **amplifica-o**, e a amplificação é quase todo o número.
+- **`horizonte = 1` o zera exato**: quem não olha além da própria garfada não tem
+  onde se modelar. **O self exige um futuro.**
+- **A mesma seleção que apaga a agência constrói o self**: em 3000 ticks a
+  `agencia` cai (0,46 → 0,36) e a `autocausa` quase dobra (0,089 → 0,169) — porque
+  a agência depende de um traço (`peso_espaco → 0`) e o self depende do
+  **horizonte**, que sobe. Degraus diferentes andam em sentidos opostos sob a mesma
+  pressão.
+
+Ver [`papers/notes/09-o-self-ja-estava-la.md`](./papers/notes/09-o-self-ja-estava-la.md)
+— que traz também uma **errata**: a `agencia` do eremita não era "zero exato", e sim
+zero com um **piso de arredondamento** de ~0,003 em `float32` (some em `double`). A
+régua tem um chão, e ele caiu justamente sobre uma condição de falseamento.
+
+Pendente: o Bandersnatch **evolutivo** (as arquiteturas de introspecção como traço),
+o custo de pensar (Fase 3), e a auditoria em `double` dos mostradores restantes.
 
 ### A pílula vermelha 🔴 — entrar num bloco
 

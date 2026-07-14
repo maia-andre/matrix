@@ -30,6 +30,13 @@ os CSVs **no mesmo commit** da mudança — assim o `git log` acima continua exa
 não são comparáveis com os `~0,63` de hoje. Ver
 [`../papers/notes/01-quatro-modos-de-errar.md`](../papers/notes/01-quatro-modos-de-errar.md).
 
+⚠️ **Coluna nova: `autocausa`** (o self como causa — nota 09), a **21ª**, no fim.
+CSVs pós-nota-08 têm 20 colunas; os atuais, 21. As 20 primeiras são **bit-a-bit
+idênticas**: o mostrador varre σ ∈ [0,1] mas a simulação roda em σ = 1, que é o
+código de sempre (`1.0f * garfada == garfada`, exato em IEEE754). Foi assim que a
+predição P3 do pré-registro (`ROADMAP.md` §5.0) foi verificada — contra este
+próprio `seed7.csv`, antes de regenerá-lo.
+
 ⚠️ **Colunas novas: `hon_f`, `blef_f`** (fração honesta/blefe da população — o
 relato causal, nota 08). CSVs pós-nota-06 têm 18 colunas; os atuais, 20. As 18
 primeiras seguem bit-a-bit compatíveis (a passagem `emitir` com todos honestos é

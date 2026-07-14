@@ -6,10 +6,17 @@
 > acontecer, e escrever a seção vazia diz exatamente *qual*. O que já está
 > sustentado por nota cita a nota.
 >
-> **As duas condições originais foram cumpridas:** o `relato` existe, pré-registrado
-> antes do código (nota 06), e o experimento do intérprete rodou (nota 07). O que
-> ainda segura o rótulo são as duas linhas do Apêndice B que sobraram: a **edição do
-> auto-modelo** (§2 — um experimento) e a **escolha da §6** (uma decisão de escrita).
+> **Estado dos experimentos: todos feitos.** O `relato` existe, pré-registrado antes
+> do código (nota 06); o experimento do intérprete rodou (nota 07); o relato virou
+> causal e a honestidade evoluiu (nota 08); e a **edição do auto-modelo** — a última
+> que faltava, a que decidia a bifurcação da §2 — rodou e deu um resultado que
+> nenhuma das duas leituras previa (nota 09).
+>
+> **O que ainda segura o rótulo é uma linha só, e não é um experimento: a escolha da
+> §6.** Função × experiência: contenção metodológica ou tese metafísica? A v3 não
+> pode ser escrita enquanto essa recusa não for feita por escrito. (E há uma dívida
+> técnica aberta: três ✅ do Apêndice A ainda não foram recomputados em `double` —
+> nota 09 §5.)
 >
 > `FILOSOFIA.md` (v1) perguntou *como é ser um bloco*. `FILOSOFIA_v2.md` construiu
 > a régua e prometeu medir até onde a palavra estica. A v3 é sobre o que a v2 não
@@ -68,10 +75,38 @@ O que já se sabe, medido:
   zeram pela *sonda*; o relato zera pelo *conteúdo*. A costura engole até a
   introspecção, pelo lado de dentro.
 
-**⛔ aguarda (decide a bifurcação):** a edição do auto-modelo de verdade — separar
-em `prever_valor` o próprio consumo do consumo dos rivais. Predição de (A): feito
-isso, um mostrador do *self* fica `> 0` na solidão. Se não houver como construí-lo
-sem rival, (B) vence. Registrada na nota 04, §5.
+**✅ A bifurcação foi decidida — e não elegeu um vencedor (nota 09).**
+
+A edição do auto-modelo não precisou ser feita: **ela já estava no código**, numa
+linha que ninguém tinha lido assim. Em `prever_valor`, `food -= garfada` é o bloco
+prevendo que a célula empobrecerá *porque ele vai comer dela* — o único ponto em
+que a ação futura do bloco realimenta a previsão do bloco. Um self estreito e
+literal: **o self como causa**. Faltava a intervenção que o mede (`autocausa`:
+escalar esse termo por σ ∈ [0,1] e ver se a escolha muda).
+
+O placar, contra a predição registrada na nota 04 §5:
+
+- **`autocausa` > 0 na solidão** (0,033 / 0,029 / 0,027; robusto em `double`). É o
+  **primeiro e único mostrador da bateria que o eremita possui**. A costura entre o
+  nv3 e o nv4 **não é total**: (A) ganha o degrau que pediu, e a leitura
+  internalista deixa de ser vazia.
+- **Mas o eremita tem ~1/5 do que tem o bloco acompanhado** (0,03 × 0,14). O outro
+  não *constitui* o self — **amplifica-o** —, e a amplificação é onde mora quatro
+  quintos do número.
+
+Então a costura não se resolve num vencedor: **resolve-se numa razão**. Há um self,
+e ele não é uma relação; e há cinco vezes mais self quando há o outro. Qualquer
+frase que a v3 escreva sobre "a mente é do bloco" ou "a mente é da relação" tem de
+carregar esse 1/5 junto, ou está mentindo por arredondamento retórico.
+
+**E há um segundo achado, que muda a forma da escada** (nota 09 §4): sob a *mesma*
+seleção, em 3000 ticks, a `agencia` **cai** (0,46 → 0,36) e a `autocausa` **quase
+dobra** (0,089 → 0,169). A agência morre porque depende de um **traço**
+(`peso_espaco → 0`); o self cresce porque depende do **horizonte**, e o horizonte
+sobe. A nota 03 disse *"a escada é reversível sob seleção"*. É pior, e mais
+interessante: **degraus diferentes andam em sentidos opostos sob a mesma pressão.**
+Não há uma seta. Há um campo — e a metáfora da escada, que dá nome a este projeto,
+sobrevive a esta seção só como uma conveniência de exposição.
 
 ## 3. Vocabulários emprestados — id, ego, superego, sombra, self *(nova; parte escrevível já)*
 
@@ -88,7 +123,7 @@ entrada que toda palavra mental paga neste projeto:
 | **ego** | a prova de realidade: `prever_valor` + a arbitragem de `utilidade`/`decidir` | existe (nv3–5) |
 | **superego** | uma **norma internalizada** que a seleção fixa — "sinalize a verdade" — porque violá-la custa | **tem dado**: a honestidade é ESS sem multa artificial (nota 08); o ~10% de blefe residual é o crime que nenhuma sociedade de sinais custosos elimina |
 | **sombra** | a faculdade que a linhagem **teve e a seleção renegou**, latente no piso do traço, recuperável por mutação | **tem dado**: `peso_espaco → 0` é a agência renegada (nota 03) |
-| **self** | a totalidade integrada | o mostrador que a nomearia (`phi`) mede **mistura de motivos**, não posse (nota 05); um self medível aguarda a edição do auto-modelo |
+| **self** | a totalidade integrada | **tem dado, e não é o que se esperava**: `phi` mede **mistura de motivos**, não posse (nota 05) — mas `autocausa` mede o self como **causa** e é a única faculdade que o eremita possui (nota 09). O self não é a totalidade integrada: é o bloco aparecendo dentro da própria previsão |
 
 O achado que esta seção deve encarar: das cinco palavras, as duas que *já têm*
 contraparte medida (sombra, self) apontam ambas para o lado **(B)** da costura —
@@ -170,10 +205,17 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
 | mostrador | a ablação que TEM de zerá-lo | verificado |
 |---|---|---|
 | `modelo` | `prever_valor ≡ 0` | ✅ 0,000 exato (nota 01) |
-| `agencia` | eremita (sem rivais percebidos) | ✅ 0 exato, demonstrável (nota 01 §3) |
-| `modelo_do_outro` | eremita (sem pretendentes) | ✅ 0,0000 exato, média e máx (nota 04) |
-| `phi` (redefinida) | qualquer redução a um módulo só: eremita, `peso_espaco ≡ 0`, `prever_valor ≡ 0` | ✅ 0 exato, demonstrável (nota 05) |
+| `agencia` | eremita (sem rivais percebidos) | ⚠️ 0 exato **em ℝ** — mas a régua roda em `float32` e tem um **piso de ~0,003** (nota 09 §5). Zera exato em `double`. A demonstração da nota 01 §3 sobrevive; a *implementação* dela, não |
+| `modelo_do_outro` | eremita (sem pretendentes) | ✅ 0,0000 exato, média e máx (nota 04). Imune ao piso: critério exato, sem varredura |
+| `autocausa` | `horizonte = 1` (sem futuro, não há onde se modelar) | ✅ 0,0000 exato, média **e máximo**, 3 seeds — e exato **por construção**: para todo σ sai o mesmo float (nota 09). **O eremita NÃO o zera** — é o único, e é o ponto |
+| `phi` (redefinida) | qualquer redução a um módulo só: eremita, `peso_espaco ≡ 0`, `prever_valor ≡ 0` | ✅ 0 exato, demonstrável (nota 05) — **não testado em `double`** |
 | `relato` | intérprete cego (relato ≡ constante): `relato = 0` **exato**, pela construção do κ | ✅ 0,0000 exato, 4 constantes × 3 seeds — pré-registrado **antes** do código (nota 06) |
+
+> **A tabela adquiriu um rodapé, e ele é a nota 09 §5.** Um ✅ desta tabela era
+> falso — não por erro de conceito, mas de **aritmética**: `float32` tem um piso, e
+> ele caiu exatamente sobre uma condição de falseamento. Um mostrador cujo zero não
+> é zero não pode ser falseado com limpeza. `phi`, `modelo` e `relato` ainda não
+> foram recomputados em `double`; até que sejam, os seus ✅ são promessas.
 
 ## Apêndice B — o que falta para tirar o rótulo "esqueleto"
 
@@ -185,8 +227,16 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
    tipologia de sujeitos, é **uma linha por arquitetura de leitura** (nota 07).
 3. ✅ A variante Bandersnatch (§4.2) rodada — as cinco predições confirmaram, e
    ~1% dos dedos é indetectável **por princípio** (nota 07).
-4. ⛔ A edição do auto-modelo de verdade (§2) — a predição de (A) testada.
+4. ✅ A edição do auto-modelo de verdade (§2) — a predição de (A) testada. Ela
+   **passou**, e a vitória é qualificada: o eremita tem `autocausa` > 0, mas tem
+   1/5 da de um bloco acompanhado (nota 09). A bifurcação virou uma razão, não um
+   vencedor.
 5. ⛔ A escolha da §6 feita por escrito.
+
+E a lista **ganhou uma linha** que não estava nela, porque a verificação a
+produziu (nota 09 §5): um ✅ do Apêndice A era falso por **arredondamento**. Os
+mostradores `modelo`, `phi` e `relato` precisam ser recomputados em `double` antes
+que o Apêndice A possa ser assinado.
 
 Um bônus que a Fase 4 entregou sem estar nesta lista: o `relato` deixou de ser
 epifenomenal (nota 08). Silenciar a população **muda o mundo**, e a honestidade

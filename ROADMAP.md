@@ -891,6 +891,40 @@ separado, para depois. Regra 5: uma coisa por vez. Registro aqui só que a
 inconsistência existe e que eu a vi antes de medir, para não a "descobrir"
 convenientemente depois.
 
+## 5.1 O placar da autocausa ✅ *(nota 09 — a bifurcação virou uma razão)*
+
+As quatro predições confirmaram, e uma quinta apareceu na verificação e virou o
+achado mais desconfortável da nota.
+
+- **P1 ✅ — e é o resultado.** `autocausa` no eremita: **0,033 / 0,029 / 0,027**,
+  contra 0,000 exato de `agencia` e `modelo_do_outro`. É o **primeiro e único
+  mostrador da bateria que sobrevive à solidão**. Mas o eremita tem **1/5** da
+  autocausa de um bloco acompanhado (0,03 × 0,14): o outro não *constitui* o self,
+  **amplifica-o**. **O item 9 não elege (A) nem (B) — resolve-se numa razão.** (A)
+  ganha o degrau que pediu; (B) fica com quatro quintos da magnitude.
+- **P2 ✅** — `horizonte = 1` ⇒ **0,0000 exato**, média *e máximo*, 3 seeds, e exato
+  **por construção**. **O self exige um futuro**, e o mínimo são dois ticks.
+- **P3 ✅** — bit-a-bit: as 20 colunas antigas batem com `datasets/seed7.csv`.
+- **P4 ✅, e mais forte que o previsto.** Não é que a `autocausa` *resista* ao
+  desbotamento: ela **quase dobra** (0,089 → 0,169) enquanto a `agencia` **cai**
+  (0,46 → 0,36), na mesma rodada, sob a mesma seleção. A agência depende de um
+  **traço** (`peso_espaco → 0`); o self depende do **horizonte**, e o horizonte
+  sobe. **Degraus diferentes andam em sentidos opostos sob a mesma pressão** — a
+  nota 03 disse "reversível"; é pior: não há uma seta, há um campo.
+- **P5 ⚠️ (não pré-registrada — a errata).** A `agencia` do eremita **não é zero
+  exato**: piso de **0,0030 / 0,0040** em float32, que some em `double`. A
+  demonstração da nota 01 §3 vale em ℝ; a régua roda em `float32`. **Um quinto modo
+  de errar** — não o desenho da sonda, a sua **aritmética** — e ele caiu exatamente
+  sobre uma **condição de falseamento**, que é o coração do método. `modelo`, `phi`
+  e `relato` ainda não foram recomputados em double: até que sejam, os seus ✅ no
+  Apêndice A são promessas.
+
+**Herda à Fase 5:** a edição "honesta" da partilha (o bloco acredita que os rivais
+roubam dele, mas não que eles esvaziam a célula — a previsão é internamente
+inconsistente; corrigir **muda a simulação**), a auditoria em `double` dos três
+mostradores restantes, e a varredura de densidade populacional (a razão de 5× é um
+piso ou o começo de uma curva?).
+
 ---
 
 ## Dois papers, não um
