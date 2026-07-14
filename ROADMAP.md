@@ -818,6 +818,81 @@ estica: apenas estica a palavra.
    seleção**. Uma filosofia que trate os degraus como aquisições permanentes está
    descrevendo um mundo que não é este.
 
+## 5.0 Pré-registro da edição do auto-modelo *(2026-07-13 — commitado ANTES do código)*
+
+Decide o item 9. Pré-registrado porque a Fase 1 ensinou que, feita a leitura, a
+tentação de reescrever a hipótese é enorme — e duas vezes a régua estava certa e
+o instrumentista errado.
+
+**Onde o self já mora, e ninguém tinha lido assim.** Ao reler `prever_valor` para
+fazer a edição prometida, achei que ela já está lá, numa linha:
+
+```c
+float garfada = menor(food, INGESTAO) * partilha;
+valor += peso * garfada;
+food  -= garfada;          /* <-- ESTA */
+food  += REGROW * (cap - food);
+```
+
+`food -= garfada` é o bloco dizendo, **de si para si**: *"a célula vai estar mais
+pobre no próximo tick porque **eu** vou ter comido dela."* É o único ponto do
+código em que a ação futura do próprio bloco realimenta a previsão do próprio
+bloco. Isso é um auto-modelo — estreito, mas literal: **o self como causa**.
+
+**A intervenção.** No espírito da `agencia` (varrer um eixo por todo o seu
+domínio, não espiar um ponto), escalo o termo do self por σ:
+
+```
+food -= sigma * garfada
+```
+
+σ = 0 é o previsor **cego a si**: come, e não modela que come — acha que a célula
+rica continua rica para sempre. σ = 1 é a regra do mundo aplicada a si mesmo, e é
+**exatamente o código de hoje**. O domínio [0, 1] é o eixo "quanto de mim entra
+no meu modelo do futuro" — o mesmo formato da `agencia`, que varre λ ∈ [0,
+`peso_espaco`] ("quanto do meu motivo de espaço entra na minha nota").
+
+`autocausa` = 1 para o bloco cuja escolha (o argmax do `melhor_celula` completo,
+com antecipação e desempate idênticos) **muda em algum ponto** de σ ∈ [0,1]; 0 se
+não muda. Média da população, encurralados fora, como na `agencia`.
+
+**O nome.** *Não* volta a se chamar `automodelo`. Essa palavra já mentiu uma vez
+(nota 04) e não ganha segunda chance de graça: o que se mede aqui é estreito e
+específico — o self como **causa**, não o self como sujeito, e o nome tem de
+caber no que o número aguenta.
+
+### As predições, antes de rodar
+
+- **P1 (a que decide o item 9).** `autocausa` > 0 **na solidão**. O eremita
+  também esvazia a própria célula; o self-como-causa não precisa de rival. Se
+  der > 0, **(A) ganha um degrau que o eremita possui** — o primeiro mostrador da
+  bateria que sobrevive ao teste do eremita — e a costura entre nv3 e nv4 deixa
+  de ser total.
+- **P2 (a sanidade — a ablação que TEM de zerá-lo).** `horizonte = 1` ⇒
+  `autocausa` = **0 exato**. Com horizonte 1 o laço fecha antes de o termo do self
+  entrar no valor: quem não olha além da própria garfada não tem onde se modelar.
+  **Corolário registrado: o self exige um futuro.** Se isto *não* zerar, o
+  mostrador está lendo outra coisa e a nota vai dizer isso.
+- **P3 (rule 3 do protocolo).** Simulação **bit-a-bit idêntica**: σ = 1 é o código
+  de hoje, então acrescentar o mostrador não pode mexer numa vírgula do mundo. As
+  20 colunas antigas do CSV saem iguais; entra a 21ª.
+- **P4.** `autocausa` **não** desbota como a `agencia` (nota 03). A agência morre
+  porque `peso_espaco → 0` sob seleção; σ não é traço, é estrutura da previsão —
+  e o horizonte **sobe** sob seleção (nota da Fase 3), então o substrato do self
+  fica mais largo, não mais estreito. Predição arriscada de propósito: se
+  `autocausa` cair junto com a agência, eu errei sobre o que a sustenta.
+
+### O que este pré-registro NÃO promete
+
+A edição "honesta" da partilha — modelar que **os rivais também esvaziam** a
+célula (hoje `food -= garfada` desconta só a *minha* parte, embora a previsão já
+tenha creditado aos rivais o resto) — **muda a simulação** e é experimento
+separado, para depois. Regra 5: uma coisa por vez. Registro aqui só que a
+inconsistência existe e que eu a vi antes de medir, para não a "descobrir"
+convenientemente depois.
+
+---
+
 ## Dois papers, não um
 
 O material já reunido é de **dois** artigos, com públicos distintos. Empacotá-los
