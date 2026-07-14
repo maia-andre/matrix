@@ -8,6 +8,7 @@ contra os CSVs commitados não for vazio, o comportamento da simulação mudou.
 | arquivo | comando | descrição |
 |---------|---------|-----------|
 | `seed7.csv` | `./matrix 7 2000 0 --log datasets/seed7.csv` | 2000 ticks da seed 7, a seed de verificação do projeto |
+| `replicacao50.csv` | `sh papers/notes/11-replicacao.sh` | **agregado, não bruto**: uma linha por (condição × seed) — 9 variantes (controle + ablações do Apêndice A) × seeds 1..50 × 3000 ticks. Colunas: médias/máximos por mostrador, janelas início/fim, e a contagem f32×double da `agencia` (nota 11). ⚠️ **Não entra no `gerar.sh`**: custa ~2 h de CPU (~15 min com `NPROC=12`); a proveniência é o script da nota 11 |
 
 **Qual `main.c` gerou cada CSV?** O commit em que o arquivo foi atualizado pela
 última vez — o próprio git responde, e a resposta nunca envelhece:

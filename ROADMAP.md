@@ -950,10 +950,13 @@ falseamento tem de produzir **o mesmo float em todo o eixo** (como a
 
 **Herda à Fase 5:** a edição "honesta" da partilha (o bloco acredita que os rivais
 roubam dele, mas não que eles esvaziam a célula — a previsão é internamente
-inconsistente; corrigir **muda a simulação**), a varredura de densidade
-populacional (a razão de 5× é um piso ou o começo de uma curva?), e o piso da
-`agencia` **fora** do eremita — numa população normal não há verdade algébrica
-contra a qual comparar, e a pergunta segue aberta.
+inconsistente; corrigir **muda a simulação**) e a varredura de densidade
+populacional (a razão de ~4,8× ± 0,7 é um piso ou o começo de uma curva?).
+~~O piso da `agencia` fora do eremita~~ ✅ **respondido (nota 11)**: comparando a
+régua com ela mesma em `double`, 6 blocos-tick discordantes em 43 milhões
+(1,4·10⁻⁷), nas duas direções — precisão finita, não viés; o piso é fenômeno do
+regime eremita (lá: 1,0·10⁻⁶, 26/50 seeds, máx 0,005 no CSV, sempre a troca
+fantasma do f32).
 
 ---
 
@@ -980,8 +983,17 @@ que a primeira pergunta de qualquer revisor ("e como deveria ser?") exigia. A
 bateria fechou em cinco mostradores, cada um com a sua condição de falseamento
 verificada (Apêndice A da `FILOSOFIA_v3.md`).
 
-Falta: **replicação** (3 seeds é pouco; a infraestrutura torna 50 baratas —
-relatar média ± dispersão).
+✅ **Replicação feita (nota 11, 2026-07-14):** 9 condições × 50 seeds × 3000
+ticks (`datasets/replicacao50.csv`). Os dez zeros do Apêndice A: **0 violações
+em 500 corridas**. As direcionais seguram — a mais forte é a nota 09 P4:
+`autocausa` sobe e `agencia` cai **nas 50 de 50 seeds**. A razão do eremita:
+4,78 ± 0,67. E a pergunta do piso fora do eremita fechou: 1,4·10⁻⁷ dos
+blocos-tick, cinco ordens abaixo do sinal — o piso é fenômeno do regime
+eremita. O que a replicação **moveu**: a extinção do pv0 alarga para 51–121
+ticks (errata na nota 01); `modelo_do_outro` recalibrou para 0,27 ± 0,05 (efeito
+da nota 08, não deriva de régua). Pendência que sobrou: os fenômenos de **30 000
+ticks** (traço congelado da nota 05; `hon_f` final da nota 08) não entraram —
+lote de janela longa é 10× o custo.
 
 **Paper 2 — "Cognição como bem posicional."** *(a meio caminho)*
 Público: vida artificial, evolução da cognição. Tese: o horizonte de planejamento

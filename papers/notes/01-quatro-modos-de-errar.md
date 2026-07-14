@@ -55,6 +55,11 @@ prova que o conserto tocou o medidor e não a simulação.
 > correlação `+0,98` com `esp_m` é mecanismo, não contaminação: a agência
 > **realmente desbota**, e a régua estava certa. Ver a nota 03.
 
+> **Errata (nota 11).** O intervalo da extinção sob **B**, "74–105 ticks", veio
+> de 3 seeds. Em 50 seeds: **50/50 extintas, em 51–121 ticks** (mediana 76). A
+> conclusão não muda um milímetro; a cauda era mais larga que a amostra. Ver
+> [`11-a-replicacao.md`](./11-a-replicacao.md).
+
 ## 2. Modo 1 — `modelo`: um mapa que não podia errar
 
 A "previsão" era

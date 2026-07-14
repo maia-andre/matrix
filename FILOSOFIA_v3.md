@@ -324,7 +324,9 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
 > empate (a `agencia` conta trocas de argmax sob desempate estrito; `modelo`,
 > `phi` e `relato` têm zeros **estruturais** — identidade `x/x`, monotonia da
 > multiplicação, igualdade de quociente). A régua desta tabela está, agora,
-> auditada por inteiro.
+> auditada por inteiro. E replicada: 50 seeds por condição, **zero violações em
+> 500 corridas** (nota 11) — nenhuma seed produziu um tick que retire um ✅ desta
+> tabela.
 
 ## Apêndice B — o que falta para tirar o rótulo "esqueleto"
 
