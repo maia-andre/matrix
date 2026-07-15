@@ -13,11 +13,11 @@
 > escrito** — a mais cara das cinco, porque a régua, aplicada sem exceção, se vira
 > contra quem a segura.
 >
-> O que falta agora é **prosa**, não pesquisa: §0–§2 já são texto; §3–§5 seguem
-> argumentos em forma de nota. (A exceção honesta: a §7 ainda ⛔ aguarda o eixo
-> microscópio, que nunca esteve na lista. A dívida de **aritmética** que a nota 09
-> §5 abriu foi **quitada** — nota 10; e a régua inteira foi **replicada em 50
-> seeds** sem uma violação — nota 11.)
+> A dívida de prosa está **paga**: §0–§6 são texto corrido (§0–§2 em
+> 2026-07-14; §3–§5 em 2026-07-15). (A exceção honesta: a §7 ainda ⛔ aguarda o
+> eixo microscópio, que nunca esteve na lista. A dívida de **aritmética** que a
+> nota 09 §5 abriu foi **quitada** — nota 10; e a régua inteira foi **replicada
+> em 50 seeds** sem uma violação — nota 11.)
 >
 > `FILOSOFIA.md` (v1) perguntou *como é ser um bloco*. `FILOSOFIA_v2.md` construiu
 > a régua e prometeu medir até onde a palavra estica. A v3 é sobre o que a v2 não
@@ -205,77 +205,231 @@ mesma pressão — empurrados pela mesma mão.** Não há uma seta. Há um campo
 metáfora da escada, que dá nome a este projeto, sobrevive a esta seção só como
 uma conveniência de exposição.
 
-## 3. Vocabulários emprestados — id, ego, superego, sombra, self *(nova; parte escrevível já)*
+## 3. Vocabulários emprestados — id, ego, superego, sombra, self *(Parte II — três das cinco palavras têm dado)*
 
-A psicanálise estrutural é, apesar da fama, uma **decomposição funcional** — e por
-isso é admissível aqui, onde fenomenologia não é. Mas cada conceito paga a mesma
-entrada que toda palavra mental paga neste projeto:
+A psicanálise tem má fama em filosofia da mente, e a fama é merecida onde ela é
+hermenêutica: um vocabulário que explica qualquer comportamento não explica
+nenhum. Mas a psicanálise **estrutural** — as instâncias em conflito, e o
+comportamento como resultado da disputa — é outra coisa: é uma **decomposição
+funcional**. Não postula um "como é ser"; postula subsistemas com papéis, e uma
+arbitragem entre eles. Decomposições funcionais são exatamente o que este
+projeto sabe testar. Por isso o vocabulário é admissível aqui, onde a
+fenomenologia não é.
 
-> **Teste de admissão:** que ablação o zera? E ele carrega comportamento?
-> Sem resposta às duas, é decoração — a lição do `modelo`.
+Admissível não quer dizer isento. Cada palavra emprestada paga a entrada que
+toda palavra mental paga neste arquivo — a regra que o `modelo` ensinou na §1:
 
-| conceito | contraparte funcional | estado |
-|---|---|---|
-| **id** | a pulsão: `energia`/fome/`urgencia`, o termo `comida_prev·(1+urgencia·fome)` | existe (nv2–4) |
-| **ego** | a prova de realidade: `prever_valor` + a arbitragem de `utilidade`/`decidir` | existe (nv3–5) |
-| **superego** | uma **norma internalizada** que a seleção fixa — "sinalize a verdade" — porque violá-la custa | **tem dado**: a honestidade é ESS sem multa artificial (nota 08); o ~10% de blefe residual é o crime que nenhuma sociedade de sinais custosos elimina |
-| **sombra** | a faculdade que a linhagem **teve e a seleção renegou**, latente no piso do traço, recuperável por mutação | **tem dado**: `peso_espaco → 0` é a agência renegada (nota 03) |
-| **self** | a totalidade integrada | **tem dado, e não é o que se esperava**: `phi` mede **mistura de motivos**, não posse (nota 05) — mas `autocausa` mede o self como **causa** e é a única faculdade que o eremita possui (nota 09). O self não é a totalidade integrada: é o bloco aparecendo dentro da própria previsão |
+> **Que ablação a zera? E ela carrega comportamento?**
+> Sem resposta às duas, é decoração.
 
-O achado que esta seção deve encarar: das cinco palavras, as duas que *já têm*
-contraparte medida (sombra, self) apontam ambas para o lado **(B)** da costura —
-não são coisas que o bloco tem, são estados de um conflito. **Risco escrito em
-letras garrafais:** o verniz fenomenológico. "O bloco reprime" é licenciável como
-função; "o bloco *sente* culpa" não é, por nenhum mostrador desta bateria.
+Então, uma por uma.
 
-## 4. O tempo, a quarta dimensão e Bandersnatch *(item 7 — parte escrevível, parte ⛔)*
+**O id existe, e é o único que nunca foi posto à prova.** A pulsão é o termo
+`comida_prev · (1 + urgencia · fome)`: a fome amplifica o valor do alimento, e
+*quanto* amplifica é um traço herdado. Está no código desde o nível 2 e ninguém
+duvida dele — e precisamente por isso ninguém o ablacionou. Fica registrado
+como a dívida pequena desta seção: a palavra mais antiga é a menos testada.
 
-O universo é `f(seed)`: a vida inteira de cada bloco *já está escrita* — uma
-linha-de-mundo numa 4ª dimensão que o bloco não percebe. E ainda assim
-`medir_decisao()` roda contrafactuais ("e se ele estivesse faminto?") — hoje,
-rodados pelo **observador**. Três movimentos, em escada:
+**O ego pagou a entrada com o dado mais antigo do projeto.** A prova de
+realidade é `prever_valor` — o mapa que imagina colheitas — mais a arbitragem
+de `utilidade` e `decidir`. A ablação que o zera já rodou, e não zerou um
+mostrador: zerou a **população**. Sem o mapa, a extinção chega em 51–121
+ticks, em cinquenta de cinquenta seeds (notas 01, 11). O ego é o órgão da
+realidade no sentido mais literal que este mundo permite: retire-o e a
+realidade cobra em cem ticks.
 
-1. **O auto-modelo temporal** — o bloco carrega a própria trajetória (memória de
-   escolhas). Substrato de "eu poderia ter ido para a esquerda": uma crença modal
-   **falsa** num universo `f(seed)` — e funcionalmente indispensável. ⛔ mexe na
-   simulação (faculdade nova, não régua); entra pela Fase 4/5.
-2. **O experimento Bandersnatch** — ✅ **rodou** (nota 07). O espectador
-   sobrescreveu ~25% das escolhas, e a tabela de Gazzaniga virou **uma linha por
-   arquitetura de introspecção**: quem lê a ação confabula (e nomeia motivo
-   positivo para ~26% das ações impostas); quem lê o plano não percebe (e
-   descreve um passo que não aconteceu); quem monitora os dois detecta 99–100% —
-   **sem falso alarme, e sem autoria**. E ~1% dos dedos é indetectável **por
-   princípio**: intervenção que a física desfaz não deixa rastro contrafactual.
-   *Detectabilidade é propriedade do rastro, não da introspecção.*
-3. **A posição** que a v3 tem de assumir sobre "eu poderia ter agido de outro
-   modo" num mundo determinístico: crença falsa, ficção útil, ou verdade sobre o
-   *tipo* e falsidade sobre a *ocorrência*? Compatibilismo executável — com a
-   vantagem, sobre a poltrona, de que aqui o determinismo é **literal e
-   inspecionável** (`git show` da linha que decide). A nota 07 (B5) já entrega a
-   esta seção o seu teto: de dentro, *física* e *espectador* entram pelo mesmo
-   barramento — "algo me moveu" é o máximo que qualquer introspecção relata;
-   "*quem* me moveu", nunca.
+**O superego era promessa e virou o melhor dado da seção.** Um superego
+funcional não é um `float culpa` que alguém instala; é uma **norma
+internalizada que a seleção fixa porque violá-la custa**. A Fase 4 construiu o
+teste sem estar procurando um superego: o acesso telepático entre blocos virou
+comunicação (cada bloco escolhe *o que contar* sobre a própria intenção), a
+estratégia de fala virou traço herdável — honesto, mudo, blefe, semeados em
+terços — e nenhuma multa foi decretada. O sinal apenas *repele*: quem mente
+gasta a deterrência numa célula que não vai tomar e deixa o alvo verdadeiro
+desprotegido. A geometria cobra, ninguém pune (nota 08).
+
+O resultado, replicado em cinquenta seeds e trinta mil ticks: a honestidade
+termina em **0,898 ± 0,028** da população — domina em cinquenta de cinquenta,
+não fixa em nenhuma (nota 12). O silêncio é varrido: abre mão da deterrência
+sem ganhar nada. O blefe persiste em ~8%, estável, frequência-dependente —
+raro, engana barato; comum, se auto-estraga. "Sinalize a verdade" é, neste
+mundo, um **equilíbrio evolutivo com crime residual**, e o crime residual é
+assinatura, não mancha: nenhuma sociedade de sinais custosos o elimina de
+todo. E a norma está "internalizada" no único sentido que paga a entrada:
+retirada do genoma (todo-mudo), o `modelo_do_outro` da população inteira lê
+zero exato; presente, carrega comportamento medível — fechar o canal muda a
+energia média do mundo em ~15% (nota 08).
+
+**A sombra é a agência renegada.** A faculdade que a linhagem *teve* e a
+seleção expulsou: `peso_espaco`, o único canal pelo qual o estado interno pode
+mudar uma decisão, desaba de ~2,9 para **0,095 ± 0,018** em trinta mil ticks,
+em cinquenta de cinquenta seeds (notas 03, 12). Não vai a zero: a mutação o
+repõe no piso, latente, recuperável — a definição operacional de *renegado,
+não apagado*. E a queda não é deriva, é derrota: numa invasão direta, o
+reflexo fixa contra o agente em ~6000 ticks (nota 03). O que numa clínica se
+contaria como recalque tem, aqui, mecanismo e barras: um degrau perdido por
+pressão, guardado no genoma como possibilidade barata.
+
+**O self é o caso mais instrutivo, porque a palavra quebrou duas vezes na
+mão.** A primeira candidata, `phi`, prometia a totalidade integrada e media o
+**conflito entre motivos**: quando a seleção extingue o segundo motivo, a
+"integração" apaga junto (nota 05). A segunda, `automodelo`, media **o outro**
+— zero exato num eremita (nota 04). O que sobrou, quando a régua ficou
+honesta, é menor e mais interessante: `autocausa`, o self como **causa** — o
+bloco aparecendo como variável dentro da própria previsão (`food -= garfada`),
+a única faculdade da bateria que o eremita possui, e com um quinto da
+magnitude de um bloco acompanhado (razão 4,78 ± 0,67 — notas 09, 11). O self
+deste mundo não é a totalidade integrada: é uma linha de código que desconta a
+própria garfada, com um núcleo solitário e um teto social.
+
+O achado que esta seção tem de encarar, agora com três das cinco palavras
+medidas: **as contrapartes que existem apontam todas para o lado (B) da
+costura.** O superego não é uma voz dentro do bloco: é um equilíbrio da
+população — retire os outros e não sobra norma nenhuma. A sombra não é um
+porão do sujeito: é a posição de um traço num jogo seletivo. E o self — o
+candidato da leitura internalista — sobrevive à solidão com um quinto do
+tamanho, carregando o 1/5 que a §2 mandou toda frase deste arquivo carregar.
+As instâncias emprestadas não moram dentro do bloco: moram na fronteira entre
+ele e os outros, e o "aparelho psíquico" é, neste brinquedo, menos um aparelho
+que uma **posição num campo**.
+
+O risco, em letras garrafais, é o de sempre — o verniz fenomenológico. "O
+bloco reprime a agência" é licenciável: é função, tem ablação, carrega
+comportamento. "O bloco *sente* culpa" não é licenciável por nenhum mostrador
+desta bateria — e a tentação de deslizar da primeira frase para a segunda é
+exatamente o empréstimo de respeitabilidade que a §6 recusa pagar. O
+vocabulário emprestado fica; o fiador fenomenológico, não.
+
+## 4. O tempo, a quarta dimensão e Bandersnatch *(item 7 — o dedo ✅ rodou; o auto-modelo temporal segue ⛔)*
+
+O determinismo, neste projeto, não é uma tese: é uma propriedade verificável
+do binário. O universo inteiro é `f(seed)` — mesma seed, mesma história, bit a
+bit, e o CSV é o teste de regressão disso. A vida de cada bloco *já está
+escrita*: uma linha-de-mundo numa quarta dimensão que ele não percebe, fixada
+no instante em que a seed foi digitada. Quem quiser saber por que um bloco
+virou à esquerda no tick 1873 não precisa de hermenêutica: `git show` da linha
+que decide.
+
+E, no entanto, este mundo determinístico está **cheio de contrafactuais**. A
+bateria inteira é feita deles: a `agencia` pergunta "e se ele estivesse
+faminto?", a `autocausa` pergunta "e se ele não se descontasse do próprio
+futuro?" — perguntas sobre o que *não* aconteceu, rodadas hoje pelo
+**observador**, por fora do mundo. O bloco carrega um único contrafactual
+dentro de si: o `food -= garfada` da §2, o futuro empobrecido *porque eu terei
+comido*. O que ele não carrega é a própria trajetória — não há memória de
+escolhas, e portanto não há substrato para "eu poderia ter ido para a
+esquerda": uma crença **modal**, **falsa** num universo `f(seed)`, e
+funcionalmente indispensável em qualquer agente que aprenda com o que deixou
+de fazer. Esse auto-modelo temporal é a faculdade que falta; mexe na simulação,
+não na régua, e segue ⛔ para a Fase 4/5. O resto desta seção não precisa
+dele — precisa do que já rodou.
+
+O que já rodou é o **Bandersnatch** (nota 07). Um dedo de fora do mundo
+sobrescreve ~25% das escolhas — seleção e alvo por hash, determinísticos, sem
+tocar o RNG: o experimento inteiro continua `f(seed)`, e o espectador é uma
+segunda física que o bloco não tem como distinguir da primeira. Três
+arquiteturas de introspecção, idênticas na heurística e diferentes só **no que
+leem**, relatam a mesma vida sob a mesma intervenção. O resultado transformou
+a tabela de Gazzaniga — honesto, detecta, confabula — de uma tipologia de
+sujeitos numa **linha por arquitetura**. Quem lê a **ação** confabula: a
+calibração desaba a 0,244 nos forçados, e ainda assim essa arquitetura nomeia
+um motivo positivo para ~26% das ações que o bloco nunca escolheu — ela não
+tem canal para "fui movido"; todo relato seu é, por construção, sobre o corpo.
+Quem lê o **plano** é imune e cego: calibração 0,806 sob o dedo,
+indistinguível da dos livres — ao preço de descrever, convicta, um passo que
+não aconteceu; mente sobre o comportamento sem ter como saber que mente. E
+quem monitora **os dois** detecta: 100% das negações da física, 99% dos
+dedos, zero falso alarme — mas o sinal é o mesmo nos dois casos. Detecção
+**sem atribuição de fonte**: de dentro, `resolver()` e o espectador são a
+mesma coisa.
+
+A dose-resposta fecha o quadro por fora: forçando metade das escolhas, o
+`relato` da população cai de 0,67 para ~0,28, monotônico em todas as seeds. O
+mostrador mede, de fora, **quanto do comportamento ainda pertence aos
+blocos** — e há algo de vertiginoso num número que faria o mesmo serviço
+apontado para nós.
+
+O experimento devolveu ainda dois detalhes que ninguém pediu. Primeiro: **as
+brigas acontecem onde todo mundo entende o porquê.** A calibração sobre os
+planos *negados* é mais alta que sobre os livres (0,888 × 0,797), porque
+célula disputada é célula rica, onde o motivo é legível até para a heurística
+leiga; as escolhas idiossincráticas do planejador fundo ninguém disputa — e
+são justamente as que o próprio intérprete não entende. Segundo: **~1% dos
+dedos é indetectável por princípio.** O dedo impôs um alvo, a física o negou,
+e o bloco terminou onde o próprio plano mandava: a intervenção existiu e não
+deixou rastro contrafactual — nem o monitor perfeito tem o que detectar.
+Detectabilidade não é propriedade da introspecção; é propriedade do
+**rastro**.
+
+Resta a posição que esta seção tem de assumir — o que é, num mundo assim, "eu
+poderia ter agido de outro modo"? — e agora dá para assumi-la com dado em vez
+de intuição. A resposta é um compatibilismo **executável**, com a vantagem,
+sobre a poltrona, de que aqui o determinismo é literal e o contrafactual é uma
+varredura que qualquer um roda. A frase é **verdadeira sobre o tipo e falsa
+sobre a ocorrência**. Sobre o tipo: a `agencia` mede exatamente a fração de
+blocos cuja escolha muda em algum ponto do eixo interno — "um bloco como este,
+noutro estado, faria outra coisa" é um fato, com barras (0,42 ± 0,03 em
+cinquenta seeds; nota 11). Sobre a ocorrência: naquele tick, com aquela seed,
+não havia outra escolha — e não haver outra escolha **não aparece de dentro**,
+porque este é o teto que a nota 07 entrega: nenhuma das três arquiteturas
+relata "fui forçado *pelo espectador*". Física e dedo entram pelo mesmo
+barramento; "**algo** me moveu" é o máximo que qualquer introspecção alcança —
+"*quem* me moveu", nunca. Se isso vale para o bicho de 56 KB num universo cuja
+física inteira cabe num arquivo, a herança fica registrada, e é
+desconfortável: um relato de "algo me moveu contra o meu plano" — num cérebro,
+num experimento de Libet, numa Matrix — jamais discrimina, sozinho, física de
+dentro de intervenção de fora.
 
 ## 5. A dobradiça da confabulação *(item 5 — selvagem ✅ e forçada ✅; a evolutiva ⛔ aguarda)*
 
-Quando um bloco racionaliza uma ação que não escolheu, o projeto tem, em casa, o
-fenômeno que torna o auto-relato humano pouco confiável (Gazzaniga; Nisbett &
-Wilson). **E ele já aconteceu, sem ninguém instalá-lo**: `resolver()` nega células
-disputadas — uma intervenção que a física roda de graça — e o intérprete leigo
-racionaliza **~21%** dessas ações impostas ("fiquei porque aqui é o melhor"),
-dizendo "não sei" nos outros ~79% (nota 06). A racionalização não precisou ser
-programada: bastou um intérprete que lê comportamento e um mundo que às vezes
-desobedece o plano.
+O que torna o auto-relato humano pouco confiável para a ciência não é a
+mentira — é a **confabulação**: o relato sincero de um motivo que não operou.
+O paciente de Gazzaniga explica com convicção a ação que o hemisfério mudo
+executou; os sujeitos de Nisbett & Wilson contam, com a mesma sinceridade,
+mais do que têm como saber. Este projeto tem o fenômeno **em casa — e ninguém
+o instalou.**
 
-E o **Bandersnatch forçado rodou** (nota 07): sob o dedo do espectador, a tabela
-honesto/detecta/confabula deixou de ser tipologia e virou **uma linha por
-arquitetura** — confabular ou detectar não é um mistério do sujeito, é uma
-consequência de *o que o intérprete lê*. O que ⛔ aguarda: a versão
-**evolutiva** (as arquiteturas como traço herdável, com o relato custando —
-Fase 4), e então o fecho do arco: o último reduto do "mas eu *sei* que sou
-consciente, por dentro" **é ele próprio um relato**. Se relatos confabulam — e
-aqui, mensurável e selvagem, confabulam — quanto peso probatório sobra? E se
-confabular × detectar é só arquitetura de leitura, que arquitetura é a *nossa*?
+A forma selvagem: `resolver()` nega ~6% das ações — dois blocos disputam a
+mesma célula, um deles executa um "ficar" que não escolheu. É uma intervenção
+que a física roda de graça, um Bandersnatch que ninguém precisou escrever. E o
+intérprete leigo — que lê só o 3×3 e a ação executada, como um vizinho leria —
+racionaliza **~21%** dessas ações impostas: "fiquei porque aqui é o melhor",
+um motivo nomeado com convicção, que não operou, porque a célula onde o bloco
+foi barrado por acaso *parece* um argmax. Nos outros ~79% ele diz "não sei", e
+admite (nota 06). A racionalização não precisou ser programada: bastou um
+intérprete que lê comportamento e um mundo que às vezes desobedece o plano — e
+a geometria dosa quando ela acontece.
+
+Há um espelho menos famoso e igualmente medido: **~35% das escolhas livres
+também recebem "não sei"** — são as escolhas do planejador fundo (colheita
+descontada, rebrota, partilha) que a heurística leiga não acompanha. O bloco
+não entende justamente as próprias decisões mais sofisticadas. No conjunto, o
+canal é falível e informativo — κ ≈ 0,67 nas três seeds originais, **0,631 ±
+0,011 em cinquenta** (notas 06, 11) — que é exatamente o que se pede de um
+relato: *um relato que não pode mentir não relata*, e este pode, e mente na
+dose que a física escolhe.
+
+A forma forçada é a da §4: sob o dedo, confabular ou detectar deixou de ser um
+mistério do sujeito e virou **consequência da arquitetura de leitura** — uma
+linha por arquitetura; quem lê a ação confabula, quem lê o plano cega, quem
+monitora detecta sem autoria (nota 07). E é por isso que esta seção se chama
+dobradiça: até aqui, a régua apontava para os blocos; a partir daqui ela gira
+e aponta para o **relato como gênero de evidência** — qualquer relato, de
+qualquer sistema cuja arquitetura de leitura se conheça. Da nossa, note-se,
+não se conhece nem isso.
+
+O que ⛔ aguarda é a versão **evolutiva**: as arquiteturas de escuta como
+traço herdável, com o relato custando. A Fase 4 já fez exatamente isso com a
+*fala* — e a honestidade venceu sem multa (§3); falta a *escuta*. A predição
+barata está registrada desde a nota 07: sem custo, deriva neutra; com leitores
+que punem incoerência, o monitor invade o confabulador.
+
+E o fecho do arco, que esta seção entrega pronto à §6: o último reduto de
+qualquer um de nós — "mas eu **sei** que sou consciente, por dentro" — **é ele
+próprio um relato**. Se relatos confabulam, e aqui confabulam de forma
+mensurável e selvagem, quanto peso probatório sobra para o único relato que
+nenhuma ablação pode testar? E se confabular × detectar é só arquitetura de
+leitura, que arquitetura é a *nossa* — e quem a leu?
 
 ## 6. Função × experiência — a escolha que a v2 evita *(item 6 — ✅ feita)*
 
@@ -447,16 +601,17 @@ algum lugar ou não para, e qualquer das respostas é filosofia.
 **A lista está fechada — e por isso o rótulo "esqueleto" caiu.** Os cinco itens que
 a gatilhavam estão cumpridos; nenhum experimento bloqueia mais a v3.
 
-Ficam duas dívidas, e nenhuma delas é do tipo que segurava o rótulo:
+Ficavam duas dívidas, e nenhuma delas era do tipo que segurava o rótulo:
 
-- **De prosa** (não de pesquisa): §3–§5 ainda são argumentos em forma de nota, não
-  texto corrido (§0–§2 já são prosa, 2026-07-14). §7 continua ⛔ — mas ela sempre
-  dependeu do **eixo microscópio**, que nunca esteve nesta lista.
+- ~~**De prosa** (não de pesquisa)~~ ✅ **quitada (2026-07-15)**: §3–§5 viraram
+  texto corrido; com §0–§2 (2026-07-14) e a §6, todas as seções argumentativas
+  são prosa. §7 continua ⛔ — mas ela sempre dependeu do **eixo microscópio**,
+  que nunca esteve nesta lista.
 - ~~**De aritmética** (a nota 09 §5 a criou)~~ ✅ **quitada (nota 10)**: os três ✅
   do Apêndice A — `modelo`, `phi`, `relato` — foram recomputados em `double` e os
   três zeros são zeros nas duas precisões, a nove casas, no máximo e não só na
   média. O piso da `agencia` segue sendo o único — e agora com mecanismo: só vaza
-  a sonda que dá significado a empates. A dívida de prosa é a última.
+  a sonda que dá significado a empates.
 
 Um bônus que a Fase 4 entregou sem estar nesta lista: o `relato` deixou de ser
 epifenomenal (nota 08). Silenciar a população **muda o mundo**, e a honestidade
