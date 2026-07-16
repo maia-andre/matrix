@@ -107,7 +107,11 @@ primeiro. Errata de mecanismo registrada na nota 09 §4.
 
 ## O que ficou em aberto
 
-1. O **fatorial** de L5: pregar motivo *e* horizonte juntos; a predição da
-   explicação por estreitamento é autocausa subindo pouco ou nada.
+1. ~~O **fatorial** de L5: pregar motivo *e* horizonte juntos; a predição da
+   explicação por estreitamento é autocausa subindo pouco ou nada.~~ ✅ **feito
+   (nota 13)**: `fambos` dá Δac +0,022 ± 0,009 (F1 confirmada, 0/50 acima do bar
+   do terceiro motor). E a não-aditividade desta nota ganhou número: interação
+   = −0,053, do tamanho dos efeitos principais. Ver
+   [`13-o-fatorial.md`](./13-o-fatorial.md).
 2. O torneio 12×12 e a dose-resposta `h*(c)` (Paper 2) — intocados.
 3. Varredura de densidade; edição honesta da partilha (pré-registro §5.0).
