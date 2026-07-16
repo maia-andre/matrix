@@ -1007,16 +1007,33 @@ número: **interação = −0,053**, do tamanho dos efeitos principais; o horizo
 inverte de sinal conforme o motivo — amplificador, nunca motor autônomo
 (`datasets/fatorial30k.csv`).
 
-**Paper 2 — "Cognição como bem posicional."** *(a meio caminho)*
+**Paper 2 — "Cognição como bem posicional."** *(dados fechados; falta a escrita)*
 Público: vida artificial, evolução da cognição. Tese: o horizonte de planejamento
 é individualmente vantajoso e coletivamente custoso (paisagem de grupo com pico em
-`h = 2–3`; invasão de `h = 9` sobre `h = 3` em 3/3 seeds). Rainha Vermelha num
+`h = 1`; invasão de `h = 9` sobre `h = 3` em 3/3 seeds). Rainha Vermelha num
 mundo de 56 KB.
 
-Falta: o **torneio de invasão par-a-par 12×12** (para o ESS e o grau de dependência
-de frequência) e a **curva dose-resposta do custo de pensar** `h*(c)`, com a
-predição do imposto pigouviano. Sem o torneio temos "9 vence 3", que é sugestivo,
-não um ESS.
+~~Falta: o **torneio de invasão par-a-par 12×12** e a **curva dose-resposta do
+custo de pensar** `h*(c)`.~~ ✅ **os dois rodaram (notas 14 e 15):**
+
+- **Torneio 12×12** (nota 14, `datasets/torneio.csv`): dominância **transitiva**
+  nos 66 duelos — o **ESS é o teto** `h = 12` (censurado por `HORIZONTE_MAX`), sem
+  freio endógeno. A margem satura no **joelho do desconto** (profundidade efetiva
+  `1/(1−δ)`), mas nunca vira não-positiva, por isso a corrida vai até a parede.
+  Transição **fixação → polimorfismo** em `h ≈ 4` (exclusão embaixo, coexistência
+  em cima). O "9 vence 3" virou ESS com barra.
+- **Dose-resposta `h*(c)`** (nota 15, `datasets/imposto.csv`): o imposto por
+  profundidade efetiva **traz a profundidade evoluída ao ótimo de grupo** (`h = 1`
+  em `c ≈ 0,15`) — o alinhamento pigouviano previsto. Cobrado pela profundidade
+  (não pelo horizonte declarado), ele morde o que é **identificável**: `hor_m` é
+  ruído (sd até 15× a da profundidade). Achado não orçado: a receita é **queimada**
+  (não redistribuída), então o imposto que alinha a escolha custa ~35% da
+  população — **alinhar a escolha ≠ restaurar o bem-estar**; o imposto que recicla
+  é o próximo pré-registro.
+
+Sobra do Paper 2 só a **escrita** (fonte + PDF em `papers/`), com todo o material
+sustentado. Em aberto para além dele: varredura de `δ` (o joelho segue `1/(1−δ)`?),
+invasor-raro para o ESS estrito no topo, e o imposto com reciclagem.
 
 ---
 
