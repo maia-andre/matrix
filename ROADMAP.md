@@ -999,8 +999,13 @@ o artefato de janela ganhou controle por intervenção (congelar o traço faz a
 correlação *cair* com a janela). E uma errata de mecanismo na nota 09 P4: o
 motor do crescimento da `autocausa` **não é o horizonte** (pregado em 6, ela
 sobe *mais*) — é o estreitamento do motivo, o mesmo `peso_espaco → 0` que apaga
-a agência. **Um processo, não dois.** Fica em aberto o fatorial de L5 (pregar
-motivo *e* horizonte juntos).
+a agência. **Um processo, não dois.** ~~Fica em aberto o fatorial de L5 (pregar
+motivo *e* horizonte juntos).~~ ✅ **fechado (nota 13)**: `fambos` dá Δac +0,022 ±
+0,009 (F1 confirmada; 0/50 seeds acima do bar do terceiro motor) — o crescimento
+do self **é** a evolução desses traços. E a não-aditividade da nota 12 ganhou
+número: **interação = −0,053**, do tamanho dos efeitos principais; o horizonte
+inverte de sinal conforme o motivo — amplificador, nunca motor autônomo
+(`datasets/fatorial30k.csv`).
 
 **Paper 2 — "Cognição como bem posicional."** *(a meio caminho)*
 Público: vida artificial, evolução da cognição. Tese: o horizonte de planejamento
