@@ -30,6 +30,23 @@ O placar do pré-registro:
 | **T2** | para `h_i < 5`, o mais fundo vence (freq > 0,5) | ✅ vence — e esmagadoramente: freq 0,84–1,00 contra os rasos |
 | **T3** | sanidade: `HI==HJ` dá `hor_m==HI`; sem extinções | ✅ sanidade passou; **0 extinções em 528 corridas** |
 
+> **Errata (nota 16) — a ameaça à validade nº 1 desta nota se realizou.** O
+> rodapé abaixo dizia: *"o joelho em h ≈ 5 é artefato do 0,80 — outro desconto
+> move o joelho"*. A varredura rodou (δ ∈ {0,30; 0,50; 0,80; 0,90; 0,95}) e o
+> veredito é misto, com uma parte cara:
+>
+> 1. **O que sobrevive:** tudo o que esta nota mediu **em δ=0,80** está correto e
+>    replicado bit-a-bit — a nota 16 reproduziu 120/120 linhas do
+>    `datasets/torneio.csv` com o mesmo binário. E o joelho **anda** com δ, como a
+>    §2 supunha, para δ ≤ 0,90.
+> 2. **"O ESS é o teto" (§1) não vale em geral.** É artefato do δ=0,80. Em
+>    δ=0,95 há **ESS interior**: o h=12 perde para o h=9 (`t = −11`) e para o h=6
+>    (`t = −4,4`). A escada **inverte** no topo. E o ótimo **desce** conforme o δ
+>    sobe (≥12 em 0,80; ~10 em 0,90; ~7–8 em 0,95).
+> 3. **A §3 está refutada** — ver a errata local lá embaixo.
+>
+> Ver [`16-a-varredura-do-desconto.md`](./16-a-varredura-do-desconto.md).
+
 ## 1. A matriz é transitiva: deeper vence, sempre
 
 A conta de vitórias, uma linha por horizonte (de quantos dos 11 duelos cada um
@@ -114,6 +131,20 @@ teto ou acima), a seleção vira **frequência-dependente** e os tipos coexistem
 o fundo invade quando raro, mas o ganho some quando ele fica comum. É a
 assinatura de manual de um bem posicional saturado: exclusão embaixo,
 coexistência em cima.
+
+> **Errata (nota 16) — "a transição cai exatamente no teto do desconto" está
+> refutada.** A transição **não anda**: é `h = 4` em δ = 0,50; 0,80; 0,90 **e**
+> 0,95, enquanto o teto do desconto vai de **2 a 20**. As colunas de fixação nos
+> três δ altos são quase idênticas (`8 7 4 0 0…`, `8 8 1 0 0…`, `8 7 1 0 0…`).
+> A coincidência com o 5 **era coincidência**.
+>
+> O que a nota 16 mostra é que esta nota fundiu **duas escalas** que só o δ=0,80
+> aproxima: uma que anda com o desconto (o joelho da margem, governado pelo fundo
+> da escada) e uma que não anda (esta transição, governada pelo topo, onde o
+> incremento *relativo* de profundidade é grande — 1→2 dobra, 11→12 acrescenta 9%
+> — e o desconto não tem alavanca). O fenômeno descrito acima é real; a **causa**
+> atribuída a ele, não. Ver
+> [`16-a-varredura-do-desconto.md`](./16-a-varredura-do-desconto.md) §2.
 
 ## 4. O que isto entrega ao Paper 2
 
