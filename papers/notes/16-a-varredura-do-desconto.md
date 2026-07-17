@@ -164,6 +164,24 @@ está errada e a inversão tem outra causa (candidata: teimosia — o planejador
 fundo se compromete com um alvo distante e passa reto por comida perto). Fica
 pré-registrado como a nota 17; **até rodar, a §4 é hipótese e a §3 é o dado.**
 
+> **Errata (nota 17) — o teste que este parágrafo propõe não serve, e o defeito é
+> de desenho.** A janela de comparação do `modelo` dura `horizonte` ticks **do
+> próprio bloco** (nota 01, "O conserto"). Um `h` maior alonga a janela e a torna
+> mais difícil **por construção**: `modelo` cairia com `h` em qualquer mundo, com
+> ou sem ruído na cauda. É **controle, não discriminante** — eu propus uma sonda
+> que não pode falsear a hipótese que ela deveria testar, que é o modo 4 do
+> Paper 1 (a régua infalseável) cometido por mim, três parágrafos depois de
+> escrever "isto é interpretação, não medição".
+>
+> O discriminante correto usa a distinção que o protocolo do projeto já carrega
+> (*população de equilíbrio é proxy de **grupo**; para aptidão individual, ensaio
+> de invasão*): rodar populações de **tipo único** (todo bloco com o mesmo `h` e
+> o mesmo δ) e perguntar se a inversão do **duelo** tem contraparte **solitária**.
+> Se o h=12 em δ=0,95 é *absolutamente* pior — menos população sem rival nenhum
+> para lhe tomar a comida — é ruído. Se o déficit **some** sem rival, é
+> relacional, e a leitura desta §4 está errada. Ver
+> [`17-tipo-unico.sh`](./17-tipo-unico.sh).
+
 ## 5. O que isto faz com a nota 14 e com o Paper 2
 
 - **Nota 14 §1 ("o ESS é o teto"):** vale em δ=0,80 (P0 replica bit-a-bit), **não
