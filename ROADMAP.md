@@ -1007,7 +1007,8 @@ número: **interação = −0,053**, do tamanho dos efeitos principais; o horizo
 inverte de sinal conforme o motivo — amplificador, nunca motor autônomo
 (`datasets/fatorial30k.csv`).
 
-**Paper 2 — "Cognição como bem posicional."** *(dados fechados; falta a escrita)*
+**Paper 2 — "Cognição como bem posicional."** *(mecanismo em obra — a nota 16
+derrubou o da nota 14; a tese sobrevive)*
 Público: vida artificial, evolução da cognição. Tese: o horizonte de planejamento
 é individualmente vantajoso e coletivamente custoso (paisagem de grupo com pico em
 `h = 1`; invasão de `h = 9` sobre `h = 3` em 3/3 seeds). Rainha Vermelha num
@@ -1031,9 +1032,41 @@ custo de pensar** `h*(c)`.~~ ✅ **os dois rodaram (notas 14 e 15):**
   população — **alinhar a escolha ≠ restaurar o bem-estar**; o imposto que recicla
   é o próximo pré-registro.
 
-Sobra do Paper 2 só a **escrita** (fonte + PDF em `papers/`), com todo o material
-sustentado. Em aberto para além dele: varredura de `δ` (o joelho segue `1/(1−δ)`?),
-invasor-raro para o ESS estrito no topo, e o imposto com reciclagem.
+~~Sobra do Paper 2 só a **escrita**, com todo o material sustentado. Em aberto
+para além dele: varredura de `δ` (o joelho segue `1/(1−δ)`?)…~~ ⚠️ **A varredura
+de `δ` deixou de ser "para além dele" e virou a nota 16 — porque o `1/(1−δ)`
+costurava o paper inteiro e tinha sido medido num `δ` só. Ela rodou, e derrubou o
+mecanismo:**
+
+- **Varredura de `δ`** (nota 16, `datasets/desconto.csv`): 5 descontos (teto 1,4 a
+  20) × 15 pares × 8 seeds. A sanidade amarrou (a fatia `δ = 0,80` reproduz
+  `torneio.csv` **120/120 linhas**), e três das quatro predições caíram. **O
+  "ESS = teto" é artefato do `δ = 0,80`**: em `δ = 0,95` a escada **inverte** — o
+  `h = 9` vence o `h = 12` (`t = −11`) e há **ESS interior**. E o ótimo **desce**
+  conforme o `δ` sobe (≥12 em 0,80; ~10 em 0,90; ~7–8 em 0,95): mais paciência ⇒
+  horizonte ótimo mais raso. A **transição fixação→polimorfismo não anda** (`h = 4`
+  de `δ = 0,50` a `0,95`, com o teto indo de 2 a 20) — a nota 14 §3 fundiu **duas
+  escalas** que só o 0,80 aproxima. O `1/(1−δ)` é uma **aproximação de `δ` baixo**:
+  descreve quando a profundidade extra é *invisível*, não quando é *nociva*.
+
+**O que o Paper 2 ganha com isso:** a corrida armamentista **tem freio endógeno**,
+e o freio não é o preço da cognição (nota 15) — é candidatamente a **imprecisão da
+própria previsão** (nota 16 §4: o desconto como *regularizador*, não como regulador
+do valor posicional). Um bem posicional que se auto-limita porque o produto que ele
+compra apodrece com a distância é um artigo melhor do que um que corre até a parede.
+
+**O que falta agora**, em ordem:
+
+1. **Nota 17 — ruído ou teimosia** (pré-registrada em `d747d4e`): populações de
+   tipo único decidem se o déficit do `h = 12` em `δ = 0,95` é **absoluto** (ruído)
+   ou **relacional** (teimosia). A §4 da nota 16 é hipótese até isto rodar.
+2. **A escrita** (fonte + PDF em `papers/`), com o mecanismo já corrigido.
+3. Grade fina em `δ ∈ [0,88; 0,96]` (onde o ótimo sai do teto); **invasor-raro** —
+   que passou a importar de verdade, agora que o ESS é interior; **imposto com
+   reciclagem** (nota 15).
+
+*(Nota de método: o Paper 1 saiu na frente e **está escrito** — `papers/paper-1-quatro-reguas.md`,
+fonte commitada; o PDF espera toolchain, que não existe nesta máquina.)*
 
 ---
 
