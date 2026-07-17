@@ -1007,8 +1007,9 @@ número: **interação = −0,053**, do tamanho dos efeitos principais; o horizo
 inverte de sinal conforme o motivo — amplificador, nunca motor autônomo
 (`datasets/fatorial30k.csv`).
 
-**Paper 2 — "Cognição como bem posicional."** *(mecanismo em obra — a nota 16
-derrubou o da nota 14; a tese sobrevive)*
+**Paper 2 — "Cognição como bem posicional."** *(✅ **ESCRITO** —
+`papers/paper-2-bem-posicional.md`. O mecanismo que a nota 14 lhe deu caiu com a
+nota 16 e foi substituído antes da prosa; ver abaixo)*
 Público: vida artificial, evolução da cognição. Tese: o horizonte de planejamento
 é individualmente vantajoso e coletivamente custoso (paisagem de grupo com pico em
 `h = 1`; invasão de `h = 9` sobre `h = 3` em 3/3 seeds). Rainha Vermelha num
@@ -1049,24 +1050,47 @@ mecanismo:**
   escalas** que só o 0,80 aproxima. O `1/(1−δ)` é uma **aproximação de `δ` baixo**:
   descreve quando a profundidade extra é *invisível*, não quando é *nociva*.
 
-**O que o Paper 2 ganha com isso:** a corrida armamentista **tem freio endógeno**,
-e o freio não é o preço da cognição (nota 15) — é candidatamente a **imprecisão da
-própria previsão** (nota 16 §4: o desconto como *regularizador*, não como regulador
-do valor posicional). Um bem posicional que se auto-limita porque o produto que ele
-compra apodrece com a distância é um artigo melhor do que um que corre até a parede.
+- **Ruído × teimosia** (nota 17, `datasets/tipo-unico.csv`): populações de **tipo
+  único** (todo bloco com o mesmo `h` e o mesmo `δ`) decidiram a leitura que a nota
+  16 §4 deixou como hipótese. **O déficit é ABSOLUTO — é ruído.** Em `δ = 0,95`, um
+  mundo de `h = 12` sustenta **5,5 blocos a menos** que o mesmo com `h = 8`
+  (pareado, `t = −4,3`), **sem rival de outro tipo para lhe tomar a comida**, e
+  deixa **+31,4** de comida em pé. E há **dose-resposta em δ**: contra o `h = 1`, o
+  `h = 12` deixa +20,3 / +45,2 / **+73,6** de comida de pé conforme δ vai a 0,80 /
+  0,90 / 0,95 — o dano **mais que triplica**. **O desconto é um regularizador**:
+  não é impaciência, é o bloco se recusando a confiar numa previsão que não
+  consegue fazer. Bônus: **o pico de colheita é `h = 2`** — do `h = 3` em diante
+  cada passo colhe *pior*, em todo δ. **Planejar fundo nunca colheu melhor neste
+  mundo.**
 
-**O que falta agora**, em ordem:
+## ✅ OS DOIS PAPERS ESTÃO ESCRITOS (2026-07-17)
 
-1. **Nota 17 — ruído ou teimosia** (pré-registrada em `d747d4e`): populações de
-   tipo único decidem se o déficit do `h = 12` em `δ = 0,95` é **absoluto** (ruído)
-   ou **relacional** (teimosia). A §4 da nota 16 é hipótese até isto rodar.
-2. **A escrita** (fonte + PDF em `papers/`), com o mecanismo já corrigido.
-3. Grade fina em `δ ∈ [0,88; 0,96]` (onde o ótimo sai do teto); **invasor-raro** —
-   que passou a importar de verdade, agora que o ESS é interior; **imposto com
-   reciclagem** (nota 15).
+Ambos saíram de "dados fechados, prosa por escrever":
 
-*(Nota de método: o Paper 1 saiu na frente e **está escrito** — `papers/paper-1-quatro-reguas.md`,
-fonte commitada; o PDF espera toolchain, que não existe nesta máquina.)*
+- **`papers/paper-1-quatro-reguas.md`** (commit `953a647`) — o metrológico.
+- **`papers/paper-2-bem-posicional.md`** (commit `9307c1b`) — o evolutivo, escrito
+  com o mecanismo **já corrigido**. Sua síntese (§6) é um achado que nenhuma nota
+  isolada via, porque mora no encontro de três medições: o ótimo de **colheita** é
+  `h ≈ 2` (nota 17), o ótimo de **grupo** é `h = 1` (Fase 3), e a profundidade
+  **evoluída** é `3,31 ± 0,24` (nota 15, `c = 0`). **A evolução pousa além do ótimo
+  produtivo, e a sobra é exatamente o bem posicional.**
+
+⚠️ **Falta o PDF dos dois.** A convenção do `papers/README.md` (fonte + PDF juntos)
+está meio paga, de propósito e por escrito: **não há `pandoc`, `pdflatex`,
+`xelatex`, `tectonic` nem `typst` nesta máquina**. A fonte — que é o que se revisa
+e se diffa — está commitada. Instalar toolchain é decisão em aberto.
+
+**O que falta de pesquisa**, em ordem de valor:
+
+1. **O elo que falta do Paper 2** (declarado no §8 dele): uma sonda do **erro de
+   previsão a `k` passos`**. Hoje o §5 é *inferência à melhor explicação* — provamos
+   que o tipo fundo colhe pior e que o dano escala com δ, mas não medimos o erro do
+   plano diretamente. É o desenho que o Paper 1 exigiria do próprio autor.
+2. **Grade fina em `δ ∈ [0,88; 0,96]`**: onde exatamente o ótimo sai do teto.
+3. **Invasor-raro** — passou a importar de verdade, agora que o ESS é interior.
+4. **Imposto com reciclagem** (nota 15), agora mais interessante: com freio
+   endógeno descoberto, o imposto exógeno compete com um mecanismo que o mundo já
+   tinha, e de graça.
 
 ---
 
