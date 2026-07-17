@@ -57,8 +57,18 @@
 #       ao longo de h, com delta fixo.
 #
 # Custo: 12 horizontes x 3 descontos x NSEEDS seeds x TICKS ticks. Com NSEEDS=8 e
-# TICKS=6000 sao 288 corridas — a nota 16 fez 600 em ~46 min com NPROC=16, entao
-# ~22 min. Nao entra no datasets/gerar.sh. Agregados em datasets/tipo-unico.csv.
+# TICKS=6000 sao 288 corridas: ~125 min com NPROC=16 (MEDIDO).
+#
+# ERRATA DE CUSTO (posta depois de rodar): este cabecalho estimava "~22 min",
+# extrapolando das 600 corridas em 46 min da nota 16. Errou por ~5x, e o motivo e
+# de desenho: `prever_valor` simula `horizonte` ticks a frente, entao uma corrida
+# com h=12 custa ~12x uma com h=1 — e esta nota varre h=1..12, enquanto a nota 16
+# rodava pares. As primeiras rows (h baixo) saem a ~4s e dao uma estimativa
+# otimista; o lote inteiro sai a ~26s/row. Fica registrado porque e a SEGUNDA vez
+# (a nota 14 estimou "2-3 min" e levou 40, e eu citei esse erro no cabecalho da
+# nota 16 antes de repeti-lo aqui).
+#
+# Nao entra no datasets/gerar.sh. Agregados em datasets/tipo-unico.csv.
 #   git log -1 --oneline -- datasets/tipo-unico.csv
 #
 #   sh papers/notes/17-tipo-unico.sh                       # 8 seeds, 6000 ticks
@@ -188,15 +198,39 @@ awk -F, 'NR>1 && $4!=-1 {
       for (b=0;b<nh;b++) { h=hh[b]; k=d"_"h; if(!(k in n)) continue
         printf "    %2s  %7.1f +- %-5.1f  %8.2f  %10.1f  %8.4f\n",
           h, p[k]/n[k], sd(p[k],pp[k],n[k]), e[k]/n[k], c[k]/n[k], m[k]/n[k] }
-      # o teste: h=8 x h=12
-      k8=d"_8"; k12=d"_12"
-      if ((k8 in n) && (k12 in n)) {
-        m8=p[k8]/n[k8]; m12=p[k12]/n[k12]
-        s8=sd(p[k8],pp[k8],n[k8])/sqrt(n[k8]); s12=sd(p[k12],pp[k12],n[k12])/sqrt(n[k12])
-        se=sqrt(s8*s8+s12*s12); t=(se>0)?(m12-m8)/se:0
-        v=(t<-2)?"*** h=12 PERDE POPULACAO (N1: ruido) ***":((t>2)?"h=12 tem MAIS pop":"~ empate (N3: deficit relacional)")
-        printf "    N1/N3 -> pop(h=12) - pop(h=8) = %+.1f   t=%+.1f   %s\n", m12-m8, t, v
-      }
     }
+  }' "$SAIDA"
+
+# ERRATA DE ANALISE (posta depois de rodar; ver 17-ruido-ou-teimosia.md §4).
+# A primeira versao deste bloco comparava pop(h=12) x pop(h=8) com um teste
+# NAO-PAREADO e cuspia "~ empate (N3)" nos tres deltas — inclusive em 0.95, onde
+# o efeito e real. O desenho e PAREADO por construcao: as mesmas seeds 1..8 rodam
+# em todo h. O sd ENTRE seeds e ~37 numa media de ~280 (cada seed e outro mundo,
+# com outras manchas de comida) — variancia comum a todo h, irrelevante para o
+# contraste, e que engole um efeito de 5.5 quando entra no denominador. Pareado,
+# o mesmo efeito da se=1.27 e t=-4.3. O pre-registro dizia "|t| > 2" e nao
+# especificou o estimador; o desenho ja era pareado, entao isto e o teste fiel a
+# ele, nao um teste novo escolhido depois de ver os dados.
+echo "== N1/N2/N3 (PAREADO por seed): h=12 menos h=8 =="
+awk -F, 'NR>1 && $4!=-1 { k=$1"_"$2"_"$3; pop[k]=$4; com[k]=$6; ds[$1]=1; ss[$3]=1 }
+  function sd(a,b,c){ v=(b-a*a/c)/(c-1); return v>0?sqrt(v):0 }
+  END {
+    nd=0; for (d in ds) dd[nd++]=d
+    for (a=0;a<nd;a++) for (b=a+1;b<nd;b++) if (dd[a]+0>dd[b]+0){t=dd[a];dd[a]=dd[b];dd[b]=t}
+    for (a=0;a<nd;a++) { d=dd[a]; np=0; sp=0; spp=0; sc=0; scc=0
+      for (s in ss) { k8=d"_8_"s; k12=d"_12_"s
+        if ((k8 in pop) && (k12 in pop)) { np++
+          x=pop[k12]-pop[k8]; sp+=x; spp+=x*x
+          y=com[k12]-com[k8]; sc+=y; scc+=y*y } }
+      if (!np) continue
+      mp=sp/np; ep=sd(sp,spp,np)/sqrt(np); tp=(ep>0)?mp/ep:0
+      mc=sc/np; ec=sd(sc,scc,np)/sqrt(np); tc=(ec>0)?mc/ec:0
+      printf "\n  delta=%s (%d seeds pareadas)\n", d, np
+      printf "    pop(12)-pop(8)       = %+7.2f +- %5.2f  t=%+6.2f  %s\n", mp, ep, tp,
+        (tp<-2)?"*** CAI => deficit ABSOLUTO (N1: ruido) ***":((tp>2)?"sobe":"~ nulo (N2/N3)")
+      printf "    comida_de_pe(12)-(8) = %+7.2f +- %5.2f  t=%+6.2f  %s\n", mc, ec, tc,
+        (tc>2)?"*** SOBRA COMIDA: colhe pior ***":"~ nulo"
+    }
+    print "\n  N1 (ruido) x N3 (teimosia): a pop cair SEM rival de outro tipo => absoluto => N1."
   }' "$SAIDA"
 echo "== fim =="

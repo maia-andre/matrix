@@ -181,6 +181,16 @@ pré-registrado como a nota 17; **até rodar, a §4 é hipótese e a §3 é o da
 > para lhe tomar a comida — é ruído. Se o déficit **some** sem rival, é
 > relacional, e a leitura desta §4 está errada. Ver
 > [`17-tipo-unico.sh`](./17-tipo-unico.sh).
+>
+> **Desfecho (nota 17, 2026-07-17): a leitura desta §4 está CERTA, e agora é
+> medição.** O déficit é **absoluto** — em δ=0,95, uma população de tipo único com
+> `h=12` sustenta **5,5 blocos a menos** que a mesma com `h=8` (pareado,
+> `t = −4,3`), **sem rival de outro tipo no mundo**, e deixa **+31,4** de comida em
+> pé. E o dano tem a **dose-resposta em δ** que o `δᵏ` prevê: contra o `h=1`, o
+> `h=12` deixa +20,3 / +45,2 / **+73,6** de comida de pé conforme δ vai a 0,80 /
+> 0,90 / 0,95. **O desconto é um regularizador** — não é impaciência, é o bloco se
+> recusando a confiar numa previsão que não consegue fazer. Ver
+> [`17-ruido-ou-teimosia.md`](./17-ruido-ou-teimosia.md).
 
 ## 5. O que isto faz com a nota 14 e com o Paper 2
 
