@@ -470,15 +470,15 @@ awk -F, 'NR>1 && $1!="ere" && $6>=1000 {
     rm[key"_"$5]+=$13; rp[key"_"$5]+=($17==-9?0:$17) }
   END {
     for (key in ks) {
-      printf "\n  %-22s fprem:", key
+      linha = sprintf("  %-22s fprem:", key)
       for (k=0; k<12; k++) { kk=key"_"k
-        if (kk in f) printf " %4.2f", f[kk]/q[kk]; else printf "    ." }
-      printf "\n  %-22s viesP(k=0) = %+.4f  rmse(k=3)=%.3f rmseP(k=3)=%.3f",
-        "", (key in vp ? vp[key]/nvp[key] : -9),
+        linha = linha sprintf((kk in f) ? " %4.2f" : "    .", (kk in f) ? f[kk]/q[kk] : 0) }
+      print linha
+      printf "  %-22s viesP(k=0)=%+.4f rmse(k=3)=%.3f rmseP(k=3)=%.3f\n",
+        key, (key in vp ? vp[key]/nvp[key] : -9),
         (key"_3" in rm ? rm[key"_3"]/q[key"_3"] : -9),
         (key"_3" in rp ? rp[key"_3"]/q[key"_3"] : -9)
     }
-    print ""
   }' "$SAIDA" | sort
 echo "   (E3: fprem < 0,5 ate k=3; viesP(0) < 0; rmseP << rmse.)"
 
