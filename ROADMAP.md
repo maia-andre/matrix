@@ -1082,10 +1082,21 @@ e se diffa — está commitada. Instalar toolchain é decisão em aberto.
 
 **O que falta de pesquisa**, em ordem de valor:
 
-1. **O elo que falta do Paper 2** (declarado no §8 dele): uma sonda do **erro de
-   previsão a `k` passos`**. Hoje o §5 é *inferência à melhor explicação* — provamos
-   que o tipo fundo colhe pior e que o dano escala com δ, mas não medimos o erro do
-   plano diretamente. É o desenho que o Paper 1 exigiria do próprio autor.
+1. ~~**O elo que falta do Paper 2**: sonda do erro de previsão a `k` passos~~ ✅
+   **FEITO (nota 18, 2026-07-20, `datasets/sonda-erro.csv`).** O elo fechou mais
+   curto do que o previsto: **k\* = 0** em toda condição povoada, 8/8 seeds — só o
+   primeiro passo carrega informação (corr 0,60–0,73; ≤0,19 dali em diante), a
+   premissa morre no primeiro replanejamento (fprem(1) ≈ 0,05), e no eremita o
+   erro sob premissa cumprida é **0 exato** (o modelo É a regra do mundo). Achado
+   E4: o erro **piora** com δ (cauda anticorrelacionada em 0,95) — o comportamento
+   fundo fabrica o próprio ruído; a dose-resposta da nota 17 precisa dos dois
+   canais (peso × degradação).
+1b. **A sonda ordinal** (declarada na nota 18 §4, não construída): k\*=0 mede o
+   plano como *previsão*; a decisão o usa como *ranking* entre células candidatas
+   — e o pico de colheita h=2 > h=1 (nota 17) prova que o termo ĝ_1 ajuda a
+   decidir sem prever. Candidato a mecanismo: o termo de rebrota injeta a
+   **capacidade** (estática, perfeitamente conhecida) no valor. Desenho: rank do
+   valor previsto × rank do retorno realizado, por decisão, entre as ≤9 células.
 2. **Grade fina em `δ ∈ [0,88; 0,96]`**: onde exatamente o ótimo sai do teto.
 3. **Invasor-raro** — passou a importar de verdade, agora que o ESS é interior.
 4. **Imposto com reciclagem** (nota 15), agora mais interessante: com freio

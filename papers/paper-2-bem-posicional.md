@@ -277,6 +277,14 @@ ninguém.
   δ. **Não** medimos diretamente o erro da previsão a `k` passos. O §5 é inferência
   à melhor explicação, não medição do elo — fechá-lo exige uma sonda que compare
   `prever_valor` passo a passo com o realizado, e ela não existe.
+  **[Adendo de 2026-07-20, nota 18: a sonda foi construída e o elo fechou — mais
+  curto do que este parágrafo temia. Só o primeiro passo do plano carrega
+  informação (corr(ĝ₀, r₀) = 0,60–0,73; corr ≤ 0,19 de k=1 em diante — k\* = 0 em
+  toda condição povoada, 8/8 seeds), a premissa de permanência morre no primeiro
+  replanejamento, e o erro da cauda *piora* com δ (anticorrelação em δ=0,95): a
+  inferência do §5 vira medição, com um segundo canal — o comportamento fundo
+  fabrica parte do próprio ruído. Fronteira que permanece: a sonda mede o plano
+  como previsão, não como *ranking* entre células candidatas (`datasets/sonda-erro.csv`).]**
 - **`comida_em_pé` é do mundo, não do bloco.** Mais comida de pé é evidência de
   colheita pior, mas é agregada: não distingue "cada bloco colhe menos" de "os
   blocos se concentram e deixam regiões intocadas". As duas são formas de colher
