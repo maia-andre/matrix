@@ -1,5 +1,13 @@
 # Nota 16 — A varredura do desconto: o joelho anda, a transição não, e em δ = 0,95 a escada inverte
 
+> **Errata (2026-07-20, nota 20):** o "ESS interior" que esta nota descobriu é,
+> mais precisamente, um **ponto de ramificação** — convergence-stable mas **não**
+> um ESS. O ensaio de invasor-raro (nota 20) mostrou que invasores raros dos dois
+> lados crescem contra o residente `h*`: ele atrai a evolução mas não a fixa,
+> mantendo um **polimorfismo protegido** em volta. O texto abaixo diz "ESS
+> interior"; leia "ponto singular interior convergence-stable". Nada mais muda: a
+> inversão, o joelho que anda e a transição que não anda seguem de pé.
+
 **Data:** 2026-07-16
 **`main.c`:** o de `079a3ce` (canônico intocado; a variante `desc` é o patch da
 nota 14 com **uma** mudança — o desconto pregado vem do ambiente).

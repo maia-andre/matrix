@@ -1,5 +1,12 @@
 # Nota 19 — A grade fina do desconto: o ótimo desce enquanto `1/(1−δ)` sobe, e deixa o teto entre 0,88 e 0,90
 
+> **Errata (2026-07-20, nota 20):** onde esta nota diz "ESS interior", leia "ponto
+> singular interior **convergence-stable**". O invasor-raro (nota 20) mostrou que o
+> `h*` localizado aqui atrai a evolução mas **não** resiste a invasores raros — é um
+> **ponto de ramificação**, não um ESS. A curva `h*(δ)` e o platô mole que esta nota
+> mede seguem exatos; é o *nome* do que `h*` é que a nota 20 corrige. (E o platô
+> mole desta nota é, retrospectivamente, a cara do polimorfismo protegido da 20.)
+
 **Data:** 2026-07-20
 **`main.c`:** o de `079a3ce` (canônico **intocado**; o patch é o da nota 16 **sem
 uma vírgula de diferença** — G0 prova isso reproduzindo `datasets/desconto.csv`

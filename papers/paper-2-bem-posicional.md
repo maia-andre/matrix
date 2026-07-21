@@ -297,8 +297,20 @@ ninguém.
   não existe é um bloco de **outro `h`**.
 - **Grade de 5 descontos.** A inversão mora entre 0,90 e 0,95; onde exatamente o
   ótimo sai do teto, esta grade não diz.
+  **[Adendo, nota 19: a grade fina δ∈[0,88;0,96] respondeu — `h*(δ)` desce
+  12→10→9→8→8→7 enquanto `1/(1−δ)` sobe 8,3→25 (direções opostas), e o teto é
+  abandonado entre δ=0,88 e 0,90 (`datasets/grade-fina.csv`).]**
 - **50/50, não invasor-raro.** Com ESS interior, a distinção passou a importar de
   verdade — muito mais do que importava quando o ESS era o teto.
+  **[Adendo, nota 20: o invasor-raro rodou e mudou o nome do achado — o ponto
+  interior NÃO é um ESS. Invasores raros dos dois lados crescem (não é
+  uninvadable), mas o `h*` raro invade os dois lados (é convergence-stable): a
+  assinatura de um PONTO DE RAMIFICAÇÃO. O "ESS interior" das §4/§6 abaixo é, mais
+  precisamente, o centro de um POLIMORFISMO PROTEGIDO — o que também dá uma segunda
+  causa, estrutural, para o `hor_m` disperso da nota 15. Onde o texto diz "ESS
+  interior", leia "ponto singular interior convergence-stable, invasível"
+  (`datasets/invasor-raro.csv`). Teste direto que falta: a evolução livre é
+  bimodal em horizonte?]**
 - **`HORIZONTE_MAX = 12` censura** o topo em δ baixo e médio.
 - **Um mundo.** "A profundidade não produz nada" é uma propriedade *deste* mundo —
   manchas de comida procedurais, vizinhança 3×3, um passo por tick. Um mundo com

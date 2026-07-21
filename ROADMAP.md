@@ -1102,9 +1102,14 @@ e se diffa — está commitada. Instalar toolchain é decisão em aberto.
    9 → 8 → 8 → 7) enquanto `1/(1−δ)` sobe (8,3 → 25): **direções opostas** — a
    fórmula do joelho erra o sinal da derivada. O ótimo deixa o teto entre
    **δ=0,88 e 0,90**; o topo não pula, **tomba** de neutro a punido. G0 160/160.
-3. **Invasor-raro** — passou a importar de verdade, agora que o ESS é interior.
-   Alvo: residente no `h*(δ)` da nota 19 (δ=0,95→8; δ=0,96→7); testar se algum
-   invasor raro cresce (ESS estrito ⇒ nenhum) e se o `h*` invade os vizinhos.
+3. ~~**Invasor-raro**~~ ✅ **FEITO (nota 20, 2026-07-20,
+   `datasets/invasor-raro.csv`).** E derrubou "ESS interior": o `h*` **não** é um
+   ESS (invasores raros dos dois lados crescem, I1 refutada) mas **é**
+   convergence-stable (I3) — é um **ponto de ramificação**, centro de um
+   polimorfismo protegido. Explica o `hor_m` disperso da nota 15. **Próxima sonda
+   (declarada):** a evolução livre produz uma distribuição de horizontes
+   **bimodal**? — o teste direto da ramificação, que ligaria de vez ao `hor_m` da
+   nota 15.
 4. **Imposto com reciclagem** (nota 15), agora mais interessante: com freio
    endógeno descoberto, o imposto exógeno compete com um mecanismo que o mundo já
    tinha, e de graça.
