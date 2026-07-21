@@ -1097,8 +1097,14 @@ e se diffa — está commitada. Instalar toolchain é decisão em aberto.
    decidir sem prever. Candidato a mecanismo: o termo de rebrota injeta a
    **capacidade** (estática, perfeitamente conhecida) no valor. Desenho: rank do
    valor previsto × rank do retorno realizado, por decisão, entre as ≤9 células.
-2. **Grade fina em `δ ∈ [0,88; 0,96]`**: onde exatamente o ótimo sai do teto.
+2. ~~**Grade fina em `δ ∈ [0,88; 0,96]`**~~ ✅ **FEITO (nota 19, 2026-07-20,
+   `datasets/grade-fina.csv`).** `h*(δ)` desce monotonicamente (teto/platô → 10 →
+   9 → 8 → 8 → 7) enquanto `1/(1−δ)` sobe (8,3 → 25): **direções opostas** — a
+   fórmula do joelho erra o sinal da derivada. O ótimo deixa o teto entre
+   **δ=0,88 e 0,90**; o topo não pula, **tomba** de neutro a punido. G0 160/160.
 3. **Invasor-raro** — passou a importar de verdade, agora que o ESS é interior.
+   Alvo: residente no `h*(δ)` da nota 19 (δ=0,95→8; δ=0,96→7); testar se algum
+   invasor raro cresce (ESS estrito ⇒ nenhum) e se o `h*` invade os vizinhos.
 4. **Imposto com reciclagem** (nota 15), agora mais interessante: com freio
    endógeno descoberto, o imposto exógeno compete com um mecanismo que o mundo já
    tinha, e de graça.
