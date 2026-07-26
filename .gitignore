@@ -1,5 +1,6 @@
 # binario de build (gerado por datasets/gerar.sh ou compilacao manual)
 /matrix
+/bin/
 
 # CSVs soltos de experimentos na raiz (datasets congelados vivem em datasets/)
 /*.csv
