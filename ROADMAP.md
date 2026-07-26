@@ -1186,9 +1186,22 @@ biografia a narrar quando o sujeito desaparece antes de a régua olhar). Das
 seeds que sobrevivem a um choque depois removido, 100% desligam o sinal
 quando a população se recupera — o relato acompanha a transição, não fica
 preso numa narrativa. **Módulos que faltam:** "emergiu uma nova estratégia";
-"há duas linhagens distintas" (a maquinaria já existe quase pronta na
-nota 23 — histograma + classificação por região —, falta rodá-la *ao vivo*
-dentro de uma única simulação, não post-hoc).
+"há duas linhagens distintas" (a classificação da nota 23 flanqueia um `h*`
+conhecido de antemão — um detector de verdade precisaria descobrir o ponto
+de corte sozinho, não receber a resposta pronta; os cenários de terreno
+conhecido das notas 20/23 continuam servindo de validação).
+
+**Aprofundamento ✅ FEITO (nota 25, 2026-07-26, `datasets/dose-detector.csv` e
+`datasets/janela-detector.csv`).** Duas perguntas sobre o limite da nota 24:
+**(D1)** o limite entre "colapso detectável" e "silêncio rápido demais" é uma
+transição de fase, não uma dose-resposta suave — 0/8 seeds se extinguem em
+todo custo ≤ 0,25 (latência e queda_max escalando limpo com a severidade),
+2/8 somem só em `c=0,30`. **(D2)** uma janela mais curta (30 ticks, contra os
+250 originais) detecta 1 seed a mais (3 ticks antes da extinção completa)
+**sem nenhum falso positivo adicional** — mas não resolve por completo: uma
+seed fica a `queda_max=0,1984`, a um triz do limiar de 0,20, sem nunca
+disparar. O trade-off janela-vs-sensibilidade é real, mas mais barato do que
+parecia — só não é grátis até o fim.
 
 ---
 
