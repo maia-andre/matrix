@@ -1173,6 +1173,23 @@ A régua se vira contra quem mede. É a coisa mais elegante que este projeto pod
 fazer. Entra a qualquer momento **depois da Fase 2**, cuja metodologia ele
 reaproveita.
 
+**Primeiro módulo ✅ FEITO (nota 24, 2026-07-26, `datasets/detector-colapso.csv`).**
+O detector de colapso ("a população entrou em colapso"): janela recente ×
+janela de referência, validado por intervenção contra o imposto pigouviano
+das notas 15/21 ligado no meio de uma corrida já estável. **Não confabula**
+— 0/8 falsos positivos em população saudável (o teste central do eixo,
+passou limpo). Detecta 6/8 seeds do colapso real em ~54 ticks; as outras 2/8
+sofreram **extinção total em 11–14 ticks** — rápido demais para a janela de
+250 ticks refletir a queda. Não é falso negativo: é o detector ficando
+**mudo**, pela mesma razão estrutural do eremita mudo da nota 06 (não há
+biografia a narrar quando o sujeito desaparece antes de a régua olhar). Das
+seeds que sobrevivem a um choque depois removido, 100% desligam o sinal
+quando a população se recupera — o relato acompanha a transição, não fica
+preso numa narrativa. **Módulos que faltam:** "emergiu uma nova estratégia";
+"há duas linhagens distintas" (a maquinaria já existe quase pronta na
+nota 23 — histograma + classificação por região —, falta rodá-la *ao vivo*
+dentro de uma única simulação, não post-hoc).
+
 ---
 
 # Engenharia — o que serve e o que ameaça
