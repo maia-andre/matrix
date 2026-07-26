@@ -13,11 +13,13 @@
 > escrito** — a mais cara das cinco, porque a régua, aplicada sem exceção, se vira
 > contra quem a segura.
 >
-> A dívida de prosa está **paga**: §0–§6 são texto corrido (§0–§2 em
-> 2026-07-14; §3–§5 em 2026-07-15). (A exceção honesta: a §7 ainda ⛔ aguarda o
-> eixo microscópio, que nunca esteve na lista. A dívida de **aritmética** que a
-> nota 09 §5 abriu foi **quitada** — nota 10; e a régua inteira foi **replicada
-> em 50 seeds** sem uma violação — nota 11.)
+> A dívida de prosa está **paga**: §0–§7 são texto corrido (§0–§2 em
+> 2026-07-14; §3–§5 em 2026-07-15; §6 em 2026-07-15; §7 em 2026-07-26, depois
+> de o eixo microscópio rodar — notas 24–27, que nunca estiveram na lista do
+> Apêndice B). A dívida de **aritmética** que a nota 09 §5 abriu foi
+> **quitada** — nota 10; e a régua inteira foi **replicada em 50 seeds** sem
+> uma violação — nota 11. Com a §7, **todas as seções argumentativas do
+> arquivo são prosa** — não sobra nenhuma seção ⛔.
 >
 > `FILOSOFIA.md` (v1) perguntou *como é ser um bloco*. `FILOSOFIA_v2.md` construiu
 > a régua e prometeu medir até onde a palavra estica. A v3 é sobre o que a v2 não
@@ -545,12 +547,124 @@ blocos está apontada para o meu próprio "por dentro" — e lê a mesma coisa.*
 perguntou como é ser um bloco. A resposta que a v3 tem de dar não é "não é nada";
 é: *a pergunta é feita pelo órgão errado, e não temos outro.*
 
-## 7. O regresso — quem calibra o calibrador? *(item 8 — ⛔ aguarda o eixo microscópio)*
+## 7. O regresso — quem calibra o calibrador? *(item 8 — ✅ o eixo microscópio rodou, notas 24–27)*
 
-Um detector de regime que dispara sobre ruído está **confabulando** (o intérprete,
-um andar acima). Valida-se por intervenção: injetar colapso conhecido, injetar
-ruído sem colapso. A régua vira objeto da própria pergunta — e o regresso para em
-algum lugar ou não para, e qualquer das respostas é filosofia.
+Um detector de regime que dispara sobre ruído está **confabulando** — o
+intérprete de Gazzaniga um andar acima: em vez de narrar por que um bloco se
+moveu, narra por que uma *população* mudou. Valida-se do mesmo jeito que a
+nota 06 validou o intérprete leigo: por intervenção. Injete um colapso
+conhecido; injete ruído sem colapso; veja o que o relatório diz. A régua
+inteira deste projeto — construída para medir os blocos — vira objeto da
+própria pergunta que ela sempre fez a eles. Isto rodou. Três vezes.
+
+### 7.1 O que a intervenção mostrou
+
+Três detectores, três faculdades emprestadas do ROADMAP ("colapso", "duas
+linhagens", "nova estratégia"), três intervenções construídas para servir de
+verdade conhecida — o imposto pigouviano das notas 15/21, já validado antes
+de emprestar autoridade a mais nada (notas 24, 25); um choque de herança de
+estratégia, inventado e verificado no próprio piloto (nota 27); e, para
+"duas linhagens", nem sequer uma corrida nova — a reanálise de um dado já
+publicado, com um algoritmo que descobre o corte sozinho (nota 26). Em
+nenhum dos três o detector confabulou: **0/8 falsos positivos**, três vezes,
+em população saudável sem intervenção nenhuma (notas 24, 27) — o medo
+fundador desta seção não se confirmou nem uma vez.
+
+Mas nenhum dos três é confiável no sentido em que "não confabula" faria
+supor. Cada um tem uma faixa de eventos para os quais foi cego, e as faixas
+mostraram uma simetria que ninguém tinha pedido:
+
+- **Rápido demais.** O detector de colapso mede uma janela de 250 ticks; uma
+  extinção total pode acontecer em 11–14 (nota 24) — a régua nunca chega a
+  encher antes de o mundo acabar. Não é uma dose-resposta suave: é uma
+  transição de fase estreita entre um custo que a população sobrevive (0/8
+  extintas até `c=0,25`) e um que não (2/8 em `c=0,30`) — nota 25. Encurtar a
+  janela para 30 ticks pega uma seed a mais, de graça, sem custar falso
+  positivo — e ainda assim uma seed fica a `0,1984` de um limiar de `0,20`,
+  o próprio critério confessando o quão perto chegou de errar do outro lado.
+- **Devagar demais.** O detector de estratégia, medindo `hon_f` em vez de
+  população, perdeu duas seeds que **declinaram tanto quanto as outras
+  (41–46%)** — só que devagar o bastante para nenhuma janela de ~750 ticks
+  jamais ver mais que 14% de queda de uma vez (nota 27). É o sapo fervendo,
+  e é o espelho exato do item anterior: o mesmo desenho, cego na outra
+  ponta do relógio.
+
+Uma régua de janela fixa tem uma banda de frequências para a qual foi
+calibrada — e as duas notas juntas *demonstraram* as duas bordas da banda,
+em vez de as terem apenas declarado por teoria.
+
+### 7.2 A mudez, não a mentira
+
+O achado que amarra esta seção às anteriores não é "o detector erra" — é
+**como** ele erra. Nas duas faixas cegas, ele não inventou colapso onde não
+havia (isso seria confabulação, e não aconteceu — §7.1); ele ficou **calado**
+onde havia. É a mesma falha, redescoberta um andar acima, que a §5 já tinha
+nomeado no fundo da escada: **"o eremita fica mudo"** — um self de um motivo
+só não tem biografia para o intérprete leigo relatar (nota 06, previsão P5).
+Lá, a mudez vinha de faltar *motivo*. Aqui, ela vem de faltar *tempo*: o
+evento e a régua não compartilham escala. Mas a forma é idêntica nos dois
+andares — quando este projeto falha, ele tende a falhar por **silêncio**, não
+por invenção. Se isso é uma propriedade do projeto ou uma propriedade de
+qualquer sistema que se recusa a confabular, ninguém aqui tem como saber a
+partir de uma amostra de dois níveis.
+
+### 7.3 Onde o regresso para (ou não)
+
+Agora a pergunta que dá nome à seção. O detector de colapso foi calibrado
+contra o imposto — mas o imposto já tinha sido medido e testado em duas
+notas anteriores (15, 21) antes de emprestar autoridade de "verdade
+conhecida" aqui (24, 25). O detector
+de estratégia foi calibrado contra um choque que este projeto **inventou na
+hora** — sem o mesmo lastro. Quem garante que o calibrador do calibrador não
+é, ele também, um mostrador que lê o que quer ver? A regra da §3 não faz
+exceção para si mesma: *que ablação zeraria o limiar de 20%? Ele carrega
+comportamento?*
+
+Ele carrega: os quatro números deste eixo (`0,20`; janela de 250; janela de
+30; o custo que liga o choque) são exatamente o que decide se uma seed conta
+como detectada ou como mais um mudo — e a nota 25 mostrou, por escrito, uma
+seed a `0,0016` do limiar, do lado errado. Um limiar que nunca erra não
+mede nada; este errou, dos dois lados, em público. Pela mesma regra que
+salvou `modelo` da decoração (nota 01) e condenou "experiência" a ela (§6),
+o limiar **paga a entrada**. Mas notar que ele paga não fecha o regresso —
+só empurra a pergunta um degrau: **quem escolheu 0,20?** Ninguém além de
+quem escreveu o pré-registro antes de rodar. Não há uma autoridade acima
+disso — só a disciplina, já praticada neste projeto desde a nota 13, de
+escrever o número **antes** de ver se ele funciona, e relatar quando não
+funciona.
+
+É aqui que o regresso para — mas não no sentido de tocar um fundo sólido.
+Para porque, na base da cadeia, não há mais um relato a validar: há
+**determinismo**. `f(seed)` é um fato, não uma alegação — qualquer pessoa com
+o mesmo commit de `main.c` recomputa o mesmo CSV, bit a bit, e não precisa
+confiar em ninguém para verificar (é a mesma propriedade que já tinha
+salvado este projeto de virar um gerador de números confortáveis, §1). Mas
+determinismo é **testemunha, não juiz**: ele confirma que a corrida produziu
+exatamente estes números; ele não tem opinião sobre se `0,20` é o limiar
+certo para chamar isso de "colapso". Essa nomeação — a única parte da cadeia
+que não é reproduzível a partir do `main.c`, só a partir de quem escreveu o
+script — é humana, é a de quem escreve estas notas, e não está isenta de
+nada que a §6 exigiu da palavra "experiência": tem de poder errar, em
+público, e este eixo mostrou que ela erra.
+
+**Então o regresso não termina numa autoridade maior; substitui autoridade
+por disciplina.** Não há calibrador do calibrador — há o mesmo hábito que
+gerou as vinte e sete notas deste projeto: escrever a predição antes de
+rodar, publicar o número que sai, e não esconder quando ele erra pelo lado
+que ninguém previu (a extinção rápida demais, o sapo fervendo — nenhum dos
+dois estava no pré-registro que os encontrou). Um calibrador cujas falhas
+são visíveis, datadas e commitadas antes do próximo teste **é** calibrado,
+no único sentido operacional que este projeto sempre usou — não porque algo
+acima dele o valide, mas porque ele continua contando, sem exceção, onde
+quebra.
+
+E o giro final, que esta seção deve à §6 e não pode evitar: os números deste
+eixo — `0,20`; 250 ticks; o que conta como "estratégia nova" — foram
+escolhidos por quem escreve este arquivo, com a mesma régua que a §6 apontou
+para o próprio "por dentro" e leu a mesma coisa. Não há grau zero. A palavra
+"calibrado" sobrevive a este arquivo do mesmo jeito que "consciente"
+sobreviveu à §6: rebaixada de certidão a **relato de quem se sabe capaz de
+errar, e que errou, e disse.**
 
 ---
 
@@ -603,10 +717,11 @@ a gatilhavam estão cumpridos; nenhum experimento bloqueia mais a v3.
 
 Ficavam duas dívidas, e nenhuma delas era do tipo que segurava o rótulo:
 
-- ~~**De prosa** (não de pesquisa)~~ ✅ **quitada (2026-07-15)**: §3–§5 viraram
-  texto corrido; com §0–§2 (2026-07-14) e a §6, todas as seções argumentativas
-  são prosa. §7 continua ⛔ — mas ela sempre dependeu do **eixo microscópio**,
-  que nunca esteve nesta lista.
+- ~~**De prosa** (não de pesquisa)~~ ✅ **quitada por inteiro (2026-07-26)**:
+  §3–§5 viraram texto corrido em 2026-07-15; com §0–§2 (2026-07-14) e a §6, e
+  agora a §7 (2026-07-26, depois de o eixo microscópio rodar — notas 24–27,
+  que nunca estiveram nesta lista), **todas as seções argumentativas são
+  prosa**. Não sobra ⛔ nenhum.
 - ~~**De aritmética** (a nota 09 §5 a criou)~~ ✅ **quitada (nota 10)**: os três ✅
   do Apêndice A — `modelo`, `phi`, `relato` — foram recomputados em `double` e os
   três zeros são zeros nas duas precisões, a nove casas, no máximo e não só na

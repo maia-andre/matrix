@@ -774,8 +774,15 @@ estica: apenas estica a palavra.
    crença falsa, ficção útil, ou verdade sobre o *tipo* e falsidade sobre a
    *ocorrência*?
 
-8. **O regresso** (depende do eixo "microscópio", abaixo): quem calibra o
-   calibrador?
+8. ~~**O regresso**~~ ✅ **ESCRITO (`FILOSOFIA_v3.md` §7, 2026-07-26, depois do
+   eixo microscópio — notas 24–27).** Três detectores, três intervenções: não
+   confabularam (0/8 falsos positivos, três vezes), mas cada um ficou **mudo**
+   numa borda — rápido demais (extinção em 11–14 ticks, notas 24/25) ou
+   devagar demais (o sapo fervendo, nota 27) — o mesmo eco do "eremita mudo"
+   da nota 06, um andar acima. O regresso não termina numa autoridade maior:
+   termina em determinismo (testemunha, não juiz) mais a disciplina de
+   pré-registrar e relatar o erro — a mesma régua que a §6 apontou para
+   "consciente" aponta para "calibrado", e lê a mesma coisa.
 
 9. **A costura da escada** — e é aqui que a v3 se bifurca *de verdade*.
 
@@ -1213,11 +1220,11 @@ detector de janela fixa. Recuperação confirmada de novo (6/6 desligam).
 
 **Os três módulos declarados no ROADMAP estão feitos** (colapso — notas
 24/25; duas linhagens — notas 23/26; nova estratégia — nota 27). O eixo
-"Matrix como microscópio" tem uma primeira geração completa; o que resta é
-aberto: aprofundar cada módulo (ex.: janela adaptativa que não sofra nem do
-"rápido demais" nem do "sapo fervendo"?), testar se os relatórios **carregam
-comportamento** (alguém no mundo reage a eles?), ou o "regresso" que
-`FILOSOFIA_v3` item 8 deixou pendente ("quem calibra o calibrador?").
+"Matrix como microscópio" tem uma primeira geração completa; o "regresso"
+que dependia dele já foi escrito (`FILOSOFIA_v3.md` §7 — ver item 8, acima).
+O que resta é aberto: aprofundar cada módulo (ex.: janela adaptativa que não
+sofra nem do "rápido demais" nem do "sapo fervendo"?), ou testar se os
+relatórios **carregam comportamento** (alguém no mundo reage a eles?).
 
 **Aprofundamento ✅ FEITO (nota 25, 2026-07-26, `datasets/dose-detector.csv` e
 `datasets/janela-detector.csv`).** Duas perguntas sobre o limite da nota 24:
