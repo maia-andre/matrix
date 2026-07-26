@@ -1185,11 +1185,21 @@ sofreram **extinção total em 11–14 ticks** — rápido demais para a janela 
 biografia a narrar quando o sujeito desaparece antes de a régua olhar). Das
 seeds que sobrevivem a um choque depois removido, 100% desligam o sinal
 quando a população se recupera — o relato acompanha a transição, não fica
-preso numa narrativa. **Módulos que faltam:** "emergiu uma nova estratégia";
-"há duas linhagens distintas" (a classificação da nota 23 flanqueia um `h*`
-conhecido de antemão — um detector de verdade precisaria descobrir o ponto
-de corte sozinho, não receber a resposta pronta; os cenários de terreno
-conhecido das notas 20/23 continuam servindo de validação).
+preso numa narrativa. **Segundo módulo ✅ FEITO (nota 26, 2026-07-26).** "Há duas linhagens
+distintas?", generalizado: um algoritmo que **descobre** o vale sozinho
+(compara cada bin com o máximo corrido de cada lado — corrige o mesmo
+defeito de ruído que a contagem de picos locais tinha na nota 23), portado
+para dentro do `main.c` e validado contra `datasets/bimodalidade.csv`.
+Concorda com a nota 23 nos casos claros (δ≥0,90: 6-7/8, e descobre o vale
+exatamente no `h*` teórico sem ser informado); mas em δ=0,80 **discorda em
+massa** (0/8 contra 4/8) — resolve a favor de "carga de mutação, não
+ramificação" a ambiguidade que a nota 23 tinha deixado explicitamente em
+aberto (o histograma é uma cauda enviesada rumo ao teto, não dois picos).
+
+**Módulo que falta:** "emergiu uma nova estratégia" — o mais em aberto: falta
+definir o que conta como estratégia nova (candidato: `hon_f`/`blef_f`, já
+rastreado desde a nota 08) e inventar/validar um mecanismo de choque que
+force uma mudança de estratégia sob comando (não existe pronto no projeto).
 
 **Aprofundamento ✅ FEITO (nota 25, 2026-07-26, `datasets/dose-detector.csv` e
 `datasets/janela-detector.csv`).** Duas perguntas sobre o limite da nota 24:

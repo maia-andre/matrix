@@ -359,6 +359,15 @@ ninguém.
   cedo, sem nunca dividir a aposta dentro da própria corrida. É o mecanismo,
   agora visto agindo, por trás do `hor_m` disperso que a nota 15 mediu como
   sintoma. `datasets/bimodalidade.csv`, `papers/notes/23-o-teste-de-bimodalidade.md`.]**
+  **[Adendo de 2026-07-26, nota 26: o "δ=0,80 deu 4/8, mais ambíguo" acima
+  ficou decidido. Um classificador que DESCOBRE o vale sozinho (compara cada
+  bin com o máximo corrido de cada lado, sem receber `h*`) reanalisa os
+  mesmos histogramas e vota 0/8 em δ=0,80 — o que a partição fixa via como
+  "massa dos dois lados" é uma cauda enviesada rumo ao teto `h=12`, não dois
+  picos separados por um vale. Lê a favor de **carga de mutação**, não
+  ramificação real, em δ=0,80 — e confirma δ≥0,90 na maioria esmagadora
+  (6-7/8), inclusive descobrindo o vale exatamente no `h*` teórico (δ=0,95,
+  seed 1) sem ter sido informado. `papers/notes/26-duas-linhagens-sem-h-conhecido.md`.]**
 - **`HORIZONTE_MAX = 12` censura** o topo em δ baixo e médio.
 - **Um mundo.** "A profundidade não produz nada" é uma propriedade *deste* mundo —
   manchas de comida procedurais, vizinhança 3×3, um passo por tick. Um mundo com
