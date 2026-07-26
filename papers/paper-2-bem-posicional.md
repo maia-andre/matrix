@@ -368,6 +368,20 @@ ninguém.
   ramificação real, em δ=0,80 — e confirma δ≥0,90 na maioria esmagadora
   (6-7/8), inclusive descobrindo o vale exatamente no `h*` teórico (δ=0,95,
   seed 1) sem ter sido informado. `papers/notes/26-duas-linhagens-sem-h-conhecido.md`.]**
+  **[Adendo de 2026-07-26, nota 28: o voto "carga de mutação" acima foi
+  ISOLADO, não só votado — e a resposta é MISTA, não o veredito único que o
+  adendo da nota 26 sugeria. Desligando a mutação de horizonte (só a
+  semeadura inicial 1..12 fornece variação), **6/8 seeds colapsam** para
+  quase-monomorfismo no teto (massa baixa cai a 0,1–3,3%) — carga de mutação
+  confirmada nelas. Mas **2/8 fazem o oposto do previsto**: sem nenhum
+  mutante novo, a massa baixa **cresce** (0,39→0,58; 0,27→0,51) e o vale
+  fica **mais limpo**, não mais raso (uma seed chega a massa **zero** no
+  vale, ao longo de 20 leituras em 5000 ticks) — a assinatura de um
+  polimorfismo genuíno numa fração das realizações, não ruído de mutação.
+  δ=0,80 não tem um veredito único: é uma fronteira historicamente
+  carregada — qual bacia (teto puro ou coexistência) uma população visita
+  depende da trajetória inicial, não só do δ.
+  `datasets/mutacao-off.csv`, `papers/notes/28-mutacao-ou-ramificacao-em-delta-080.md`.]**
 - **`HORIZONTE_MAX = 12` censura** o topo em δ baixo e médio.
 - **Um mundo.** "A profundidade não produz nada" é uma propriedade *deste* mundo —
   manchas de comida procedurais, vizinhança 3×3, um passo por tick. Um mundo com

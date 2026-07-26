@@ -1199,9 +1199,21 @@ defeito de ruído que a contagem de picos locais tinha na nota 23), portado
 para dentro do `main.c` e validado contra `datasets/bimodalidade.csv`.
 Concorda com a nota 23 nos casos claros (δ≥0,90: 6-7/8, e descobre o vale
 exatamente no `h*` teórico sem ser informado); mas em δ=0,80 **discorda em
-massa** (0/8 contra 4/8) — resolve a favor de "carga de mutação, não
+massa** (0/8 contra 4/8) — vota a favor de "carga de mutação, não
 ramificação" a ambiguidade que a nota 23 tinha deixado explicitamente em
 aberto (o histograma é uma cauda enviesada rumo ao teto, não dois picos).
+
+**Isolado, não só votado ✅ (nota 28, 2026-07-26, `datasets/mutacao-off.csv`).**
+Desligar a mutação de horizonte no mesmo fundo (só a semeadura inicial
+1..12 fornece variação) decide de vez — e a resposta é **mista**, não o
+veredito único que a nota 26 sugeria. 6/8 seeds colapsam para
+quase-monomorfismo no teto sem mutação (massa baixa cai a 0,1–3,3%) — carga
+de mutação confirmada nelas. Mas 2/8 fazem o oposto do previsto: sem nenhum
+mutante novo, a massa baixa **cresce** (0,39→0,58; 0,27→0,51) e o vale fica
+**mais limpo** (uma seed chega a massa zero) — polimorfismo genuíno numa
+fração das realizações. δ=0,80 é uma fronteira historicamente carregada:
+qual bacia (teto puro ou coexistência) uma população visita depende da
+trajetória, não só do δ.
 
 **Terceiro módulo ✅ FEITO (nota 27, 2026-07-26, `datasets/detector-estrategia.csv`).**
 "Emergiu uma nova estratégia?", com um choque inventado (força todo
