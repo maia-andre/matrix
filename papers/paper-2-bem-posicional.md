@@ -345,6 +345,20 @@ ninguém.
   interior", leia "ponto singular interior convergence-stable, invasível"
   (`datasets/invasor-raro.csv`). Teste direto que falta: a evolução livre é
   bimodal em horizonte?]**
+  **[Adendo de 2026-07-26, nota 23: o teste direto rodou, com uma resposta em
+  duas camadas. No MESMO fundo pregado desta nota (só o horizonte livre para
+  mutar 1..12), o ponto de ramificação vira polimorfismo REAL — 8/8 seeds
+  bimodais (massa ≥15% dos dois lados do `h*`) a partir de δ=0,90, saturação
+  total (δ=0,80 deu 4/8, mais ambíguo que o esperado da dominância pareada das
+  notas 14/16). Mas na evolução DE VERDADE (urgência/peso_espaço/estratégia
+  também livres), NENHUMA seed é bimodal — cada corrida converge para um
+  único pico, e é o pico que dispersa entre seeds (moda de 3 a 9, `sd=2,12`).
+  A coevolução dos outros três traços não apaga o ponto estrutural — apaga a
+  bimodalidade *visível*, substituindo-a por dependência de trajetória: cada
+  realização comete a um ponto diferente do mesmo espaço de possibilidades,
+  cedo, sem nunca dividir a aposta dentro da própria corrida. É o mecanismo,
+  agora visto agindo, por trás do `hor_m` disperso que a nota 15 mediu como
+  sintoma. `datasets/bimodalidade.csv`, `papers/notes/23-o-teste-de-bimodalidade.md`.]**
 - **`HORIZONTE_MAX = 12` censura** o topo em δ baixo e médio.
 - **Um mundo.** "A profundidade não produz nada" é uma propriedade *deste* mundo —
   manchas de comida procedurais, vizinhança 3×3, um passo por tick. Um mundo com
@@ -387,6 +401,7 @@ deste artigo tem nota, script e dataset:
 | §7 (imposto pigouviano) | 15 | `15-imposto.sh` | `imposto.csv` |
 | §7 (adendo — dividendo per-capita) | 21 | `21-reciclagem.sh` | `reciclagem.csv` |
 | §8 (adendo — a sonda ordinal) | 22 | `22-sonda-ordinal.sh` | `sonda-ordinal.csv` |
+| §8 (adendo — o teste de bimodalidade) | 23 | `23-bimodalidade.sh` | `bimodalidade.csv` |
 
 As notas registram as **hipóteses mortas** — três na Fase 3, e o mecanismo inteiro
 do §4, que a nota 16 derrubou depois de a nota 14 o ter publicado. Num projeto cuja

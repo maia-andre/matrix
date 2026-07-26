@@ -1124,10 +1124,19 @@ e se diffa — está commitada. Instalar toolchain é decisão em aberto.
    `datasets/invasor-raro.csv`).** E derrubou "ESS interior": o `h*` **não** é um
    ESS (invasores raros dos dois lados crescem, I1 refutada) mas **é**
    convergence-stable (I3) — é um **ponto de ramificação**, centro de um
-   polimorfismo protegido. Explica o `hor_m` disperso da nota 15. **Próxima sonda
-   (declarada):** a evolução livre produz uma distribuição de horizontes
-   **bimodal**? — o teste direto da ramificação, que ligaria de vez ao `hor_m` da
-   nota 15.
+   polimorfismo protegido. Explica o `hor_m` disperso da nota 15.
+   ~~**Próxima sonda (declarada):** a evolução livre produz uma distribuição de
+   horizontes bimodal?~~ ✅ **FEITA (nota 23, 2026-07-26,
+   `datasets/bimodalidade.csv`).** No MESMO fundo pregado da nota 20
+   (`uni_h_livre`, só o horizonte livre), o ponto de ramificação vira
+   polimorfismo real — 8/8 seeds bimodais (massa ≥15% dos dois lados do `h*`)
+   a partir de δ=0,90, saturação total (δ=0,80 deu 4/8, mais ambíguo que o
+   previsto ≤2/8 — a dominância do teto das notas 14/16 não é o mesmo teste
+   que a invasão-rara da 20). Mas na evolução **de verdade** (todos os traços
+   livres), **nenhuma seed é bimodal** — cada corrida converge para um pico
+   só, e o pico varia entre seeds (moda 3–9, sd=2,12): a coevolução dos outros
+   três traços apaga a bimodalidade visível sem apagar o ponto estrutural —
+   é o mecanismo por trás do `hor_m` disperso da nota 15, agora visto agindo.
 4. ~~**Imposto com reciclagem**~~ ✅ **FEITO (nota 21, 2026-07-26,
    `datasets/reciclagem.csv`).** O rebate lump-sum preserva o alinhamento (R1) e
    **restaura o bem-estar além do baseline** (R2/R3: 102% da população sem
