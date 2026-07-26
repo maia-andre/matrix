@@ -1196,10 +1196,28 @@ massa** (0/8 contra 4/8) — resolve a favor de "carga de mutação, não
 ramificação" a ambiguidade que a nota 23 tinha deixado explicitamente em
 aberto (o histograma é uma cauda enviesada rumo ao teto, não dois picos).
 
-**Módulo que falta:** "emergiu uma nova estratégia" — o mais em aberto: falta
-definir o que conta como estratégia nova (candidato: `hon_f`/`blef_f`, já
-rastreado desde a nota 08) e inventar/validar um mecanismo de choque que
-force uma mudança de estratégia sob comando (não existe pronto no projeto).
+**Terceiro módulo ✅ FEITO (nota 27, 2026-07-26, `datasets/detector-estrategia.csv`).**
+"Emergiu uma nova estratégia?", com um choque inventado (força todo
+nascimento a herdar `SIN_BLEFE`, movendo `hon_f`) e o mesmo núcleo de
+detector das notas 24/25. Passa o teste central de novo (0/8 falsos
+positivos) e detecta 6/8 choques reais (~520 ticks de latência — mais lenta
+que a de população, porque a alavanca é substituição demográfica, não
+efeito direto de energia). **Achado que fecha o eixo com uma simetria**: as
+2 seeds que escapam não são o "rápido demais" da nota 24 — declinaram tanto
+quanto as outras (41–46%) mas devagar o bastante para nenhuma janela de
+~750 ticks ver mais que 14% de queda de uma vez. O **sapo fervendo** é o
+espelho exato da extinção-rápida-demais: o mesmo desenho de janela fixa fica
+cego nas duas pontas da régua de tempo, rápido e devagar demais, não é
+defeito de um detector especifico — é propriedade estrutural de qualquer
+detector de janela fixa. Recuperação confirmada de novo (6/6 desligam).
+
+**Os três módulos declarados no ROADMAP estão feitos** (colapso — notas
+24/25; duas linhagens — notas 23/26; nova estratégia — nota 27). O eixo
+"Matrix como microscópio" tem uma primeira geração completa; o que resta é
+aberto: aprofundar cada módulo (ex.: janela adaptativa que não sofra nem do
+"rápido demais" nem do "sapo fervendo"?), testar se os relatórios **carregam
+comportamento** (alguém no mundo reage a eles?), ou o "regresso" que
+`FILOSOFIA_v3` item 8 deixou pendente ("quem calibra o calibrador?").
 
 **Aprofundamento ✅ FEITO (nota 25, 2026-07-26, `datasets/dose-detector.csv` e
 `datasets/janela-detector.csv`).** Duas perguntas sobre o limite da nota 24:
