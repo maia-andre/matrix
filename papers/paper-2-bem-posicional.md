@@ -271,6 +271,23 @@ de graça. O imposto exógeno e queimado compete com um mecanismo endógeno — 
 imprecisão da própria previsão — que produz um ESS interior sem cobrar nada de
 ninguém.
 
+> **[Adendo de 2026-07-26, nota 21: a conclusão central deste parágrafo foi
+> corrigida — "alinhar ≠ restaurar o bem-estar" era propriedade da queima, não
+> do imposto pigouviano em si.]** Um dividendo per-capita (o pool do imposto
+> devolvido igualmente a cada sobrevivente, a cada tick) preserva o alinhamento
+> quase intocado — a profundidade evoluída desce ao mesmo lugar, dentro de 0,16
+> do queimado em todo `c` (R1) — e **restaura o bem-estar além do baseline**: no
+> `c = 0,15` que alinha, a população queimada é 66% do baseline sem imposto; a
+> reciclada é **102%** (R2/R3). A ressalva pré-registrada — que a redistribuição
+> para sobreviventes perto do teto de reprodução deixaria um custo residual —
+> foi **falseada na direção favorável**: o resíduo é um excedente de ~2% em todo
+> `c ≥ 0,01`, da mesma ordem da externalidade posicional que o §3 mede entre
+> `h = 1` e `h = 12` (leitura candidata, não isolada experimentalmente). A
+> ironia deste parágrafo também muda de figura: os dois freios — o endógeno
+> (§5, a imprecisão da previsão) e o exógeno reciclado (nota 21) — não
+> competem por quem cobra menos; **os dois já são de graça**, por mecanismos
+> diferentes. `datasets/reciclagem.csv`, `papers/notes/21-o-imposto-que-recicla.md`.
+
 ## 8. Ameaças à validade
 
 - **O elo que falta.** Provamos que o tipo fundo colhe pior e que o dano escala com
@@ -351,6 +368,7 @@ deste artigo tem nota, script e dataset:
 | §4 (varredura de δ, ESS interior) | 16 | `16-desconto.sh` | `desconto.csv` |
 | §5, §6 (ruído × teimosia; a colheita) | 17 | `17-tipo-unico.sh` | `tipo-unico.csv` |
 | §7 (imposto pigouviano) | 15 | `15-imposto.sh` | `imposto.csv` |
+| §7 (adendo — dividendo per-capita) | 21 | `21-reciclagem.sh` | `reciclagem.csv` |
 
 As notas registram as **hipóteses mortas** — três na Fase 3, e o mecanismo inteiro
 do §4, que a nota 16 derrubou depois de a nota 14 o ter publicado. Num projeto cuja

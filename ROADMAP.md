@@ -1033,6 +1033,17 @@ custo de pensar** `h*(c)`.~~ ✅ **os dois rodaram (notas 14 e 15):**
   população — **alinhar a escolha ≠ restaurar o bem-estar**; o imposto que recicla
   é o próximo pré-registro.
 
+~~O imposto que recicla é o próximo pré-registro.~~ ✅ **FEITO (nota 21,
+2026-07-26, `datasets/reciclagem.csv`).** Dividendo per-capita em vez de queima:
+o alinhamento (profundidade → `h=1`) **sobrevive** ao rebate, quase intocado
+(R1); e o bem-estar **também** sobrevive — no `c=0,15` que alinha, a população
+queimada é 66% do baseline, a reciclada é **102%** (R2/R3). A ressalva
+pré-registrada (R4: possível custo residual da redistribuição) foi **falseada
+na direção favorável** — o resíduo é um excedente de ~2%, na mesma ordem de
+grandeza da externalidade posicional já medida na paisagem de grupo do §3
+(leitura candidata, não isolada). **Alinhar a escolha ≠ restaurar o bem-estar
+só quando o instrumento é destrutivo — reciclado, o alinhamento vem de graça.**
+
 ~~Sobra do Paper 2 só a **escrita**, com todo o material sustentado. Em aberto
 para além dele: varredura de `δ` (o joelho segue `1/(1−δ)`?)…~~ ⚠️ **A varredura
 de `δ` deixou de ser "para além dele" e virou a nota 16 — porque o `1/(1−δ)`
@@ -1110,9 +1121,13 @@ e se diffa — está commitada. Instalar toolchain é decisão em aberto.
    (declarada):** a evolução livre produz uma distribuição de horizontes
    **bimodal**? — o teste direto da ramificação, que ligaria de vez ao `hor_m` da
    nota 15.
-4. **Imposto com reciclagem** (nota 15), agora mais interessante: com freio
-   endógeno descoberto, o imposto exógeno compete com um mecanismo que o mundo já
-   tinha, e de graça.
+4. ~~**Imposto com reciclagem**~~ ✅ **FEITO (nota 21, 2026-07-26,
+   `datasets/reciclagem.csv`).** O rebate lump-sum preserva o alinhamento (R1) e
+   **restaura o bem-estar além do baseline** (R2/R3: 102% da população sem
+   imposto, contra 66% no queimado). A ressalva de custo residual (R4) foi
+   **falseada na direção favorável**. O imposto exógeno reciclado e o freio
+   endógeno da nota 17 não competem: os dois operam de graça, por mecanismos
+   distintos.
 
 ---
 
