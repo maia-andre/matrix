@@ -302,6 +302,23 @@ ninguém.
   inferência do §5 vira medição, com um segundo canal — o comportamento fundo
   fabrica parte do próprio ruído. Fronteira que permanece: a sonda mede o plano
   como previsão, não como *ranking* entre células candidatas (`datasets/sonda-erro.csv`).]**
+  **[Adendo de 2026-07-26, nota 22: a fronteira que sobrou foi fechada — a sonda
+  ordinal. O plano falha como previsão (k\* = 0, nota 18) mas ORDENA as até 9
+  células candidatas muito melhor que o acaso: discordância de pares entre o
+  rank previsto (só `prever_valor`) e o rank do que foi de fato extraído de
+  cada célula, por quem for, fica em 0,17–0,20 (acaso = 0,5) em toda condição
+  povoada, e o acerto do argmax é 3,8–4,5× o acaso — 8/8 seeds, reconstrução da
+  decisão real 100,000% exata. A discordância quase não piora de `h = 4` a
+  `h = 12` (|Δ| ≤ 0,015, contra o colapso de `corr(g_k,r_k)` da nota 18 já em
+  `k = 1`): é o porquê candidato do pico de colheita `h = 2` da nota 17 — o
+  RANK não degrada como o VALOR degrada. E a decisão completa (`u`, com o termo
+  de espaço) rastreia o realizado *melhor* quando o bloco está faminto que
+  quando está saciado (Δ = 0,02–0,11 a favor, 8/8 seeds, `t` até 29) — o espaço
+  recua exatamente quando deveria, por desenho, não por falha. Controle
+  algébrico: no eremita (sem rivais percebidos), `espaço` é constante entre
+  candidatos e `rank(u) ≡ rank(m)` por construção (afim, inclinação positiva)
+  — e a mesma comparação sai **invertida** ali (`t = −29`), como a álgebra
+  exige. `datasets/sonda-ordinal.csv`, `papers/notes/22-a-sonda-ordinal.md`.]**
 - **`comida_em_pé` é do mundo, não do bloco.** Mais comida de pé é evidência de
   colheita pior, mas é agregada: não distingue "cada bloco colhe menos" de "os
   blocos se concentram e deixam regiões intocadas". As duas são formas de colher
@@ -369,6 +386,7 @@ deste artigo tem nota, script e dataset:
 | §5, §6 (ruído × teimosia; a colheita) | 17 | `17-tipo-unico.sh` | `tipo-unico.csv` |
 | §7 (imposto pigouviano) | 15 | `15-imposto.sh` | `imposto.csv` |
 | §7 (adendo — dividendo per-capita) | 21 | `21-reciclagem.sh` | `reciclagem.csv` |
+| §8 (adendo — a sonda ordinal) | 22 | `22-sonda-ordinal.sh` | `sonda-ordinal.csv` |
 
 As notas registram as **hipóteses mortas** — três na Fase 3, e o mecanismo inteiro
 do §4, que a nota 16 derrubou depois de a nota 14 o ter publicado. Num projeto cuja

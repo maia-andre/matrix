@@ -1102,12 +1102,19 @@ e se diffa — está commitada. Instalar toolchain é decisão em aberto.
    E4: o erro **piora** com δ (cauda anticorrelacionada em 0,95) — o comportamento
    fundo fabrica o próprio ruído; a dose-resposta da nota 17 precisa dos dois
    canais (peso × degradação).
-1b. **A sonda ordinal** (declarada na nota 18 §4, não construída): k\*=0 mede o
-   plano como *previsão*; a decisão o usa como *ranking* entre células candidatas
-   — e o pico de colheita h=2 > h=1 (nota 17) prova que o termo ĝ_1 ajuda a
-   decidir sem prever. Candidato a mecanismo: o termo de rebrota injeta a
-   **capacidade** (estática, perfeitamente conhecida) no valor. Desenho: rank do
-   valor previsto × rank do retorno realizado, por decisão, entre as ≤9 células.
+1b. ~~**A sonda ordinal**~~ ✅ **FEITA (nota 22, 2026-07-26,
+   `datasets/sonda-ordinal.csv`).** k\*=0 media o plano como *previsão*
+   (nota 18); esta nota mede a *ordem*. O rank do mapa (`prever_valor`) contra o
+   rank do que foi realmente extraído de cada célula candidata (por quem for)
+   fica bem abaixo do acaso (discordância 0,08–0,20 vs 0,5) e o argmax bate
+   3,8–5,8× mais que o acaso, em toda condição povoada — 8/8 seeds,
+   reconstrução da decisão real 100,000% exata em 74M decisões. A discordância
+   quase não piora de h=4 a h=12 (|Δ|≤0,015, contra o colapso de `corr(g_k,r_k)`
+   já em k=1): é o candidato a mecanismo, agora medido, para o pico de colheita
+   h=2 da nota 17 — o RANK não degrada como o VALOR degrada. Bônus: a decisão
+   completa rastreia o realizado melhor quando faminto (t até 29), e o
+   controle algébrico (eremita: espaço vira constante, rank(u)≡rank(m)) inverte
+   a comparação exatamente como a álgebra exige (t=−29,5).
 2. ~~**Grade fina em `δ ∈ [0,88; 0,96]`**~~ ✅ **FEITO (nota 19, 2026-07-20,
    `datasets/grade-fina.csv`).** `h*(δ)` desce monotonicamente (teto/platô → 10 →
    9 → 8 → 8 → 7) enquanto `1/(1−δ)` sobe (8,3 → 25): **direções opostas** — a
