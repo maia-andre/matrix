@@ -601,16 +601,20 @@ população melhor. É uma corrida que cada indivíduo precisa correr para ficar
 parado, e que sai cara para todos. Se isso vale para o bicho de 56 KB, vale a
 pergunta para os outros.
 
-# Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos** *(em andamento — §4.0/4.1 fechados)*
+# Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos** *(em andamento — §4.0/4.1 fechados, §4.2/4.3 pré-registrados)*
 
 **Pergunta:** que comportamentos emergem, sem que ninguém os programe?
 
-> **Onde esta fase está** (2026-07-13): o sinal de intenção foi pré-registrado
+> **Onde esta fase está** (2026-07-27): o sinal de intenção foi pré-registrado
 > (§4.0) e entregue (§4.1, nota 08) — o relato virou causal e a honestidade
-> evoluiu sozinha. Seguem **abertas** as três frentes que a nota 08 herdou: o
-> blefe residual como ESS (varrer a frequência), a **memória de sinais**
-> (reputação) como 2ª rota anti-*cheap talk*, e o **Bandersnatch evolutivo** (a
-> arquitetura de *escuta* como traço herdável, ao lado da de *fala*).
+> evoluiu sozinha. Dos três fios que a nota 08 herdou, dois ganharam
+> pré-registro nesta sessão e aguardam rodar: a **arquitetura de escuta**
+> como traço (§4.2, sem custo ainda) e, fechando os dois `⛔` internos da
+> `FILOSOFIA_v3.md`, o **auto-modelo temporal** (§4.3, aprender com o que não
+> se fez). Seguem **abertas**, sem pré-registro: o blefe residual como ESS
+> (varrer a frequência) e a **memória de sinais** (reputação) como 2ª rota
+> anti-*cheap talk* — esta última é candidata natural a virar o mecanismo de
+> custo que o §4.2 propositalmente deixou de fora.
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
@@ -698,6 +702,157 @@ honestidade é ESS sem ninguém decretá-la — a matéria do **superego** da v3
 Herda à Fase 4: o blefe residual como ESS (varrer a frequência), memória de
 sinais (reputação) como 2ª rota anti-cheap-talk, e o **Bandersnatch evolutivo**
 (a arquitetura de *escuta* como traço, ao lado da de *fala*).
+
+## 4.2 Pré-registro da escuta evolutiva — a arquitetura de introspecção como traço *(2026-07-27, antes de rodar)*
+
+**O mecanismo.** A nota 07 mediu três arquiteturas de introspecção — a mesma
+heurística leiga do mostrador `relato` (nota 06), diferentes só **no que leem**
+— mas como um *patch do observador*: todas as três rodavam sobre a mesma
+população, calculadas de fora, nunca instaladas em bloco nenhum. A ameaça à
+validade que a própria nota 07 registrou (§ "Ameaças à validade"): *"o passo
+evolutivo... é o que transformaria a tabela em resultado de seleção; hoje ela é
+resultado de intervenção."* Este pré-registro dá esse passo — mas só a
+metade dele (ver "o que este pré-registro NÃO faz", abaixo).
+
+`relato_prepara()` já fotografa, antes de `resolver()`, o alvo cognitivo
+(`alvo_x/y`) e os dois argmax leigos (`rel_cx/rel_cy` por comida crua,
+`rel_ex/rel_ey` por espaço) que valem tanto para a verdade da decisão quanto
+para o relato. Passa a fotografar também o alvo em si num par `plano_x/plano_y`
+— hoje essa posição se perde quando `resolver()` sobrescreve `alvo_*` dos
+negados. Com isso, três leituras da MESMA fotografia ficam disponíveis para
+`medir_relato()`:
+
+- **ESC_ACAO** (a leitura única de hoje): classifica a posição **final**
+  (`blocos[i].x/y`, pós-`resolver()`) contra os argmax leigos.
+- **ESC_PLANO**: classifica `plano_x/plano_y` (pré-`resolver()`) contra os
+  mesmos argmax — imune à física de `resolver()`, do jeito que a nota 07
+  descreveu a arquitetura B ("nunca olha o mundo").
+- **ESC_MONITOR**: compara ação × plano; se coincidem, relata como ESC_ACAO
+  (as duas leituras concordam trivialmente quando não há negação); se
+  divergem, relata `REL_NAOSEI` — a arquitetura C da nota 07 não tem canal
+  para nomear um motivo quando detecta a própria negação, só para admitir que
+  detectou.
+
+**A arquitetura é traço herdável** (nível 6, com mutação, campo `escuta` em
+`Bloco`): semeadura em terços, como a estratégia de fala (§4.0). Mas, ao
+contrário de `estrategia`, `escuta` **não é lida por ninguém** nesta nota — não
+alimenta `utilidade()`, `pretendentes_em()` nem qualquer decisão. Só troca qual
+fórmula `medir_relato()` usa para aquele bloco específico.
+
+**O que este pré-registro NÃO faz, de propósito:** não liga `escuta` a nenhum
+custo ou vantagem. A nota 07 já previu o resultado esperado desse desenho —
+*"sem custo, deriva neutra; com leitores que punem incoerência, C invade A"* —
+e o primeiro semestre dessa frase é barato de confirmar isolado, sem desenhar
+ainda o mecanismo de custo (que é a parte difícil: como um vizinho "pune"
+incoerência, quando o próprio traço não é observável de fora). Este é o **S1**
+desta nota — instalar o traço, provar que ele não faz nada por conta própria —
+no mesmo espírito do S1 do §4.0 (o refactor inócuo). O mecanismo de custo, se
+os dados aqui confirmarem a deriva neutra, é o pré-registro seguinte.
+
+**Predições, declaradas antes de rodar:**
+
+- **P1 (instalação inócua):** com `escuta` variando livremente (herdado, com
+  mutação, semeado em terços) a simulação inteira é **bit-a-bit idêntica**,
+  coluna por coluna, à mesma seed sem o traço — `pop`, `energia_media`,
+  `comida_total`, os quatro traços, `modelo`, `agencia`, `modelo_do_outro`,
+  `phi`, `hon_f`, `blef_f`, `autocausa`. Só `relato` e as colunas novas podem
+  mudar. Mais forte que o S1 do §4.0: lá "todos honestos" precisava reproduzir
+  a telepatia; aqui **qualquer mistura** de arquiteturas tem que deixar o mundo
+  intocado, porque `escuta` não é lida em lugar nenhum do tick.
+- **P2 (compatibilidade retroativa):** com toda a população em `ESC_ACAO`, a
+  coluna `relato` é **idêntica** à de hoje (a leitura já era essa, sem nome).
+- **P3 (ordem esperada do kappa, populações homogêneas):** `ESC_PLANO` ≥
+  `ESC_ACAO`, porque ação e plano só divergem nos ~6% negados por `resolver()`
+  (nota 06) — e é exatamente aí que a nota 07 mediu a arquitetura B mais
+  precisa que a A (`accB` 0,888 × `accA` 0,441 nos negados). O efeito no kappa
+  da população inteira deve ser **modesto** (a maioria dos ticks é "livre",
+  onde as três leituras coincidem), não da magnitude da tabela da nota 07 (que
+  isolava os negados). `ESC_MONITOR` deve ficar **abaixo** de `ESC_PLANO` nos
+  negados — responder `NAOSEI` é uma admissão, não um acerto, quando a verdade
+  não é `NAOSEI`.
+- **P4 (deriva neutra):** semeando em terços com mutação e deixando rodar (3+
+  seeds, 30 000 ticks, como o S6 do §4.0), **não deve haver direção
+  consistente entre seeds** — ao contrário de `hon_f`, que a nota 08 mediu
+  convergindo para perto de 1 nas três seeds testadas. Se as três seeds desta
+  nota também convergirem na mesma direção, é sinal de um efeito de fitness
+  que este desenho não devia ter — e isso derruba P1, não só P4.
+
+**Reproduzir (script a escrever):** `sh papers/notes/29-escuta-evolutiva.sh`.
+
+## 4.3 Pré-registro do auto-modelo temporal — aprender com o que não se fez *(2026-07-27, antes de rodar)*
+
+**O problema, como a v3 §4 o deixou.** O bloco não carrega a própria
+trajetória: não há substrato para "eu poderia ter ido para a esquerda" — uma
+crença modal, falsa num universo `f(seed)`, e funcionalmente indispensável em
+qualquer agente que aprenda com o que deixou de fazer. Ao contrário da escuta
+(§4.2), a v3 é explícita que aqui **não basta medir**: "mexe na simulação, não
+na régua". Este pré-registro instala uma faculdade nova, não um mostrador.
+
+**O mecanismo — o contrafactual que o próprio tick já quase calcula.**
+`melhor_celula()` (nível 4/5) já varre as células alcançáveis e escolhe o
+argmax. Guardando também a **segunda melhor** (`vice_x/vice_y`, a "vice-célula" — com
+seu próprio critério de desempate, o mesmo `>` estrito do argmax principal) a
+decisão fica com um contrafactual concreto: "se o alvo não desse
+certo, era esta a minha segunda aposta." `resolver()` já decide, todo tick,
+quem é **negado** (`alvo_x/y` reescrito para a posição atual). Um bloco negado
+cuja vice-célula estava **livre no início do tick** (portanto alcançável, e
+ninguém a disputou) tem agora um contrafactual **verificável**, não
+especulativo: ele poderia ter ido para lá, e ninguém o impediria. É o caso
+exato que a v3 nomeia.
+
+O **arrependimento** desse tick é `prever_valor(vice) − prever_valor(posição
+final)` quando positivo (a vice-célula parecia melhor que ficar parado). Um
+novo estado persistente por bloco, `remorso[i]` (não um traço — um *estado*,
+como `real_acum`/`peso_janela` já são), acumula esse sinal com o mesmo
+decaimento do desconto do bloco (`remorso[i] = remorso[i]*desconto +
+arrependimento`) — a memória de curto prazo que a v3 pede, sem precisar
+guardar um histórico de posições. O traço herdável (nível 6, campo
+`peso_arrependimento`, mutação, semeado em torno de 0 com folga para os dois
+lados) decide **quanto** `remorso[i]` pesa de volta em `utilidade()`: um termo
+que empurra a escolha para células com mais espaço livre quando o bloco
+anda "arrependido" — a mesma direção que o contrafactual apontava (a
+vice-célula, nos casos que geram `remorso`, tende a ser uma célula menos
+disputada; é por estar livre e não reivindicada que ela sobra como vice
+alcançável). `peso_arrependimento = 0` é o bloco de hoje: sem memória, sem
+aprendizado, ablação natural embutida no próprio traço.
+
+**Por que isto é diferente da `agencia` e do `modelo_do_outro`.** Aqueles
+mostradores **varrem um eixo hipotético** (λ, α) sem que o bloco jamais opere
+naquele contrafactual — são a régua perguntando "faria diferença?", de fora.
+Aqui o contrafactual **entra na decisão de verdade**, tick após tick, e a
+seleção natural decide se vale a pena carregá-lo. É a diferença entre medir
+agência e ter agência sobre o próprio agir passado.
+
+**Predições, declaradas antes de rodar:**
+
+- **Q1 (ablação natural):** `peso_arrependimento ≡ 0` para toda a população
+  produz simulação **bit-a-bit idêntica** à de hoje (sem o mecanismo) — o
+  termo em `utilidade()` desaparece exatamente, não aproximadamente.
+- **Q2 (o remorso acontece, e é raro-mas-real):** numa população de controle
+  (traço fixo em algum valor positivo pequeno, sem mutação), a fração de
+  ticks com `arrependimento > 0` fica na mesma ordem de grandeza da taxa de
+  negados da nota 06 (~6%) — não pode ser maior (é um subconjunto dos
+  negados) nem desprezível.
+- **Q3 (aprender com o passado ajuda, ou não — registrado em voz alta):**
+  comparando população com `peso_arrependimento` fixo positivo × fixo em 0
+  (mesma seed, sem mutação no traço), a hipótese é que a taxa de negados
+  **cai** ao longo da simulação para quem aprende (o viés de espaço afasta o
+  bloco de células disputadas antes de errar de novo) — mas o risco declarado
+  é que o sinal seja tão raro (Q2) que o efeito populacional se perca no
+  ruído, ou que reforçar `peso_espaco` de forma cega prejudique quem não
+  estava mesmo perto de uma disputa. Qualquer um dos dois é resultado, não
+  fracasso do desenho.
+- **Q4 (invasão):** 50/50 `peso_arrependimento` positivo × zero, sem mutação
+  no traço — se Q3 se confirmar, o aprendiz desloca o não-aprendiz; se não,
+  o não-aprendiz não perde terreno (não há custo intrínseco em não
+  aprender, só a oportunidade perdida).
+- **Q5 (deriva a partir do diverso):** semeando `peso_arrependimento` em torno
+  de 0 com folga, com mutação, 30 000 ticks, 3+ seeds — a média da população
+  se desloca para longe de 0 (na direção que Q4 favorecer) ou fica perto de 0
+  (aprendizado é adaptativamente indiferente neste mundo). As duas são
+  publicáveis; a v3 §4 só precisa saber qual.
+
+**Reproduzir (script a escrever):** `sh papers/notes/30-auto-modelo-temporal.sh`.
 
 ---
 
