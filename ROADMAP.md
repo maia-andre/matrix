@@ -1285,3 +1285,69 @@ parecia — só não é grátis até o fim.
 Um benchmark de performance. Um exercício de arquitetura de software. Uma
 demonstração de ECS. São coisas boas — em outro projeto. Aqui cada uma custa
 determinismo, simplicidade ou identidade, e não compra nenhuma pergunta nova.
+
+---
+
+# Backlog especulativo — conjecturas, não pesquisa *(2026-07-26)*
+
+O André perguntou, tirando os papers da mesa: como expandir o universo daqui?
+Quatro ideias na mesa, e o que cada uma pesa **hoje** — isto é conjectura
+registrada para orientar a próxima sessão, não compromisso.
+
+1. **`FILOSOFIA_v4`?** Ainda não. A v3 fechou §7 nesta sessão, mas não esgotou
+   a si mesma: sobram dois `⛔` **internos**, dentro de seções já escritas —
+   §4 (o auto-modelo temporal: a crença "eu poderia ter ido pra esquerda",
+   modal e falsa num universo `f(seed)`, adiada porque mexe na simulação, não
+   na régua) e §5 (a versão evolutiva da escuta: arquiteturas de
+   interpretação como traço herdável, reaproveitando o padrão de traço
+   herdável que a Fase 4 já construiu para a *fala*). O padrão do projeto
+   (v1→v2→v3, cada uma nascendo quando a anterior esgota o que pode
+   perguntar) diz para fechar esses dois antes de abrir uma quarta versão —
+   abrir agora seria decoração antes da hora, pelo próprio critério que o
+   projeto aplica a tudo o mais.
+
+   **O gatilho real de uma v4**, se vier, é mais específico: os três
+   detectores do eixo microscópio (notas 24–28) são **observacionais** —
+   nenhum bloco no mundo reage a eles. A pergunta que já ficou em aberto
+   ("os relatórios carregam comportamento, ou são saída inerte?") é onde
+   uma v4 nasceria de verdade: um sistema que se observa **e age** sobre a
+   própria observação é, possivelmente, uma categoria diferente da que a v3
+   descreve — mas isso só se sabe depois de construir a malha causal, não
+   antes.
+
+2. **Mais referências da literatura.** Já começou nos preprints (Geritz et
+   al. 1998 para ponto de ramificação, Hirsch 1976 para "bem posicional",
+   Maynard Smith, Tononi, Dretske/Millikan, Popper, Pigou, Van Valen). Vale
+   continuar, mas como **apoio** de uma pesquisa em andamento — ler mais
+   dinâmica adaptativa sugere o próximo experimento de invasão; ler mais
+   Gazzaniga sugere a próxima intervenção no `relato`. Não é um eixo por si
+   só.
+
+3. **Um motor novo, mais robusto, para repassar os mesmos testes.** Aqui a
+   resposta direta é **não**, e o motivo já está escrito acima, nesta mesma
+   seção: paralelismo/otimização quebrariam o determinismo bit-a-bit que é o
+   método de verificação inteiro do projeto, e não há gargalo real (~300
+   blocos, vizinhança 3×3, tudo O(1) já). As oito notas desta sessão (24–28)
+   inventaram cada uma um mecanismo diferente — detector de colapso, choque
+   de estratégia inventado, classificador que descobre o próprio corte — e
+   nenhuma precisou de motor novo, só de patches temporários sobre o
+   `main.c` canônico. O padrão escalou para tudo que foi pedido até agora.
+
+4. **Um motor novo que permita testes hoje impossíveis.** Esta é a pergunta
+   que decide tudo, e ainda não tem um "sim, precisamos disso para X"
+   concreto — nenhuma nota desta sessão esbarrou num teste que o padrão de
+   patch não desse conta. Se um teste concreto aparecer que pareça
+   estruturalmente impossível dentro de "um arquivo, sem dependência,
+   aritmética determinística", **nomeie-o antes de construir infraestrutura
+   para ele** — é a mesma disciplina de "meça antes de escrever" aplicada a
+   engenharia, não só a resultado.
+
+   **O que eu separaria dessa rejeição**: uma camada de **visualização**,
+   nova, aditiva, num diretório próprio (`viz/` ou parecido), que não toca
+   `main.c` — só lê os CSVs e datasets que já existem e produz gráficos e
+   replays de verdade. Isso não ameaça determinismo nenhum (é leitura por
+   fora) e resolve um buraco real: os dois papers têm **zero figuras**, só
+   tabelas. Um replay visual do split bimodal (nota 23) ou do detector de
+   colapso disparando ao vivo (nota 24) convenceria muito mais que uma
+   tabela de números. É o "motor mais visual" que vale construir — como
+   ferramenta ao lado do núcleo, nunca como substituto dele.
