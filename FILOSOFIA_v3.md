@@ -382,7 +382,7 @@ desconfortável: um relato de "algo me moveu contra o meu plano" — num cérebr
 num experimento de Libet, numa Matrix — jamais discrimina, sozinho, física de
 dentro de intervenção de fora.
 
-## 5. A dobradiça da confabulação *(item 5 — selvagem ✅ e forçada ✅; a evolutiva ⛔ aguarda)*
+## 5. A dobradiça da confabulação *(item 5 — selvagem ✅, forçada ✅ e evolutiva instalada ✅; o custo segue ⛔)*
 
 O que torna o auto-relato humano pouco confiável para a ciência não é a
 mentira — é a **confabulação**: o relato sincero de um motivo que não operou.
@@ -420,11 +420,16 @@ e aponta para o **relato como gênero de evidência** — qualquer relato, de
 qualquer sistema cuja arquitetura de leitura se conheça. Da nossa, note-se,
 não se conhece nem isso.
 
-O que ⛔ aguarda é a versão **evolutiva**: as arquiteturas de escuta como
-traço herdável, com o relato custando. A Fase 4 já fez exatamente isso com a
-*fala* — e a honestidade venceu sem multa (§3); falta a *escuta*. A predição
-barata está registrada desde a nota 07: sem custo, deriva neutra; com leitores
-que punem incoerência, o monitor invade o confabulador.
+A versão **evolutiva** está instalada: as três arquiteturas viraram traço
+herdável (`escuta`, nível 6, ROADMAP §4.2) — mas, de propósito, ainda **sem
+o relato custar nada**. A metade barata da predição da nota 07 se confirmou
+primeiro: sem custo, a deriva é mesmo neutra — três seeds, 30 000 ticks,
+sem direção comum, ao contrário do que a honestidade da *fala* fez sob
+custo real (§3). O que falta — e o que continua ⛔ — é a metade cara: ligar
+`escuta` a uma consequência de verdade, para testar se "leitores que punem
+incoerência" fazem o monitor invadir o confabulador. Sem isso instalado,
+não há o que testar — só o controle que prova que o traço, sozinho, não
+inclina nada (nota 29).
 
 E o fecho do arco, que esta seção entrega pronto à §6: o último reduto de
 qualquer um de nós — "mas eu **sei** que sou consciente, por dentro" — **é ele

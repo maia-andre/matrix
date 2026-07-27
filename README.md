@@ -88,7 +88,9 @@ traços do nível 6, a **média** (`_m`) e o **desvio-padrão** (`_sd`)
 (`hor_*, desc_*, urg_*, esp_*`); e os **mostradores da bateria** (abaixo),
 todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi, relato`; a
 fração da população por estratégia de sinalização, `hon_f` (honesta) e `blef_f`
-(blefe) — o resto é muda; e, na última coluna, `autocausa`. Como o universo é
+(blefe) — o resto é muda; `autocausa`; e, nas duas últimas colunas, a fração por
+**arquitetura de escuta** (introspecção — nota 07), `esc_plano_f` e
+`esc_monitor_f` — o resto lê a própria ação (nota 29). Como o universo é
 `f(seed)` (ver abaixo), o CSV é **reproduzível bit-a-bit**: qualquer pessoa
 regenera o mesmo dataset a partir da seed. É a base para virar instrumento de
 pesquisa — varrer seeds/parâmetros e medir o que a evolução faz, em vez de só
@@ -187,6 +189,19 @@ o silêncio (0,50 → 0,95) e resiste ao blefe (0,50 → 0,87), sobrando um poli
 estável de ~10% de blefe. O `modelo_do_outro` de um mundo todo-mudo é **zero
 exato**: silêncio e cegueira são, para a régua, o mesmo estado. Ver
 [`papers/notes/08-o-sinal-e-a-mentira.md`](./papers/notes/08-o-sinal-e-a-mentira.md).
+
+E a **arquitetura de escuta** (ler a ação / ler o plano / monitorar os dois —
+nota 07) também virou **traço herdável** (`escuta`, nível 6) — mas, de
+propósito, **sem custo** nenhum ligado ao jogo ainda: só troca qual fórmula o
+mostrador `relato` usa por bloco. Instalação inócua confirmada (a simulação
+inteira fica bit-a-bit igual, qualquer que seja a mistura de arquiteturas na
+população) e a deriva é mesmo **neutra**: 30 000 ticks, três seeds, sem
+vencedor consistente — ao contrário de `hon_f`, que convergiu sob custo real.
+Achado extra: populações de `ESC_MONITOR` (admite "não sei" quando detecta a
+própria negação) tiram kappa **mais alto** que `ESC_ACAO` (confabula) — admitir
+ignorância acerta contra uma verdade que também é "não sei" mais do que
+confabular erra. Ver
+[`papers/notes/29-escuta-evolutiva.md`](./papers/notes/29-escuta-evolutiva.md).
 
 E o **self já estava no código**, sem que ninguém o tivesse notado. Em
 `prever_valor`, a linha `food -= garfada` é o bloco prevendo que a célula vai

@@ -47,6 +47,15 @@ os CSVs **no mesmo commit** da mudança — assim o `git log` acima continua exa
 não são comparáveis com os `~0,63` de hoje. Ver
 [`../papers/notes/01-quatro-modos-de-errar.md`](../papers/notes/01-quatro-modos-de-errar.md).
 
+⚠️ **Colunas novas: `esc_plano_f`, `esc_monitor_f`** (fração da população por
+arquitetura de escuta/introspecção — traço herdável sem custo, nota 29). CSVs
+pós-nota-09 têm 21 colunas; os atuais, 23. As 21 primeiras **não** são
+bit-a-bit compatíveis desta vez: variar `escuta` livremente consome `rng01()`
+a mais na semeadura e na mutação de cada bloco, o que desloca o fluxo do RNG
+inteiro (reprodução incluída) — mesmo o traço não afetando decisão nenhuma
+(prova disso: nota 29, P1/P2, com a metodologia que preserva o fluxo do RNG
+via patch). Datasets regenerados no mesmo commit da mudança.
+
 ⚠️ **Coluna nova: `autocausa`** (o self como causa — nota 09), a **21ª**, no fim.
 CSVs pós-nota-08 têm 20 colunas; os atuais, 21. As 20 primeiras são **bit-a-bit
 idênticas**: o mostrador varre σ ∈ [0,1] mas a simulação roda em σ = 1, que é o
