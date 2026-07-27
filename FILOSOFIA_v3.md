@@ -302,7 +302,7 @@ desta bateria — e a tentação de deslizar da primeira frase para a segunda é
 exatamente o empréstimo de respeitabilidade que a §6 recusa pagar. O
 vocabulário emprestado fica; o fiador fenomenológico, não.
 
-## 4. O tempo, a quarta dimensão e Bandersnatch *(item 7 — o dedo ✅ rodou; o auto-modelo temporal segue ⛔)*
+## 4. O tempo, a quarta dimensão e Bandersnatch *(item 7 — o dedo ✅ rodou; o auto-modelo temporal ✅ instalado, direção surpreendente)*
 
 O determinismo, neste projeto, não é uma tese: é uma propriedade verificável
 do binário. O universo inteiro é `f(seed)` — mesma seed, mesma história, bit a
@@ -318,13 +318,24 @@ faminto?", a `autocausa` pergunta "e se ele não se descontasse do próprio
 futuro?" — perguntas sobre o que *não* aconteceu, rodadas hoje pelo
 **observador**, por fora do mundo. O bloco carrega um único contrafactual
 dentro de si: o `food -= garfada` da §2, o futuro empobrecido *porque eu terei
-comido*. O que ele não carrega é a própria trajetória — não há memória de
-escolhas, e portanto não há substrato para "eu poderia ter ido para a
-esquerda": uma crença **modal**, **falsa** num universo `f(seed)`, e
-funcionalmente indispensável em qualquer agente que aprenda com o que deixou
-de fazer. Esse auto-modelo temporal é a faculdade que falta; mexe na simulação,
-não na régua, e segue ⛔ para a Fase 4/5. O resto desta seção não precisa
-dele — precisa do que já rodou.
+comido*. O que ele não carregava era a própria trajetória — e agora carrega. Um
+bloco negado por `resolver()` cuja vice-célula (a segunda melhor da própria
+varredura de decisão) ninguém disputou tem um contrafactual **verificável**:
+podia mesmo ter ido para lá. `remorso[]` acumula esse sinal, decaindo pelo
+próprio desconto do bloco; o traço herdável `peso_arrependimento` (nível 6)
+decide se ele volta a pesar na decisão seguinte — a crença modal "eu poderia
+ter ido para a esquerda" virou substrato de verdade, não mais ausência
+(ROADMAP §4.3, nota 30). A surpresa não estava em *se* a seleção usaria essa
+memória — estava em **para onde**: o desenho apostava que aprender
+significava reforçar a fuga do espaço disputado (peso positivo), e a régua
+mostrou o oposto — três seeds convergem, a partir de um início diverso, para
+um peso **negativo**, que faz o bloco *menos* propenso a perseguir espaço
+aberto depois de ser barrado, não mais. Reforçar a fuga custa energia
+(medido, pequeno mas sem exceção nas três seeds); a seleção parece preferir
+que o bloco, depois de perder uma disputa, continue competindo pelo recurso
+que valia a disputa. A hipótese mecânica fica registrada, não provada — o
+próximo passo natural é uma invasão direta negativo × zero, que a nota 30
+deixou como item em aberto.
 
 O que já rodou é o **Bandersnatch** (nota 07). Um dedo de fora do mundo
 sobrescreve ~25% das escolhas — seleção e alvo por hash, determinísticos, sem

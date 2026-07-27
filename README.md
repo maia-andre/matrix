@@ -88,9 +88,10 @@ traços do nível 6, a **média** (`_m`) e o **desvio-padrão** (`_sd`)
 (`hor_*, desc_*, urg_*, esp_*`); e os **mostradores da bateria** (abaixo),
 todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi, relato`; a
 fração da população por estratégia de sinalização, `hon_f` (honesta) e `blef_f`
-(blefe) — o resto é muda; `autocausa`; e, nas duas últimas colunas, a fração por
-**arquitetura de escuta** (introspecção — nota 07), `esc_plano_f` e
-`esc_monitor_f` — o resto lê a própria ação (nota 29). Como o universo é
+(blefe) — o resto é muda; `autocausa`; a fração por **arquitetura de escuta**
+(introspecção — nota 07), `esc_plano_f` e `esc_monitor_f` — o resto lê a
+própria ação (nota 29); e, nas duas últimas colunas, média e desvio do peso
+do **auto-modelo temporal**, `arrep_m`/`arrep_sd` (nota 30). Como o universo é
 `f(seed)` (ver abaixo), o CSV é **reproduzível bit-a-bit**: qualquer pessoa
 regenera o mesmo dataset a partir da seed. É a base para virar instrumento de
 pesquisa — varrer seeds/parâmetros e medir o que a evolução faz, em vez de só
@@ -202,6 +203,24 @@ própria negação) tiram kappa **mais alto** que `ESC_ACAO` (confabula) — adm
 ignorância acerta contra uma verdade que também é "não sei" mais do que
 confabular erra. Ver
 [`papers/notes/29-escuta-evolutiva.md`](./papers/notes/29-escuta-evolutiva.md).
+
+E o **auto-modelo temporal** deixou de ser ausência e virou mecanismo: um
+bloco negado por `resolver()` cuja vice-célula (a segunda melhor da própria
+varredura de decisão) ninguém disputou tem um contrafactual **verificável**
+— "eu poderia ter ido para a esquerda" deixa de ser especulação. O sinal
+(`remorso`, que decai pelo próprio desconto do bloco) alimenta um novo
+traço herdável, `peso_arrependimento`, que decide se a memória volta a
+pesar na decisão seguinte. A surpresa não foi *se* a seleção usaria essa
+memória, foi **para onde**: o desenho apostava que aprender significava
+perseguir mais espaço livre depois de barrado (peso positivo) — mas isso
+custa energia (medido, pequeno e sem exceção em três seeds) e não vence
+disputas de invasão contra o traço zerado (placar exato de 3×3). A
+população, semeada livre e deixada evoluir, converge nas três seeds para o
+lado **oposto**: um peso **negativo**, que faz o bloco *menos* propenso a
+fugir da lotação depois de perder uma disputa — hipótese em aberto:
+persistir onde a disputa valia a pena compensa mais que fugir para uma
+célula vazia só por estar vazia. Ver
+[`papers/notes/30-auto-modelo-temporal.md`](./papers/notes/30-auto-modelo-temporal.md).
 
 E o **self já estava no código**, sem que ninguém o tivesse notado. Em
 `prever_valor`, a linha `food -= garfada` é o bloco prevendo que a célula vai
@@ -363,12 +382,15 @@ só essa parte mudou:
   ```
   utilidade = comida_prevista · (1 + URGENCIA·fome)      ← motivo FOME
             + PESO_ESPACO · espaco_livre · (1 − fome)    ← motivo ESPACO
+            + PESO_ARREPENDIMENTO · remorso · espaco_livre  ← motivo do nv6, §4.3
   ```
 
   com `fome = clamp(1 − energia/SACIADO, 0, 1)`. Faminto → forrageia obstinado;
   saciado → busca espaço aberto (menos disputa, lugar pra cria). O **mesmo** bloco
   no **mesmo** mundo decide diferente conforme a necessidade. Ele age para regular
-  a própria valência — isso é agência, não reação.
+  a própria valência — isso é agência, não reação. (A terceira linha só existe
+  desde o nível 6/nota 30 — `remorso` é memória de curto prazo, não um traço; ver
+  abaixo.)
 - **Nível 5 (auto-modelo):** até aqui o bloco modelava o mundo mas se esquecia de
   **si** — avaliava uma célula como se fosse o único a cobiçá-la. Agora o tick tem
   **três passagens** (`declarar` → `emitir` → `decidir`): primeiro todos declaram a
@@ -399,7 +421,11 @@ só essa parte mudou:
   política que come mais vive mais e deixa mais filhos, então a média da
   população **deriva** para o que funciona — **seleção natural**, sem gradiente
   nem recompensa explícita. As médias dos traços aparecem no HUD pra você ver a
-  evolução ao vivo.
+  evolução ao vivo. Mais três traços se juntaram aos quatro originais, cada um
+  com o próprio mecanismo de mutação/herança: a **estratégia de fala**
+  (`estrategia` — nota 08), a **arquitetura de escuta** (`escuta` — nota 29, sem
+  custo ainda) e o **peso do arrependimento** (`peso_arrependimento` — nota 30,
+  a única que a seleção já empurrou numa direção clara e inesperada).
 
   *Efeito medido* (seed 7, traço médio ao longo de 800 ticks): `horizonte`
   6.0 → **7.6** e `peso_espaco` 3.2 → **2.7** — planejar mais fundo é favorecido,

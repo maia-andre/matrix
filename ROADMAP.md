@@ -601,20 +601,23 @@ população melhor. É uma corrida que cada indivíduo precisa correr para ficar
 parado, e que sai cara para todos. Se isso vale para o bicho de 56 KB, vale a
 pergunta para os outros.
 
-# Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos** *(em andamento — §4.0/4.1 fechados, §4.2/4.3 pré-registrados)*
+# Fase 4 — Vida artificial: instalar **mecanismos**, nunca **fenômenos** *(em andamento — §4.0–4.3 entregues)*
 
 **Pergunta:** que comportamentos emergem, sem que ninguém os programe?
 
 > **Onde esta fase está** (2026-07-27): o sinal de intenção foi pré-registrado
 > (§4.0) e entregue (§4.1, nota 08) — o relato virou causal e a honestidade
-> evoluiu sozinha. Dos três fios que a nota 08 herdou, dois ganharam
-> pré-registro nesta sessão e aguardam rodar: a **arquitetura de escuta**
-> como traço (§4.2, sem custo ainda) e, fechando os dois `⛔` internos da
-> `FILOSOFIA_v3.md`, o **auto-modelo temporal** (§4.3, aprender com o que não
-> se fez). Seguem **abertas**, sem pré-registro: o blefe residual como ESS
-> (varrer a frequência) e a **memória de sinais** (reputação) como 2ª rota
-> anti-*cheap talk* — esta última é candidata natural a virar o mecanismo de
-> custo que o §4.2 propositalmente deixou de fora.
+> evoluiu sozinha. Dos três fios que a nota 08 herdou, dois rodaram nesta
+> sessão e fecham os dois `⛔` internos da `FILOSOFIA_v3.md`: a
+> **arquitetura de escuta** como traço (§4.2, nota 29 — instalada sem custo,
+> deriva neutra confirmada) e o **auto-modelo temporal** (§4.3, nota 30 — o
+> contrafactual "eu poderia ter ido para a esquerda" virou mecanismo real, e
+> a seleção converge para um `peso_arrependimento` **negativo**, não o
+> positivo que o desenho apostava). Seguem **abertas**, sem pré-registro: o
+> blefe residual como ESS (varrer a frequência), a **memória de sinais**
+> (reputação) — candidata natural ao mecanismo de custo que o §4.2
+> propositalmente deixou de fora — e, herdado da nota 30, uma invasão direta
+> negativo × zero para fechar o argumento de Q5.
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
@@ -1449,7 +1452,8 @@ O André perguntou, tirando os papers da mesa: como expandir o universo daqui?
 Quatro ideias na mesa, e o que cada uma pesa **hoje** — isto é conjectura
 registrada para orientar a próxima sessão, não compromisso.
 
-1. **`FILOSOFIA_v4`?** Ainda não. A v3 fechou §7 nesta sessão, mas não esgotou
+1. **`FILOSOFIA_v4`?** Ainda não *(era a resposta em 2026-07-26 — ver
+   atualização abaixo)*. A v3 fechou §7 nesta sessão, mas não esgotou
    a si mesma: sobram dois `⛔` **internos**, dentro de seções já escritas —
    §4 (o auto-modelo temporal: a crença "eu poderia ter ido pra esquerda",
    modal e falsa num universo `f(seed)`, adiada porque mexe na simulação, não
@@ -1460,6 +1464,19 @@ registrada para orientar a próxima sessão, não compromisso.
    perguntar) diz para fechar esses dois antes de abrir uma quarta versão —
    abrir agora seria decoração antes da hora, pelo próprio critério que o
    projeto aplica a tudo o mais.
+
+   **Atualização (2026-07-27): os dois `⛔` fecharam** — §4.2/4.3, notas 29 e
+   30. A escuta virou traço sem custo (deriva neutra confirmada); o
+   auto-modelo temporal virou mecanismo real, com uma seleção que converge
+   para um `peso_arrependimento` **negativo** — direção que o desenho
+   original não previu. Isso muda o argumento contra a `FILOSOFIA_v4`
+   também: **ainda não**, pelo mesmo critério de sempre (v1→v2→v3 cada uma
+   nasce quando a anterior esgota o que pode perguntar), porque a v3 acabou
+   de ganhar um resultado que **ela própria** ainda não digeriu em prosa —
+   o §4 e o §5 relatam o mecanismo, mas a pergunta que a direção negativa
+   abre ("por que evitar o espaço, depois de barrado, paga mais que
+   persegui-lo?") é nova e não escrita em lugar nenhum ainda. O gatilho real
+   de uma v4 continua sendo o que já estava registrado abaixo.
 
    **O gatilho real de uma v4**, se vier, é mais específico: os três
    detectores do eixo microscópio (notas 24–28) são **observacionais** —

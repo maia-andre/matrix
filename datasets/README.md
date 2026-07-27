@@ -47,6 +47,16 @@ os CSVs **no mesmo commit** da mudança — assim o `git log` acima continua exa
 não são comparáveis com os `~0,63` de hoje. Ver
 [`../papers/notes/01-quatro-modos-de-errar.md`](../papers/notes/01-quatro-modos-de-errar.md).
 
+⚠️ **Colunas novas: `arrep_m`, `arrep_sd`** (média/desvio do traço
+`peso_arrependimento` — o auto-modelo temporal, nota 30). CSVs pós-nota-29
+têm 23 colunas; os atuais, 25. As 23 primeiras **não** são bit-a-bit
+compatíveis: variar `peso_arrependimento` livremente consome `rng01()` a mais
+(mesmo argumento da entrada abaixo, sobre `escuta`) — mas desta vez o traço
+**também afeta a simulação de verdade**, quando não é zero: alimenta um termo
+novo em `utilidade()`. Prova disso: nota 30, Q1, com traço forçado a zero SEM
+consumir RNG — aí sim as 23 colunas batem exatas contra o `main.c` de antes do
+mecanismo existir.
+
 ⚠️ **Colunas novas: `esc_plano_f`, `esc_monitor_f`** (fração da população por
 arquitetura de escuta/introspecção — traço herdável sem custo, nota 29). CSVs
 pós-nota-09 têm 21 colunas; os atuais, 23. As 21 primeiras **não** são
