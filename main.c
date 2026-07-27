@@ -144,6 +144,7 @@ typedef struct {
     int   horizonte;    /* profundidade do plano  (era #define HORIZONTE)   */
     int   estrategia;   /* de sinalizacao: honesto, mudo ou blefe (§4.0)    */
     int   escuta;       /* introspeccao: acao, plano ou monitor   (§4.2)    */
+    float peso_arrependimento; /* quanto o remorso pesa em utilidade (§4.3) */
 } Bloco;
 
 static Bloco blocos[MAX_AG];
@@ -172,6 +173,17 @@ static int intencao_y[MAX_AG];
  * intencao) o mundo e bit-a-bit identico ao da telepatia (verificado; S1). */
 static int sinal_x[MAX_AG];
 static int sinal_y[MAX_AG];
+
+/* (§4.3) auto-modelo temporal — o contrafactual que resolver() ja quase
+ * calcula. 'decidido_*'/'vice_*' sao fotografia do tick (escritas em decidir,
+ * antes de resolver() poder negar o alvo; lidas por atualizar_remorso logo
+ * depois). 'remorso' e o unico ESTADO que persiste de um tick pro outro —
+ * nao e traco: decai pelo desconto do proprio bloco, como peso_janela decai
+ * na bateria do 'modelo'. Zerado na cria em reproduzir() (slots reciclados
+ * nao devem herdar o remorso de quem morreu ali). */
+static int   decidido_x[MAX_AG], decidido_y[MAX_AG];
+static int   vice_x[MAX_AG],     vice_y[MAX_AG];
+static float remorso[MAX_AG];
 
 static int reivindicado[ALT][LARG];  /* quem ganhou o direito de entrar aqui */
 
@@ -279,6 +291,7 @@ static void semear_blocos(void) {
         if (b->estrategia > SIN_BLEFE) b->estrategia = SIN_BLEFE;
         b->escuta      = (int)(rng01() * 3.0f);                   /* tercos      */
         if (b->escuta > ESC_MONITOR) b->escuta = ESC_MONITOR;
+        b->peso_arrependimento = (rng01() - 0.5f) * 4.0f;          /* -2..2, folga */
         ocup[y][x] = n_blocos;
         n_blocos++;
     }
@@ -385,10 +398,18 @@ static float utilidade_sigma(int cx, int cy, Bloco *b, float sigma) {
     float comida_prev = prever_valor_sigma(cx, cy, b, sigma);
     float espaco = (8 - rivais_em(cx, cy, b->x, b->y)) / 8.0f;   /* 0..1 */
 
+    /* (§4.3) o remorso acumulado empurra na MESMA direcao do espaco — e o
+     * viés que a v3 pede: aprender, das disputas que perdeu, a evitar a
+     * lotacao de novo. 'b - blocos' e o indice do bloco: utilidade() so e
+     * chamada com ponteiros reais para dentro de blocos[] (nunca uma copia
+     * na pilha), entao a aritmetica de ponteiro e segura em todo call site. */
+    int i = (int)(b - blocos);
+
     /* Faminto: a comida vale ainda mais (urgencia escala com a fome).
      * Saciado: a comida pesa pouco e entra o desejo de espaco aberto. */
     return comida_prev * (1.0f + b->urgencia * fome)
-         + b->peso_espaco * espaco * (1.0f - fome);
+         + b->peso_espaco * espaco * (1.0f - fome)
+         + b->peso_arrependimento * remorso[i] * espaco;
 }
 
 static float utilidade(int cx, int cy, Bloco *b) {
@@ -416,10 +437,16 @@ static int pretendentes_em(int cx, int cy, int self_i) {
 
 /* Varre as celulas 3x3 alcancaveis (mais ficar parado) e devolve a de maior
  * pontuacao. Pontuar = utilidade do nivel 4; se 'antecipar', o nivel 5 ainda
- * desvaloriza alvos que os vizinhos tambem declararam querer (so um entra). */
-static void melhor_celula(Bloco *b, int i, int antecipar, int *bx, int *by) {
+ * desvaloriza alvos que os vizinhos tambem declararam querer (so um entra).
+ * Guarda tambem a VICE-celula — a segunda melhor pontuacao (§4.3): o mesmo
+ * varredura ja teria essa informacao, so nao a devolvia. vx e vy podem ser
+ * NULL quando ninguem vai usar a vice (a passagem de declarar, por exemplo). */
+static void melhor_celula(Bloco *b, int i, int antecipar, int *bx, int *by,
+                           int *vx, int *vy) {
     int   melhor_x = b->x, melhor_y = b->y;   /* ficar parado e sempre valido */
     float melhor   = utilidade(b->x, b->y, b);
+    int   vice_x_l = b->x, vice_y_l = b->y;   /* sem alternativa: vice = ficar */
+    float vice_l   = -1e30f;
 
     for (int dy = -1; dy <= 1; dy++) {
         for (int dx = -1; dx <= 1; dx++) {
@@ -434,18 +461,22 @@ static void melhor_celula(Bloco *b, int i, int antecipar, int *bx, int *by) {
                 u /= 1.0f + ANTECIPACAO * pret;
             }
             if (u > melhor) {
+                vice_l = melhor; vice_x_l = melhor_x; vice_y_l = melhor_y;
                 melhor = u;
                 melhor_x = nx; melhor_y = ny;
+            } else if (u > vice_l) {
+                vice_l = u; vice_x_l = nx; vice_y_l = ny;
             }
         }
     }
     *bx = melhor_x; *by = melhor_y;
+    if (vx) { *vx = vice_x_l; *vy = vice_y_l; }
 }
 
 /* 1a passagem (nivel 5): cada bloco DECLARA, sem olhar os vizinhos, para onde
  * pretende ir — e exatamente a decisao do nivel 4. */
 static void declarar(int i) {
-    melhor_celula(&blocos[i], i, 0, &intencao_x[i], &intencao_y[i]);
+    melhor_celula(&blocos[i], i, 0, &intencao_x[i], &intencao_y[i], NULL, NULL);
 }
 
 /* Passagem intermediaria (relato causal, §4.0): cada bloco EMITE um sinal
@@ -492,9 +523,13 @@ static void emitir(int i) {
 }
 
 /* 2a passagem (nivel 5): cada bloco RECONSIDERA, agora antecipando a disputa
- * lida nas intencoes dos vizinhos, e fixa o alvo final do tick. */
+ * lida nas intencoes dos vizinhos, e fixa o alvo final do tick. Fotografa
+ * tambem o alvo e a vice-celula (§4.3) ANTES que resolver() possa negar o
+ * alvo — decidido_x/y e vice_x/y sao o material que atualizar_remorso() le. */
 static void decidir(int i) {
-    melhor_celula(&blocos[i], i, 1, &alvo_x[i], &alvo_y[i]);
+    melhor_celula(&blocos[i], i, 1, &alvo_x[i], &alvo_y[i], &vice_x[i], &vice_y[i]);
+    decidido_x[i] = alvo_x[i];
+    decidido_y[i] = alvo_y[i];
 }
 
 /* ================================================================== */
@@ -529,6 +564,33 @@ static void resolver(void) {
             alvo_x[i] = blocos[i].x;         /* negado: permanece          */
             alvo_y[i] = blocos[i].y;
         }
+    }
+}
+
+/* (§4.3) O auto-modelo temporal: o contrafactual que resolver() acabou de
+ * quase calcular. Um bloco foi NEGADO quando queria mover (decidido_* !=
+ * posicao atual) e alvo_* voltou a ser a posicao atual (resolver() acima).
+ * Se a VICE-celula que ele preteriu ficou com reivindicado == -1, ninguem a
+ * disputou — ele podia mesmo ter ido para la: o contrafactual "eu poderia
+ * ter ido para a esquerda" e verificavel, nao especulativo. O arrependimento
+ * e o quanto essa vice-celula prometia a mais do que ficar onde esta;
+ * remorso[] acumula esse sinal e decai pelo proprio desconto do bloco — a
+ * mesma curva que peso_janela usa na bateria do 'modelo'. Roda logo apos
+ * resolver(), antes que o proximo tick zere reivindicado[][]. */
+static void atualizar_remorso(void) {
+    for (int i = 0; i < n_blocos; i++) {
+        if (!blocos[i].vivo) continue;
+
+        int queria_mover = (decidido_x[i] != blocos[i].x || decidido_y[i] != blocos[i].y);
+        int negado = queria_mover && alvo_x[i] == blocos[i].x && alvo_y[i] == blocos[i].y;
+
+        float arrependimento = 0.0f;
+        if (negado && reivindicado[vice_y[i]][vice_x[i]] == -1) {
+            float perdido = prever_valor(vice_x[i], vice_y[i], &blocos[i])
+                           - prever_valor(blocos[i].x, blocos[i].y, &blocos[i]);
+            if (perdido > 0.0f) arrependimento = perdido;
+        }
+        remorso[i] = remorso[i] * blocos[i].desconto + arrependimento;
     }
 }
 
@@ -668,6 +730,10 @@ static void reproduzir(void) {
         cria->horizonte   = muta_horizonte(pai->horizonte);
         cria->estrategia  = muta_estrategia(pai->estrategia);
         cria->escuta      = muta_escuta(pai->escuta);
+        cria->peso_arrependimento =
+            muta_traco(pai->peso_arrependimento, 2.0f * MUTACAO, -6.0f, 6.0f);
+        remorso[j] = 0.0f;   /* (§4.3) estado, nao traco: a cria nao herda o
+                               * remorso de quem morreu nesse slot reciclado */
         ocup[ly[e]][lx[e]] = j;
     }
 }
@@ -837,13 +903,15 @@ typedef struct {
     float hon_f,  blef_f;
     /* fracao da populacao por arquitetura de escuta (acao = 1 - p - m; §4.2) */
     float esc_plano_f, esc_monitor_f;
+    /* media/desvio do peso do arrependimento (traco continuo, nivel 6; §4.3) */
+    float arrep_m, arrep_sd;
 } Stats;
 
 static Stats coletar_stats(void) {
     Stats s = {0};                 /* zera tudo: pop=0, medias=0...           */
 
     /* 1a passagem: somas -> medias. Precisamos da media ANTES da variancia. */
-    float se = 0, su = 0, sp = 0, sd = 0, sh = 0, sphi = 0;
+    float se = 0, su = 0, sp = 0, sd = 0, sh = 0, sphi = 0, sar = 0;
     int   nhon = 0, nblef = 0, nescp = 0, nescm = 0;
     for (int i = 0; i < n_blocos; i++) if (blocos[i].vivo) {
         s.pop++;
@@ -853,6 +921,7 @@ static Stats coletar_stats(void) {
         sd   += blocos[i].desconto;
         sh   += blocos[i].horizonte;     /* int -> float na soma              */
         sphi += phi_proxy(&blocos[i]);
+        sar  += blocos[i].peso_arrependimento;
         if      (blocos[i].estrategia == SIN_HONESTO) nhon++;
         else if (blocos[i].estrategia == SIN_BLEFE)   nblef++;
         if      (blocos[i].escuta == ESC_PLANO)   nescp++;
@@ -865,21 +934,24 @@ static Stats coletar_stats(void) {
     s.urg_m  = su * inv;  s.esp_m  = sp * inv;
     s.hon_f  = nhon * inv;  s.blef_f = nblef * inv;
     s.esc_plano_f = nescp * inv;  s.esc_monitor_f = nescm * inv;
+    s.arrep_m = sar * inv;
 
     /* 2a passagem: variancia = media dos desvios ao quadrado. Populacional
      * (/N, nao /N-1) porque temos a populacao INTEIRA, nao uma amostra dela.
      * Duas passagens em vez da formula de uma so ("media dos quadrados menos
      * quadrado da media"): aquela subtrai dois numeros grandes e quase iguais
      * — cancelamento catastrofico, que come os digitos significativos. */
-    float vh = 0, vd = 0, vu = 0, ve = 0;
+    float vh = 0, vd = 0, vu = 0, ve = 0, va = 0;
     for (int i = 0; i < n_blocos; i++) if (blocos[i].vivo) {
         float dh = blocos[i].horizonte   - s.hor_m;   vh += dh * dh;
         float dd = blocos[i].desconto    - s.desc_m;  vd += dd * dd;
         float du = blocos[i].urgencia    - s.urg_m;   vu += du * du;
         float de = blocos[i].peso_espaco - s.esp_m;   ve += de * de;
+        float da = blocos[i].peso_arrependimento - s.arrep_m; va += da * da;
     }
     s.hor_sd  = raiz(vh * inv);  s.desc_sd = raiz(vd * inv);
     s.urg_sd  = raiz(vu * inv);  s.esp_sd  = raiz(ve * inv);
+    s.arrep_sd = raiz(va * inv);
 
     /* comida total do solo: varre o reticulado, nao os blocos */
     float sc = 0;
@@ -1403,10 +1475,10 @@ static void desenhar(uint32_t seed, long tick) {
     p += sprintf(buf + p,
         "  tracos media±desvio:  horizonte %4.1f±%-3.1f  desconto %4.2f±%-4.2f"
         "  urgencia %4.1f±%-3.1f  espaco %4.1f±%-3.1f  sinal h%.2f b%.2f"
-        "  escuta p%.2f m%.2f\n",
+        "  escuta p%.2f m%.2f  arrependimento %5.2f±%-4.2f\n",
         st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
         st.urg_m, st.urg_sd, st.esp_m, st.esp_sd, st.hon_f, st.blef_f,
-        st.esc_plano_f, st.esc_monitor_f);
+        st.esc_plano_f, st.esc_monitor_f, st.arrep_m, st.arrep_sd);
     /* bateria de desbotamento (0..1): quanto cada faculdade carrega o comportamento.
      * modelo = mapa bate com o territorio; agencia = decisao muda com a fome;
      * autocausa = modelar que EU vou esvaziar a celula muda a escolha;
@@ -1622,13 +1694,13 @@ int main(int argc, char **argv) {
             fprintf(stderr, "matrix: nao consegui abrir '%s' para escrita\n", log_path);
             return 1;
         }
-        /* 'esc_plano_f'/'esc_monitor_f' entram no FIM, depois de 'autocausa': assim
-         * as 21 colunas anteriores seguem compativeis por prefixo com os CSVs
+        /* 'arrep_m'/'arrep_sd' entram no FIM, depois de 'esc_monitor_f': assim as
+         * 23 colunas anteriores seguem compativeis por prefixo com os CSVs
          * antigos — a mesma convencao de quando entraram 'relato' e 'hon_f'/'blef_f'. */
         fprintf(logf, "seed,tick,pop,energia_media,comida_total,"
                       "hor_m,hor_sd,desc_m,desc_sd,urg_m,urg_sd,esp_m,esp_sd,"
                       "modelo,agencia,modelo_do_outro,phi,relato,hon_f,blef_f,"
-                      "autocausa,esc_plano_f,esc_monitor_f\n");
+                      "autocausa,esc_plano_f,esc_monitor_f,arrep_m,arrep_sd\n");
     }
 
     rng_estado = seed ? seed : 1u;   /* o RNG do universo nasce da seed      */
@@ -1698,18 +1770,20 @@ int main(int argc, char **argv) {
                     "%u,%ld,%d,%.3f,%.1f,"
                     "%.3f,%.3f,%.4f,%.4f,%.3f,%.3f,%.3f,%.3f,"
                     "%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,"
-                    "%.3f,%.3f,%.3f\n",
+                    "%.3f,%.3f,%.3f,%.3f,%.3f\n",
                     seed, t, st.pop, st.energia_media, st.comida_total,
                     st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
                     st.urg_m, st.urg_sd, st.esp_m, st.esp_sd,
                     ultima_bateria.modelo, ultima_bateria.agencia,
                     ultima_bateria.modelo_do_outro, st.phi_media,
                     ultima_bateria.relato, st.hon_f, st.blef_f,
-                    ultima_bateria.autocausa, st.esc_plano_f, st.esc_monitor_f);
+                    ultima_bateria.autocausa, st.esc_plano_f, st.esc_monitor_f,
+                    st.arrep_m, st.arrep_sd);
                 fflush(logf);   /* descarrega ja: Ctrl+C no meio nao perde a cauda */
             }
 
             resolver();
+            atualizar_remorso();   /* §4.3: le reivindicado[][] antes que suma */
             aplicar_e_comer();
             /* FASE 2: agora que os blocos comeram (mas ANTES de reproduzir reusar
              * slots), confere a previsao do modelo contra a colheita real — e o
