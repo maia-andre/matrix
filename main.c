@@ -106,7 +106,16 @@
 #define SIN_MUDO    1   /* sinal = propria celula (silencio: ninguem a mira)  */
 #define SIN_BLEFE   2   /* sinal = o melhor alvo que NAO e a intencao         */
 
-/* Parametros do APRENDIZADO (nivel 6): os 4 tracos acima sao herdados COM
+/* Arquiteturas de ESCUTA (introspeccao — nota 07, ROADMAP §4.2): o que o
+ * bloco LE de si mesmo para compor o motivo que o mostrador 'relato' cobra
+ * dele. E um traco herdado com mutacao (nivel 6) — mas, ao contrario de
+ * 'estrategia', ninguem LE 'escuta' de fora: ela nao alimenta utilidade()
+ * nem decisao nenhuma, so troca qual formula medir_relato() usa por bloco. */
+#define ESC_ACAO    0   /* le a ACAO executada (pos-resolver) — a leitura de sempre */
+#define ESC_PLANO   1   /* le o PLANO (pre-resolver) — imune a negacao de resolver()*/
+#define ESC_MONITOR 2   /* compara acao x plano; se divergem, relata NAOSEI         */
+
+/* Parametros do APRENDIZADO (nivel 6): os tracos acima sao herdados COM
  * MUTACAO a cada nascimento; a selecao natural (quem sobrevive e se reproduz
  * mais) faz a media da populacao evoluir sozinha — sem gradiente, so vida. */
 #define MUTACAO       0.12f /* magnitude da mutacao herdada (0 = clones perfeitos) */
@@ -134,6 +143,7 @@ typedef struct {
     float desconto;     /* desconto do futuro     (era #define DESCONTO)    */
     int   horizonte;    /* profundidade do plano  (era #define HORIZONTE)   */
     int   estrategia;   /* de sinalizacao: honesto, mudo ou blefe (§4.0)    */
+    int   escuta;       /* introspeccao: acao, plano ou monitor   (§4.2)    */
 } Bloco;
 
 static Bloco blocos[MAX_AG];
@@ -267,6 +277,8 @@ static void semear_blocos(void) {
         if (b->horizonte > HORIZONTE_MAX) b->horizonte = HORIZONTE_MAX;
         b->estrategia  = (int)(rng01() * 3.0f);                   /* tercos      */
         if (b->estrategia > SIN_BLEFE) b->estrategia = SIN_BLEFE;
+        b->escuta      = (int)(rng01() * 3.0f);                   /* tercos      */
+        if (b->escuta > ESC_MONITOR) b->escuta = ESC_MONITOR;
         ocup[y][x] = n_blocos;
         n_blocos++;
     }
@@ -579,6 +591,17 @@ static int muta_estrategia(int e) {
     return e;
 }
 
+/* (nivel 6 + §4.2) Mutacao da arquitetura de escuta: de vez em quando, a cria
+ * nasce lendo a si mesma de outro jeito. Sem custo instalado nesta nota, a
+ * predicao (P4) e deriva neutra — nenhuma arquitetura devia levar vantagem. */
+static int muta_escuta(int e) {
+    if (rng01() < 2.0f * MUTACAO) {
+        e = (int)(rng01() * 3.0f);
+        if (e > ESC_MONITOR) e = ESC_MONITOR;
+    }
+    return e;
+}
+
 /* Um slot para a cria: reaproveita o BURACO de menor indice deixado por um morto
  * e so estende o array quando nao ha buraco nenhum. Varrer do menor indice pra
  * cima e uma politica deterministica, a mesma do desempate de resolver().
@@ -644,6 +667,7 @@ static void reproduzir(void) {
         cria->desconto    = muta_traco(pai->desconto,    0.4f * MUTACAO, 0.30f, 0.98f);
         cria->horizonte   = muta_horizonte(pai->horizonte);
         cria->estrategia  = muta_estrategia(pai->estrategia);
+        cria->escuta      = muta_escuta(pai->escuta);
         ocup[ly[e]][lx[e]] = j;
     }
 }
@@ -811,6 +835,8 @@ typedef struct {
     float esp_m,  esp_sd;
     /* fracao da populacao por estrategia de sinalizacao (mudo = 1 - h - b) */
     float hon_f,  blef_f;
+    /* fracao da populacao por arquitetura de escuta (acao = 1 - p - m; §4.2) */
+    float esc_plano_f, esc_monitor_f;
 } Stats;
 
 static Stats coletar_stats(void) {
@@ -818,7 +844,7 @@ static Stats coletar_stats(void) {
 
     /* 1a passagem: somas -> medias. Precisamos da media ANTES da variancia. */
     float se = 0, su = 0, sp = 0, sd = 0, sh = 0, sphi = 0;
-    int   nhon = 0, nblef = 0;
+    int   nhon = 0, nblef = 0, nescp = 0, nescm = 0;
     for (int i = 0; i < n_blocos; i++) if (blocos[i].vivo) {
         s.pop++;
         se   += blocos[i].energia;
@@ -829,6 +855,8 @@ static Stats coletar_stats(void) {
         sphi += phi_proxy(&blocos[i]);
         if      (blocos[i].estrategia == SIN_HONESTO) nhon++;
         else if (blocos[i].estrategia == SIN_BLEFE)   nblef++;
+        if      (blocos[i].escuta == ESC_PLANO)   nescp++;
+        else if (blocos[i].escuta == ESC_MONITOR) nescm++;
     }
     float inv = s.pop ? 1.0f / s.pop : 0.0f;
     s.energia_media = se   * inv;
@@ -836,6 +864,7 @@ static Stats coletar_stats(void) {
     s.hor_m  = sh * inv;  s.desc_m = sd * inv;
     s.urg_m  = su * inv;  s.esp_m  = sp * inv;
     s.hon_f  = nhon * inv;  s.blef_f = nblef * inv;
+    s.esc_plano_f = nescp * inv;  s.esc_monitor_f = nescm * inv;
 
     /* 2a passagem: variancia = media dos desvios ao quadrado. Populacional
      * (/N, nao /N-1) porque temos a populacao INTEIRA, nao uma amostra dela.
@@ -1139,6 +1168,9 @@ static float autocausa_do_bloco(Bloco *b, int i) {
 static int   rel_cx[MAX_AG], rel_cy[MAX_AG];  /* argmax LEIGO: comida crua   */
 static int   rel_ex[MAX_AG], rel_ey[MAX_AG];  /* argmax de espaco            */
 static int   rel_verdade[MAX_AG];             /* motivo da DECISAO, -1 = fora */
+/* (§4.2) o alvo COGNITIVO (pre-resolver), fotografado antes que resolver()
+ * sobrescreva alvo_* dos negados — o material que ESC_PLANO/ESC_MONITOR leem. */
+static int   plano_x[MAX_AG], plano_y[MAX_AG];
 static float relato_ultimo;
 
 /* Rotula uma posicao contra os dois argmax de motivo. Vale para o relato
@@ -1151,11 +1183,34 @@ static int rel_classifica(int x, int y, int fx, int fy, int ex, int ey) {
     return REL_NAOSEI;
 }
 
+/* (§4.2) A leitura do relato depende da arquitetura de escuta do bloco —
+ * mesmos argmax leigos (rel_cx/cy/ex/ey), posicoes diferentes:
+ *   ESC_ACAO    le a posicao FINAL (blocos[i].x/y, pos-resolver) — de sempre.
+ *   ESC_PLANO   le o alvo COGNITIVO (plano_x/y, pre-resolver) — nunca ve a
+ *               negacao de resolver(), nunca erra por causa dela.
+ *   ESC_MONITOR compara os dois: coincidem -> mesma leitura de ESC_ACAO;
+ *               divergem -> NAOSEI. Detecta a propria negacao, mas nao tem
+ *               canal para nomear um motivo que so existe por causa dela
+ *               (a mesma limitacao da arquitetura C na nota 07). */
+static int relato_le(int i) {
+    int r_acao = rel_classifica(blocos[i].x, blocos[i].y,
+                                 rel_cx[i], rel_cy[i], rel_ex[i], rel_ey[i]);
+    if (blocos[i].escuta == ESC_ACAO) return r_acao;
+
+    if (blocos[i].escuta == ESC_PLANO)
+        return rel_classifica(plano_x[i], plano_y[i],
+                               rel_cx[i], rel_cy[i], rel_ex[i], rel_ey[i]);
+
+    int divergiu = (blocos[i].x != plano_x[i] || blocos[i].y != plano_y[i]);
+    return divergiu ? REL_NAOSEI : r_acao;               /* ESC_MONITOR */
+}
+
 /* FASE 1 do relato (na decisao, antes de resolver): fotografa os argmax que o
  * interprete PODERA usar e computa o motivo verdadeiro da decisao. Mesma
  * varredura e mesmo desempate de melhor_celula (ficar parado primeiro, '>'
  * estrito) — o interprete e leigo no conteudo, nao na ordem de olhar. */
 static void relato_prepara(Bloco *b, int i) {
+    plano_x[i] = alvo_x[i]; plano_y[i] = alvo_y[i];    /* §4.2: antes de resolver() */
     int fx = b->x, fy = b->y, ex = b->x, ey = b->y, vx = b->x, vy = b->y;
     float mf = comida[b->y][b->x];
     float me = (8 - rivais_em(b->x, b->y, b->x, b->y)) / 8.0f;
@@ -1273,8 +1328,7 @@ static void medir_relato(void) {
     for (int i = 0; i < n_blocos; i++) {
         if (!blocos[i].vivo) continue;           /* morreu no tick: nao relata */
         if (rel_verdade[i] < 0) continue;        /* encurralado: sem escolha   */
-        int r = rel_classifica(blocos[i].x, blocos[i].y,
-                               rel_cx[i], rel_cy[i], rel_ex[i], rel_ey[i]);
+        int r = relato_le(i);
         conf[r][rel_verdade[i]]++;
         n++;
     }
@@ -1348,9 +1402,11 @@ static void desenhar(uint32_t seed, long tick) {
      * desvio -> 0) ou se DIVERSIFICA em nichos (desvio cresce). */
     p += sprintf(buf + p,
         "  tracos media±desvio:  horizonte %4.1f±%-3.1f  desconto %4.2f±%-4.2f"
-        "  urgencia %4.1f±%-3.1f  espaco %4.1f±%-3.1f  sinal h%.2f b%.2f\n",
+        "  urgencia %4.1f±%-3.1f  espaco %4.1f±%-3.1f  sinal h%.2f b%.2f"
+        "  escuta p%.2f m%.2f\n",
         st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
-        st.urg_m, st.urg_sd, st.esp_m, st.esp_sd, st.hon_f, st.blef_f);
+        st.urg_m, st.urg_sd, st.esp_m, st.esp_sd, st.hon_f, st.blef_f,
+        st.esc_plano_f, st.esc_monitor_f);
     /* bateria de desbotamento (0..1): quanto cada faculdade carrega o comportamento.
      * modelo = mapa bate com o territorio; agencia = decisao muda com a fome;
      * autocausa = modelar que EU vou esvaziar a celula muda a escolha;
@@ -1566,13 +1622,13 @@ int main(int argc, char **argv) {
             fprintf(stderr, "matrix: nao consegui abrir '%s' para escrita\n", log_path);
             return 1;
         }
-        /* 'autocausa' entra no FIM, nao ao lado dos irmaos da bateria: assim as 20
-         * colunas anteriores seguem compativeis por prefixo com os CSVs antigos —
-         * a mesma convencao de quando entraram 'relato' e 'hon_f'/'blef_f'. */
+        /* 'esc_plano_f'/'esc_monitor_f' entram no FIM, depois de 'autocausa': assim
+         * as 21 colunas anteriores seguem compativeis por prefixo com os CSVs
+         * antigos — a mesma convencao de quando entraram 'relato' e 'hon_f'/'blef_f'. */
         fprintf(logf, "seed,tick,pop,energia_media,comida_total,"
                       "hor_m,hor_sd,desc_m,desc_sd,urg_m,urg_sd,esp_m,esp_sd,"
                       "modelo,agencia,modelo_do_outro,phi,relato,hon_f,blef_f,"
-                      "autocausa\n");
+                      "autocausa,esc_plano_f,esc_monitor_f\n");
     }
 
     rng_estado = seed ? seed : 1u;   /* o RNG do universo nasce da seed      */
@@ -1642,14 +1698,14 @@ int main(int argc, char **argv) {
                     "%u,%ld,%d,%.3f,%.1f,"
                     "%.3f,%.3f,%.4f,%.4f,%.3f,%.3f,%.3f,%.3f,"
                     "%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,"
-                    "%.3f\n",
+                    "%.3f,%.3f,%.3f\n",
                     seed, t, st.pop, st.energia_media, st.comida_total,
                     st.hor_m, st.hor_sd, st.desc_m, st.desc_sd,
                     st.urg_m, st.urg_sd, st.esp_m, st.esp_sd,
                     ultima_bateria.modelo, ultima_bateria.agencia,
                     ultima_bateria.modelo_do_outro, st.phi_media,
                     ultima_bateria.relato, st.hon_f, st.blef_f,
-                    ultima_bateria.autocausa);
+                    ultima_bateria.autocausa, st.esc_plano_f, st.esc_monitor_f);
                 fflush(logf);   /* descarrega ja: Ctrl+C no meio nao perde a cauda */
             }
 
