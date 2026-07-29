@@ -1523,3 +1523,16 @@ registrada para orientar a próxima sessão, não compromisso.
    colapso disparando ao vivo (nota 24) convenceria muito mais que uma
    tabela de números. É o "motor mais visual" que vale construir — como
    ferramenta ao lado do núcleo, nunca como substituto dele.
+
+   **Atualização (2026-07-28): construído.** `viz/` existe — só lê
+   `datasets/*.csv` (mais um punhado de tabelas pequenas já publicadas,
+   transcritas com proveniência em `viz/data/`, para os pontos que
+   antecedem os datasets agregados de hoje) e gera 11 figuras (5 do
+   Paper 1, 6 do Paper 2), em pt/en, embutidas nos quatro arquivos de
+   paper e nos dois PDFs do preprint. O buraco das "zero figuras" fechou.
+   Ainda não construído — e continua fora de escopo por ora, não
+   rejeitado: o **replay visual ao vivo** (o split bimodal da nota 23, o
+   detector de colapso da nota 24 disparando em tempo real) que este item
+   também cogitava. `viz/gerar_figuras.py` é estático — CSV → PNG —, não
+   um replay; se o André quiser essa segunda metade, é a extensão natural
+   do mesmo diretório, não um motor novo.

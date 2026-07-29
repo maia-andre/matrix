@@ -1,0 +1,10 @@
+# Paper 1, Secao 7 (modo 4 - "phi" velha, infalseavel: nenhuma ablacao a zera).
+# Numeros transcritos da tabela publicada, contra a phi ANTERIOR ao conserto
+# (antes do commit e151c45), preservados porque o conserto os destruiu.
+# Fonte: papers/paper-1-quatro-reguas.md sec.7; papers/notes/05-phi.sh, nota 05.
+condicao,phi_velha
+controle,0.255
+horizonte=1,0.263
+prever_valor=0,0.131
+solipsista,0.039
+COMPETICAO=0,0.192

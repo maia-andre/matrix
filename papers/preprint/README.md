@@ -13,7 +13,11 @@ source changes.
 Both add a formal bibliography and a handful of citations the Portuguese
 originals only gestured at in prose (see each file's References section).
 
-PDF build: `pandoc <file>.md -o <file>.pdf --pdf-engine=typst -V
-mainfont="DejaVu Serif" -V monofont="DejaVu Sans Mono"` (typst installed
-as a standalone binary in `~/.local/bin`, not via apt — see the project
-memory for how).
+PDF build: `pandoc -f markdown-implicit_figures <file>.md -o <file>.pdf
+--pdf-engine=typst --pdf-engine-opt=--root=.. -V mainfont="DejaVu Serif"
+-V monofont="DejaVu Sans Mono"` (typst installed as a standalone binary
+in `~/.local/bin`, not via apt — see the project memory for how). The
+figures live in `../figs/en/` (outside `preprint/`), so typst's sandbox
+needs `--root=..` to reach them; `-implicit_figures` turns off pandoc's
+auto-numbered "Figure N:" caption, since each figure already carries its
+own hand-written caption paragraph in the source.

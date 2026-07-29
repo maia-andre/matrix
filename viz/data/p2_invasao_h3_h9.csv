@@ -1,0 +1,8 @@
+# Paper 2, Secao 3 (ensaio de invasao). Populacao 50/50 de h=3 e h=9, sem
+# mutacao, heranca exata. freq_h9 = frequencia do planejador fundo (h=9).
+# Transcrito da tabela publicada. Fonte: ROADMAP.md, "Fase 3 - O custo de pensar".
+tick,seed7,seed42,seed1234
+0,0.42,0.55,0.42
+1000,0.71,0.76,0.73
+2000,0.84,0.83,0.83
+4000,0.91,0.87,0.85

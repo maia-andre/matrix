@@ -89,6 +89,13 @@ O ótimo de grupo é `h = 1`. Quanto mais fundo a população pensa, **menor** e
 A frequência do `h = 9` sobe monotonicamente nas três seeds, a 0,91 / 0,87 / 0,85
 em 4000 ticks. O planejador fundo **desloca** o raso.
 
+![Paisagem de grupo (populacao vs horizonte pregado) e ensaio de invasao 50/50 h=3 vs h=9](figs/pt/p2-fig1-bem-posicional.png)
+
+**Figura 1.** As duas medições lado a lado: a população de grupo cai
+conforme o horizonte pregado aumenta (esquerda), enquanto o planejador
+fundo `h=9` desloca o raso `h=3` num ensaio de invasão direto (direita).
+O descasamento entre as duas **é** o achado.
+
 O descasamento entre as duas medidas **é** o achado, e ele tem a forma clássica:
 pensar fundo é individualmente vantajoso e coletivamente ruim. É também por isso
 que zerar a competição faz os horizontes evoluídos ficarem **mais rasos** — a
@@ -113,6 +120,13 @@ Lemos essa saturação como o **teto da profundidade efetiva** `min(h, 1/(1−δ
 com δ = 0,80, `1/(1−0,80) = 5`, e o joelho da curva caía em `h ≈ 4–6`. A transição
 **fixação → polimorfismo** (exclusão embaixo, coexistência em cima) caía em
 `h ≈ 4` — "exatamente no teto do desconto", escrevemos.
+
+![Matriz de dominancia do torneio: frequencia de vitoria de cada par de horizontes, delta=0,80](figs/pt/p2-fig2-torneio-heatmap.png)
+
+**Figura 2.** A matriz completa dos 66 pares. Azul-escuro no canto
+inferior esquerdo, vermelho-escuro no superior direito: dominância
+transitiva e perfeita — todo horizonte maior vence todo horizonte menor —,
+com a margem saturando (esbranquiçando) perto do teto `h = 12`.
 
 **Estava errado, e o erro era de um ponto só.** A profundidade efetiva costurava o
 argumento inteiro e tinha sido medida num único δ; com δ = 0,80, `1/(1−δ) = 5` — e
@@ -142,6 +156,13 @@ vence**. Os duelos de longo alcance, uma medição independente com pares
 não-adjacentes, concordam: o `h = 9` bate o `h = 12` (`t = −11`), o `h = 6` bate o
 `h = 12` (`t = −4,4`). **Há ESS interior.** E o ótimo **desce** conforme δ sobe:
 ≥ 12 em 0,80; ~10 em 0,90; ~7–8 em 0,95.
+
+![Frequencia do horizonte h vencer h-1, para cada delta - a escada inverte em delta alto](figs/pt/p2-fig3-inversao-escada.png)
+
+**Figura 3.** A vantagem de cada passo adjacente (`h` contra `h−1`), uma
+linha por δ. Em δ baixo (azul claro) a linha desaba cedo rumo ao empate;
+em δ = 0,95 (azul escuro) ela **cruza abaixo de 0,5** nos horizontes
+altos — o passo adicional deixa de compensar, e a escada inverte.
 
 ## 5. O freio é ruído, não posição (a terceira camada)
 
@@ -177,6 +198,13 @@ na comida que **ninguém colheu**.
 | 2 | **−2,3** `t−4,3` | **−2,5** `t−3,8` | **−2,2** `t−3,1` |
 | 6 | +11,0 `t+7,9` | +22,9 `t+10,2` | +27,6 `t+13,7` |
 | 12 | +20,3 `t+12,5` | +45,2 `t+14,4` | **+73,6** `t+17,3` |
+
+![Comida em pe (contra h=1) por horizonte, uma linha por delta - o dano triplica com delta](figs/pt/p2-fig4-dose-resposta-colheita.png)
+
+**Figura 4.** A curva completa de `h = 1` a `12`, para os três δ. O pico
+de colheita (`h = 2`, a única queda abaixo de zero) é o mesmo nos três;
+o que muda é a inclinação depois dele — três vezes mais íngreme em
+δ = 0,95 (azul escuro) do que em δ = 0,80 (azul claro).
 
 Três leituras, e a terceira é a tese:
 
@@ -288,6 +316,13 @@ ninguém.
 > competem por quem cobra menos; **os dois já são de graça**, por mecanismos
 > diferentes. `datasets/reciclagem.csv`, `papers/notes/21-o-imposto-que-recicla.md`.
 
+![Profundidade efetiva e populacao vs custo do imposto, queimado contra reciclado](figs/pt/p2-fig5-imposto.png)
+
+**Figura 5.** À esquerda, a profundidade efetiva desce monotonicamente e
+encosta em `h = 1` perto de `c = 0,15`. À direita, o preço dessa
+correção: população queimada (azul) cai o tempo todo; reciclada
+(laranja, nota 21) fica **acima** do baseline em vez de abaixo dele.
+
 ## 8. Ameaças à validade
 
 - **O elo que falta.** Provamos que o tipo fundo colhe pior e que o dano escala com
@@ -382,6 +417,14 @@ ninguém.
   carregada — qual bacia (teto puro ou coexistência) uma população visita
   depende da trajetória inicial, não só do δ.
   `datasets/mutacao-off.csv`, `papers/notes/28-mutacao-ou-ramificacao-em-delta-080.md`.]**
+
+![Histograma do horizonte por delta, populacao uni_h_livre: cauda em 0,80, bimodal em 0,90 e 0,95](figs/pt/p2-fig6-bimodalidade.png)
+
+**Figura 6.** O histograma completo por trás do voto das notas 26/28. Em
+δ = 0,80 a massa é uma cauda enviesada rumo ao teto — sem vale. Em
+δ = 0,90 e 0,95 os dois lados do `h*` ganham massa própria: o ponto de
+ramificação virou polimorfismo visível.
+
 - **`HORIZONTE_MAX = 12` censura** o topo em δ baixo e médio.
 - **Um mundo.** "A profundidade não produz nada" é uma propriedade *deste* mundo —
   manchas de comida procedurais, vizinhança 3×3, um passo por tick. Um mundo com

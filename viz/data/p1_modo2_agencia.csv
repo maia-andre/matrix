@@ -1,0 +1,9 @@
+# Paper 1, Secao 5 (modo 2 - "agencia", a regra 4: antes de acusar a regua,
+# congele o traco). Media de 3 seeds (7, 42, 1234), transcrita da tabela
+# publicada (nao ha CSV bruto por-tick commitado para este par de corridas).
+# Fonte: papers/paper-1-quatro-reguas.md sec.5; papers/notes/03-a-evolucao-extingue-a-agencia.md.
+tick,agencia_peso_espaco_livre,agencia_peso_espaco_congelado
+500,0.430,0.464
+5000,0.360,0.486
+15000,0.059,0.447
+29999,0.049,0.440

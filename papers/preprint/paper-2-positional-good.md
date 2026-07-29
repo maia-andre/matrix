@@ -99,6 +99,13 @@ mutation. The frequency of `h = 9` rises monotonically across three
 seeds, to 0.91 / 0.87 / 0.85 over 4,000 ticks. The deep planner
 **displaces** the shallow one.
 
+![Group landscape (population vs fixed horizon) and 50/50 invasion trial h=3 vs h=9](../figs/en/p2-fig1-bem-posicional.png)
+
+**Figure 1.** The two measurements side by side: group population falls
+as the fixed horizon deepens (left), while the deep planner `h=9`
+displaces the shallow one `h=3` in a direct invasion trial (right). The
+mismatch between the two **is** the finding.
+
 The mismatch between the two measures **is** the finding, and it has the
 classic shape: thinking deep is individually advantageous and
 collectively bad. This is also why zeroing out competition makes evolved
@@ -121,6 +128,13 @@ total annihilation (1.000 against `h = 1`) to near coin-flip (0.52–0.56 at
 the top) — but it never turns non-positive, and so **the ESS is the
 ceiling** `h = 12`, censored by the world's maximum. A race with no
 endogenous brake.
+
+![Dominance matrix of the tournament: win frequency for each horizon pair, delta=0.80](../figs/en/p2-fig2-torneio-heatmap.png)
+
+**Figure 2.** The full matrix of the 66 pairs. Dark blue in the
+bottom-left corner, dark red in the top-right: transitive and perfect
+dominance — every larger horizon beats every smaller one — with the
+margin saturating (whitening) near the ceiling `h = 12`.
 
 We read this saturation as the **ceiling of effective depth**
 `min(h, 1/(1−δ))`: with δ = 0.80, `1/(1−0.80) = 5`, and the curve's knee
@@ -163,6 +177,13 @@ independent measurement with non-adjacent pairs — agree: `h = 9` beats
 interior singular strategy** (Geritz, Kisdi, Meszéna, & Metz, 1998). And
 the optimum **falls** as δ rises: ≥ 12 at 0.80; ~10 at 0.90; ~7–8 at 0.95.
 
+![Frequency of horizon h beating h-1, for each delta - the ladder inverts at high delta](../figs/en/p2-fig3-inversao-escada.png)
+
+**Figure 3.** The advantage of each adjacent step (`h` versus `h−1`), one
+line per δ. At low δ (light blue) the line collapses early toward a
+toss-up; at δ = 0.95 (dark blue) it **crosses below 0.5** at the higher
+horizons — the extra step stops paying off, and the ladder inverts.
+
 ## 5. The brake is noise, not position (the third layer)
 
 The inversion admitted two readings, and they make opposite predictions:
@@ -201,6 +222,13 @@ the world. And the material trace is in the food **no one harvested.**
 | 2 | **−2.3** `t−4.3` | **−2.5** `t−3.8` | **−2.2** `t−3.1` |
 | 6 | +11.0 `t+7.9` | +22.9 `t+10.2` | +27.6 `t+13.7` |
 | 12 | +20.3 `t+12.5` | +45.2 `t+14.4` | **+73.6** `t+17.3` |
+
+![Standing food (vs h=1) by horizon, one line per delta - the damage triples with delta](../figs/en/p2-fig4-dose-resposta-colheita.png)
+
+**Figure 4.** The full curve from `h = 1` to `12`, for the three δ. The
+harvesting peak (`h = 2`, the only dip below zero) is the same across
+all three; what changes is the slope after it — three times steeper at
+δ = 0.95 (dark blue) than at δ = 0.80 (light blue).
 
 Three readings, and the third is the thesis:
 
@@ -324,6 +352,13 @@ produces an interior singular strategy without charging anyone anything.
 > less; **both are already free**, through different mechanisms.
 > `datasets/reciclagem.csv`, `papers/notes/21-o-imposto-que-recicla.md`.]**
 
+![Effective depth and population vs tax cost, burned versus recycled](../figs/en/p2-fig5-imposto.png)
+
+**Figure 5.** Left, effective depth falls monotonically and hits `h = 1`
+near `c = 0.15`. Right, the price of that correction: burned population
+(blue) falls throughout; recycled (orange, note 21) sits **above** the
+baseline instead of below it.
+
 ## 8. Threats to validity
 
 - **The missing link.** We proved that the deep type harvests worse and
@@ -437,6 +472,14 @@ produces an interior singular strategy without charging anyone anything.
   which basin (pure ceiling or coexistence) a population visits depends
   on its initial trajectory, not on δ alone.
   `datasets/mutacao-off.csv`, `papers/notes/28-mutacao-ou-ramificacao-em-delta-080.md`.]**
+
+![Horizon histogram by delta, uni_h_livre population: a tail at 0.80, bimodal at 0.90 and 0.95](../figs/en/p2-fig6-bimodalidade.png)
+
+**Figure 6.** The full histogram behind the notes 26/28 verdict. At
+δ = 0.80 the mass is a tail skewed toward the ceiling — no valley. At
+δ = 0.90 and 0.95 both sides of `h*` gain mass of their own: the
+branching point turned into visible polymorphism.
+
 - **`HORIZONTE_MAX = 12` censors** the top at low and medium δ.
 - **One world.** "Depth produces nothing" is a property of *this* world —
   procedural food patches, a 3×3 neighborhood, one step per tick. A world

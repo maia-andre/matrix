@@ -157,6 +157,12 @@ Three independent ablations, all pointing at the same place:
 | `predict_value ≡ 0` (no map) | **1.000** ↑↑ | **extinct** |
 | solipsist (blind to rivals) | 0.789 ↓ | 314 |
 
+![The (broken) modelo gauge reading under 4 ablations, with final population below](../figs/en/p1-fig1-modelo-ablacao.png)
+
+**Figure 1.** The same ablation, two panels. On top, the gauge's score
+*rises* to a perfect reading; below, the population that produced that
+perfect score is extinct. High calibration is compatible with a corpse.
+
 Lobotomizing the horizon makes the score **rise**. Removing the world
 model entirely gives a **perfect score** — to a population that goes
 extinct in 51–121 ticks. Blinding the block to rivals makes the score
@@ -238,6 +244,13 @@ ruler, freeze the trait.
 | `space_weight` mean, free | 2.760 | 1.677 | 0.131 | **0.079** |
 | `agency`, `space_weight` **frozen** | 0.464 | 0.486 | 0.447 | **0.440** |
 
+![Agency over 30,000 ticks, space_weight free versus frozen](../figs/en/p1-fig2-agencia-regra4.png)
+
+**Figure 2.** Rule 4 in a picture: with the trait free (blue), the reading
+collapses together with `space_weight`; frozen (orange), it stays flat.
+The ruler didn't change — the object it measures is what vanished under
+selection.
+
 Flat. **The ruler is stable; the object is what changes.** The correlation
 was mechanism, not contamination: `space_weight` is the only channel
 through which internal state can change a decision, and once it dies the
@@ -292,6 +305,13 @@ curve:
 | 1 | 0.3528 | 0.3596 | 0.3200 |
 | 4 → ∞ | 0.3540 | 0.3608 | 0.3220 |
 
+![other-model as a function of alpha, three seeds, with the old probe marked at alpha=0.5](../figs/en/p1-fig3-modelo-do-outro-alpha.png)
+
+**Figure 3.** The same run reread at each anticipation strength `α`. The
+old probe (gray line at `α = 0.5`) measures an arbitrary point midway up
+the curve; the fix reads the asymptote, to the right, and does not
+depend on `ANTECIPACAO`.
+
 `0.5` is just **a point midway up the curve**. Had `ANTECIPACAO` been 0.25,
 the gauge would have read ~0.29; at 0.125, ~0.19. The absolute value was a
 function of a constant chosen for an unrelated reason — not a property of
@@ -341,6 +361,14 @@ Ablation table:
 | `predict_value ≡ 0` | 0.131 — no model at all, dying, still "integrates" 0.13 |
 | solipsist | 0.039 |
 | `COMPETICAO = 0` | 0.192 |
+
+![Old phi under 5 ablations, none of which drives it to zero](../figs/en/p1-fig4-phi-ablacao.png)
+
+**Figure 4.** The five bars from the table alongside: no ablation comes
+close to zero — not even the one that kills the population
+(`predict_value = 0`), nor the one that lobotomizes the plan
+(`horizon = 1`). A ruler never forced to say "no" isn't measuring
+anything.
 
 **No ablation drives it to zero.** By rule 2, the old `phi` **measured
 nothing** — in the strict sense that no reading of it could ever force the
@@ -472,6 +500,12 @@ The controls, now with error bars:
 | `phi` | 0.0649 ± 0.0039 |
 | `report` | 0.6310 ± 0.0111 |
 | `self-as-cause` | 0.1381 ± 0.0113 |
+
+![The 6 gauges across 50 seeds, mean and standard deviation](../figs/en/p1-fig5-replicacao-50-seeds.png)
+
+**Figure 5.** The table alongside, as bars: `modelo` and `report` on top,
+`phi` at the floor — the same hierarchy every individual section already
+showed, now with an error bar over 50 seeds instead of 3.
 
 And the uncomfortable question from §8 — *what is the ruler's floor
 outside the hermit, where there is no algebraic truth to compare

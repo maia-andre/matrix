@@ -1,0 +1,10 @@
+# Paper 1, Secao 6 (modo 3 - "modelo_do_outro", o parametro escondido).
+# Mesma corrida relida em cada forca alpha (ANTECIPACAO real = 0.5, a sonda
+# antiga). alpha=4 representa o patamar "4 -> infinito" do texto (assintota).
+# Fonte: papers/paper-1-quatro-reguas.md sec.6; papers/notes/04-modelo-do-outro.sh.
+alpha,seed7,seed42,seed1234
+0,0.0000,0.0000,0.0000
+0.25,0.2872,0.2942,0.2566
+0.5,0.3407,0.3481,0.3070
+1,0.3528,0.3596,0.3200
+4,0.3540,0.3608,0.3220

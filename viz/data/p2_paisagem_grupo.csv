@@ -1,0 +1,13 @@
+# Paper 2, Secao 3 (paisagem de grupo). Horizonte pregado na populacao inteira,
+# media de 3 seeds (7, 42, 1234), ticks 500-3000. Transcrito da tabela publicada
+# (nao ha CSV bruto commitado para esta varredura, anterior aos datasets/*.csv
+# atuais). Fonte: ROADMAP.md, "Fase 3 - O custo de pensar".
+h,pop
+1,295.9
+2,295.0
+3,293.6
+4,292.7
+6,290.6
+8,289.8
+10,289.4
+12,289.3

@@ -1,0 +1,9 @@
+# Paper 1, Secao 4 (modo 1 - "modelo" quebrado). Numeros transcritos da tabela
+# publicada, nao recomputados: sao lidos contra o main.c ANTERIOR ao conserto
+# (commit a311663..48ecbcb^), preservados aqui porque o conserto os destruiu.
+# Fonte: papers/paper-1-quatro-reguas.md sec.4; papers/notes/01-ablacoes.sh, nota 01.
+condicao,modelo,pop,extinta
+controle (mapa intacto),0.973,312,0
+horizonte=1 (mapa raso),0.994,321,0
+prever_valor=0 (sem mapa),1.000,,1
+solipsista (nao ve rivais),0.789,314,0

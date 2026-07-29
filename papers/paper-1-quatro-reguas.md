@@ -143,6 +143,12 @@ Três ablações independentes, todas apontando para o mesmo lugar:
 | `prever_valor ≡ 0` (sem mapa) | **1,000** ↑↑ | **extinta** |
 | solipsista (cego aos rivais) | 0,789 ↓ | 314 |
 
+![Nota do mostrador modelo (quebrado) sob 4 ablacoes, com a populacao final embaixo](figs/pt/p1-fig1-modelo-ablacao.png)
+
+**Figura 1.** A mesma ablação, dois painéis. Em cima, a nota do mostrador
+*sobe* até a nota perfeita; embaixo, a população que gerou essa nota máxima
+está extinta. Calibração alta é compatível com um cadáver.
+
 Lobotomizar o horizonte faz a nota **subir**. Remover o modelo de mundo por
 inteiro dá **nota perfeita** — a uma população que se extingue em 51–121 ticks.
 Cegar o bloco para os rivais faz a nota **descer**, porque sem aversão a multidão
@@ -216,6 +222,12 @@ traço que evolui. A regra 4 diz: antes de acusar a régua, congele o traço.
 | `esp_m`, livre | 2,760 | 1,677 | 0,131 | **0,079** |
 | `agencia`, `peso_espaco` **congelado** | 0,464 | 0,486 | 0,447 | **0,440** |
 
+![Agencia ao longo de 30 mil ticks, peso_espaco livre versus congelado](figs/pt/p1-fig2-agencia-regra4.png)
+
+**Figura 2.** A regra 4 em imagem: com o traço livre (azul), a leitura
+desaba junto com `peso_espaco`; congelado (laranja), fica plana. A régua
+não mudou — o objeto medido é que desapareceu sob seleção.
+
 Plana. **A régua é estável; o objeto é que muda.** A correlação era mecanismo, não
 contaminação: `peso_espaco` é o único canal pelo qual o estado interno pode mudar
 uma decisão, e quando ele morre a política vira reflexo — `argmax(comida_prev)`, e
@@ -265,6 +277,12 @@ corrida relida), a leitura desenha uma curva:
 | 1 | 0,3528 | 0,3596 | 0,3200 |
 | 4 → ∞ | 0,3540 | 0,3608 | 0,3220 |
 
+![modelo_do_outro em funcao de alpha, tres seeds, com a sonda antiga marcada em alpha=0,5](figs/pt/p1-fig3-modelo-do-outro-alpha.png)
+
+**Figura 3.** A mesma corrida relida em cada força `α`. A sonda antiga
+(linha cinza em `α = 0,5`) mede um ponto arbitrário no meio da subida; o
+conserto lê a assíntota, à direita, e não depende de `ANTECIPACAO`.
+
 `0,5` é só **um ponto no meio da subida**. Tivesse `ANTECIPACAO` valido 0,25, o
 mostrador leria ~0,29; a 0,125, ~0,19. O valor absoluto era função de uma
 constante escolhida por outro motivo — não uma propriedade do que se dizia medir.
@@ -307,6 +325,13 @@ encontra. Tabela de ablações:
 | `prever_valor ≡ 0` | 0,131 — sem modelo nenhum, morrendo, "integra" 0,13 |
 | solipsista | 0,039 |
 | `COMPETICAO = 0` | 0,192 |
+
+![Phi velha sob 5 ablacoes, nenhuma delas zera](figs/pt/p1-fig4-phi-ablacao.png)
+
+**Figura 4.** As cinco barras da tabela ao lado: nenhuma ablação chega perto
+de zero — nem a que mata a população (`prever_valor = 0`), nem a que
+lobotomiza o plano (`horizonte = 1`). Uma régua que nunca é obrigada a
+dizer "não" não está medindo nada.
 
 **Nenhuma ablação a zera.** Pela regra 2, a `phi` velha **não media nada** — no
 sentido estrito de que nenhuma leitura dela podia obrigar a retirar a palavra. E o
@@ -422,6 +447,12 @@ Os controles, agora com barras:
 | `phi` | 0,0649 ± 0,0039 |
 | `relato` | 0,6310 ± 0,0111 |
 | `autocausa` | 0,1381 ± 0,0113 |
+
+![Os 6 mostradores em 50 seeds, media e desvio-padrao](figs/pt/p1-fig5-replicacao-50-seeds.png)
+
+**Figura 5.** A tabela ao lado, em barras: `modelo` e `relato` no topo,
+`phi` no chão — a mesma hierarquia que cada seção individual já mostrou,
+agora com barra de erro sobre 50 seeds em vez de 3.
 
 E a pergunta desconfortável do §8 — *qual é o piso da régua fora do eremita, onde
 não há verdade algébrica para comparar?* — tem resposta, obtida comparando **a
