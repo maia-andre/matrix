@@ -44,6 +44,39 @@ exige o `main.c` do commit certo, exatamente como a nota de origem descreve.
 | `p2-fig5-imposto` | Paper 2 §7 + adendo nota 21 | `datasets/reciclagem.csv` (real, recicla=0/1) |
 | `p2-fig6-bimodalidade` | Paper 2 §8, adendo notas 23/26/28 | `datasets/bimodalidade.csv` (real, variante uni_h) |
 
+## Replays (CSV → GIF, não CSV → PNG)
+
+A segunda metade que este diretório já previa (ver ROADMAP, "Backlog
+especulativo"): duas animações que mostram uma MUDANÇA ao longo do tempo, não
+um estado final — a bifurcação do histograma de horizonte (nota 23) e o
+detector de colapso disparando/desligando (nota 24). Diferente das figuras
+acima, os dois CSVs de origem (`viz/data/replay_bimodal.csv` e
+`replay_colapso.csv`) não são transcrições nem `datasets/*.csv` existentes:
+são gerados por uma corrida **fresca**, sob o `main.c` de hoje, com a mesma
+técnica de patch temporário que as notas 23/24/26 já usavam (env vars ligam
+imposto/sonda; nada entra no binário canônico). Não são uma nota nova — não
+testam hipótese, não produzem achado — só ilustram com uma seed demonstrativa
+um fenômeno já estabelecido nos datasets reais. Por isso os números **não**
+reproduzem as tabelas publicadas nas notas 23/24 (traços novos desde então —
+`escuta`, `peso_arrependimento` — deslocam o fluxo de `rng01()`, o mesmo aviso
+da seção acima), mas a forma qualitativa é a mesma.
+
+```sh
+sh viz/data/gerar_replay_bimodal.sh    # ~1 corrida, 30000 ticks -> replay_bimodal.csv
+sh viz/data/gerar_replay_colapso.sh    # ~1 corrida, 8000 ticks  -> replay_colapso.csv
+python3 viz/gerar_replay.py            # os dois CSVs -> viz/replays/*.gif
+```
+
+| replay | mostra | seed/condição |
+|---|---|---|
+| `replay-bimodal.gif` | histograma de horizonte (1..12) indo de quase-uniforme a dois picos separados por um vale, ao longo de 30000 ticks | `uni_h_livre`, δ=0,95, seed=1 (fundo da nota 20/23, só horizonte livre) |
+| `replay-colapso.gif` | população + faixa vermelha quando `colapso ativo`: imposto liga em t=2000 (crash quase até a extinção), detector dispara em t=2054, população se recupera parcialmente sob o imposto, detector desliga em t=2861, segunda recuperação quando o imposto sai em t=5000 | imposto pigouviano `c=0,30`, liga 2000/desliga 5000, seed=2 |
+
+Cada `gerar_replay_*.sh` confirma leitura pura antes de gerar dado (a sonda/
+detector sozinhos, sem a intervenção que muda o comportamento, produzem CSV
+`--log` bit a bit idêntico ao vanilla) — a mesma disciplina C0a/B0a das notas
+23/24, só que sem pré-registro (não há predição sendo testada aqui).
+
 ## Paleta e estilo
 
 Cores e regras de uso (categórica em ordem fixa, sequencial azul para
