@@ -613,11 +613,11 @@ pergunta para os outros.
 > deriva neutra confirmada) e o **auto-modelo temporal** (§4.3, nota 30 — o
 > contrafactual "eu poderia ter ido para a esquerda" virou mecanismo real, e
 > a seleção converge para um `peso_arrependimento` **negativo**, não o
-> positivo que o desenho apostava). Seguem **abertas**, sem pré-registro: o
-> blefe residual como ESS (varrer a frequência), a **memória de sinais**
-> (reputação) — candidata natural ao mecanismo de custo que o §4.2
-> propositalmente deixou de fora — e, herdado da nota 30, uma invasão direta
-> negativo × zero para fechar o argumento de Q5.
+> positivo que o desenho apostava). Os dois fios que ficaram abertos ganharam
+> pré-registro em 2026-07-29: o **custo da escuta** via desconfiança por
+> vizinho (§4.4, nota 31) e a **invasão direta** negativo × zero/positivo do
+> arrependimento (§4.5, nota 32), fechando o argumento de Q5. Segue aberta,
+> sem pré-registro: o blefe residual como ESS (varrer a frequência).
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
@@ -856,6 +856,106 @@ agência e ter agência sobre o próprio agir passado.
   publicáveis; a v3 §4 só precisa saber qual.
 
 **Reproduzir (script a escrever):** `sh papers/notes/30-auto-modelo-temporal.sh`.
+
+## 4.4 Pré-registro do custo da escuta — desconfiança por vizinho *(2026-07-29, antes de rodar)*
+
+**O mecanismo.** A nota 29 instalou `escuta` sem nenhuma consequência real, de
+propósito — "sem custo, deriva neutra" era a metade fácil. O que ficou em
+aberto (nota 29, "O que ficou em aberto"): *"memória de sinais (reputação)...
+um vizinho com ESC_MONITOR que flagra outro bloco incoerente poderia parar de
+se deixar repelir pelo sinal daquele bloco."* Este pré-registro dá o
+mecanismo concreto, sem precisar de telepatia sobre a intenção alheia (só o
+que já é publicamente observável: o sinal emitido e o resultado real).
+
+`pretendentes_em()` hoje conta, sem distinção, quantos vizinhos sinalizaram a
+mesma célula — cada um desvaloriza via `ANTECIPACAO`, igual para todos.
+`atualizar_remorso()` já calcula, tick a tick, para **todo** bloco (não só
+para si) se ele foi **negado** por `resolver()` — só falta expor esse
+booleano. Um vizinho cronicamente negado é um vizinho cujo sinal, mesmo
+honesto, nunca se confirma: continuar se afastando dele custa oportunidade
+real, não evita disputa real. Um bloco com `escuta == ESC_MONITOR` passa a
+acumular, por vizinho **atualmente visível** (`desconfianca[i][j]`, matriz
+`MAX_AG × MAX_AG`, decaindo pelo **próprio desconto de `i`** — o mesmo idioma
+de `remorso[]`), quantas vezes aquele vizinho específico foi negado
+recentemente. `pretendentes_em`, só para quem tem `ESC_MONITOR`, pesa cada
+sinal concorrente por `1/(1+desconfianca[i][j])` em vez de contar 1 cheio;
+`ESC_ACAO`/`ESC_PLANO` continuam contando cheio, comportamento de hoje, sem
+mudança nenhuma. É a primeira vez que as três arquiteturas de escuta
+diferem por **comportamento**, não só pelo mostrador `relato` — e sem multa
+artificial: o "custo" de não ser `ESC_MONITOR` é só a oportunidade perdida de
+descontar sinais que a experiência local já desmentiu, e só existe **se**
+descontar ajudar de fato.
+
+Índices de bloco são reciclados (`alocar_slot()`); `desconfianca[i][j]` não é
+limpa quando o slot `j` (ou `i`) troca de dono — a mesma aproximação que
+`remorso[]` já tolera, sem tratamento especial. Declarado aqui, não
+escondido: é ruído esperado, não um bug a caçar.
+
+**Predições, declaradas antes de rodar:**
+
+- **R1 (instalação inócua para quem não é `ESC_MONITOR`):** com toda a
+  população em `ESC_ACAO` (ou toda em `ESC_PLANO`), `pretendentes_em` nunca
+  lê `desconfianca` — o resultado é **idêntico bit a bit** ao `main.c` de
+  antes deste patch (a soma inteira de sempre, só que num `float` que
+  representa exatamente cada inteiro 0–8).
+- **R2 (a desconfiança se acumula, rara-mas-real):** numa população 100%
+  `ESC_MONITOR`, alguma fração não-trivial (nem ~0%, nem ~100%) dos pares
+  vizinho-atual acaba com `desconfianca[i][j] > 0` ao longo de uma corrida —
+  a mesma ordem de grandeza da taxa de negados que a nota 30 já mediu
+  (8,7–9,7% dos ticks-de-bloco), porque é o mesmo evento visto por fora.
+- **R3 (descontar ajuda, ou não — registrado em voz alta):** `ESC_MONITOR`
+  × `ESC_ACAO`, populações homogêneas separadas, mesma seed — comparar taxa
+  de negados e população/energia ao longo do tempo. Hipótese: `ESC_MONITOR`
+  reduz sua própria taxa de negados (descontar um vizinho não-confiável
+  libera uma célula que a contagem ingênua teria evitado); risco declarado:
+  o efeito pode ser pequeno demais para aparecer fora do ruído, ou pode não
+  existir — qualquer um dos dois é resultado.
+- **R4 (invasão):** 50/50 `ESC_MONITOR` × `ESC_ACAO`, sem mutação em
+  `escuta`, montagens espelhadas por paridade de índice (o desenho exato do
+  Q4 da nota 30) — se R3 confirmar vantagem, `ESC_MONITOR` desloca `ESC_ACAO`
+  de forma consistente nas duas montagens; senão, sem vencedor consistente.
+- **R5 (deriva do início misto, agora COM o mecanismo ligado):** semeando
+  `escuta` em terços com mutação, 30 000 ticks, 3 seeds — ao contrário da
+  deriva neutra que a nota 29 mediu sem custo nenhum (P4), se R3/R4
+  confirmarem vantagem real, espera-se alguma direção para `ESC_MONITOR`
+  (não necessariamente fixação — o próprio mecanismo só ajuda quando há
+  vizinhos cronicamente negados para descontar).
+
+**Reproduzir (script a escrever):** `sh papers/notes/31-custo-da-escuta.sh`.
+
+## 4.5 Pré-registro da invasão direta do arrependimento — fechar o argumento de Q5 *(2026-07-29, antes de rodar)*
+
+**O problema.** A nota 30 (Q3/Q4) testou `peso_arrependimento` positivo ×
+zero e não achou vencedor (invasão 50/50, placar exato 3×3). Mas a mesma
+nota (Q5), semeando o traço livre em `[-2,2]` com mutação, achou a seleção
+convergindo **consistentemente para negativo** nas três seeds — a região
+errada do domínio, que Q3/Q4 nunca testaram. A própria nota 30 registrou a
+ameaça à validade: convergência sob mutação livre pode refletir uma
+assimetria perto das bordas do domínio de mutação, não seleção de verdade.
+Fecha-se o argumento com uma invasão direta — o mesmo desenho exato do Q4
+(50/50, **sem mutação** no traço, duas montagens espelhadas por paridade de
+índice, 3 seeds, 30 000 ticks), só trocando os valores. Nenhum código novo:
+é o mesmo `main.c` da nota 30, o mesmo harness (`gen invasao "res,inv"`),
+valores diferentes.
+
+**Predições, declaradas antes de rodar:**
+
+- **T1 (negativo vs. zero):** `-2,0` desloca `0,0` de forma consistente nas
+  duas montagens espelhadas — diferente do empate 3×3 que Q4 mediu para
+  positivo × zero. Se Q5 estiver certa sobre a direção real da seleção, esta
+  é a comparação que devia mostrar um vencedor claro.
+- **T2 (negativo vs. positivo):** `-2,0` desloca `2,0` — mais forte que T1,
+  já que Q5 mostrou o traço se afastando do zero especificamente **na
+  direção negativa**, não só evitando o zero.
+- **T3 (condicional — só roda se T1 e/ou T2 confirmarem):** blocos com
+  `peso_arrependimento` fortemente negativo mostram `agencia` mais baixa que
+  blocos com o traço em zero — a hipótese mecânica da nota 30 §4 (parar de
+  fugir do espaço disputado, depois de negado, aproxima o bloco do reflexo
+  que a nota 03 já documentou matando a `agencia` por outro caminho). Se
+  T1/T2 não confirmarem (a seleção de Q5 não bate com competição direta),
+  T3 não roda — não há hipótese a testar.
+
+**Reproduzir (script a escrever):** `sh papers/notes/32-invasao-arrependimento.sh`.
 
 ---
 
