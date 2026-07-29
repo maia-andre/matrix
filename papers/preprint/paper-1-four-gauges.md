@@ -157,7 +157,7 @@ Three independent ablations, all pointing at the same place:
 | `predict_value ≡ 0` (no map) | **1.000** ↑↑ | **extinct** |
 | solipsist (blind to rivals) | 0.789 ↓ | 314 |
 
-![The (broken) modelo gauge reading under 4 ablations, with final population below](../figs/en/p1-fig1-modelo-ablacao.png)
+![The (broken) modelo gauge reading under 4 ablations, with final population below](../figs/en/p1-fig1-modelo-ablacao.png){width=90%}
 
 **Figure 1.** The same ablation, two panels. On top, the gauge's score
 *rises* to a perfect reading; below, the population that produced that
@@ -244,7 +244,7 @@ ruler, freeze the trait.
 | `space_weight` mean, free | 2.760 | 1.677 | 0.131 | **0.079** |
 | `agency`, `space_weight` **frozen** | 0.464 | 0.486 | 0.447 | **0.440** |
 
-![Agency over 30,000 ticks, space_weight free versus frozen](../figs/en/p1-fig2-agencia-regra4.png)
+![Agency over 30,000 ticks, space_weight free versus frozen](../figs/en/p1-fig2-agencia-regra4.png){width=90%}
 
 **Figure 2.** Rule 4 in a picture: with the trait free (blue), the reading
 collapses together with `space_weight`; frozen (orange), it stays flat.
@@ -305,7 +305,7 @@ curve:
 | 1 | 0.3528 | 0.3596 | 0.3200 |
 | 4 → ∞ | 0.3540 | 0.3608 | 0.3220 |
 
-![other-model as a function of alpha, three seeds, with the old probe marked at alpha=0.5](../figs/en/p1-fig3-modelo-do-outro-alpha.png)
+![other-model as a function of alpha, three seeds, with the old probe marked at alpha=0.5](../figs/en/p1-fig3-modelo-do-outro-alpha.png){width=90%}
 
 **Figure 3.** The same run reread at each anticipation strength `α`. The
 old probe (gray line at `α = 0.5`) measures an arbitrary point midway up
@@ -362,7 +362,7 @@ Ablation table:
 | solipsist | 0.039 |
 | `COMPETICAO = 0` | 0.192 |
 
-![Old phi under 5 ablations, none of which drives it to zero](../figs/en/p1-fig4-phi-ablacao.png)
+![Old phi under 5 ablations, none of which drives it to zero](../figs/en/p1-fig4-phi-ablacao.png){width=90%}
 
 **Figure 4.** The five bars from the table alongside: no ablation comes
 close to zero — not even the one that kills the population
@@ -501,7 +501,7 @@ The controls, now with error bars:
 | `report` | 0.6310 ± 0.0111 |
 | `self-as-cause` | 0.1381 ± 0.0113 |
 
-![The 6 gauges across 50 seeds, mean and standard deviation](../figs/en/p1-fig5-replicacao-50-seeds.png)
+![The 6 gauges across 50 seeds, mean and standard deviation](../figs/en/p1-fig5-replicacao-50-seeds.png){width=90%}
 
 **Figure 5.** The table alongside, as bars: `modelo` and `report` on top,
 `phi` at the floor — the same hierarchy every individual section already
