@@ -963,6 +963,55 @@ valores diferentes.
 
 **Reproduzir (script a escrever):** `sh papers/notes/32-invasao-arrependimento.sh`.
 
+## 4.6 Pré-registro da extensão da invasão do arrependimento — 10 seeds fecham a contagem que 3 não bastaram *(2026-07-30, antes de rodar)*
+
+**O problema.** A nota 32 (§4.5) rodou T1/T2 em 3 seeds e não decidiu: 5 das
+6 comparações mostraram a assinatura de efeito fundador (a paridade do
+índice vence nas duas montagens espelhadas, não o valor do traço); só 1/6
+(seed 42, T2) foi na direção que a nota 30 (Q5) apostou. A própria nota 32
+registrou o problema em voz alta: não havia, no pré-registro original, um
+número mínimo de seeds que separasse "sinal real, pequeno, afogado pelo
+efeito fundador na maioria das corridas" de "ruído, e a seed 42 caiu do lado
+certo por acaso" — e sugeriu, como próximo passo natural, mais seeds (10+,
+o mesmo remédio que a nota 11 aplicou à régua inteira) ou uma população
+maior. Esta extensão escolhe seeds: mesmo desenho exato (T1: −2,0 × 0,0;
+T2: −2,0 × 2,0; 50/50, sem mutação no traço, duas montagens espelhadas por
+paridade de índice, 30 000 ticks), agora com **10 seeds novas e
+sequenciais** (`1..10`, a convenção da nota 11) — não as 3 seeds da nota 32,
+para não reaproveitar corridas cujo resultado já se conhece. Nenhum
+mecanismo novo: mesmo `main.c`, mesmo harness `invasao`.
+
+**Por que 10 seeds pode não bastar — declarado antes de rodar.** A nota 31
+mediu o mesmo padrão noutro traço: mesmo com um mecanismo real confirmado
+por outro caminho (R5, `esc_monitor_f` subindo em 3/3 seeds), a invasão
+direta pareada (R4) ficou confundida pelo efeito fundador em 2 das 3 seeds.
+Se o efeito fundador é **estrutural** ao harness (a metade do espaço que
+nasce vizinha de um recurso melhor prospera, quase independente do traço),
+mais seeds não elimina o confundidor — só permite **contar** através dele, e
+só se a vantagem real for grande o bastante para deslocar a fração de
+vitórias "independente de paridade" bem acima do que o próprio efeito
+fundador produziria sozinho (uma taxa de base que este projeto nunca mediu
+num traço comprovadamente neutro). Esta extensão é uma tentativa honesta,
+não uma garantia de fechar o argumento.
+
+**Critério de decisão, declarado antes de rodar — o que faltou na nota 32.**
+Para cada comparação (T1, T2), separadamente, conte quantas das 10 seeds
+mostram o MESMO valor vencendo nas duas montagens espelhadas,
+**independente de paridade** (o diagnóstico que as notas 30/31/32 já usam):
+
+- **≥7/10:** confirma — o traço desloca o oponente de forma consistente
+  demais para ser só efeito fundador.
+- **4–6/10:** não confirma nem refuta — mantém a dúvida da nota 32, agora com
+  um número em vez de "5 de 6".
+- **≤3/10:** o painel de 10 seeds se comporta como o efeito fundador sozinho
+  (a mesma leitura que a nota 32 já deu para 1/6) — sem evidência de
+  vantagem real detectável neste desenho.
+
+**T3 (condicional, herdado do §4.5):** só roda se T1 e/ou T2 confirmarem
+(≥7/10) pelo critério acima.
+
+**Reproduzir (script a escrever):** `sh papers/notes/33-invasao-arrependimento-10-seeds.sh`.
+
 ---
 
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper
