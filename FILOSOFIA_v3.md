@@ -393,7 +393,7 @@ desconfortável: um relato de "algo me moveu contra o meu plano" — num cérebr
 num experimento de Libet, numa Matrix — jamais discrimina, sozinho, física de
 dentro de intervenção de fora.
 
-## 5. A dobradiça da confabulação *(item 5 — selvagem ✅, forçada ✅ e evolutiva instalada ✅; o custo segue ⛔)*
+## 5. A dobradiça da confabulação *(item 5 — selvagem ✅, forçada ✅, evolutiva instalada ✅ e o custo ligado ✅ — nota 31: misto isolado, claro na deriva)*
 
 O que torna o auto-relato humano pouco confiável para a ciência não é a
 mentira — é a **confabulação**: o relato sincero de um motivo que não operou.
@@ -431,16 +431,21 @@ e aponta para o **relato como gênero de evidência** — qualquer relato, de
 qualquer sistema cuja arquitetura de leitura se conheça. Da nossa, note-se,
 não se conhece nem isso.
 
-A versão **evolutiva** está instalada: as três arquiteturas viraram traço
-herdável (`escuta`, nível 6, ROADMAP §4.2) — mas, de propósito, ainda **sem
-o relato custar nada**. A metade barata da predição da nota 07 se confirmou
-primeiro: sem custo, a deriva é mesmo neutra — três seeds, 30 000 ticks,
-sem direção comum, ao contrário do que a honestidade da *fala* fez sob
-custo real (§3). O que falta — e o que continua ⛔ — é a metade cara: ligar
-`escuta` a uma consequência de verdade, para testar se "leitores que punem
-incoerência" fazem o monitor invadir o confabulador. Sem isso instalado,
-não há o que testar — só o controle que prova que o traço, sozinho, não
-inclina nada (nota 29).
+A versão **evolutiva** está instalada em duas etapas. Primeiro, sem custo, de
+propósito (`escuta`, nível 6, ROADMAP §4.2): a metade barata da predição da
+nota 07 se confirmou — três seeds, 30 000 ticks, sem direção comum, ao
+contrário do que a honestidade da *fala* fez sob custo real (§3) — só o
+controle que prova que o traço, sozinho, não inclina nada (nota 29). Depois,
+a metade cara (ROADMAP §4.4, nota 31): `ESC_MONITOR` passa a descontar o
+sinal de vizinhos que ele viu sendo repetidamente negados por `resolver()`
+(`desconfianca[i][j]`, decaindo como `remorso[]`) — a primeira vez que as
+três arquiteturas diferem por **comportamento**, não só pelo mostrador
+`relato`. A comparação isolada e a invasão direta saem **mistas** (o mesmo
+efeito fundador de paridade que o §4 já documentou para
+`peso_arrependimento`), mas a deriva a partir de uma população mista é limpa:
+`esc_monitor_f` sobe de 0,33–0,40 para 0,76–0,81 nas três seeds — o oposto
+exato da deriva neutra medida sem o mecanismo. O mesmo padrão do §4:
+comparações pareadas ambíguas, deriva do diverso decisiva.
 
 E o fecho do arco, que esta seção entrega pronto à §6: o último reduto de
 qualquer um de nós — "mas eu **sei** que sou consciente, por dentro" — **é ele
