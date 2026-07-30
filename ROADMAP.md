@@ -613,11 +613,17 @@ pergunta para os outros.
 > deriva neutra confirmada) e o **auto-modelo temporal** (§4.3, nota 30 — o
 > contrafactual "eu poderia ter ido para a esquerda" virou mecanismo real, e
 > a seleção converge para um `peso_arrependimento` **negativo**, não o
-> positivo que o desenho apostava). Os dois fios que ficaram abertos ganharam
-> pré-registro em 2026-07-29: o **custo da escuta** via desconfiança por
-> vizinho (§4.4, nota 31) e a **invasão direta** negativo × zero/positivo do
-> arrependimento (§4.5, nota 32), fechando o argumento de Q5. Segue aberta,
-> sem pré-registro: o blefe residual como ESS (varrer a frequência).
+> positivo que o desenho apostava). Os dois fios que ficaram abertos rodaram
+> em 2026-07-29: o **custo da escuta** (§4.4, nota 31) instalou o mecanismo
+> (`ESC_MONITOR` desconta vizinhos cronicamente negados) e achou o sinal mais
+> limpo na deriva do início misto (`esc_monitor_f` sobe consistente nas 3
+> seeds) — mas a invasão direta (R4) e a comparação isolada (R3) saíram
+> mistas. A **invasão direta** do arrependimento (§4.5, nota 32) **não fechou**
+> o argumento de Q5: em 5 das 6 corridas, o vencedor segue a paridade do
+> índice, não o valor do traço — a mesma assinatura de efeito fundador que a
+> nota 30 já tinha descrito, agora vista de novo com valores diferentes.
+> Segue aberta, sem pré-registro: o blefe residual como ESS (varrer a
+> frequência).
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
