@@ -184,6 +184,15 @@ static int sinal_y[MAX_AG];
 static int   decidido_x[MAX_AG], decidido_y[MAX_AG];
 static int   vice_x[MAX_AG],     vice_y[MAX_AG];
 static float remorso[MAX_AG];
+static int   negado_tick[MAX_AG];   /* (§4.4) foi negado por resolver() ESTE tick? */
+
+/* (§4.4) desconfianca[i][j]: quanto o bloco i (so quando escuta==ESC_MONITOR)
+ * desconfia do sinal do vizinho j, por te-lo visto ser negado. Decai pelo
+ * proprio desconto de i, o mesmo idioma de remorso[]. So e lida/escrita para
+ * pares que estao no MESMO 3x3 no momento — indices reciclados nao sao
+ * limpos na coluna j (a mesma aproximacao que remorso[] tolera; ver
+ * ROADMAP.md §4.4), so na linha do proprio recem-nascido (reproduzir()). */
+static float desconfianca[MAX_AG][MAX_AG];
 
 static int reivindicado[ALT][LARG];  /* quem ganhou o direito de entrar aqui */
 
@@ -420,16 +429,24 @@ static float utilidade(int cx, int cy, Bloco *b) {
  * So vizinhos imediatos de (cx,cy) podem mira-la (ninguem anda mais que um
  * passo), entao basta varrer o 3x3 ao redor e ler o sinal de cada um. Antes
  * isto lia intencao_* — telepatia. Agora le o que o vizinho ESCOLHEU contar
- * (sinal_*, escrito por emitir): comunicacao, com direito a mentira. */
-static int pretendentes_em(int cx, int cy, int self_i) {
-    int n = 0;
+ * (sinal_*, escrito por emitir): comunicacao, com direito a mentira.
+ *
+ * (§4.4) Para ESC_ACAO/ESC_PLANO, cada sinal concorrente pesa 1 cheio, como
+ * sempre. Para ESC_MONITOR, pesa 1/(1+desconfianca[self_i][j]) — um vizinho
+ * cronicamente negado (sinal que nunca se confirma) repele cada vez menos.
+ * Devolve float por causa desse peso fracionario; para ESC_ACAO/ESC_PLANO o
+ * valor e sempre um inteiro pequeno representado exato em float (0..8). */
+static float pretendentes_em(int cx, int cy, int self_i) {
+    int monitor = (blocos[self_i].escuta == ESC_MONITOR);
+    float n = 0.0f;
     for (int dy = -1; dy <= 1; dy++) {
         for (int dx = -1; dx <= 1; dx++) {
             int nx = cx + dx, ny = cy + dy;
             if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
             int j = ocup[ny][nx];
             if (j == -1 || j == self_i) continue;       /* vazio ou eu mesmo  */
-            if (sinal_x[j] == cx && sinal_y[j] == cy) n++;
+            if (sinal_x[j] == cx && sinal_y[j] == cy)
+                n += monitor ? 1.0f / (1.0f + desconfianca[self_i][j]) : 1.0f;
         }
     }
     return n;
@@ -457,7 +474,7 @@ static void melhor_celula(Bloco *b, int i, int antecipar, int *bx, int *by,
 
             float u = utilidade(nx, ny, b);
             if (antecipar) {                         /* nivel 5: prever a disputa */
-                int pret = pretendentes_em(nx, ny, i);
+                float pret = pretendentes_em(nx, ny, i);
                 u /= 1.0f + ANTECIPACAO * pret;
             }
             if (u > melhor) {
@@ -579,10 +596,11 @@ static void resolver(void) {
  * resolver(), antes que o proximo tick zere reivindicado[][]. */
 static void atualizar_remorso(void) {
     for (int i = 0; i < n_blocos; i++) {
-        if (!blocos[i].vivo) continue;
+        if (!blocos[i].vivo) { negado_tick[i] = 0; continue; }
 
         int queria_mover = (decidido_x[i] != blocos[i].x || decidido_y[i] != blocos[i].y);
         int negado = queria_mover && alvo_x[i] == blocos[i].x && alvo_y[i] == blocos[i].y;
+        negado_tick[i] = negado;   /* (§4.4) exposto p/ atualizar_confianca ler DE FORA */
 
         float arrependimento = 0.0f;
         if (negado && reivindicado[vice_y[i]][vice_x[i]] == -1) {
@@ -591,6 +609,31 @@ static void atualizar_remorso(void) {
             if (perdido > 0.0f) arrependimento = perdido;
         }
         remorso[i] = remorso[i] * blocos[i].desconto + arrependimento;
+    }
+}
+
+/* (§4.4) Roda logo apos atualizar_remorso() — negado_tick[] ja esta fresco, e
+ * ocup[][] ainda reflete o 3x3 de ANTES de aplicar_e_comer() mover ninguem
+ * (o mesmo 3x3 que pretendentes_em() consultou nesta mesma passagem de
+ * decidir()). Cada bloco com escuta==ESC_MONITOR acumula, para cada vizinho
+ * ATUAL, quanto ele foi negado — decai pelo proprio desconto de i, o mesmo
+ * idioma de remorso[]. Blocos que nao sao ESC_MONITOR nunca escrevem nem leem
+ * desconfianca — o mostrador so entra no jogo para quem escuta de verdade. */
+static void atualizar_confianca(void) {
+    for (int i = 0; i < n_blocos; i++) {
+        if (!blocos[i].vivo || blocos[i].escuta != ESC_MONITOR) continue;
+        int x = blocos[i].x, y = blocos[i].y;
+        for (int dy = -1; dy <= 1; dy++) {
+            for (int dx = -1; dx <= 1; dx++) {
+                if (dx == 0 && dy == 0) continue;
+                int nx = x + dx, ny = y + dy;
+                if (nx < 0 || nx >= LARG || ny < 0 || ny >= ALT) continue;
+                int j = ocup[ny][nx];
+                if (j == -1) continue;
+                float sinal = negado_tick[j] ? 1.0f : 0.0f;
+                desconfianca[i][j] = desconfianca[i][j] * blocos[i].desconto + sinal;
+            }
+        }
     }
 }
 
@@ -732,6 +775,10 @@ static void reproduzir(void) {
         cria->escuta      = muta_escuta(pai->escuta);
         cria->peso_arrependimento =
             muta_traco(pai->peso_arrependimento, 2.0f * MUTACAO, -6.0f, 6.0f);
+        for (int k = 0; k < MAX_AG; k++) desconfianca[j][k] = 0.0f;   /* (§4.4)
+            * a cria nao herda a desconfianca de quem morreu neste slot — so a
+            * PROPRIA linha (o que ELA lembra dos outros); a coluna (o que os
+            * outros lembram deste slot) fica, ruido tolerado (ROADMAP §4.4) */
         remorso[j] = 0.0f;   /* (§4.3) estado, nao traco: a cria nao herda o
                                * remorso de quem morreu nesse slot reciclado */
         ocup[ly[e]][lx[e]] = j;
@@ -1106,10 +1153,10 @@ static float agencia_do_bloco(Bloco *b, int i) {
  * escolha a modelar: sai da media, como na agencia. */
 static float modelo_do_outro_do_bloco(Bloco *b, int i) {
     float u[9];
-    int   pret[9], n = 0;
+    float pret[9]; int n = 0;
 
     /* ficar parado: sempre valido, e nunca disputado (pret = 0) */
-    u[0] = utilidade(b->x, b->y, b);  pret[0] = 0;  n = 1;
+    u[0] = utilidade(b->x, b->y, b);  pret[0] = 0.0f;  n = 1;
 
     for (int dy = -1; dy <= 1; dy++)
         for (int dx = -1; dx <= 1; dx++) {
@@ -1128,12 +1175,12 @@ static float modelo_do_outro_do_bloco(Bloco *b, int i) {
     int w = 0;
     for (int k = 1; k < n; k++) if (u[k] > u[w]) w = k;
 
-    if (pret[w] == 0) return 0.0f;                    /* a escolha pre-social nao e disputada */
+    if (pret[w] == 0.0f) return 0.0f;                  /* a escolha pre-social nao e disputada */
 
     for (int k = 0; k < n; k++) {                     /* W disputada: alguem a ultrapassa? */
         if (k == w) continue;
-        if (pret[k] == 0) { if (u[k] > 0.0f) return 1.0f; }       /* plana positiva vence W->0 */
-        else if (u[k] * (float)pret[w] > u[w] * (float)pret[k])   /* mais valor por pretendente */
+        if (pret[k] == 0.0f) { if (u[k] > 0.0f) return 1.0f; }    /* plana positiva vence W->0 */
+        else if (u[k] * pret[w] > u[w] * pret[k])       /* mais valor por pretendente */
             return 1.0f;
     }
     return 0.0f;
@@ -1173,10 +1220,11 @@ static float modelo_do_outro_do_bloco(Bloco *b, int i) {
 #define AC_PASSOS 33      /* amostras do eixo sigma em [0,1] (32 intervalos) */
 
 static float autocausa_do_bloco(Bloco *b, int i) {
-    int   cx[9], cy[9], pret[9], n = 0;
+    int   cx[9], cy[9], n = 0;
+    float pret[9];
 
     /* ficar parado: sempre valido, e melhor_celula o pontua SEM antecipacao */
-    cx[0] = b->x; cy[0] = b->y; pret[0] = 0; n = 1;
+    cx[0] = b->x; cy[0] = b->y; pret[0] = 0.0f; n = 1;
 
     for (int dy = -1; dy <= 1; dy++)
         for (int dx = -1; dx <= 1; dx++) {
@@ -1197,7 +1245,7 @@ static float autocausa_do_bloco(Bloco *b, int i) {
         float melhor = utilidade_sigma(cx[0], cy[0], b, sig);   /* parado: K = 1 */
         for (int k = 1; k < n; k++) {
             float u = utilidade_sigma(cx[k], cy[k], b, sig);
-            u /= 1.0f + ANTECIPACAO * (float)pret[k];
+            u /= 1.0f + ANTECIPACAO * pret[k];
             if (u > melhor) { melhor = u; arg = k; }  /* '>' estrito: mesmo
                                                        * desempate de melhor_celula */
         }
@@ -1783,7 +1831,8 @@ int main(int argc, char **argv) {
             }
 
             resolver();
-            atualizar_remorso();   /* §4.3: le reivindicado[][] antes que suma */
+            atualizar_remorso();    /* §4.3: le reivindicado[][] antes que suma */
+            atualizar_confianca();  /* §4.4: le negado_tick[] fresco, ocup[][] pre-mover */
             aplicar_e_comer();
             /* FASE 2: agora que os blocos comeram (mas ANTES de reproduzir reusar
              * slots), confere a previsao do modelo contra a colheita real — e o
