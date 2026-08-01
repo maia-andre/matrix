@@ -1017,6 +1017,56 @@ mostram o MESMO valor vencendo nas duas montagens espelhadas,
 
 **Reproduzir (script a escrever):** `sh papers/notes/33-invasao-arrependimento-10-seeds.sh`.
 
+## 4.7 Pré-registro da segunda extensão de T2 — 20 seeds novas para separar o sinal sub-limiar de ruído *(2026-08-01, antes de rodar)*
+
+**O problema.** A nota 33 fechou T1 com folga (1/10 REAL — fundador puro; o
+triplo de seeds não diluiu o 3/3 fundador da nota 32, confirmou-o). T2 não
+fechou: 6/10 REAL, abaixo do limiar de confirmação (7/10) mas longe do
+limiar de fundador puro (≤3/10) — e as seis corridas "reais" concordam,
+sem exceção, na direção que a nota 30 (Q5) apostara (`−2,0`). A própria nota
+33 deixou dois caminhos possíveis, nenhum construído: painel maior (20+
+seeds) ou população maior. Esta extensão escolhe o painel maior — reaproveita
+o harness inteiro sem mudança nenhuma, ao custo de mais tempo de máquina;
+população maior exigiria mexer em parâmetros de mundo que este projeto nunca
+varreu, e a disciplina do backlog especulativo (`ROADMAP`, item 4) é não
+construir infraestrutura nova sem antes nomear um teste que a exija — o que
+não é o caso aqui.
+
+**Desenho.** Só T2 (`−2,0` × `2,0`) — T1 já está decidido e não precisa de
+mais seeds. Mesmo desenho exato das notas 30/32/33: 50/50 fixo por paridade
+de índice, sem mutação no traço, duas montagens espelhadas, 30 000 ticks.
+**20 seeds novas e sequenciais, 11 a 30** (continuando a série 1–10 da nota
+33, convenção da nota 11 — não reaproveitar corridas já conhecidas).
+
+**Critério de decisão, declarado antes de rodar.** Dois números, os dois
+recomputados nos mesmos moldes da nota 33 (mesma fórmula, sem tocar
+simulação nenhuma):
+
+- **Standalone (as 20 seeds novas, sozinhas)** — mesma banda proporcional:
+  ≥14/20 confirma, 7–13/20 não decide, ≤6/20 fundador puro.
+- **Pool (as 20 novas somadas às 10 já publicadas na nota 33 — 6 REAL de
+  10, seeds 2/3/4/6/8/9 REAL, seeds 1/5/7/10 fundador)** — total de 30, banda
+  proporcional às mesmas 70%/30%: ≥21/30 confirma, 10–20/30 não decide,
+  ≤9/30 fundador puro.
+
+Se as duas bandas discordarem, o **pool** decide — tem mais poder estatístico
+—, e o standalone entra na nota como réplica independente do mesmo desenho,
+não como segundo veredito. **T3** (condicional, herdado do §4.5/§4.6) só roda
+se o pool confirmar (≥21/30); T1 já não confirma, então essa é a única porta
+que resta aberta para T3.
+
+**Por que 30 seeds pode não bastar — declarado antes de rodar.** A mesma
+ressalva da nota 33 vale aqui, sem novidade: se o efeito fundador for
+estrutural ao harness (metade do espaço que nasce vizinha de recurso melhor
+prospera quase independente do traço), nenhum n de seeds sozinho separa um
+sinal real pequeno de uma taxa de base nunca medida num traço comprovadamente
+neutro. Esta extensão é mais uma tentativa honesta de contar através do
+confundidor, não uma garantia de fechá-lo — se ficar em "não decide" de
+novo, o próximo recurso é a população maior que esta nota escolheu não
+construir ainda.
+
+**Reproduzir (script a escrever):** `sh papers/notes/34-invasao-arrependimento-t2-20-seeds.sh`.
+
 ---
 
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper
