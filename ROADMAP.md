@@ -621,9 +621,14 @@ pergunta para os outros.
 > mistas. A **invasão direta** do arrependimento (§4.5, nota 32) **não fechou**
 > o argumento de Q5: em 5 das 6 corridas, o vencedor segue a paridade do
 > índice, não o valor do traço — a mesma assinatura de efeito fundador que a
-> nota 30 já tinha descrito, agora vista de novo com valores diferentes.
-> Segue aberta, sem pré-registro: o blefe residual como ESS (varrer a
-> frequência).
+> nota 30 já tinha descrito, agora vista de novo com valores diferentes. A
+> extensão de 10 seeds (§4.6, nota 33) fecha **T1**: `−2,0` × `0,0` é
+> **fundador puro** (1/10 REAL, mais nítido que o 3/3 da nota 32) — e a
+> própria nota pegou um bug na classificação automática do script antes de
+> aceitar o veredito (a primeira leitura, com bug, dizia o oposto). **T2**
+> (`−2,0` × `2,0`) continua sem decidir (6/10), embora as seeds "reais"
+> concordem todas na direção `−2,0`. Segue aberta, sem pré-registro: o blefe
+> residual como ESS (varrer a frequência).
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:

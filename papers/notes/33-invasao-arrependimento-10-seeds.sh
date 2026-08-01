@@ -74,10 +74,12 @@ rodar_comparacao() {
     "$TMP/${nome}_B" "$s" "$TICKS_LONGO" 0 --log "$TMP/${nome}_B_$s.csv" >/dev/null
     afA=$(valor_tick "$TMP/${nome}_A_$s.csv" 24 $((TICKS_LONGO-1)))
     afB=$(valor_tick "$TMP/${nome}_B_$s.csv" 24 $((TICKS_LONGO-1)))
-    # A: residente(par)=vres, invasor(impar)=vinv -- winner = vres se af < mid, senao vinv
+    # winner = o VALOR (nao o papel) para o qual arrep_m convergiu -- mid e o
+    # mesmo limiar absoluto nas duas montagens, entao a formula e IDENTICA em
+    # A e B (o papel que cada valor ocupa muda entre montagens; o valor
+    # vencedor e comparado ao valor vencedor da outra montagem, nao ao papel).
     wA=$(awk -v af="$afA" -v mid="$mid" -v vr="$vres" -v vi="$vinv" 'BEGIN{print (af<mid)?vr:vi}')
-    # B: residente(par)=vinv, invasor(impar)=vres -- winner = vinv se af < mid, senao vres
-    wB=$(awk -v af="$afB" -v mid="$mid" -v vr="$vres" -v vi="$vinv" 'BEGIN{print (af<mid)?vi:vr}')
+    wB=$(awk -v af="$afB" -v mid="$mid" -v vr="$vres" -v vi="$vinv" 'BEGIN{print (af<mid)?vr:vi}')
     if [ "$wA" = "$wB" ]; then
       classe="REAL (vencedor=$wA, indep. de paridade)"
       real=$((real+1))
