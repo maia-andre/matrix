@@ -302,7 +302,7 @@ desta bateria — e a tentação de deslizar da primeira frase para a segunda é
 exatamente o empréstimo de respeitabilidade que a §6 recusa pagar. O
 vocabulário emprestado fica; o fiador fenomenológico, não.
 
-## 4. O tempo, a quarta dimensão e Bandersnatch *(item 7 — o dedo ✅ rodou; o auto-modelo temporal ✅ instalado, direção surpreendente)*
+## 4. O tempo, a quarta dimensão e Bandersnatch *(item 7 — o dedo ✅ rodou; o auto-modelo temporal ✅ instalado, direção surpreendente — a invasão direta não confirma, T2 fica em aberto: notas 32/33)*
 
 O determinismo, neste projeto, não é uma tese: é uma propriedade verificável
 do binário. O universo inteiro é `f(seed)` — mesma seed, mesma história, bit a
@@ -336,6 +336,39 @@ que o bloco, depois de perder uma disputa, continue competindo pelo recurso
 que valia a disputa. A hipótese mecânica fica registrada, não provada — o
 próximo passo natural é uma invasão direta negativo × zero, que a nota 30
 deixou como item em aberto.
+
+Essa invasão rodou (ROADMAP §4.5/4.6, notas 32/33), reaproveitando o desenho
+exato do Q4 — 50/50 fixo por paridade de índice, sem mutação no traço, duas
+montagens espelhadas — só trocando os valores: T1 (`−2,0` × `0,0`) era, no
+próprio pré-registro, "a comparação que devia mostrar um vencedor claro" se
+Q5 estivesse certa; T2 (`−2,0` × `2,0`) devia confirmar com ainda mais força.
+Os dois erraram o roteiro esperado, e por caminhos diferentes. A primeira
+leitura de T1 em 10 seeds dizia CONFIRMA, 9/10 — até uma conferência linha a
+linha contra a convenção par/ímpar que as notas 30–32 já usam à mão achar a
+fórmula da segunda montagem com os dois valores trocados; recomputado sem
+tocar a simulação (que é determinística — só a aritmética pós-hoc mudou), o
+veredito é o oposto exato: **1/10 REAL, fundador puro**, e o triplo de seeds
+não dilui o 3/3 fundador da nota 32, confirma-o (nota 33). A comparação que
+deveria ser a prova mais limpa da direção de Q5 é, das duas, a que mais
+claramente não a confirma: é a paridade do índice, não o peso, que decide 9
+das 10 corridas.
+
+T2, a que deveria confirmar com mais força ainda, fica em 6/10 — abaixo do
+limiar de confirmação (7/10), mas longe do 3/10 que marcaria ruído puro: as
+seis corridas que escapam do efeito fundador concordam, sem exceção, na
+direção que a nota 30 apostara. O quadro que sobra: a convergência da nota
+30 (peso negativo, três seeds sem exceção sob deriva livre) continua medida,
+mas perde o apoio que uma vitória direta lhe daria — a competição pareada
+mostra o mesmo confundidor espacial que a §5 documenta para a `escuta`
+(nota 31) dominando 9 de 10 corridas em T1, e um sinal fraco demais para
+vencê-lo, mas não ausente, em T2. Se há vantagem real no peso negativo,
+este desenho não tem potência para separá-la do efeito fundador — o que não
+é o mesmo que ela não existir. E o episódio deixa, de bônus, um lembrete que
+esta seção deve à §7: o classificador que decide REAL contra FUNDADOR é
+também um instrumento sem calibração de fábrica, e a inversão só apareceu
+porque a nota 33 conferiu a régua nova contra um caso já resolvido à mão
+antes de publicar — uma fórmula de uma linha errada bastou para inverter o
+veredito inteiro.
 
 O que já rodou é o **Bandersnatch** (nota 07). Um dedo de fora do mundo
 sobrescreve ~25% das escolhas — seleção e alvo por hash, determinísticos, sem
