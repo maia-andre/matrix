@@ -1069,6 +1069,103 @@ construir ainda.
 
 ---
 
+## 4.8 Pré-registro do nulo do classificador — quanto REAL este desenho fabrica sozinho? *(2026-08-08, antes de rodar)*
+
+**O problema.** T2 fechou em 20/30 (66,7%), uma seed abaixo do corte. Três notas
+seguidas (32, 33, 34) declararam a mesma ameaça e nenhuma a mediu: se o efeito
+fundador for estrutural ao harness, **nenhum n de seeds separa um sinal real
+pequeno de uma taxa de base nunca medida**. Esta seção para de contar seeds e
+mede a taxa de base. Não é mais um painel do mundo — é um painel da **régua**.
+No idioma do §7 da `FILOSOFIA_v3`: antes de perguntar de novo o que o mundo diz,
+perguntar quanto o instrumento diz sozinho.
+
+**A álgebra que desenha o teste — declarada antes de rodar, e ela já matou o
+experimento óbvio.** O nulo intuitivo seria ablar o mecanismo (remorso ≡ 0) e
+contar quantas seeds ainda saem REAL. Esse nulo é **degenerado, e dá zero por
+identidade, não por medição**: com `remorso[i]` ≡ 0 o traço `peso_arrependimento`
+não entra em `utilidade_sigma` (é o único lugar onde ele é lido), então as duas
+montagens espelhadas viram a **mesma simulação bit a bit** — só muda o rótulo
+colado em cada paridade. Se `f` é a fração de sobreviventes de índice par,
+a montagem A dá `arrep_m = 2 − 4f` e a B dá `arrep_m = 4f − 2`: exatamente
+simétricas. O classificador (`vence quem tem o sinal do lado certo do meio, nas
+duas montagens`) então **nunca** pode dizer REAL. Zero seeds REAL, por álgebra.
+
+Disso sai a lição que reorganiza este pré-registro: **REAL exige que o traço seja
+causalmente ativo** — mas não exige que ele seja *vantajoso*. Um traço ativo e
+**empatado** decorrelaciona as duas montagens e faz cada uma sortear um vencedor;
+duas moedas honestas concordam em **metade** das vezes. A taxa de base que as
+notas 32–34 nomearam e não mediram é essa: **≈ 50%, não ≈ 0%**. E 20/30 = 66,7%
+começa a parecer bem menos com "sinal forte afogado" e bem mais com "moeda".
+Medir, não deduzir — os dois braços abaixo.
+
+**N1 — o nulo inerte (verificação da álgebra, não estimativa).** Ablação natural
+do remorso, a mesma da nota 30 (Q1): mantém todo o cálculo de `atualizar_remorso()`
+(inclusive as chamadas a `prever_valor`, que não consomem RNG — a ablação é inócua
+ao fluxo) e zera o estado guardado. 10 seeds (1–10), valores de T2, 30 000 ticks.
+
+- **P1:** os CSVs de A e B são **idênticos em todas as colunas menos `arrep_m`**
+  (col. 24) — inclusive `arrep_sd`, que não depende do rótulo.
+- **P2:** `arrep_m` da montagem B = −`arrep_m` da A, **a cada tick**, em toda seed.
+- **P3:** REAL = **0/10**.
+
+Se qualquer uma falhar, minha álgebra está errada e a nota vira a investigação
+disso, não a calibração — declarado agora para não virar racionalização depois.
+
+**N2 — o nulo ativo (a taxa de base de verdade).** Mesmo `main.c`, mesmo harness
+`invasao`, mesmos valores (`−2,0` × `2,0`), **as mesmas 30 seeds de T2** (1–30),
+30 000 ticks, mesmas montagens espelhadas, mesmo classificador. A única mudança é
+um sinal ±1 embaralhado por **célula candidata** no termo do arrependimento em
+`utilidade_sigma`: `... * espaco * (hash2(cx,cy,seed^SALT) & 1 ? +1 : −1)`. A
+**dose é idêntica** — mesmo `remorso[i]`, mesma magnitude, mesma frequência (~5%
+dos ticks, nota 30 Q2) —, só a **direção** é destruída: cada valor passa a preferir
+espaço aberto em metade do mapa e lotação na outra metade, em espelho exato do
+outro. Nenhum dos dois pode ser sistematicamente melhor, e os dois continuam
+ativos o bastante para decorrelacionar as montagens.
+
+- **P4:** REAL(N2) **≈ 15/30**, e declaro 15/30 como **teto** esperado, não como
+  ponto: decorrelação parcial (o traço mexe pouco na trajetória) empurra as duas
+  montagens de volta para a mesma paridade, ou seja, para FUNDADOR. Banda:
+  10–20/30 é o esperado; abaixo de 10 é decorrelação fraca; acima de 20 diz que
+  o desenho fabrica REAL sozinho na taxa que T2 exibe.
+- **P5 (o número que a nota existe para produzir):** a comparação T2 (20/30) × N2,
+  por Fisher exato bilateral, declarada **antes** de ver N2. As três leituras:
+  - **N2 ≤ 10/30, com p < 0,05 contra T2** — o desenho quase não fabrica REAL, e
+    os 20/30 de T2 são sinal de verdade. Isso **não reabre** o veredito de T2 (o
+    corte pré-registrado fica de pé, e mover critério depois do placar é
+    exatamente o que a §7 proíbe), mas registra que o "não decide" vem de um
+    **corte mal calibrado**, não de ausência de sinal — e passa a ser argumento
+    para pré-registrar o corte certo num painel futuro.
+  - **N2 em 11–19/30, sem diferença significativa de T2** — T2 é
+    **indistinguível do nulo**. Seria o achado mais forte contra Q5 que este fio
+    já produziu, e o que eu aposto, pela álgebra acima.
+  - **N2 ≥ 20/30** — a régua fabrica sozinha o que T2 mede; as notas 32/33/34
+    mediram o instrumento, não o mundo.
+- **P6 — o nulo da direção, que é o número mais chamativo em aberto.** A nota 34
+  registrou que **20 de 20** corridas REAL favorecem `−2,0`, sem exceção. Sob N2 a
+  direção não pode ter preferência: entre as corridas REAL de N2, espero um split
+  **≈ 50/50** entre `−2,0` e `2,0`. Se N2 também pender esmagadoramente para
+  `−2,0`, então o 20/20 da nota 34 não é evidência sobre o mundo — é assinatura do
+  desenho, e a nota 34 precisa de errata. Este é o único item aqui que pode
+  **derrubar** um número já publicado.
+
+**O que este pré-registro NÃO promete.** N2 é o traço real com a **direção
+destruída**, não um traço com vantagem comprovadamente nula — não existe traço
+assim medido neste projeto, e inventar um exigiria um mecanismo novo que nenhum
+teste nomeado pede (a disciplina do item 4 do backlog). Se a perturbação de
+trajetória depender da direção (se "evitar espaço aberto" mexer na trajetória mais
+do que "buscar"), a taxa de N2 não é exatamente a taxa de um empate verdadeiro.
+Declaro a fraqueza agora: N2 é a melhor aproximação disponível sem construir
+infraestrutura nova, não um nulo perfeito. As duas ablações são **patch temporário
+sobre `main.c`** compilado em tmpdir, a técnica das notas 23/24/25 — o `main.c` do
+repo não é tocado, e nenhum dataset congelado muda.
+
+**Custo declarado:** 20 corridas (N1) + 60 (N2) ≈ 2h45 sequencial, na medida de
+~124 s/corrida da nota 34.
+
+**Reproduzir (script a escrever):** `sh papers/notes/35-nulo-do-classificador.sh`.
+
+---
+
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper
 
 **Pergunta:** onde a palavra mental **quebra**?
