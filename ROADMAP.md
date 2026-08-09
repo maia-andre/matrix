@@ -640,8 +640,12 @@ pergunta para os outros.
 > moeda (3/9). **O veredito de T2 não muda** — o corte era 21/30 e fica —, mas
 > "não decide" deixa de significar "sinal indistinguível de ruído" e passa a
 > significar "sinal medido contra um corte calibrado sem saber onde ficava o
-> zero". Segue aberta, sem pré-registro: o blefe residual como ESS (varrer a
-> frequência).
+> zero". E em 2026-08-09 a fase entrega um item que não é de vida artificial mas
+> herdou a numeração: a **ablação do id** (§4.9, nota 36), a última palavra da
+> §3 a ser cobrada — ela **não paga a entrada** em população (2/8), e o controle
+> de sanidade reencontrou o piso do `float32` agindo sobre a **decisão**, não só
+> sobre o mostrador. Com ela a `FILOSOFIA_v3` fechou. Segue aberta, sem
+> pré-registro: o blefe residual como ESS (varrer a frequência).
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
@@ -1307,9 +1311,26 @@ nota 35).
 
 ---
 
-# Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper
+# Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper *(a v3 **fechou** em 2026-08-09)*
 
 **Pergunta:** onde a palavra mental **quebra**?
+
+> **A `FILOSOFIA_v3.md` está fechada** (2026-08-09). O rótulo "esqueleto" tinha
+> caído em 2026-07-13 com a lista do Apêndice B; o rótulo "rascunho" caiu agora,
+> por quatro atos no mesmo dia. **(1)** A última dívida de pesquisa foi paga: a
+> §3 admitia por escrito não estar cobrando do **id** a entrada que cobra de
+> todas as outras palavras — a ablação rodou (§4.9, nota 36) e o id **não
+> pagou**, 2/8 contra as ≥6/8 pré-registradas. **(2)** A §3 foi reescrita: as
+> cinco palavras têm dado, o id é em boa parte "o mapa do ego usando outro nome",
+> e a álgebra o joga para o lado (B) da costura — os dois termos que ele divide
+> dependem de **rivais**, então um bloco sozinho não tem sobre o que o id agir.
+> **(3)** O **Apêndice A** foi congelado, com as três condições que o reabrem
+> escritas por extenso, mais o acréscimo da nota 36 (o piso do `float32` agora
+> tem um caso na **decisão**, não só na régua). **(4)** A **§8** — "o que esta
+> versão não pôde perguntar" — nomeia o limite: toda medição da v3 é feita de
+> fora, inclusive os detectores da §7, e a pergunta que fica é o que acontece
+> quando a medição vira parte do mecanismo. É esse o gate da `FILOSOFIA_v4`, e
+> ele agora está escrito **dentro da v3**, onde deve estar.
 
 As fases 1–4 são expansionistas: mais fenômenos, mais mostradores, mais
 experimentos. Um projeto cuja tese é *"até onde a palavra estica"* precisa de uma
