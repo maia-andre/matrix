@@ -1,9 +1,23 @@
-# FILOSOFIA v3 — Onde a palavra quebra *(rascunho — a lista fechou)*
+# FILOSOFIA v3 — Onde a palavra quebra *(fechada em 2026-08-09)*
 
-> **Estado: RASCUNHO** (esqueleto em 2026-07-10; rótulo retirado em 2026-07-13).
+> **Estado: FECHADA.** Esqueleto em 2026-07-10; o rótulo "esqueleto" caiu em
+> 2026-07-13, quando a lista do Apêndice B se cumpriu; o rótulo "rascunho" caiu
+> em **2026-08-09**, quando a última dívida de pesquisa foi paga — e paga com um
+> resultado negativo, que é o desfecho mais no espírito deste arquivo.
 > Este arquivo existiu *antes* de poder ser terminado, de propósito: o índice
 > disciplinava a pesquisa — cada seção **⛔ aguarda** era um experimento que ainda
 > precisava acontecer, e escrever a seção vazia dizia exatamente *qual*.
+>
+> **O que "fechada" quer dizer aqui**, para não virar cerimônia: não que o
+> arquivo esteja certo, e sim que ele **parou de aceitar argumento novo**. Daqui
+> em diante, mudança nele é **errata datada** — o mesmo regime das notas, onde o
+> texto original não é reescrito para parecer que sempre esteve certo. Três atos
+> fecharam a versão no mesmo dia: a **dívida do id** (§3), a única das cinco
+> palavras emprestadas que nunca tinha sido ablacionada, foi cobrada e **não
+> pagou a entrada** no observável declarado (nota 36); o **Apêndice A** foi
+> congelado, com as três condições que o reabrem escritas por extenso; e a **§8**
+> nomeou o que esta versão não teve como perguntar, que é por onde uma quarta
+> começaria.
 >
 > **A lista do Apêndice B fechou.** Os cinco itens que seguravam o rótulo estão
 > cumpridos: o `relato` existe, pré-registrado antes do código (nota 06); o
@@ -19,7 +33,8 @@
 > Apêndice B). A dívida de **aritmética** que a nota 09 §5 abriu foi
 > **quitada** — nota 10; e a régua inteira foi **replicada em 50 seeds** sem
 > uma violação — nota 11. Com a §7, **todas as seções argumentativas do
-> arquivo são prosa** — não sobra nenhuma seção ⛔.
+> arquivo são prosa** — não sobra nenhuma seção ⛔. E com a §8, escrita no
+> fechamento, o arquivo diz também **onde ele próprio para**.
 >
 > `FILOSOFIA.md` (v1) perguntou *como é ser um bloco*. `FILOSOFIA_v2.md` construiu
 > a régua e prometeu medir até onde a palavra estica. A v3 é sobre o que a v2 não
@@ -858,7 +873,20 @@ as notas carregam e um arquivo de filosofia não deve fingir que resolveu.
 
 ---
 
-## Apêndice A — condições de falseamento por mostrador *(tabela viva)*
+## Apêndice A — condições de falseamento por mostrador *(**congelada em 2026-08-09**, com a v3)*
+
+> **O que "congelada" quer dizer, para não virar promessa vaga.** Esta tabela
+> deixou de ser viva no dia em que a v3 fechou: as seis linhas abaixo são as que
+> a bateria tem, cada uma com a sua condição de falseamento verificada, auditada
+> em `double` e replicada em 500 corridas. Ela **reabre** em exatamente três
+> casos, e em nenhum outro: se um mostrador **novo** entrar na bateria (ganha
+> linha, com condição declarada antes do código, como o `relato` e a
+> `autocausa` ganharam); se uma corrida futura **produzir um contraexemplo** a um
+> ✅ (aí a linha vira ⚠️ e a nota que achou o contraexemplo é citada, como a nota
+> 09 fez com a `agencia`); ou se a régua mudar de precisão. Congelar não é
+> declarar a tabela verdadeira para sempre — é parar de tratá-la como rascunho e
+> passar a tratar cada alteração como **errata datada**, que é o regime em que o
+> resto do projeto já vive.
 
 | mostrador | a ablação que TEM de zerá-lo | verificado |
 |---|---|---|
@@ -881,6 +909,21 @@ as notas carregam e um arquivo de filosofia não deve fingir que resolveu.
 > auditada por inteiro. E replicada: 50 seeds por condição, **zero violações em
 > 500 corridas** (nota 11) — nenhuma seed produziu um tick que retire um ✅ desta
 > tabela.
+>
+> **Um último acréscimo, no dia do congelamento (nota 36).** O piso do `float32`
+> descrito acima era, até aqui, um fenômeno de **régua**: mexia no que o mostrador
+> lia, não no que o mundo fazia. A ablação do id encontrou o mesmo mecanismo um
+> andar abaixo, na **decisão**. Multiplicar todas as células candidatas por um
+> fator comum preserva a ordem em ℝ, mas em `float32` pode fundir duas candidatas
+> num empate — e o desempate por ordem de varredura então **muda o movimento do
+> bloco**, e com ele a trajetória inteira da corrida (4 de 8 seeds numa condição
+> em que a álgebra exigia identidade; confirmado como arredondamento, e não como
+> canal causal, por um controle com fator exato que dá identidade em 8/8). Nada
+> disso retira um ✅ desta tabela — nenhuma das seis condições de falseamento
+> depende de uma reescala comum. Mas alarga a regra que a nota 10 deixou escrita:
+> *"`float32` não inverte ordens, cria empates"* vale também para o mundo, e não
+> só para quem o mede; um empate criado pode custar uma história inteira, não
+> apenas uma casa decimal.
 
 ## Apêndice B — o que falta para tirar o rótulo "esqueleto"
 
@@ -922,3 +965,17 @@ Um bônus que a Fase 4 entregou sem estar nesta lista: o `relato` deixou de ser
 epifenomenal (nota 08). Silenciar a população **muda o mundo**, e a honestidade
 é ESS sem multa artificial — a matéria do superego da §3, que a v3 já pode
 escrever com dado em vez de promessa.
+
+**E uma sexta dívida, que não estava nesta lista porque o arquivo a escondia
+dentro de uma seção já escrita** — encontrada em 2026-08-09, relendo a v3 para
+decidir se ela podia ser encerrada. A §3 cobra de toda palavra emprestada a
+mesma entrada e, no parágrafo do id, **admitia por escrito não a estar
+cobrando**: "o id existe, e é o único que nunca foi posto à prova". Fechar a
+versão nesse estado seria conceder à palavra mais antiga do vocabulário
+exatamente o crédito que a §1 chama de decoração e que a §6 recusou pagar a
+"experiência" — e recusar a alguém o que se concede a si é o vício que este
+arquivo inteiro persegue nos outros. A ablação rodou (§4.9 do `ROADMAP`, nota
+36) e o id **não pagou**: tirar a modulação da pulsão não muda a população em
+nenhuma das três janelas testadas. A dívida foi quitada no sentido que importa —
+**foi cobrada, e o devedor não tinha com que pagar**, e está escrito. É com esse
+resultado, e não apesar dele, que a v3 fecha.
