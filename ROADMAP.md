@@ -1255,6 +1255,21 @@ pregação é inócua ao fluxo, conferido no código antes de escrever isto.
   **magnitude** em vez de **ordem** — achado nos dois casos, e exatamente o tipo
   de coisa que o Apêndice A precisa saber antes de ser congelado.
 
+> **Errata do próprio pré-registro** *(2026-08-09, escrita **antes** de rodar o
+> painel completo, depois de um teste de fumaça de 2 seeds × 400 ticks).* A
+> redação de D4 acima está **defeituosa** e fica registrada como estava. "CSVs
+> idênticos" é impossível por uma razão trivial que nada tem a ver com a
+> álgebra: `urg_m` e `urg_sd` (colunas 10 e 11) **descrevem o próprio traço
+> ablacionado** e obviamente diferem entre uma população com `urgencia` livre e
+> outra com `urgencia ≡ 0`. A nota 35 já tinha resolvido exatamente isso ao
+> excluir a coluna 24 (`arrep_m`) da comparação de P1, e eu não repeti a
+> exclusão aqui. **A comparação que a álgebra prediz, e que vale como D4, é a
+> identidade das 23 colunas que não são `urg_m`/`urg_sd`.** O teste de fumaça já
+> mostrou que **só** 10 e 11 diferem — o que é a confirmação, não a refutação,
+> da consequência 2. O script reporta as duas comparações (completa e
+> corrigida), e a nota tem de dizer que o critério foi corrigido antes do painel
+> e por quê, em vez de publicar a versão que "deu certo".
+
 **O que este pré-registro NÃO promete.** Ablação de traço não é ablação de
 mecanismo: pregar `urgencia = 0` remove a *modulação*, não o termo da comida —
 `comida_prev` continua lá, e é ele que a nota 01 já mostrou ser letal remover
