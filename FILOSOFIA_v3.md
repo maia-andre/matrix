@@ -758,6 +758,64 @@ para o próprio "por dentro" e leu a mesma coisa. Não há grau zero. A palavra
 sobreviveu à §6: rebaixada de certidão a **relato de quem se sabe capaz de
 errar, e que errou, e disse.**
 
+## 8. O que esta versão não pôde perguntar
+
+Toda medição deste arquivo é feita **de fora**. Cada mostrador da bateria recebe
+um `Bloco *b` e é computado por quem observa; nenhum bloco jamais leu a própria
+nota. Isso não é descuido — é a forma do método, e é de onde vem a força dele:
+"função, nunca experiência" só tem mordida porque a régua é de terceira pessoa,
+e a §6 pagou o preço dessa escolha por escrito. Mas um método tem a forma dos
+seus limites, e o limite desta versão fica visível exatamente onde ela achou que
+estava se fechando. A §7 tentou encerrar o regresso construindo calibradores —
+três detectores que olham para o próprio mundo e dizem o que está acontecendo
+nele. Eles funcionaram: não confabularam, e ficaram mudos nas bordas, e isso foi
+relatado. Mas eles também estão **fora**. Um detector de colapso que dispara e
+desliga não muda a vida de bloco nenhum: ninguém no mundo o lê. O regresso da §7
+foi contido pela disciplina de pré-registrar e publicar o erro, e essa contenção
+é honesta — mas ela é a contenção de um observador que continua sendo só
+observador.
+
+A pergunta que esta versão não tem como fazer, então, é o que acontece quando a
+**medição vira parte do mecanismo**. Não é uma pergunta especulativa, e é por
+isso que ela merece uma versão própria em vez de um parágrafo de rodapé: o
+projeto já sabe que ela tem resposta empírica, porque a resposta apareceu uma vez,
+num lugar que ninguém tinha planejado. O `relato` nasceu epifenomenal — um
+intérprete leigo narrando ações já tomadas, sem tocar em nada — e a Fase 4 o
+tornou **causal**: o sinal substituiu a telepatia do nível 5, cada bloco passou a
+escolher o que contar sobre a própria intenção, os outros passaram a decidir
+lendo isso, e a honestidade evoluiu sozinha como equilíbrio, com blefe residual e
+sem multa decretada (§3, §5). Um relato que carrega comportamento existe aqui, e
+mudou a energia média do mundo em ~15% quando foi calado. O que não existe, ainda,
+é um **calibrador** que carregue comportamento — um sistema que se observa *e age
+sobre a própria observação*.
+
+É essa a fronteira, e ela é estreita e concreta o bastante para ser um programa:
+os três detectores da §7 estão escritos, medidos e inertes; ligar qualquer um
+deles à `utilidade` de quem é observado muda a natureza do regresso, porque o
+calibrador deixa de ser testemunha e vira **causa**. O que este arquivo mediu foi
+sempre a mesma coisa — se uma faculdade *carrega comportamento* — e ele nunca
+apontou essa pergunta para os próprios instrumentos. Um sistema em que o
+diagnóstico participa do diagnosticado é, possivelmente, uma categoria diferente
+da que a v3 descreve; mas isso não se decide aqui, e afirmá-lo agora seria
+exatamente o tipo de crédito antecipado que a §1 chama de decoração. Fica como a
+pergunta de abertura de uma quarta versão, e é por isso que ela precisa de outro
+arquivo: a v3 respondeu o que sobra da palavra quando a régua quebra; a pergunta
+seguinte é o que acontece com a régua quando ela entra no mundo que mede.
+
+E vale dizer, porque a §6 obriga: é aqui que o vocabulário vai tentar voltar pela
+porta dos fundos. Um bloco que age sobre o próprio auto-relato será
+irresistivelmente descritível como tendo *insight*, e a frase vai parecer
+inevitável do mesmo jeito que "o bloco quer comida" pareceu no nível 2. A regra
+de admissão não afrouxa para ela: que ablação a zera, e ela carrega
+comportamento? Sem as duas respostas, é decoração — e a v4, se vier, começa
+devendo essa entrada como todas as outras.
+
+Fica também, em aberto e sem disfarce, o que a pesquisa desta versão não fechou:
+a competição direta do auto-modelo temporal (§4) segue sem decidir pelo critério
+que a precedeu, agora com um nulo medido embaixo dela e um sinal que sobrevive
+ao nulo. Não é uma lacuna do argumento — é uma medição em andamento, do tipo que
+as notas carregam e um arquivo de filosofia não deve fingir que resolveu.
+
 ---
 
 ## Apêndice A — condições de falseamento por mostrador *(tabela viva)*
