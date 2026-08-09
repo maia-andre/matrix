@@ -1179,6 +1179,96 @@ repo não é tocado, e nenhum dataset congelado muda.
 
 ---
 
+## 4.9 Pré-registro da ablação do id — a última palavra da §3 a pagar a entrada *(2026-08-09, antes de rodar)*
+
+**O problema, e ele é uma dívida que o próprio arquivo declara.** A §3 da
+`FILOSOFIA_v3` estabelece a regra de admissão de toda palavra emprestada —
+*"que ablação a zera? e ela carrega comportamento? sem resposta às duas, é
+decoração"* — e logo depois admite, por escrito, que uma das cinco não a paga:
+*"o id existe, e é o único que nunca foi posto à prova (…) a palavra mais antiga
+é a menos testada"*. Ego, superego, sombra e self têm ablação e barras; o id não
+tem. **Fechar a v3 com uma dívida autodeclarada à sua própria regra é o
+movimento que a §6 e a §7 recusam quando o alvo é outra pessoa** — daí este
+pré-registro ser o último item de pesquisa antes de a v3 poder ser encerrada.
+
+**O que o id é, operacionalmente.** O termo `comida_prev · (1 + urgencia · fome)`
+em `utilidade_sigma`. `urgencia` é traço herdado (nível 6): semeado em
+`URGENCIA · (0,5 + rng01())`, mutado por `muta_traco` a cada nascimento.
+
+**A álgebra antes da máquina (regra 9 do protocolo, que a nota 35 pagou caro
+para aprender) — e ela já entrega o resultado principal.** A decisão é um
+`argmax` sobre as células candidatas, e `(1 + urgencia · fome)` é um fator
+**positivo e comum a todas elas** (`urgencia` e `fome` são do bloco, não da
+célula). Dividindo a utilidade por esse fator, o ranking é idêntico ao de
+
+> `nota(k) = comida_prev(k) + [ peso_espaco · espaco(k) · (1−fome)
+>            + peso_arrependimento · remorso · espaco(k) ] / (1 + urgencia · fome)`
+
+Consequências, declaradas antes de rodar:
+
+1. **O id não tem canal próprio.** `urgencia` não consegue mudar decisão alguma
+   *empurrando* para a comida — o ranking é invariante a reescalar tudo por um
+   fator comum. A única coisa que ela faz é **encolher os termos que não são
+   comida**. Dito na língua da seção: **o id não é um empurrão em direção à
+   comida; é um botão que abaixa o volume de tudo o que não é comida.** Isso é
+   álgebra, não medição, e reescreve o parágrafo do id independentemente do que
+   as corridas derem.
+2. **Logo, se `peso_espaco ≡ 0` e `remorso ≡ 0`, `urgencia` é exatamente inerte** —
+   o numerador inteiro some, e a ablação vira degenerada no sentido da nota 35.
+   Isso dá um controle de sanidade **bit a bit**, não uma estimativa.
+3. **A seleção já fecha o canal do id sozinha.** A nota 12 mediu `peso_espaco`
+   caindo de ~2,9 para **0,095 ± 0,018** em 30 000 ticks, em 50 de 50 seeds. Se
+   o único canal do id é multiplicar o termo do espaço, então **a sombra da §3
+   (a agência renegada) é também a aposentadoria do id** — a mesma variável, o
+   mesmo processo. Predição: o efeito da ablação é grande cedo e quase some tarde.
+
+**Desenho.** 6 condições × **8 seeds sequenciais (1–8)** × 30 000 ticks. O
+`rng01()` descartado é preservado em toda pregação (idioma da nota 12), e
+`muta_traco(v, 0.0f, …)` consome exatamente um `rng01()` como o original — a
+pregação é inócua ao fluxo, conferido no código antes de escrever isto.
+
+| condição | `urgencia` | `peso_espaco` | `remorso` |
+|---|---|---|---|
+| `ctl` | livre | livre | normal |
+| `id0` | **pregada em 0** | livre | normal |
+| `fesp` | livre | pregado em `PESO_ESPACO` | normal |
+| `fesp_id0` | **pregada em 0** | pregado em `PESO_ESPACO` | normal |
+| `deg` | livre | **pregado em 0** | **≡ 0** |
+| `deg_id0` | **pregada em 0** | **pregado em 0** | **≡ 0** |
+
+**Predições, antes de rodar:**
+
+- **D1 — a entrada que a §3 cobra.** Com o canal do id mantido aberto à força
+  (`fesp` × `fesp_id0`), a ablação **carrega comportamento**: diferença na
+  população final em ≥ 6/8 seeds, com `fesp_id0` **pior**. Se não carregar, o id
+  **não paga a entrada**, e a §3 tem de dizer isso em voz alta em vez de fechar
+  a v3 fingindo que paga.
+- **D2 — a previsão da álgebra.** Na evolução normal, o efeito é muito menor:
+  `|Δpop(ctl, id0)| < |Δpop(fesp, fesp_id0)|` em ≥ 6/8 seeds, porque a seleção já
+  levou `peso_espaco` a ~0,095 e o canal está quase fechado.
+- **D3 — a janela cedo.** No tick 200, antes de a seleção derrubar `peso_espaco`,
+  `ctl` × `id0` já diferem, na mesma direção de D1. Lido dos **mesmos** CSVs, sem
+  corrida nova.
+- **D4 — o controle degenerado (bit a bit).** `deg` × `deg_id0` produzem CSVs
+  **idênticos**, porque nessa condição `urgencia` não tem por onde agir. Se
+  diferirem **só** em colunas de mostrador, isso localiza qual mostrador lê
+  **magnitude** em vez de **ordem** — achado nos dois casos, e exatamente o tipo
+  de coisa que o Apêndice A precisa saber antes de ser congelado.
+
+**O que este pré-registro NÃO promete.** Ablação de traço não é ablação de
+mecanismo: pregar `urgencia = 0` remove a *modulação*, não o termo da comida —
+`comida_prev` continua lá, e é ele que a nota 01 já mostrou ser letal remover
+(o ego). O id desta seção é a modulação, e é só sobre ela que D1 decide. E 8
+seeds é o painel mínimo que a nota 11 tolera para um efeito direcional; se D1
+sair em 4–5/8, isso é "não decide", não "confirma fraco" — declarado agora.
+
+**Custo declarado:** 48 corridas ≈ 80 min sequencial (~100 s/corrida, medido na
+nota 35).
+
+**Reproduzir (script a escrever):** `sh papers/notes/36-a-ablacao-do-id.sh`.
+
+---
+
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper
 
 **Pergunta:** onde a palavra mental **quebra**?
