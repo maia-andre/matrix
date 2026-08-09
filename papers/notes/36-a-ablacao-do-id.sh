@@ -46,7 +46,7 @@ SEEDS=${SEEDS_LISTA:-"1 2 3 4 5 6 7 8"}
 TICKS=${TICKS_OVERRIDE:-30000}
 T_CEDO=${T_CEDO:-200}
 
-COND="ctl id0 fesp fesp_id0 deg deg_id0"
+COND="ctl id0 fesp fesp_id0 deg deg_id0 degp2"
 
 gen() {
 python3 - "$MAINC" "$TMP" "$1" <<'PY'
@@ -82,6 +82,14 @@ elif cond.startswith("deg"):
     # urgencia fique SEM canal nenhum (ver Sec4.9, consequencia 2)
     s = troca(s, REMORSO, REMORSO +
         "        remorso[i] = 0.0f;   /* deg: ablacao natural, idioma do N1 da nota 35 */\n")
+
+# --- degp2: o fator do id trocado por 2.0f, EXATO em float32 -------------
+# (D5, post-hoc -- ver o adendo do Sec4.9.) Multiplicar por 2 so desloca o
+# expoente: nao pode inverter ordem NEM criar empate novo. Se a divergencia de
+# D4 for arredondamento, degp2 x deg_id0 tem de dar identico.
+if cond == "degp2":
+    UTI = "    return comida_prev * (1.0f + b->urgencia * fome)\n"
+    s = troca(s, UTI, "    return comida_prev * 2.0f   /* D5: fator exato */\n")
 
 open(f"{tmp}/v.c", "w").write(s)
 PY
@@ -186,6 +194,38 @@ for s in $SEEDS; do
 done
 printf '\n  D4 (corrigido): %d/%d identicos nas 23 colunas   [D4 literal, 25 colunas: %d/%d]\n' \
        "$d4" "$n" "$d4full" "$n"
-printf '  ->  %s\n\n' \
+printf '  ->  %s\n' \
   "$([ "$d4" -eq "$n" ] && echo 'CONFIRMA: o id nao tem canal fora do termo do espaco' \
-     || echo 'FALHOU: existe canal nao enumerado na algebra do Sec4.9 -- investigar ANTES de escrever')"
+     || echo 'FALHOU no literal -- ver D5, que separa canal causal de arredondamento')"
+
+echo ""
+echo "=============================================================="
+echo "  D5 (POST-HOC, declarado como post-hoc no adendo do Sec4.9)"
+echo "  degp2 x deg_id0: o fator do id trocado por 2.0f, EXATO em"
+echo "  float32 (so desloca expoente: nao inverte ordem nem cria"
+echo "  empate). Se a divergencia de D4 for arredondamento, estes"
+echo "  dois tem de ser IDENTICOS nas 23 colunas em 8/8."
+echo "=============================================================="
+d5=0
+for s in $SEEDS; do
+  cut -d, -f1-9,12- "$TMP/degp2_$s.csv"   > "$TMP/e.a"
+  cut -d, -f1-9,12- "$TMP/deg_id0_$s.csv" > "$TMP/e.b"
+  difs=$(paste -d, "$TMP/degp2_$s.csv" "$TMP/deg_id0_$s.csv" | awk -F, '
+      NR>1 { for (i=1;i<=25;i++) if ($i != $(25+i)) col[i]=1 }
+      END  { for (i=1;i<=25;i++) if (i in col) printf "%d ", i }')
+  if cmp -s "$TMP/e.a" "$TMP/e.b"; then
+    d5=$((d5+1)); printf '      seed %-3s  IDENTICAS  (diferem so: %s)\n' "$s" "$difs"
+  else
+    printf '      seed %-3s  DIFEREM  (colunas: %s)\n' "$s" "$difs"
+  fi
+done
+printf '\n  D5: %d/%d identicos nas 23 colunas\n' "$d5" "$n"
+if [ "$d5" -eq "$n" ]; then
+  echo "  ->  a divergencia de D4 e' ARREDONDAMENTO (float32 criando empates, o"
+  echo "      mecanismo da nota 10), nao canal causal. A algebra do Sec4.9 vale em R,"
+  echo "      e a implementacao dela tem um piso -- exatamente o padrao da nota 09."
+else
+  echo "  ->  a divergencia SOBREVIVE a um fator exato: existe canal causal nao"
+  echo "      enumerado. A consequencia 2 do Sec4.9 esta ERRADA -- reescrever."
+fi
+echo ""

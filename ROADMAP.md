@@ -1280,6 +1280,29 @@ sair em 4–5/8, isso é "não decide", não "confirma fraco" — declarado agor
 **Custo declarado:** 48 corridas ≈ 80 min sequencial (~100 s/corrida, medido na
 nota 35).
 
+> **Adendo D5 — POST-HOC, escrito DEPOIS de ver D4 falhar** *(2026-08-09).* Isto
+> não é pré-registro e não deve ser lido como um: o painel rodou, e **D4 falhou
+> em 4 das 8 seeds** — `deg` × `deg_id0` divergem, e em três delas a divergência
+> alcança colunas comportamentais (população, energia, comida), não só
+> mostradores. O pré-registro mandava investigar antes de escrever, e a
+> investigação começou por leitura de código: `urgencia` aparece em **exatamente
+> um** lugar de `main.c` (o termo de `utilidade_sigma`), e `prever_valor_sigma`
+> — o único outro candidato — **não a lê**. Não há canal causal não enumerado.
+> Sobra a explicação que este projeto já documentou uma vez: **`float32` não
+> inverte ordens, cria empates** (nota 10). Multiplicar todas as candidatas por
+> `(1 + urgencia · fome)` preserva a ordem em ℝ, mas em `float32` pode fundir
+> duas candidatas distintas num empate — e `melhor_celula` desempata por ordem
+> de varredura, o que **muda a decisão**. Pela regra 6 do protocolo (§1.7), não
+> posso escrever isso como conclusão sem medir. **D5** mede: uma condição
+> `degp2` idêntica a `deg`, só que com o fator do id trocado por **2,0** — uma
+> multiplicação **exata** em `float32` (desloca o expoente, não arredonda),
+> incapaz de inverter ordem *ou* criar empate. Se a divergência de D4 for
+> arredondamento, `degp2` × `deg_id0` têm de ser idênticas nas 23 colunas em
+> **8/8**; se sobreviver a um fator exato, existe canal causal e a consequência 2
+> do §4.9 está errada e deve ser reescrita. O script passa a rodar 7 condições
+> (56 corridas, ~93 min) e a nota reporta D4 e D5 lado a lado, com D5 marcada
+> como post-hoc no texto.
+
 **Reproduzir (script a escrever):** `sh papers/notes/36-a-ablacao-do-id.sh`.
 
 ---
