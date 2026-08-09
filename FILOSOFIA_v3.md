@@ -302,7 +302,7 @@ desta bateria — e a tentação de deslizar da primeira frase para a segunda é
 exatamente o empréstimo de respeitabilidade que a §6 recusa pagar. O
 vocabulário emprestado fica; o fiador fenomenológico, não.
 
-## 4. O tempo, a quarta dimensão e Bandersnatch *(item 7 — o dedo ✅ rodou; o auto-modelo temporal ✅ instalado, direção surpreendente — a invasão direta não confirma, T2 fica em aberto a uma seed do limiar: notas 32/33/34)*
+## 4. O tempo, a quarta dimensão e Bandersnatch *(item 7 — o dedo ✅ rodou; o auto-modelo temporal ✅ instalado, direção surpreendente — a invasão direta não confirma, T2 fica em aberto a uma seed do limiar: notas 32/33/34 — e a nota 35 mede o nulo que faltava embaixo dela)*
 
 O determinismo, neste projeto, não é uma tese: é uma propriedade verificável
 do binário. O universo inteiro é `f(seed)` — mesma seed, mesma história, bit a
@@ -377,6 +377,36 @@ FUNDADOR é também um instrumento sem calibração de fábrica, e a inversão
 que a nota 33 corrigiu só apareceu porque ela conferiu a régua nova contra
 um caso já resolvido à mão antes de publicar — uma fórmula de uma linha
 errada bastou para inverter o veredito inteiro.
+
+Esse lembrete cobrou a própria dívida na nota 35, e o desfecho reescreve o
+parágrafo anterior sem alterar um único veredito. Três notas seguidas
+declararam a mesma ameaça — se o efeito fundador for estrutural, contar
+seeds não separa sinal pequeno de uma taxa de base **nunca medida** — e
+nenhuma a mediu. Medi-la exigiu primeiro uma álgebra que matou o
+experimento óbvio: ablar o mecanismo e contar quantas corridas ainda saem
+REAL dá zero **por identidade**, não por medição, porque um traço que não
+entra em `utilidade` faz das duas montagens espelhadas a mesma simulação bit
+a bit, e o classificador então nunca pode dizer outra coisa senão fundador.
+Do cadáver desse teste saiu a distinção que faltava: **REAL exige que o
+traço seja causalmente ativo, não que ele seja vantajoso** — e um traço
+ativo mas empatado decorrelaciona as montagens, deixando cada uma sortear
+um vencedor. O nulo a temer nunca foi zero. Construído o traço certo — a
+mesma dose do arrependimento com a **direção destruída**, cada valor
+preferindo espaço aberto em metade do mapa e lotação na outra, em espelho
+exato do outro —, o desenho fabrica REAL em **30%** das seeds sozinho. Os
+66,7% de T2 estão acima disso (`p = 0,0092`), e a consistência direcional
+que a nota 34 registrou como curiosidade fora do critério vira o número
+mais forte do fio: o nulo não tem preferência de direção (3 de 9), T2 tem
+20 de 20, `p = 0,0002`. **O veredito de T2 não muda** — o corte foi
+pré-registrado em 21/30 e mover a régua depois de ver o placar é justamente
+o que a §7 proíbe. Muda o que o veredito *quer dizer*: "não decide" deixa de
+ser "fraco demais para distinguir de ruído" e passa a ser "medido contra um
+corte escolhido sem saber onde ficava o zero". E há uma ironia que a §7
+adoraria: o mesmo braço inerte que servia só para conferir a álgebra mediu,
+de passagem, o tamanho real do confundidor — com as duas metades da
+população **causalmente idênticas por construção**, nove seeds em dez
+terminam com uma delas ocupando quase tudo. A deriva neste mundo não empurra
+de leve; ela fixa. Era contra isso que três notas vinham contando seeds.
 
 O que já rodou é o **Bandersnatch** (nota 07). Um dedo de fora do mundo
 sobrescreve ~25% das escolhas — seleção e alvo por hash, determinísticos, sem
