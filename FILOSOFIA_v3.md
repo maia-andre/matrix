@@ -207,7 +207,7 @@ mesma pressão — empurrados pela mesma mão.** Não há uma seta. Há um campo
 metáfora da escada, que dá nome a este projeto, sobrevive a esta seção só como
 uma conveniência de exposição.
 
-## 3. Vocabulários emprestados — id, ego, superego, sombra, self *(Parte II — três das cinco palavras têm dado)*
+## 3. Vocabulários emprestados — id, ego, superego, sombra, self *(Parte II — as cinco palavras têm dado; a última, o id, pagou com um resultado negativo — nota 36)*
 
 A psicanálise tem má fama em filosofia da mente, e a fama é merecida onde ela é
 hermenêutica: um vocabulário que explica qualquer comportamento não explica
@@ -226,11 +226,38 @@ toda palavra mental paga neste arquivo — a regra que o `modelo` ensinou na §1
 
 Então, uma por uma.
 
-**O id existe, e é o único que nunca foi posto à prova.** A pulsão é o termo
-`comida_prev · (1 + urgencia · fome)`: a fome amplifica o valor do alimento, e
-*quanto* amplifica é um traço herdado. Está no código desde o nível 2 e ninguém
-duvida dele — e precisamente por isso ninguém o ablacionou. Fica registrado
-como a dívida pequena desta seção: a palavra mais antiga é a menos testada.
+**O id era a dívida desta seção, e a dívida foi paga com um resultado ruim para
+o id.** A pulsão é o termo `comida_prev · (1 + urgencia · fome)`: a fome
+amplifica o valor do alimento, e *quanto* amplifica é um traço herdado. Ficou
+anos no código sem que ninguém duvidasse dele — e precisamente por isso ninguém
+o ablacionou. A ablação rodou (nota 36), e antes dela a álgebra já tinha
+entregue o essencial. A decisão é um `argmax` sobre as nove células candidatas, e
+`(1 + urgencia · fome)` é um fator **positivo e comum a todas elas**: depende do
+bloco, não da célula. Reescalar todas as opções pelo mesmo número não muda a
+ordem de nenhuma. Logo **o id não tem canal próprio, e não é o que a palavra
+promete**: ele não empurra o bloco *em direção* à comida — ele **abaixa o volume
+de tudo o que não é comida**. A pulsão, aqui, não é um impulso; é um atenuador
+dos outros motivos.
+
+O teste declarado antes de rodar pedia que a ablação **carregasse comportamento**
+— a segunda metade da regra de admissão desta seção. Com o canal do id mantido
+aberto à força, tirar o id **não reduz a população** em 2 de 8 seeds contra as 6
+que o pré-registro exigia, e na janela em que a seleção ainda não agiu a direção
+é cara-ou-coroa. Há um sinal na direção esperada em **energia média** — blocos
+mais bem alimentados com o id intacto, em 7 das 8 seeds —, mas esse observável
+não foi declarado antes, e trocar de régua depois de ver o número é exatamente o
+que a §7 deste arquivo proíbe. Então fica assim, sem maquiagem: **das cinco
+palavras desta seção, o id é a única cuja entrada foi cobrada e não foi paga no
+observável que eu mesmo escolhi.** Ele tem ablação; falta-lhe a carga.
+
+E há uma correção de fundo que a álgebra impõe ao próprio parágrafo. O que a
+seção chamava de "id" são **duas coisas costuradas numa fórmula só**, e a mais
+importante delas já tinha dono: `comida_prev` é o mapa — é o **ego** —, e a
+ablação dele mata a população em 51–121 ticks, em cinquenta de cinquenta seeds.
+O que sobra de próprio ao id é a modulação, e é ela que não carrega comportamento
+medível. Dito sem diplomacia: **o id deste mundo é, em boa parte, o mapa do ego
+usando outro nome**, mais um atenuador que a régua declarada não distingue de
+zero.
 
 **O ego pagou a entrada com o dado mais antigo do projeto.** A prova de
 realidade é `prever_valor` — o mapa que imagina colheitas — mais a arbitragem
@@ -284,16 +311,29 @@ magnitude de um bloco acompanhado (razão 4,78 ± 0,67 — notas 09, 11). O self
 deste mundo não é a totalidade integrada: é uma linha de código que desconta a
 própria garfada, com um núcleo solitário e um teto social.
 
-O achado que esta seção tem de encarar, agora com três das cinco palavras
-medidas: **as contrapartes que existem apontam todas para o lado (B) da
-costura.** O superego não é uma voz dentro do bloco: é um equilíbrio da
-população — retire os outros e não sobra norma nenhuma. A sombra não é um
-porão do sujeito: é a posição de um traço num jogo seletivo. E o self — o
-candidato da leitura internalista — sobrevive à solidão com um quinto do
-tamanho, carregando o 1/5 que a §2 mandou toda frase deste arquivo carregar.
-As instâncias emprestadas não moram dentro do bloco: moram na fronteira entre
-ele e os outros, e o "aparelho psíquico" é, neste brinquedo, menos um aparelho
-que uma **posição num campo**.
+O achado que esta seção tem de encarar, agora com as **cinco** palavras medidas:
+**as contrapartes que existem apontam todas para o lado (B) da costura.** O
+superego não é uma voz dentro do bloco: é um equilíbrio da população — retire os
+outros e não sobra norma nenhuma. A sombra não é um porão do sujeito: é a posição
+de um traço num jogo seletivo. E o self — o candidato da leitura internalista —
+sobrevive à solidão com um quinto do tamanho, carregando o 1/5 que a §2 mandou
+toda frase deste arquivo carregar. As instâncias emprestadas não moram dentro do
+bloco: moram na fronteira entre ele e os outros, e o "aparelho psíquico" é, neste
+brinquedo, menos um aparelho que uma **posição num campo**.
+
+O id, que era a última a entrar, entra pelo mesmo lado — e de um jeito que eu não
+esperava, porque nenhuma palavra deste vocabulário soa mais interior que a
+pulsão. A álgebra da nota 36 mostra que o id só age dividindo os termos que não
+são comida; e os dois termos que ele divide — o do espaço e o do arrependimento —
+são, os dois, multiplicados por `espaco`, que é literalmente uma contagem de
+**rivais** no 3×3. Segue-se que, para um bloco sozinho, `espaco` é constante em
+todas as células candidatas, os dois termos saem do ranking, e **o id não tem
+sobre o que agir**. A palavra mais visceral das cinco é, pela mesma costura que
+partiu a escada entre o nível 3 e o nível 4, uma faculdade **social**: precisa dos
+outros para existir, como a agência e o modelo do outro. Registro isso como
+implicação da álgebra, **não** como medida — e a própria nota 36 é a razão da
+cautela, porque foi ali que uma inércia algebricamente exata vazou na prática por
+empates de `float32`. Uma inferência limpa em ℝ não é, neste projeto, um ✅.
 
 O risco, em letras garrafais, é o de sempre — o verniz fenomenológico. "O
 bloco reprime a agência" é licenciável: é função, tem ablação, carrega
