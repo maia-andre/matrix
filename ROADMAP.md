@@ -626,9 +626,22 @@ pergunta para os outros.
 > **fundador puro** (1/10 REAL, mais nítido que o 3/3 da nota 32) — e a
 > própria nota pegou um bug na classificação automática do script antes de
 > aceitar o veredito (a primeira leitura, com bug, dizia o oposto). **T2**
-> (`−2,0` × `2,0`) continua sem decidir (6/10), embora as seeds "reais"
-> concordem todas na direção `−2,0`. Segue aberta, sem pré-registro: o blefe
-> residual como ESS (varrer a frequência).
+> (`−2,0` × `2,0`) continua sem decidir: 6/10 na nota 33, e a segunda extensão
+> de 20 seeds (§4.7, nota 34) leva o pool a 20/30 — **uma seed** abaixo do corte
+> pré-registrado (21/30) —, com as 20 corridas REAL favorecendo `−2,0` **sem
+> exceção**. Em 2026-08-09 o fio muda de natureza: em vez de contar mais seeds,
+> o **nulo do classificador** (§4.8, nota 35) mede pela primeira vez a taxa de
+> base que as notas 32–34 declararam três vezes e nunca quantificaram. O nulo
+> inerte confirma a álgebra (traço sem efeito **nunca** produz REAL: 0/10) e
+> mostra o tamanho do confundidor (9/10 seeds vão a fixação quase total por
+> deriva pura); o nulo ativo — mesma dose, direção destruída — fabrica
+> **9/30 = 30%**. Contra ele, os 20/30 de T2 dão **p = 0,0092** (Fisher), e a
+> consistência direcional da nota 34 dá **p = 0,0002** contra um nulo que é
+> moeda (3/9). **O veredito de T2 não muda** — o corte era 21/30 e fica —, mas
+> "não decide" deixa de significar "sinal indistinguível de ruído" e passa a
+> significar "sinal medido contra um corte calibrado sem saber onde ficava o
+> zero". Segue aberta, sem pré-registro: o blefe residual como ESS (varrer a
+> frequência).
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
