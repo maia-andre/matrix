@@ -14,8 +14,18 @@ dependências além da libc.
 > onde acaba a programação e começa a consciência? — está em
 > **[`FILOSOFIA.md`](./FILOSOFIA.md)**. Este README é o *como*; aquele é o *porquê*.
 
-> **Onde estamos:** escada completa — níveis 0 → 6 implementados. 🪜
-> A população agora **evolui** sozinha (seleção natural de personalidades).
+> **Onde estamos:** a escada está completa — níveis 0 → 6 implementados 🪜 — e a
+> população **evolui** sozinha (seleção natural de personalidades). Mas o projeto
+> há muito deixou de ser só a escada: virou um **instrumento de medida**. Hoje ele
+> tem uma bateria de **seis mostradores** com condição de falseamento declarada
+> para cada um, auditada em `double` e replicada sem uma violação em 500 corridas;
+> **36 notas de pesquisa** (`papers/notes/`), cada uma com pré-registro commitado
+> *antes* de rodar e o script que regenera seus números; **dois papers** e um
+> **preprint em inglês** com bibliografia e PDFs (`papers/preprint/`); e três
+> versões do manifesto filosófico, a última **fechada** em 2026-08-09
+> ([`FILOSOFIA_v3.md`](./FILOSOFIA_v3.md)) — encerrada, aliás, com um resultado
+> **negativo**: a palavra mais antiga do seu vocabulário emprestado foi cobrada e
+> não pagou a entrada.
 
 ---
 
@@ -90,7 +100,8 @@ todos normalizados em `[0,1]`: `modelo, agencia, modelo_do_outro, phi, relato`; 
 fração da população por estratégia de sinalização, `hon_f` (honesta) e `blef_f`
 (blefe) — o resto é muda; `autocausa`; a fração por **arquitetura de escuta**
 (introspecção — nota 07), `esc_plano_f` e `esc_monitor_f` — o resto lê a
-própria ação (nota 29); e, nas duas últimas colunas, média e desvio do peso
+própria ação (nota 29; o custo que faz as três arquiteturas divergirem entrou
+na nota 31); e, nas duas últimas colunas, média e desvio do peso
 do **auto-modelo temporal**, `arrep_m`/`arrep_sd` (nota 30). Como o universo é
 `f(seed)` (ver abaixo), o CSV é **reproduzível bit-a-bit**: qualquer pessoa
 regenera o mesmo dataset a partir da seed. É a base para virar instrumento de
@@ -282,6 +293,34 @@ Pra conferir a população num tick específico sem assistir à animação:
 
 ---
 
+## Dois fenômenos, em movimento
+
+Como tudo é `f(seed)`, uma corrida pode ser **reproduzida e filmada**. As duas
+animações abaixo saem de `viz/` (que só lê CSV e nunca toca o `main.c`) e mostram
+coisas que ninguém programou — elas *aconteceram*.
+
+<p align="center">
+  <img src="viz/replays/replay-bimodal.gif" alt="histograma do horizonte de planejamento se partindo em dois picos ao longo de 30000 ticks" width="49%">
+  <img src="viz/replays/replay-colapso.gif" alt="população despencando sob o imposto e o detector de colapso disparando e desligando" width="49%">
+</p>
+
+À **esquerda**, o histograma do horizonte de planejamento (1..12) partindo de
+quase-uniforme e terminando em **dois picos separados por um vale**: a população
+se divide em duas estratégias de profundidade que coexistem, em vez de convergir
+para uma. O ponto ótimo não é o topo de uma colina — é um **ponto de ramificação**
+(notas 20 e 23).
+
+À **direita**, um colapso de verdade e um relato sobre ele: o imposto sobre a
+cognição liga no tick 2000, a população despenca quase até a extinção, e a faixa
+vermelha marca quando um **detector que só vê a própria história de população**
+diz "estou colapsando" — dispara em 2054, desliga em 2861 quando a recuperação
+vem, e o imposto sai em 5000. Esse detector é a peça central do eixo microscópio:
+ele **não confabula** (0/8 falsos positivos em população saudável), mas fica
+**mudo** quando a extinção é rápida demais para a janela dele enxergar — o mesmo
+limite, um andar acima, do "eremita mudo" da nota 06.
+
+---
+
 ## Estrutura do repositório
 
 ```
@@ -289,11 +328,22 @@ main.c            a simulação inteira (um arquivo, só libc)
 README.md         o como — arquitetura, parâmetros, efeitos medidos
 FILOSOFIA.md      o porquê, v1 — o manifesto da escada
 FILOSOFIA_v2.md   o porquê, v2 — a bateria de desbotamento
+FILOSOFIA_v3.md   o porquê, v3 — onde a palavra quebra (FECHADA em 2026-08-09)
+ROADMAP.md        para onde vai, o que cada eixo arrisca, e o que o projeto
+                  escolhe NÃO ser; guarda os pré-registros, commitados antes
+                  de cada experimento rodar
 CLAUDE.md         guia para Claude Code
 assets/           imagens do README
 datasets/         CSVs congelados + gerar.sh (proveniência: comando + commit)
 notebooks/        análise dos datasets (commitados sem outputs)
-papers/           escrita formal (fonte + PDF)
+papers/           escrita formal
+  notes/          36 notas de pesquisa — uma descoberta cada, com o script
+                  que regenera seus números (inclusive de versões passadas
+                  do main.c, via git show)
+  preprint/       os dois papers em inglês, com bibliografia e PDF
+  figs/           figuras geradas por viz/ (pt e en)
+viz/              camada de visualização ADITIVA: só lê datasets/*.csv e
+                  gera figuras e replays; nunca toca o main.c
 ```
 
 Como o universo é `f(seed, código)`, um CSV congelado só é reproduzível no
@@ -309,15 +359,18 @@ tudo (servindo de teste de regressão: diff não-vazio = comportamento mudou).
   - 🟢 verde forte (`>10`) · 🟡 amarelo (`>4`) · 🔴 vermelho (fraco, perto da morte).
 - `. : *` em verde fraco = densidade de comida no solo (recurso).
 - ` ` (vazio) = deserto / comida quase zero.
-- HUD embaixo, quatro linhas: (1) `seed`, `tick`, `pop` (população viva),
+- HUD embaixo, cinco linhas: (1) `seed`, `tick`, `pop` (população viva),
   `energia media`, `comida` (total no mundo) e **`Φ~`** (a "luz acesa" — um proxy
   de integração; a intuição está em [`FILOSOFIA.md`](./FILOSOFIA.md) §5, a
-  definição atual na nota 05); (2) **traços `média±desvio`**
-  da população (`horizonte`, `desconto`, `urgencia`, `espaco`) — a média deriva
-  (evolução do nível 6 ao vivo) e o **desvio** mostra se a população *converge*
-  (todos parecidos, desvio→0) ou *diversifica* em nichos (desvio cresce); (3) a
-  **bateria** (`modelo`, `agencia`, `modelo_do_outro`) — os mostradores de desbotamento
-  descritos acima, ao vivo; (4) a legenda.
+  definição atual na nota 05); (2) os **traços do nível 6**: `média±desvio` dos
+  quatro contínuos (`horizonte`, `desconto`, `urgencia`, `espaco`) — a média
+  deriva (evolução ao vivo) e o **desvio** mostra se a população *converge*
+  (todos parecidos, desvio→0) ou *diversifica* em nichos (desvio cresce) —, mais
+  a fração honesta/blefe do **sinal**, a fração por arquitetura de **escuta**
+  (`p` = lê o plano, `m` = monitora os dois) e o **arrependimento** médio;
+  (3) e (4) a **bateria** de desbotamento ao vivo — `modelo`, `agencia`,
+  `autocausa`, `modelo-do-outro`, `relato`, em duas linhas porque cinco
+  mostradores não cabem em 70 colunas; (5) a legenda.
 
 Dá pra ver emergir: manadas em torno de manchas férteis, colapsos por escassez,
 ciclos de fartura/fome, blocos saciados colonizando a fronteira (nível 4) e —
@@ -406,6 +459,22 @@ só essa parte mudou:
   mesmo estado estável (arrays separados) pra não reintroduzir a "física fantasma"
   da ordem de varredura.
 
+  E há o outro lado da conversa: **quem escuta, e se acredita**. A arquitetura de
+  escuta é um traço (`escuta`, abaixo), e blocos que **monitoram** (`ESC_MONITOR`)
+  mantêm uma `desconfianca[i][j]` por vizinho — quanto já viram aquele vizinho ser
+  **negado** por `resolver()` —, que decai pelo próprio desconto, no mesmo idioma
+  do `remorso`. Em `pretendentes_em`, o sinal de um vizinho desconfiado pesa
+  `1/(1+desconfianca)` em vez de 1 cheio, e **só para quem monitora**: para as
+  outras duas arquiteturas o mecanismo é inócuo, bit a bit. Foi a primeira vez que
+  as três arquiteturas passaram a diferir por **comportamento**, e não só por
+  leitura (nota 31, §4.4 do `ROADMAP`).
+
+  *Efeito medido* (nota 31): a desconfiança alcança **53–58 %** das interações —
+  5 a 6× mais do que a taxa de blocos negados sugeria, porque ela decai devagar e
+  se acumula. E partindo de uma população mista, a fração de monitores **sobe
+  consistentemente** nas 3 seeds — o oposto exato da deriva neutra que a mesma
+  arquitetura mostrava antes de o custo existir.
+
   *Efeito medido* (A/B com `ANTECIPACAO` 0 vs 0.5, 5 seeds, tick 300): a população
   sobe ~5–7 % e a energia média **cai** (≈6 → ≈4). Lendo as intenções, os blocos
   colidem menos e param menos vezes "negados", espalham-se e ocupam mais o mapa —
@@ -423,9 +492,12 @@ só essa parte mudou:
   nem recompensa explícita. As médias dos traços aparecem no HUD pra você ver a
   evolução ao vivo. Mais três traços se juntaram aos quatro originais, cada um
   com o próprio mecanismo de mutação/herança: a **estratégia de fala**
-  (`estrategia` — nota 08), a **arquitetura de escuta** (`escuta` — nota 29, sem
-  custo ainda) e o **peso do arrependimento** (`peso_arrependimento` — nota 30,
-  a única que a seleção já empurrou numa direção clara e inesperada).
+  (`estrategia` — nota 08), a **arquitetura de escuta** (`escuta` — instalada sem
+  custo na nota 29, e com o custo ligado na nota 31, acima) e o **peso do
+  arrependimento** (`peso_arrependimento` — nota 30, que a seleção empurrou numa
+  direção clara e **inesperada**: para valores **negativos**, o oposto do que o
+  desenho apostava; a competição direta ainda não decidiu, mas contra um nulo
+  medido o sinal sobrevive — notas 32 a 35).
 
   *Efeito medido* (seed 7, traço médio ao longo de 800 ticks): `horizonte`
   6.0 → **7.6** e `peso_espaco` 3.2 → **2.7** — planejar mais fundo é favorecido,
@@ -482,33 +554,49 @@ num bloco), o **auto-relato** (o bloco que diz "eu") e o **Φ~** (medir a "luz
 acesa"), tudo destrinchado em **[`FILOSOFIA.md`](./FILOSOFIA.md)** — o manifesto
 do projeto.
 
-A segunda é **mais simulação**. Algumas ideias, da mais barata à mais ambiciosa:
+A segunda é **mais simulação** — e esta lista, que já foi de ideias, hoje é em
+boa parte de **coisas que rodaram**. Três das que estavam aqui saíram, e o que
+elas viraram vale mais que a proposta original:
 
-- **Aprofundar o auto-modelo (nv5):** em `prever_valor`, separar o **próprio**
-  consumo do consumo dos rivais (hoje ambos entram juntos via `partilha`),
-  modelando que a célula escolhida fica deprimida *pelo próprio bloco*. É o que
-  falta para haver um `automodelo` **de verdade**: o mostrador atual mede um modelo
-  do *outro* (zero para um eremita — ver a nota 04). **Predição falseável:** feita
-  essa edição, um mostrador do self ficaria `> 0` na solidão. Ao contrário das
-  outras ideias desta lista, esta **mexe na simulação** (a decisão muda), então não
-  é conserto de régua — é a bifurcação da Fase 5 do [`ROADMAP.md`](./ROADMAP.md).
-- **Variância no HUD:** além da média dos traços, mostrar o desvio — dá pra ver
-  a população *convergir* (todos parecidos) ou *se diversificar* (nichos).
+- ~~**Aprofundar o auto-modelo (nv5)**~~ ✅ — a proposta era separar em
+  `prever_valor` o **próprio** consumo do dos rivais, com a predição falseável de
+  que "um mostrador do self ficaria `> 0` na solidão". O desfecho foi melhor que a
+  proposta: **o auto-modelo já estava no código** desde o nível 3 — a linha
+  `food -= garfada` é o bloco modelando que *a célula empobrece porque ele vai
+  comer dela*. Daí saiu a `autocausa`, o **único** mostrador da bateria que um
+  eremita possui, com um quinto da magnitude de um bloco acompanhado (razão
+  4,78 ± 0,67 em 50 seeds). A predição confirmou, e a bifurcação filosófica que
+  ela decidiria virou uma **razão** em vez de um vencedor (notas 09 e 11).
+- ~~**Variância no HUD**~~ ✅ — está lá desde então: a segunda linha mostra
+  `média±desvio` dos quatro traços contínuos, que é como se vê a população
+  convergir ou se abrir em nichos ao vivo.
+- ~~**Custo do pensar**~~ ✅ — virou a Fase 3 inteira, e rendeu mais do que um
+  *trade-off*: com o custo cobrado por **profundidade efetiva**, a profundidade
+  evoluída desce até o ótimo de grupo (`h = 1`), o que é alinhamento pigouviano
+  medido. E um achado que ninguém tinha orçado — com a receita **queimada**,
+  alinhar a escolha custa ~35 % da população; **reciclada** como dividendo, o
+  alinhamento sobrevive e a população fica em 102 % do baseline. Alinhar a
+  escolha ≠ restaurar o bem-estar (notas 15 e 21).
+
+As que continuam abertas, da mais barata à mais ambiciosa:
+
 - **Genealogia / espécies:** colorir o `@` pelo traço dominante (ex.: horizonte)
   em vez da energia, e assistir "linhagens" pintarem regiões do mapa.
 - **Sexo / recombinação:** cria herda traços de **dois** pais vizinhos saciados,
   não de um só — abre co-evolução e seleção sexual.
 - **Predadores:** uma segunda espécie que come blocos em vez de comida, criando
   uma corrida armamentista evolutiva (presa fica mais arisca, predador mais...).
-- **Custo do pensar:** `horizonte` alto consumir mais `METABOLISMO` — aí o
-  planejamento profundo deixa de ser grátis e a evolução tem um *trade-off* real.
 
 > Cada uma mexe só na PART 2 (cognição) ou na fase de reprodução — o resto do
 > pipeline (mundo, render, tick) segue de pé.
 
-Depois da v2 o espaço abriu bem mais do que essas duas direções: as linhas de
-pesquisa possíveis — e as que o projeto deliberadamente **não** vai seguir —
-estão em **[`ROADMAP.md`](./ROADMAP.md)**.
+Depois da v2 o espaço abriu muito além dessas duas direções, e o que aconteceu
+com esta lista é o resumo do porquê: as perguntas que sobraram já não são "que
+comportamento dá para adicionar?", e sim "o que exatamente estamos medindo, e
+como saberíamos que estamos errados?". As linhas de pesquisa possíveis, os
+pré-registros de cada experimento, as que o projeto deliberadamente **não** vai
+seguir, e o desenho conjecturado da próxima versão do manifesto estão em
+**[`ROADMAP.md`](./ROADMAP.md)**.
 
 ---
 
