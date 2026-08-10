@@ -2005,3 +2005,144 @@ registrada para orientar a próxima sessão, não compromisso.
    também cogitava. `viz/gerar_figuras.py` é estático — CSV → PNG —, não
    um replay; se o André quiser essa segunda metade, é a extensão natural
    do mesmo diretório, não um motor novo.
+
+---
+
+# Fase 6 — `FILOSOFIA_v4`: quando o modelo vira causa *(desenho conjecturado, 2026-08-09)*
+
+> **Nada aqui é pré-registro.** Isto é o desenho da próxima versão, escrito no dia
+> em que a v3 fechou e a §8 dela nomeou o gate. Todo experimento citado abaixo
+> ainda precisa do seu pré-registro próprio, commitado antes do código, como
+> todos os outros. O que esta seção fixa é o **escopo** — e escopo, neste
+> projeto, é a decisão que mais barato se toma cedo e mais caro se conserta
+> depois.
+
+**Pergunta:** o que acontece quando a medição vira parte do mecanismo?
+
+## 6.0 A tese: o gate da §8 e o basilisco de Roko são o mesmo experimento
+
+A §8 da v3 fechou a versão dizendo onde ela parava: **toda medição da v3 é feita
+de fora**. Cada mostrador recebe um `Bloco *b` e é computado por quem observa; e
+mesmo os três detectores do eixo microscópio (notas 24–27), construídos
+justamente para encerrar o regresso, olham o mundo sem que ninguém no mundo os
+leia. O `relato` foi a única faculdade que atravessou essa fronteira — nasceu
+epifenomenal e a Fase 4 o tornou causal (nota 08). Um **calibrador** que carregue
+comportamento ainda não existe.
+
+O basilisco de Roko entra aqui não como enfeite literário, mas como o **caso
+extremo** da mesma pergunta: uma crença sobre o futuro que fabrica o futuro que
+descreve. Tirada a teologia, a estrutura que sobra é exatamente a do gate — um
+modelo que deixa de descrever e passa a causar. É por isso que a v4 pode ter as
+duas coisas sem se dispersar: são a mesma coisa vista de dois ângulos.
+
+**O que já existe e o que falta, medido antes de conjecturar:** nenhum dos três
+detectores mora no `main.c` de hoje (todos foram patch temporário, técnica das
+notas 23/24/25) — portar um é trabalho real, do mesmo tipo que a nota 31 fez com
+`desconfianca[][]`. Já a `escuta` **mora** no `main.c` como traço herdável com
+três arquiteturas (§4.2/§4.4), com deriva neutra medida (nota 29) e custo ligado
+(nota 31). Isso torna o §6.1 abaixo muito mais barato que o §6.0.
+
+## 6.1 O primeiro experimento — a profecia que se cumpre, ou não
+
+Portar um detector para dentro do `main.c` e **ligá-lo à `utilidade`** de quem é
+observado. A pergunta tem sinal medível e as duas direções são mecanicamente
+plausíveis, o que é a marca de um teste que vale a pena: se o alarme faz os
+blocos pouparem, ele **se autodestrói**; se faz cada um correr para a comida
+antes dos outros, ele **se autocumpre**. Qual dos dois acontece é empírico, e o
+detector já vem calibrado da v3 (notas 24/25: 0/8 falsos positivos em população
+saudável, latência ~54 ticks, dose-resposta conhecida) — é raro herdar a régua
+pronta.
+
+A dificuldade que este experimento cria, e que é a matéria da v4 em vez de um
+defeito dela: **assim que o detector age, ele deixa de ser medida limpa do
+mundo**, porque parte do que ele lê é efeito dele mesmo. O regresso da §7 volta
+com dentes, e desta vez não dá para contê-lo só com disciplina de pré-registro:
+é preciso uma ablação que separe "o mundo colapsou" de "o alarme colapsou o
+mundo".
+
+## 6.2 A afirmação testável do basilisco — a seleção pela ignorância
+
+A assinatura do basilisco não é a punição: é o **risco informacional** — saber
+dele te torna vulnerável. Traduzido para este mundo, isso é literalmente a
+`escuta`: um traço herdável que decide **o que o bloco lê**. Ligado o detector do
+§6.1, a pergunta vira uma das mais limpas que este projeto já pôde fazer:
+
+> **A seleção favorece não saber?**
+
+Se os blocos que leem a profecia se saem pior, a evolução produz **cegueira
+voluntária** — e o projeto teria isso com barras, num mundo de 56 KB, sem ter
+instalado cegueira nenhuma. Se favorece saber, o alarme é um bem público e a
+pergunta vira outra (por que não fixa em 100%?). Nos dois casos há resultado.
+
+É a proposta mais forte desta seção, e por três razões: reaproveita
+infraestrutura já construída e já medida (a `escuta`, com deriva neutra
+documentada como linha de base), pergunta algo que nenhuma nota deste projeto
+perguntou, e responde "vale a pena olhar para o basilisco?" com um número em vez
+de uma discussão.
+
+## 6.3 O basilisco num universo `f(seed)` — e o comércio acausal mínimo
+
+A v4 herda uma posição já tomada, e isso a protege de perder tempo: a §4 da v3
+decidiu que a crença modal do bloco é **verdadeira sobre o tipo e falsa sobre a
+ocorrência**. Uma ameaça retroativa pede a mesma análise um passo adiante — num
+mundo determinístico ela é **incoerente e ainda assim funcionalmente eficaz**,
+porque o que age não é o futuro alcançando o passado, é o *modelo* do futuro
+estando no presente, dentro da `utilidade`, agora. Compatibilismo executável de
+novo, com o mesmo maquinário.
+
+E há uma versão mínima do comércio acausal que este mundo já quase tem: a
+reprodução aqui é **local**, então o agente que o bloco cria é o rival que vai
+disputar a célula dele. Um bloco que modela os próprios descendentes como
+competidores futuros está na estrutura do basilisco em miniatura — agir agora em
+função de um agente que ainda não existe e **cuja existência você causa**. A
+pergunta evolutiva sai limpa e barata: ele reproduz menos? E o `autocausa`, o
+único mostrador que o eremita possui, é o candidato natural a medir isso, porque
+já é o self entrando como variável dentro da própria previsão.
+
+## 6.4 O que fica de fora — decisão de escopo *(André, 2026-08-09)*
+
+Duas linhas boas foram levantadas na mesma conversa e **ficam para a v5 ou
+posterior, dependendo do que o basilisco destravar na v4**. Ficam registradas
+aqui para não se perderem, e explicitamente **fora** do escopo da v4:
+
+- **O gato de Cheshire — o sorriso sem o gato.** O que persiste quando o
+  substrato vai embora. O projeto já tem duas camadas separadas por uma decisão
+  de código: a cria herda os **traços** do pai, mas `remorso[]` e
+  `desconfianca[][]` são zerados ("a cria não herda o remorso de quem morreu
+  nesse slot"). Traço grina, estado evapora. O experimento é um Navio de Teseu
+  com número: substituída a população inteira, um bloco por vez, a **honestidade**
+  — que é ESS desde a nota 08 e é norma de *população*, não de indivíduo —
+  sobrevive à troca completa de quem a sustenta?
+- **Absolem — "quem é você?"** A mesma pergunta pelo outro lado, e o projeto **já
+  a respondeu sem debater**, numa linha de `reproduzir()`. Inverter essa linha (a
+  cria herda o remorso do slot) instala **trauma ancestral** como mecanismo, e põe
+  herança lamarckiana de estado contra herança mendeliana de traço. Uma linha de
+  código, uma pergunta filosófica inteira.
+
+**Por que não agora.** O padrão v1→v2→v3 é **uma pergunta por versão**, e a §8
+acabou de comprometer a v4 publicamente com o loop causal. Abrir a v4 numa
+pergunta de identidade faria da §8 uma promessa quebrada uma semana depois de
+escrita. Nota lateral: nenhuma das duas precisa esperar por uma versão — a de
+herança de estado é candidata natural a **paper próprio**, que não depende de
+`FILOSOFIA` nenhuma.
+
+## 6.5 O risco desta versão, escrito antes de começar
+
+O basilisco é o conceito mais convidativo a **verniz fenomenológico** que já
+entrou neste projeto. "Os blocos temem o basilisco" vai parecer tão inevitável
+quanto "o bloco quer comida" pareceu no nível 2. A regra de admissão da §3 não
+afrouxa para ele: *que ablação o zera, e ele carrega comportamento?* Se
+instalarmos punição antecipada, é preciso poder zerá-la e mostrar que carrega —
+senão é decoração com nome bonito.
+
+Vale lembrar, porque é fresco: a v3 fechou **reprovando** a palavra mais antiga
+do vocabulário (o id, nota 36) por não pagar exatamente essa entrada. Uma versão
+que começa com um conceito muito mais sedutor que o id deve começar com o
+critério que reprovou o id à mão.
+
+E a invariante de sempre, que a v4 **não** ameaça: ligar o detector à `utilidade`
+mantém tudo `f(seed)` — é mais uma leitura local dentro de `utilidade`, não um
+canal global. O que a v4 ameaça é outra coisa, e é preciso dizer em voz alta: ela
+**contamina o instrumento de propósito**. É o primeiro desenho deste projeto em
+que a régua e o medido deixam de ser separáveis por construção, e é exatamente
+por isso que ela merece uma versão inteira.
