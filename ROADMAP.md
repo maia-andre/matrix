@@ -1311,6 +1311,148 @@ nota 35).
 
 ---
 
+## 4.10 Pré-registro da divergência de trajetória — o vão entre T2 e o nulo é vantagem ou coerência? *(2026-08-10, antes de rodar)*
+
+**O problema, e ele está escrito na própria nota que o criou.** A nota 35 fechou
+declarando a fraqueza central do seu nulo: N2 tem a mesma dose de T2 e a direção
+destruída, mas o termo de T2 é espacialmente **coerente** (multiplica `espaco`,
+que é suave) e o de N2 troca de sinal **célula a célula**. Se coerência
+decorrelacionar as duas montagens espelhadas mais do que incoerência de mesma
+magnitude, parte do vão 30% → 66,7% é decorrelação, não vantagem — e o
+`p = 0,0092` da nota 35 mediria a diferença entre dois níveis de perturbação, não
+entre sinal e ruído. A nota nomeou o teste que fecharia isso e não o rodou:
+comparar **quanto as trajetórias de A e B divergem em cada braço**. Ele muda o que
+o script **guarda**, não o que ele roda.
+
+**A álgebra antes da máquina — e ela entrega um teto que corrida nenhuma move.**
+Seja `W_A` o valor do traço que domina a montagem A no fim, e `W_B` o da B; o
+classificador diz REAL exatamente quando `W_A = W_B`. Dois extremos fixam a régua:
+
+1. **Sem mecanismo** (o N1 da nota 35), A e B são a **mesma** simulação — a mesma
+   paridade vence as duas, os valores são opostos, REAL é impossível: **0%**, e
+   isso está medido (0/10).
+2. **Com decorrelação total** e nenhum valor melhor que o outro, `W_A` e `W_B` são
+   dois sorteios independentes e justos: concordam em **50%**.
+
+A decorrelação parcial interpola entre os dois. Para passar de 50% é preciso que
+`W_A` e `W_B` fiquem **positivamente correlacionados**, e como a única coisa que
+distingue B de A é qual paridade carrega qual valor, correlação positiva quer
+dizer "o valor `v` tende a vencer, seja qual for a paridade que o carregue" — que
+é a **definição** de vantagem neste harness. Portanto:
+
+> **P(REAL) > 50% ⟺ vantagem.** Decorrelação, sozinha, não passa de 50%.
+
+Aplicado aos dois números já publicados, sem gastar máquina:
+
+- **T2 = 20/30 = 66,7%** está **acima** do teto: `P(X ≥ 20 | n = 30, p = 0,5) = 0,0494`
+  (binomial unilateral).
+- **N2 = 9/30 = 30,0%** está **abaixo** dele de forma significativa
+  (`P(X ≤ 9) = 0,0214`): o nulo **não** decorrelaciona por completo. Isso é fato
+  aritmético sobre um número já publicado, não conjectura.
+
+Daí sai o tamanho exato do que está em jogo, declarado antes de medir: a coerência,
+**no pior caso possível para a nota 35**, explica o vão de 30% até 50%; o que passa
+de 50% ela não pode explicar. Se a ameaça se confirmar inteira, o `p = 0,0092` da
+nota 35 vira `p = 0,0494` — a evidência encolhe de confortável para no fio, e
+**não** desaparece. Se for descartada, o `p = 0,0092` fica sem ressalva.
+
+**Ressalva do teto, escrita agora para não virar racionalização depois:** a
+equivalência acima vale para vantagem **global**. Uma vantagem que mude de sinal
+de seed para seed (`−2,0` melhor em alguns mundos, `2,0` em outros) também
+correlaciona `W_A` com `W_B` e também passa de 50% — continua sendo vantagem, mas
+não a de Q5. O que separa as duas é a direção condicional, e ela já está medida:
+as 20 corridas REAL de T2 apontam **todas** para `−2,0` (nota 34) contra 3/9 no
+nulo (nota 35, `p = 0,0002`). Para T2, o teto é rompido por vantagem global.
+
+**O desenho — os mesmos binários, as mesmas seeds; muda o que se guarda.** Dois
+braços: **T2** (o harness `invasao` puro, o que as notas 33/34 rodaram) e **N2**
+(o nulo ativo da nota 35), as duas montagens espelhadas, as **mesmas 30 seeds**.
+`main.c` não muda desde `65e83f3`, anterior às notas 32–36, então os binários são
+bit a bit os que produziram os números publicados — e uma seed publicada de cada
+braço é conferida como regressão **antes** do painel (regra 8: conferir a régua
+antes de aceitar o que ela diz).
+
+Definições, todas sobre colunas do CSV, nenhuma sobre estado interno:
+
+- **`d(t) = (arrep_m^A(t) + arrep_m^B(t)) / 4`.** Álgebra: em A o índice par
+  carrega `−2,0` e em B carrega `2,0`, logo `arrep_m^A = 2(2f − 1)` e
+  `arrep_m^B = −2(2f' − 1)`, com `f`, `f'` = fração de índice ímpar em cada
+  montagem; a soma dá `4(f − f')`. Ou seja, **`d` é a diferença de composição
+  entre as duas montagens, em fração da população, com sinal** — e sob N1 (traço
+  inerte) `d ≡ 0` a cada tick, que é exatamente o que a P2 da nota 35 verificou e
+  jogou fora.
+- **`d̄_W`** — média de `d(t)` na janela `1..W`, **com sinal**.
+- **`Δpop_W`** — média de `|pop_A − pop_B|` na janela, dividida pela população
+  média: divergência do **mundo**, cega a qual valor está vencendo.
+- **`t_div`** — primeiro tick em que A e B diferem em qualquer coluna invariante
+  ao rótulo (todas menos `arrep_m`); **`t_01`**, o primeiro tick com `|d| ≥ 0,01`,
+  entra junto porque `t_div` tem resolução grossa demais (o piloto deu 4 e 6).
+
+E a decomposição de que tudo depende, declarada antes de ver o painel: através das
+seeds, **vantagem é deslocamento de `d̄`, decorrelação é espalhamento de `d̄`**. Um
+mecanismo que só decorrelaciona espalha `d̄` em torno de zero; um que dá vantagem a
+`−2,0` desloca `d̄` para o negativo (em A o ímpar carrega `2,0` e encolhe; em B o
+ímpar carrega `−2,0` e cresce).
+
+**Janela: `W = 2000` como primária**, com `W = 500` e `W = 5000` de sensibilidade,
+das mesmas corridas. Calibrada em **seeds fora da amostra** (31 e 32, que não estão
+nas 30 do painel e nunca foram publicadas), rodadas antes deste pré-registro
+exatamente para isto: em `t = 2000` a composição está em ~79% e ainda se move (a
+fixação só chega perto de `t = 23000`), enquanto em `t = 30000` `d` **é** o
+desfecho — medir lá seria medir o classificador de novo, com outro nome.
+
+- **P1 — a dose, que a §4.8 afirmou e nunca conferiu.** `t_div` e `t_01`
+  comparáveis entre T2 e N2, pareados por seed (sinal exato, bilateral, 5%). Se T2
+  divergir sistematicamente mais cedo, "mesma dose" é falso no nível da trajetória
+  e o resto da nota se lê sob essa luz.
+- **P2 — a ameaça (primária).** Escala de `d̄_2000` por braço, com
+  `s_seed = |d̄ − mediana do próprio braço|` (a mediana tira o deslocamento de
+  vantagem; o que sobra é decorrelação). Sinal exato pareado, bilateral, 5%, T2 ×
+  N2; companheiro: razão de MADs com `p` por permutação pareada (10⁵ sorteios, RNG
+  de semente fixa no script — este projeto não sorteia sem semente). Leituras:
+  - **sem diferença** → ameaça **fechada**: os 30% são linha de base justa e o
+    `p = 0,0092` da nota 35 fica sem ressalva;
+  - **T2 > N2** → ameaça **confirmada**, e o que resta de pé é o teto
+    (`p = 0,0494`); a nota 35 recebe ressalva de **interpretação**, não errata de
+    número;
+  - **T2 < N2** → linha de base **conservadora**, e a nota 35 sai mais forte.
+- **P3 — a mesma ameaça, medida no mundo.** `Δpop_2000` pareado, T2 × N2, mesmo
+  teste. É a segunda régua da P2 e é cega a qual valor vence. Se P2 e P3
+  discordarem, a nota lê o desacordo em vez de escolher o que agrada.
+- **P4 — o modelo que sustenta o argumento inteiro.** Dentro de N2, onde não há
+  vantagem por construção, REAL só pode vir de decorrelação: as 9 seeds REAL devem
+  ter `|d̄_2000|` **maior** que as 21 FUNDADOR (Mann–Whitney unilateral, 5%). Se
+  falhar, o modelo "REAL = decorrelação + vantagem" está errado, e a nota vira a
+  investigação disso em vez da calibração.
+- **P5 — a direção, agora contínua e cedo.** `d̄_2000` **com sinal**, nas 30 seeds.
+  Em N2 espero mediana ≈ 0 e ~15/30 negativas; em T2, se `−2,0` for vantajoso,
+  espero **≥ 21/30 negativas** — o mesmo corte do §4.6, para não inventar régua
+  nova. Declaro antes: o observável é **novo**, contínuo e medido cedo, e **não
+  revoga nem substitui** o veredito binário de T2. O corte de 21/30 do §4.7 decidiu
+  o que decidiu; nada aqui move critério depois do placar.
+
+**O que este pré-registro NÃO promete.** `Δpop` é cego à vantagem mas **satura**: a
+população é homeostática (~250 blocos), então, uma vez decorrelacionadas, as duas
+montagens ficam a uma distância típica e a medida para de crescer — ela distingue
+"decorrelacionou" de "não decorrelacionou" melhor do que "decorrelacionou quanto".
+`d̄` não satura na janela, mas mistura os dois efeitos, e só a decomposição
+(deslocamento × espalhamento) os separa — decomposição que vale sobre as 30 seeds,
+não seed a seed. E N2 continua sendo "direção destruída", não "vantagem
+comprovadamente nula": esta seção mede a ameaça que a nota 35 declarou, não todas
+as que existem. Se a P2 confirmar a ameaça, o teste seguinte já tem nome — um
+**nulo coerente** (o mesmo termo multiplicado por um campo suave arbitrário em vez
+de ±1 por célula), que responderia na moeda do desfecho em vez de na de um proxy,
+ao custo de mais 60 corridas de 30 000 ticks.
+
+**Custo declarado:** 120 corridas de 5 000 ticks ≈ 45 min sequenciais (~22 s/corrida,
+na medida de ~130 s por 30 000 ticks deste devbook hoje), mais 4 corridas de 30 000
+para a regressão das seeds publicadas (~9 min). Patch temporário em tmpdir (técnica
+das notas 23/24/25): o `main.c` do repo não é tocado e nenhum dataset congelado muda.
+
+**Reproduzir (script a escrever):** `sh papers/notes/37-divergencia-de-trajetoria.sh`.
+
+---
+
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper *(a v3 **fechou** em 2026-08-09)*
 
 **Pergunta:** onde a palavra mental **quebra**?
