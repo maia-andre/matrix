@@ -644,8 +644,19 @@ pergunta para os outros.
 > herdou a numeração: a **ablação do id** (§4.9, nota 36), a última palavra da
 > §3 a ser cobrada — ela **não paga a entrada** em população (2/8), e o controle
 > de sanidade reencontrou o piso do `float32` agindo sobre a **decisão**, não só
-> sobre o mostrador. Com ela a `FILOSOFIA_v3` fechou. Segue aberta, sem
-> pré-registro: o blefe residual como ESS (varrer a frequência).
+> sobre o mostrador. Com ela a `FILOSOFIA_v3` fechou. Em 2026-08-10 a
+> **divergência de trajetória** (§4.10, nota 37) fecha a ameaça que a nota 35
+> declarou e não mediu — a régua cega a qual valor vence dá **15 × 15**, os dois
+> braços perturbam o mundo exatamente na mesma medida, e o `p = 0,0092` fica sem
+> ressalva. Mas o que a nota entrega de maior não era a pergunta dela: a
+> **diferença pareada** das duas montagens (`d = f_ímpar^A − f_ímpar^B`), cega ao
+> efeito fundador **por construção**, dá **28/30** contra um nulo de **15/30
+> exato**, e **9 das 10** corridas que o classificador binário descartara como
+> FUNDADOR carregam o mesmo sinal. **Q5 tem resposta:** a seleção favorece
+> `peso_arrependimento` negativo. O veredito binário de T2 continua sendo o que
+> era — o corte fica —, mas agora se sabe que ele era uma régua de baixo poder,
+> e que a boa estava disponível desde a nota 30. Segue aberta, sem pré-registro:
+> o blefe residual como ESS (varrer a frequência).
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
