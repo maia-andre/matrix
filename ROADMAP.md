@@ -1464,6 +1464,128 @@ das notas 23/24/25): o `main.c` do repo não é tocado e nenhum dataset congelad
 
 ---
 
+## 4.11 Pré-registro do painel da régua pareada — a primária, fora da amostra, com a potência calculada antes *(2026-08-15, antes de rodar)*
+
+**Por que existe, e o que exatamente está errado hoje.** A régua pareada
+(`d̄`, a diferença de composição entre as duas montagens espelhadas) deu 28/30 na
+nota 37 e respondeu Q5. Nenhum número dela está sob suspeita — o que está errado é o
+**estatuto**: ela entrou como observável **secundário** (a P5) de um painel montado
+para responder outra pergunta (a ameaça de decorrelação), e rodou nas **mesmas 30
+seeds** que as notas 33/34/35 já tinham usado e olhado. Um resultado assim é uma
+descoberta, não uma confirmação. Este painel a promove a **primária**, em **30 seeds
+que nenhuma nota deste projeto rodou** (101–130), com o corte declarado antes e —
+pela primeira vez neste fio — **potência calculada antes**, porque só agora existem
+as duas coisas que faltavam: um nulo medido (15/30 exato, nota 37) e um tamanho de
+efeito (mediana `d̄_2000 = −0,164`).
+
+**A potência, antes da máquina** (binomial exata, `n = 30`, corte **≥ 21/30** — o
+corte do §4.6, para não inventar régua nova):
+
+| | |
+|---|---|
+| α sob o nulo (`p = 0,5`) | `P(X ≥ 21) =` **0,0214** |
+| potência sob o efeito medido (`p = 28/30 = 0,933`) | **0,99998** (falha com prob. 1,5·10⁻⁵) |
+| potência sob o limite inferior CP 95% do efeito (`p = 0,805`) | **0,947** |
+| menor efeito com 80% de potência | `p = ` **0,749** |
+
+Ou seja: **este painel não tem desculpa de amostra pequena**. Se a direção não
+replicar, o problema é do achado da nota 37, não do `n`.
+
+**A álgebra do nulo, feita antes de gastar máquina (regra 5 do protocolo) — e ela
+explica o 15/30 exato.** Em N2 o termo do arrependimento é multiplicado por
+`sinal_nulo(cx,cy) ∈ {−1,+1}`, campo arbitrário fixo por seed. Um bloco com peso `w`
+sob o campo `s` se comporta **exatamente** como um bloco com peso `−w` sob o campo
+complementar `−s`. Como a única diferença entre as montagens A e B é qual paridade
+carrega qual valor, segue que a montagem A sob `−s` **é** a montagem B sob `s`, e
+portanto `d(−s) = −d(s)`: a complementação do campo é uma involução que troca o sinal
+de `d`. O ensemble de campos (um bit de `hash2` por célula) é simétrico sob
+complemento, logo **a distribuição de `d` é simétrica em torno de zero por construção
+do ensemble** — o 15/30 exato da nota 37 não foi sorte, era o que tinha de acontecer.
+Isso é o mais perto de "nulo por identidade" que este fio chega, e vale escrever a
+diferença: sob N1 (traço inerte) `d ≡ 0` **tick a tick**; sob N2, `d` é grande em cada
+seed e só a **distribuição** é simétrica. Por isso N2 ainda roda aqui: com `n = 30` o
+nulo tem ruído binomial, e ele também valida o encanamento inteiro (patch, extração,
+estatística) em seeds novas.
+
+**O desenho — mesmos binários, seeds novas, e cada corrida entrega as duas réguas.**
+Dois braços (**T2**, o harness `invasao` puro das notas 33/34; **N2**, o nulo ativo da
+nota 35, copiado verbatim), duas montagens espelhadas, 30 seeds novas, **30 000 ticks**
+por corrida. O tamanho da corrida é a decisão de desenho que faz este painel valer mais
+que o da nota 37 pelo mesmo trabalho: o CSV de 30 000 ticks **contém** o prefixo de
+2 000, então cada corrida entrega ao mesmo tempo `d̄` nas janelas `W ∈ {500, 2000, 5000}`
+**e** o desfecho binário na fixação — as duas réguas medidas **nas mesmas corridas**,
+que é a única forma honesta de compará-las. 120 corridas.
+
+**Uma mudança no harness, declarada porque toca a invariante.** As corridas rodam em
+**processos paralelos**. A cláusula "paralelização e SIMD ameaçam" da seção *Engenharia*
+é sobre paralelizar **dentro do tick** (ordem de redução, reassociação de ponto
+flutuante) — aqui nada no `main.c` muda: cada corrida continua um processo
+single-thread, `f(seed)`, escrevendo o próprio CSV; o paralelismo está só no shell que
+as dispara. Como isso é asserção e não fé, o script **verifica**: guarda o md5 de todos
+os 120 CSVs, repete ao final uma corrida (T2/101/A) **sozinha** e compara — se diferir,
+o painel é nulo. As métricas vão para um arquivo por tarefa e são concatenadas em ordem
+ordenada, então o agregado é idêntico byte a byte independentemente de quem termina
+primeiro; `JOBS=1` roda sequencial e deve dar **o mesmo painel**.
+
+- **P1 — primária: a direção, fora da amostra.** T2, `d̄_2000` **com sinal**, 30 seeds
+  novas, corte **≥ 21/30 negativas**. Espero **28/30 ± ruído binomial**. Falhar aqui,
+  com a potência da tabela acima, seria dizer que o 28/30 da nota 37 era das seeds
+  1–30 — e a nota 38 viraria a investigação disso.
+- **P2 — a magnitude, não só o sinal.** Mediana de `d̄_2000` em **[−0,30; −0,05]**
+  (o valor antigo é −0,164; a faixa é "mesma ordem de grandeza", declarada agora).
+  Fora dela com o sinal replicando: a direção é robusta e o tamanho não é, e é isso
+  que a nota vai escrever.
+- **P3 — o nulo, na mesma amostra fresca.** N2 com negativas em **10..20** (intervalo
+  de aceitação de `p = 0,5` a 5% bilateral) e `|mediana d̄_2000| < 0,05`. A álgebra
+  acima prevê 15/30. Se cair fora, o nulo tem viés nestas seeds e **P1 não se lê**.
+- **P4 — as duas réguas nas mesmas corridas (a afirmação sobre o instrumento).**
+  (a) O binário de T2 deve cair em **14..25** (IC95 Clopper–Pearson dos 20/30
+  publicados), e declaro agora que é **provável que ele não alcance o próprio corte de
+  21/30**: se isso acontecer, o painel exibe, fora da amostra, a régua de baixo poder
+  dizendo "não decide" enquanto a de alto poder decide com `p ~ 10⁻⁶` **nas mesmas
+  corridas**. (b) Entre as seeds que o binário carimba FUNDADOR em T2, a fração com
+  `d̄_2000 < 0` deve ser **> 0,5** (binomial unilateral, 5%, condicional a haver ≥ 5
+  dessas seeds) — é a réplica dos 9/10 da nota 37. (c) O binário de N2 deve cair em
+  **4..15** (IC95 CP dos 9/30 publicados).
+- **P5 — companheiro de maior potência: Wilcoxon signed-rank** de `d̄_2000` contra zero
+  (permutação de sinais, 10⁵ sorteios, RNG de semente fixa no script — este projeto não
+  sorteia sem semente). **Companheiro, não primária**: a contagem é que mantém a
+  comparabilidade com o corte do §4.6/§4.7.
+- **Sensibilidade:** `W = 500` e `W = 5000`, das mesmas corridas. Se as três janelas
+  discordarem, a nota **lê o desacordo** em vez de escolher a que agrada — foi o que a
+  P2 da nota 37 obrigou a fazer.
+
+**O que este pré-registro NÃO promete.**
+
+- **Não re-decide o §4.7, em direção nenhuma.** O veredito binário de T2 é 20/30 contra
+  um corte de 21/30 e está fechado. O braço binário deste painel é **secundário e
+  descritivo**, com faixa de expectativa declarada acima. Declaro antes o caso
+  incômodo: **se o binário destas 30 seeds novas der ≥ 21/30**, isso é uma réplica
+  independente que teria confirmado pelo próprio corte — a nota registra o fato, e
+  **não** funde os dois painéis (60 seeds com um corte de 21/30 não é teste nenhum) nem
+  abre o gate de T3 por conta própria; abrir T3 exige pré-registro próprio, escrito
+  depois e com corte novo declarado antes. Mover a trave depois do placar é o que a §7
+  da `FILOSOFIA_v3` proíbe, e a proibição vale para o lado que agrada.
+- **`d̄` mede vantagem de crescimento cedo; o binário mede quem fixa.** São perguntas
+  diferentes (ameaça herdada da nota 37) e este painel não troca uma pela outra.
+- **28/30 é proporção de seeds, não tamanho de efeito populacional**; a mediana de `d̄`
+  é composição, não aptidão, e não será convertida em uma.
+- **Não mede por que `−2,0` vence.** O item 2 da nota 37 (a hipótese mecânica da nota
+  30 — persistir na disputa é o que paga — testável ligando `PESO_ESPACO`/densidade)
+  continua aberto e fora deste painel.
+
+**Custo declarado, medido neste devbook hoje** (`gcc -O2`, 16 núcleos, carga ~1,3):
+171,6 s por corrida de 30 000 ticks e 27,6 s por 5 000 ⇒ 120 corridas = **5 h 43 de
+CPU**, ~30 min de relógio com 12 processos simultâneos. Mais 4 corridas de regressão
+(T2 seed 11 e N2 seed 2, as publicadas) e 1 corrida solitária para o teste de
+determinismo sob paralelismo. Patch temporário em tmpdir (técnica das notas 23/24/25):
+o `main.c` do repo não é tocado e nenhum dataset congelado muda.
+
+**Reproduzir (script a escrever):** `sh papers/notes/38-painel-da-regua-pareada.sh`
+(`JOBS=12` por padrão; `JOBS=1` roda sequencial e deve produzir o mesmo painel).
+
+---
+
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper *(a v3 **fechou** em 2026-08-09)*
 
 **Pergunta:** onde a palavra mental **quebra**?
