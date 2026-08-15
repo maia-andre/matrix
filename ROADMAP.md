@@ -655,8 +655,22 @@ pergunta para os outros.
 > FUNDADOR carregam o mesmo sinal. **Q5 tem resposta:** a seleção favorece
 > `peso_arrependimento` negativo. O veredito binário de T2 continua sendo o que
 > era — o corte fica —, mas agora se sabe que ele era uma régua de baixo poder,
-> e que a boa estava disponível desde a nota 30. Segue aberta, sem pré-registro:
-> o blefe residual como ESS (varrer a frequência).
+> e que a boa estava disponível desde a nota 30. Em 2026-08-15 o §4.11 fecha o
+> item 1 que a nota 37 deixou: a régua pareada roda como **primária**, em 30
+> seeds novas (101–130) e com potência calculada **antes** (0,99998 sob o efeito
+> medido). Dá **30/30** (`p = 1,9·10⁻⁹`; pooled 58/60) contra um nulo de 16/30 —
+> previsto pela involução do §4.11, não torcido. Rodar 30 000 ticks põe as duas
+> réguas nas **mesmas corridas**: 6/6 das FUNDADOR de T2 carregam o sinal
+> (pooled 15/16), e a única falha do placar é o nulo da régua **velha** — o
+> binário fabrica 16/30 = 53% onde a nota 35 mediu 30%, porque estas seeds
+> decorrelacionaram mais (`|d̄|` 0,040 → 0,069, `Δpop` 0,0150 → 0,0167, T2
+> estável). O contraste da nota 35 vira 80% × 53% (`p = 0,054`): qualificação de
+> interpretação, sem errata — e o que não depende do nulo fica mais forte
+> (24/30 acima do teto de 50%, `p = 0,00072`; direção 24/24, pooled 44/44). O
+> binário **alcança** o próprio corte nas seeds novas (24/30), e o §4.11 tinha
+> declarado antes o que fazer com isso: registrar, **não** fundir painéis, **não**
+> abrir T3 sem pré-registro próprio. Segue aberta, sem pré-registro: o blefe
+> residual como ESS (varrer a frequência).
 
 Nichos, especiação, cooperação, comunicação, predação. Talvez seja aqui que mora
 o ouro. Mas há uma armadilha de categoria que precisa estar escrita:
