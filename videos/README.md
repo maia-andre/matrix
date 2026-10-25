@@ -24,6 +24,17 @@ cd ../../Treinamentos
 .venv/bin/python render/conferir.py ../matrix/videos/v04-o-self             # sincronia, frames, pronúncia
 ```
 
+## Simulação ao vivo (`scripts/capturar_sim.py`)
+A simulação entra no vídeo como **texto**, não como gravação de tela: o script compila o `main.c`, roda
+`./matrix <seed> <ticks> 0 [foco]` num pipe, roda **duas vezes e compara os bytes** (para se divergir) e
+grava `sim/<nome>.js` com um quadro por tick (texto + uma cor por caractere), a seed, o foco e o commit do
+`main.c`. O HTML desenha o quadro `floor(t · ticks_por_segundo)` na fonte da marca, com zoom livre.
+
+```sh
+.venv/bin/python -I ../matrix/videos/scripts/capturar_sim.py ../matrix/videos/v01-x/sim/deus.js --seed 7 --ticks 300
+.venv/bin/python -I ../matrix/videos/scripts/capturar_sim.py ../matrix/videos/v01-x/sim/eu.js --seed 7 --ticks 140 --foco 0 --nome eu
+```
+
 ## Identidade (`marca/`)
 - Preto, verde fósforo `#00FF41`, JetBrains Mono embutida (`marca/fontes/`, licença OFL).
 - Chuva de caracteres e mundo ASCII desenhados em canvas como função pura de `t` (nada de animação CSS).
