@@ -24,6 +24,23 @@ cd ../../Treinamentos
 .venv/bin/python render/conferir.py ../matrix/videos/v04-o-self             # sincronia, frames, pronúncia
 ```
 
+## Os vídeos (série completa, out/2026)
+
+| pasta | vídeo | duração |
+|---|---|---|
+| `v01-a-pergunta` | 1 · A pergunta (piloto e trailer) | 7:23 |
+| `v02-quatro-reguas` | 2 · Quatro modos de uma régua mentir | 6:53 |
+| `v03-bem-posicional` | 3 · Pensar demais é um bem posicional | 6:06 |
+| `v04-o-self` | 4 · O self já estava no código | 3:24 |
+| `v05-o-dedo` | 5 · O dedo do espectador | 4:33 |
+| `v06-quase-me-enganei` | 6 · Como eu quase me enganei (fecha a série) | 4:33 |
+| `v07-replays` | 7 · Replays (peça visual, sem voz) | 0:59 |
+
+Cada pasta tem `roteiro.md` (falas com a FONTE de cada bloco) e `projeto.json` (histórico). Trilha: semente =
+número do vídeo. **v07:** os GIFs de `viz/replays/` entram como quadros PNG em `v07-replays/quadros/` (fora do git;
+`ffmpeg -i ../viz/replays/replay-<nome>.gif -vsync 0 v07-replays/quadros/<nome>/%03d.png`), e a trilha sobe +10 dB
+antes da mixagem porque não há voz.
+
 ## Simulação ao vivo (`scripts/capturar_sim.py`)
 A simulação entra no vídeo como **texto**, não como gravação de tela: o script compila o `main.c`, roda
 `./matrix <seed> <ticks> 0 [foco]` num pipe, roda **duas vezes e compara os bytes** (para se divergir) e
