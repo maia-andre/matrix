@@ -1,0 +1,492 @@
+[
+ {
+  "bloco": "b1",
+  "frase": 1,
+  "texto": "Depois de duas horas e catorze minutos de simulação, meu script imprimiu: confirma.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Depois de duas horas e quatorze minutos de simulação, meu script imprimiu. Confirma.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b1",
+  "frase": 2,
+  "texto": "Estava errado. E eu quase publiquei.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "estava errado e eu quase publiquei.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 1,
+  "texto": "A pergunta era sobre arrependimento.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A pergunta era sobre arrependimento.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 2,
+  "texto": "Quando um bloco perde uma disputa, às vezes a segunda melhor casa estava livre. Ele podia mesmo ter ido para lá.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Quando um bloco perde uma disputa, às vezes a segunda melhor casa estava livre. Ele podia mesmo ter ido para lá.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 3,
+  "texto": "Esse contrafactual é verificável. E eu dei aos blocos uma memória dele: o remorso.",
+  "ok": true,
+  "nota": 0.897,
+  "faltando": [],
+  "transcricao": "Esse contra-facultal é verificável e eu dei aos blocos uma memória dele, o remorso.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 4,
+  "texto": "Um traço herdado decide quanto o remorso pesa na decisão seguinte. E em que direção.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Um traço herdado decide quanto o remorso pesa na decisão seguinte. E em que direção?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 5,
+  "texto": "Eu apostei que a seleção ia premiar quem aprende com o erro: peso positivo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Eu apostei que a seleção ia premiar quem aprende com o erro. Peso positivo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 6,
+  "texto": "Nas três seeds, a evolução foi para o outro lado. Peso negativo.",
+  "ok": true,
+  "nota": 0.917,
+  "faltando": [],
+  "transcricao": "Nas três CDs, a evolução foi para o outro lado, peso negativo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 7,
+  "texto": "Então eu precisava saber: isso é seleção de verdade, ou só deriva?",
+  "ok": true,
+  "nota": 0.96,
+  "faltando": [],
+  "transcricao": "Então eu precisava saber. Isso é a seleção de verdade ou só deriva.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 1,
+  "texto": "O teste é um duelo. Metade da população com um valor, metade com o outro. E de novo, com os lados trocados.",
+  "ok": true,
+  "nota": 0.955,
+  "faltando": [],
+  "transcricao": "O teste é um duelo, metade da população com o valor, metade com o outro, e de novo, com os lados trocados.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 2,
+  "texto": "Se o mesmo valor vence nas duas montagens, é sinal. Se vence sempre o mesmo lado, é efeito fundador: quem chegou primeiro domina.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Se o mesmo valor vence nas duas montagens, é sinal. Se vence sempre o mesmo lado, é efeito fundador, quem chegou primeiro domina.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 3,
+  "texto": "Em cinco de seis corridas, venceu o mesmo lado.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Em 5 de 6 corridas, venceu o mesmo lado.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 4,
+  "texto": "Três seeds não decidem. Então eu pré-registrei dez, com o critério escrito antes: sete ou mais, confirma.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "3 seeds não decidem. Então eu pré-registrei 10, com o critério escrito antes. 7 ou mais confirma.",
+  "tentativa": 3
+ },
+ {
+  "bloco": "b4",
+  "frase": 1,
+  "texto": "Duas horas e catorze minutos depois, o script disse: confirma. Nove de dez.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Duas horas e quatorze minutos depois, o script disse. Confirma, nove de dez.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 2,
+  "texto": "Revertia a conclusão anterior. E era o resultado que eu queria.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "revertia a conclusão anterior e era o resultado que eu queria.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 3,
+  "texto": "Antes de aceitar, eu conferi o classificador linha a linha, contra um caso que eu já tinha resolvido à mão.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Antes de aceitar, eu conferi o classificador linha a linha contra um caso que eu já tinha resolvido à mão.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 4,
+  "texto": "A fórmula de uma das montagens estava invertida. Uma linha.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A fórmula de uma das montagens estava invertida. Uma linha.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 5,
+  "texto": "O mundo é determinístico. Então eu não rodei nada de novo: só refiz a conta, com os mesmos números.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O mundo é determinístico. Então eu não rodei nada de novo. Só refiz a conta com os mesmos números.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 6,
+  "texto": "O veredito virou o oposto exato. Um de dez. Efeito fundador puro.",
+  "ok": true,
+  "nota": 0.88,
+  "faltando": [],
+  "transcricao": "O veredito virou o oposto exato, um de dez e feito fundador puro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 7,
+  "texto": "Uma linha errada bastou para inverter tudo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Uma linha errada bastou para inverter tudo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 1,
+  "texto": "A outra comparação, peso negativo contra positivo, tinha ficado em seis de dez. Sem decidir.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A outra comparação, peso negativo contra positivo, tinha ficado em 6 de 10, sem decidir.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 2,
+  "texto": "Mais vinte seeds, com o critério escrito antes. O total ficou em vinte de trinta.",
+  "ok": true,
+  "nota": 0.897,
+  "faltando": [],
+  "transcricao": "Mais 20 seeds, com critérios escrito antes, o total ficou em 20 de 30.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 3,
+  "texto": "O corte era vinte e um. Faltou uma seed.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "O corte era 21. Faltou uma acide.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 4,
+  "texto": "Então, pelo critério, não decide. E mover a régua depois de ver o placar é exatamente o que eu me proibi.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então, pelo critério, não decide. E mover a régua depois de ver o placar é exatamente o que eu me proibi.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 5,
+  "texto": "Mas havia um detalhe. Das vinte corridas que escaparam do efeito fundador, todas favoreciam o peso negativo. Nenhuma ao contrário.",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "Mas havia um detalhe. Das 20 corridas que escaparam do efeito fundador, todas favoreciam o peso negativo. Nenhum o contrário.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 1,
+  "texto": "Faltava a pergunta que três notas seguidas tinham adiado: quanto disso o próprio desenho fabrica?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "faltava a pergunta que três notas seguidas tinham adiado. Quanto disso, o próprio desenho fabrica.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 2,
+  "texto": "O nulo óbvio seria desligar o mecanismo. A álgebra, antes da máquina, mostrou que isso dá zero por identidade.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O nulo óbvio seria desligar o mecanismo. A álgebra, antes da máquina, mostrou que isso dá zero por identidade.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 3,
+  "texto": "Sem o traço, as duas montagens viram a mesma simulação, e o classificador nunca pode dizer sinal.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Sem o traço, as duas montagens viram a mesma simulação e o classificador nunca pode dizer sinal.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 4,
+  "texto": "O nulo certo é um traço ativo, mas sem direção. E duas moedas honestas concordam metade das vezes.",
+  "ok": true,
+  "nota": 0.944,
+  "faltando": [],
+  "transcricao": "O nulo certo é um traço ativo, mas sem direção. E duas moedas onestas concordam metade das vezes.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 5,
+  "texto": "Medido, o desenho sozinho fabrica trinta por cento. Contra sessenta e sete medidos.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Medido, o desenho sozinho fabrica 30% contra 67 medidas.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 6,
+  "texto": "E eu tinha escrito, antes, que esperava não distinguir do nulo. Errei de novo. Para o lado bom.",
+  "ok": true,
+  "nota": 0.944,
+  "faltando": [],
+  "transcricao": "E eu tinha escrito, antes que esperava não distinguir do Nullo, errei de novo, para o lado bom.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 1,
+  "texto": "Aí veio o embaraço maior.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Aí veio o Embaraço Maior.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b7",
+  "frase": 2,
+  "texto": "O classificador decidia cada montagem separadamente, e só depois comparava os rótulos.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O classificador decidia cada montagem separadamente e só depois comparava os rotulos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 3,
+  "texto": "Mas as duas montagens existem para ser comparadas. A diferença entre elas é cega ao efeito fundador: o viés de lado entra nas duas, e cancela na subtração.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Mas as duas montagens existem para ser comparadas. A diferença entre elas é cega ao efeito fundador. O viés de lado entra nas duas e cancela na subtração.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 4,
+  "texto": "Essa régua pareada estava disponível desde o começo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Essa régua pareada estava disponível desde o começo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 5,
+  "texto": "Com ela, vinte e oito de trinta na direção negativa. Contra um nulo de quinze.",
+  "ok": true,
+  "nota": 0.966,
+  "faltando": [],
+  "transcricao": "com ela 28/30 na direção negativa, contra um nulo de 15.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 6,
+  "texto": "E das dez corridas que o classificador tinha jogado fora, nove carregavam o mesmo sinal.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e das 10 corridas que o classificador tinha jogado fora. 9 carregavam o mesmo sinal.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 1,
+  "texto": "Restava o teste que não deixa espaço para eu me enganar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Restava o teste que não deixa espaço para eu me enganar.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b8",
+  "frase": 2,
+  "texto": "Trinta seeds novas, que nenhuma nota tinha rodado. A régua pareada como primária. E a potência calculada antes de rodar.",
+  "ok": true,
+  "nota": 0.878,
+  "faltando": [],
+  "transcricao": "30 C de novas que nenhuma nota tinha rodado, a régua apareada como primária e a potência calculada antes de rodar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 3,
+  "texto": "Trinta de trinta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "30 de 30.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 4,
+  "texto": "A seleção favorece o peso negativo. Pré-registrado, primário, fora da amostra.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A seleção favorece o peso negativo pré-registrado, primário, fora da amostra.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b8",
+  "frase": 5,
+  "texto": "E uma coisa falhou: o nulo do classificador antigo, que era trinta por cento, foi a cinquenta e três nas seeds novas.",
+  "ok": true,
+  "nota": 0.955,
+  "faltando": [],
+  "transcricao": "E uma coisa falhou. O nulo do classificador antigo, que era 30%, foi a 53 nas CDs novas.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 6,
+  "texto": "Isso também está publicado.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Isso também está publicado.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 1,
+  "texto": "A cultura deste projeto cabe em três frases.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A cultura deste projeto cabe em três frases.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 2,
+  "texto": "Pré-registre antes de rodar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "pré-registre antes de rodar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 3,
+  "texto": "Meça o nulo antes de comemorar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Meça o nulo antes de comemorar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 4,
+  "texto": "E não reescreva a nota antiga. Escreva uma errata.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e não reescreva a nota antiga. Escreva uma errata.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 5,
+  "texto": "As notas existem porque o conserto destrói a evidência.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "As notas existem porque o concerto destrói a evidência.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 6,
+  "texto": "No fim, a régua mais difícil de calibrar era a minha.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "No fim, a régua mais difícil de calibrar era a minha.",
+  "tentativa": 1
+ }
+]

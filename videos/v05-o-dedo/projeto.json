@@ -1,0 +1,16 @@
+{
+  "serie": "matrix",
+  "episodio": "Vídeo 5 — O dedo do espectador: confabulação e Bandersnatch",
+  "roteiro": "roteiro-base.md §3 (Vídeo 5); fontes: notas 06, 07, 08, 12 e FILOSOFIA_v3 §4–§5; versão final em roteiro.md",
+  "fase": "validacao",
+  "voz": "fish free · voz 'Morpheus' (95a171ec7eb84829a20f718475d6522a) · velocidade 1.0",
+  "musica": "original, scripts/gerar_trilha.py (96 bpm, semente 5), mixada a -24 dB",
+  "resolucao": "1920x1080@30",
+  "pendencias": [],
+  "historico": [
+    "2026-10-25 Roteiro a partir das notas 06 (intérprete leigo, eremita mudo), 07 (dedo, três arquiteturas, dedo sem rastro), 08 e 12 (sinal e mentira); as duas predições que falharam entram como erro antes do resultado",
+    "2026-10-25 Narrado (48/48 no Whisper); 'o que lê o plano' saía 'o que leu plano' e 'o que lê os dois' saía 'ele e os dois' → frases reescritas; grades 3×3 corrigidas (classe herdada com position absolute); quadros revisados no fim de cada frase",
+    "2026-10-25 Render 273,0 s (4 min 33 s), conferência OK: sincronia, 48 frames-chave, áudio −17,8 dB médio",
+    "2026-10-25 Aprovado pelo André ('ficaram ótimos'); publicação no YouTube iniciada por ele"
+  ]
+}

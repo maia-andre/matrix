@@ -1,0 +1,82 @@
+[
+ {
+  "bloco": "b1",
+  "frase": 1,
+  "texto": "Dois replays da simulação, sem narração.",
+  "ok": null,
+  "nota": null,
+  "faltando": [],
+  "transcricao": null,
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 1,
+  "texto": "Trinta mil passos de evolução, só o horizonte livre para mudar.",
+  "ok": null,
+  "nota": null,
+  "faltando": [],
+  "transcricao": null,
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 2,
+  "texto": "Com desconto alto, a população se divide em duas linhagens de horizonte.",
+  "ok": null,
+  "nota": null,
+  "faltando": [],
+  "transcricao": null,
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 3,
+  "texto": "Uma rasa, outra funda, com um vale entre elas.",
+  "ok": null,
+  "nota": null,
+  "faltando": [],
+  "transcricao": null,
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 1,
+  "texto": "Uma população estável, por oito mil passos.",
+  "ok": null,
+  "nota": null,
+  "faltando": [],
+  "transcricao": null,
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 2,
+  "texto": "O imposto liga e a população despenca.",
+  "ok": null,
+  "nota": null,
+  "faltando": [],
+  "transcricao": null,
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 3,
+  "texto": "O detector de colapso dispara, e desliga quando ela se recompõe.",
+  "ok": null,
+  "nota": null,
+  "faltando": [],
+  "transcricao": null,
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 1,
+  "texto": "Matrix, André Maia.",
+  "ok": null,
+  "nota": null,
+  "faltando": [],
+  "transcricao": null,
+  "tentativa": 1
+ }
+]

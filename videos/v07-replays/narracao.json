@@ -1,0 +1,60 @@
+{
+  "episodio": "Matrix · Vídeo 7 — Replays (peça visual, sem narração)",
+  "voz": {
+    "provedor": "silencio",
+    "velocidade": 1.0
+  },
+  "pausa_frase": 0.5,
+  "blocos": [
+    {
+      "id": "b1",
+      "cena": "Abertura",
+      "falas": [
+        {
+          "texto": "Dois replays da simulação, sem narração."
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "cena": "Bimodal",
+      "falas": [
+        {
+          "texto": "Trinta mil passos de evolução, só o horizonte livre para mudar.",
+          "pausa_depois": 4.0
+        },
+        {
+          "texto": "Com desconto alto, a população se divide em duas linhagens de horizonte."
+        },
+        {
+          "texto": "Uma rasa, outra funda, com um vale entre elas."
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "cena": "Colapso",
+      "falas": [
+        {
+          "texto": "Uma população estável, por oito mil passos.",
+          "pausa_depois": 1.5
+        },
+        {
+          "texto": "O imposto liga e a população despenca."
+        },
+        {
+          "texto": "O detector de colapso dispara, e desliga quando ela se recompõe."
+        }
+      ]
+    },
+    {
+      "id": "b4",
+      "cena": "Fim",
+      "falas": [
+        {
+          "texto": "Matrix, André Maia."
+        }
+      ]
+    }
+  ]
+}

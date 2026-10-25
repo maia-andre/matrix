@@ -1,0 +1,652 @@
+[
+ {
+  "bloco": "b1",
+  "frase": 1,
+  "texto": "Dei aos bloquinhos a capacidade de planejar alguns passos à frente.",
+  "ok": true,
+  "nota": 0.909,
+  "faltando": [],
+  "transcricao": "e aos bloquinhos a capacidade de planejar alguns passos à frente.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 2,
+  "texto": "E deixei a evolução escolher quantos.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e deixei a evolução escolher quantos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 3,
+  "texto": "Eles escolheram pensar o máximo que podiam.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "eles escolheram pensar o máximo que podiam.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 4,
+  "texto": "E isso deixou todo mundo mais pobre.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E isso deixou todo mundo mais pobre.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 1,
+  "texto": "Cada bloco herda dos pais dois traços, com mutação.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "Cada bloco erda dos pais dois traços, com mutação.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 2,
+  "texto": "O horizonte: quantos passos à frente ele planeja. De um a doze.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O horizonte, quantos passos a frente ele planeja, de 1 a 12.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 3,
+  "texto": "E o desconto: quanto vale, para ele, uma comida que só vem daqui a alguns passos.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "e o desconto. Quanto vale para ele uma comida que só vende aqui a alguns passos?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 4,
+  "texto": "Desconto alto é paciência. Desconto baixo quer tudo agora.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "Desconto auto e paciência. Desconto baixo quer tudo agora.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 5,
+  "texto": "E os dois se compensam. Um bloco pode declarar um plano longo e, com desconto baixo, pensar raso.",
+  "ok": true,
+  "nota": 0.944,
+  "faltando": [],
+  "transcricao": "E os dois se compensam. Um bloco pode declarar um plano longo e, com desconto baixo, pensa raso.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 6,
+  "texto": "Então qualquer frase sobre pensar fundo precisa do par: horizonte e desconto.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então, qualquer frase sobre pensar fundo precisa do par, horizonte e desconto.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 1,
+  "texto": "Primeira medida: pregar o horizonte na população inteira, e ver quantos blocos o mundo sustenta.",
+  "ok": true,
+  "nota": 0.867,
+  "faltando": [],
+  "transcricao": "Primeira medida, pregá-lo horizonte na população inteira e ver quantos blocos o mundo sustenta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 2,
+  "texto": "A cada passo a mais de plano, a população encolhe. Pouco, mas sempre.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A cada passo a mais de plano, a população encolhe. Pouco, mas sempre.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 3,
+  "texto": "O ótimo do grupo é pensar o mínimo: um passo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O ótimo do grupo é pensar o mínimo um passo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 4,
+  "texto": "Segunda medida: um duelo. Metade da população planeja três passos. A outra metade, nove.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Segunda medida. Um duelo. Metade da população planeja três passos. A outra metade, nove.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 5,
+  "texto": "O planejador fundo vence. Nas três seeds, em quatro mil passos, ele chega a oitenta e cinco por cento da população ou mais.",
+  "ok": true,
+  "nota": 0.955,
+  "faltando": [],
+  "transcricao": "o planejador fundo vence. Nas três CDs, em 4 mil passos, ele chega a 85% da população ou mais.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 6,
+  "texto": "Bom para o indivíduo, ruim para o grupo. Isso tem nome: bem posicional.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Bom para o indivíduo, ruim para o grupo. Isso tem nome bem posicional.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 7,
+  "texto": "É a Rainha Vermelha. Correr cada vez mais, só para ficar no mesmo lugar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "É a Rainha Vermelha. Correr cada vez mais, só para ficar no mesmo lugar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 8,
+  "texto": "E desligar a competição deixa os horizontes mais rasos. A competição não freia o pensamento. Ela alimenta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e desligar a competição deixa os horizontes mais rasos. A competição não freia o pensamento. Ela alimenta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 9,
+  "texto": "Depois, o torneio inteiro: todos os horizontes contra todos. Sessenta e seis duelos, oito seeds cada.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Depois, o torneio inteiro. Todos os horizontes contra todos. 66 duelos, 8 se descada.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 10,
+  "texto": "Cada horizonte maior vence todos os menores. O doze vence os onze.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Cada horizonte maior vence todos os menores. O 12 vence os 11.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 11,
+  "texto": "Uma corrida sem freio.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "uma corrida sem freio.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 1,
+  "texto": "Mas quanto desse pensamento é produção, e quanto é só tomar do vizinho?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Mas quanto desse pensamento é produção, e quanto é só tomar do vizinho?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 2,
+  "texto": "Para separar, eu rodei mundos de um tipo só. Todo mundo com o mesmo horizonte. Ninguém de outro tipo para disputar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Para separar eu rodei mundos de um tipo só. Todo mundo com o mesmo horizonte. Ninguém de outro tipo para disputar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 3,
+  "texto": "Se pensar fundo produz comida, esses mundos deviam colher mais.",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "Se pensar fundo produz comida, esses mundos deviam cullir mais.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b4",
+  "frase": 4,
+  "texto": "Colhem menos. Com doze passos de plano, sobram vinte unidades a mais de comida em pé do que com um passo só. Comida que ninguém colheu.",
+  "ok": true,
+  "nota": 0.898,
+  "faltando": [],
+  "transcricao": "Com 12 passos de plano, sobram 20 unidades a margem comida em pé do que com um passo só. Comida que ninguém colheu.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 5,
+  "texto": "Só um passo de plano paga: o segundo. Do terceiro em diante, cada passo a mais piora a colheita.",
+  "ok": true,
+  "nota": 0.895,
+  "faltando": [],
+  "transcricao": "Só um passo de plano paga, o segundo, do terceiro em diante, cada passo a mais pior a acolheita.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 6,
+  "texto": "O horizonte não produz nada. Tudo o que ele compra é tomado de um vizinho.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O horizonte não produz nada. Tudo o que ele compra é tomado de um vizinho.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 1,
+  "texto": "E aqui eu errei. O erro precisa aparecer.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E aqui eu errei. O erro precisa aparecer.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 2,
+  "texto": "Eu tinha escrito que o doze era o fim da corrida: o equilíbrio era pensar o máximo possível.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Eu tinha escrito que o 12 era o fim da corrida. O equilíbrio era pensar o máximo possível.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 3,
+  "texto": "Só que eu tinha medido isso num único desconto: zero vírgula oitenta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Só que eu tinha medido isso num único desconto, 0,80.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 4,
+  "texto": "Varri outros descontos. Em zero vírgula noventa e cinco, a escada inverte.",
+  "ok": true,
+  "nota": 0.917,
+  "faltando": [],
+  "transcricao": "Vari outros descontos. Em 0,95 a escada inverte.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 5,
+  "texto": "O nove vence o doze. O seis vence o doze. O raso vence.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O 9 vence o 12, O 6 vence o 12, O raso vence.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 6,
+  "texto": "A pergunta passou a ser: o fundo perde porque prevê pior, ou só porque alguém chega antes na comida dele?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A pergunta passou a ser, o fundo perde porque prevê pior? Ou só porque alguém chega antes na comida dele?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 7,
+  "texto": "O mundo de um tipo só decide.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O mundo de um tipo só decide.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 8,
+  "texto": "Com desconto alto, um mundo inteiro de blocos com doze passos sustenta cinco blocos e meio a menos que um mundo com oito.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Com desconto alto, um mundo inteiro de blocos com 12 passos sustenta 5 blocos e meio, a menos que um mundo com 8.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 9,
+  "texto": "E ali não tem ninguém de fora para tomar a comida. O déficit é contra o mundo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E ali não tem ninguém de fora para tomar a comida. O déficit é contra o mundo.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b5",
+  "frase": 10,
+  "texto": "A ponta do plano é uma alucinação. E o desconto decide quanto peso ela recebe.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A ponta do plano é uma alucinação e o desconto decide quanto peso ela recebe.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 11,
+  "texto": "Com desconto zero vírgula oitenta, o último passo entra com nove por cento do peso. Com zero vírgula noventa e cinco, com mais da metade.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Com desconto 0,80, o último passo entra com 9% do peso, com 0,95, com mais da metade.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 12,
+  "texto": "O desconto não é impaciência. É o bloco se recusando a confiar numa previsão que ele não consegue fazer.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "O desconto não é em paciência. É o bloco se recusando a confiar numa previsão que ele não consegue fazer.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 1,
+  "texto": "Daí sai o resultado mais estranho do trabalho.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Aí sai o resultado mais estranho do trabalho.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 2,
+  "texto": "Mais paciência, horizonte ótimo mais raso.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "mais paciência, horizonte ótimo, mais raso.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 3,
+  "texto": "Com desconto zero vírgula noventa, o melhor é planejar uns dez passos. Com zero vírgula noventa e cinco, uns sete ou oito.",
+  "ok": true,
+  "nota": 0.955,
+  "faltando": [],
+  "transcricao": "Com desconto 0,90, o melhor é planejar uns 10 passos. Com 0,95, um 7 ou 8.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 4,
+  "texto": "Quanto mais peso você dá ao futuro distante, menos longe pode olhar sem ser envenenado pela própria previsão.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Quanto mais peso você dá ao futuro distante, menos longe pode olhar sem ser envenenado pela própria previsão.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 1,
+  "texto": "Depois eu medi a previsão passo a passo, contra o que de fato aconteceu.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Depois eu medi a previsão, passo a passo, contra o que de fato aconteceu.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 2,
+  "texto": "Só o primeiro passo do plano carrega informação. Do segundo em diante, a previsão já não acerta. Em oito de oito seeds.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Só o primeiro passo do plano carrega informação. Do segundo em diante, a previsão já não acerta. Em 8 de 8 seeds.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 3,
+  "texto": "O plano é um passo, com uma cauda que nunca é vivida.",
+  "ok": true,
+  "nota": 0.917,
+  "faltando": [],
+  "transcricao": "O plano é um passo com uma calda que nunca é vivida.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 4,
+  "texto": "Mas tem uma virada. Como previsão, o plano falha. Como ordem, ele funciona.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Mas tem uma virada. Como previsão, o plano falha. Como ordem, ele funciona.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 5,
+  "texto": "Ele ainda põe as opções na ordem certa, e acerta a melhor cerca de quatro vezes mais que o acaso.",
+  "ok": true,
+  "nota": 0.974,
+  "faltando": [],
+  "transcricao": "ele ainda põe as opções na ordem certa e acerta melhor cerca de quatro vezes mais que o acaso.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 1,
+  "texto": "Se pensar fundo impõe um custo ao grupo, a receita clássica é cobrar por ele. Um imposto sobre pensar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Se pensar fundo impõe um custo ao grupo, a receita clássica é cobrar por ele um imposto sobre pensar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 2,
+  "texto": "Cobrei pela profundidade efetiva, e não pelo horizonte declarado. Senão o bloco escapava baixando o desconto.",
+  "ok": true,
+  "nota": 0.97,
+  "faltando": [],
+  "transcricao": "e cobrei pela profundidade efetiva e não pelo horizonte declarado, senão o bloco escapava baixando o desconto.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 3,
+  "texto": "Funciona. Com o imposto certo, a profundidade evoluída cai de três vírgula três para um. Encosta no ótimo do grupo.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Funciona. Com imposto certo, a profundidade evoluída cai de 3,3 para 1. Encoça no ótimo do grupo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 4,
+  "texto": "Mas, queimando a arrecadação, o imposto custou um terço da população.",
+  "ok": true,
+  "nota": 0.909,
+  "faltando": [],
+  "transcricao": "Mas, queimando a recadação, o imposto custou um terço da população.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 5,
+  "texto": "Eu escrevi que alinhar a escolha não é restaurar o bem-estar. E isso também estava errado.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Eu escrevi que alinhar a escolha não é restaurar o bem-estar. E isso também estava errado.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 6,
+  "texto": "Devolvendo a arrecadação como dividendo, igual para todos, o alinhamento continua. E a população vai a cento e dois por cento do original.",
+  "ok": true,
+  "nota": 0.957,
+  "faltando": [],
+  "transcricao": "Devolvendo a recadação como dividendo, igual para todos, o alinhamento continua e a população vai a 102% do original.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 7,
+  "texto": "O problema não era o imposto. Era queimar o dinheiro.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O problema não era o imposto, era queimar o dinheiro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 1,
+  "texto": "Agora, o último andar.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "Agora, último andar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 2,
+  "texto": "O horizonte ótimo não é um equilíbrio estável. É um ponto de ramificação: a população pode se dividir ali.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O horizonte ótimo não é um equilíbrio estável. É um ponto de ramificação. A população pode se dividir ali.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 3,
+  "texto": "Com desconto alto e os outros traços pregados, ela se divide de fato, em duas linhagens: uma rasa, outra funda.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "com desconto alto e os outros traços pregados, ela se divide de fato em duas linhagens. Uma rasa, outra funda.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 4,
+  "texto": "Na evolução livre, cada mundo escolhe um pico só. E cada mundo escolhe um diferente.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Na evolução livre, cada mundo escolhe um pico só. E cada mundo escolhe um diferente.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 5,
+  "texto": "E onde o desconto é zero vírgula oitenta, a resposta é mista. Em seis de oito seeds era ruído de mutação. Em duas, eram duas linhagens de verdade.",
+  "ok": true,
+  "nota": 0.964,
+  "faltando": [],
+  "transcricao": "E onde o desconto é 0,80, a resposta é mista. Em 6 de 8 CDs era ruído de mutação. Em 2, eram duas linhagens de verdade.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 1,
+  "texto": "Então, pensar demais é um bem posicional.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então, pensar demais é um bem posicional.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 2,
+  "texto": "Onde o desconto protege, é um bem que não produz nada. E mesmo assim você precisa dele, para não ser deslocado.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Onde o desconto protege, é um bem que não produz nada. E mesmo assim você precisa dele para não ser deslocado.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 3,
+  "texto": "Acima disso, não é um bem caro. É um erro. E a seleção corrige.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Acima disso, não é um bem-caro, é um erro e a seleção corrige.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 4,
+  "texto": "Dá vontade de comparar com a corrida por modelos cada vez maiores. Eu deixo isso como pergunta, não como conclusão.",
+  "ok": true,
+  "nota": 0.95,
+  "faltando": [],
+  "transcricao": "na vontade de comparar com a corrida por modelos cada vez maiores. Eu deixo isso como pergunta, não como conclusão.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 5,
+  "texto": "Na próxima: o self que já estava no código.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "Na próxima, o Selfie que já estava no código.",
+  "tentativa": 1
+ }
+]

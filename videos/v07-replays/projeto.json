@@ -1,0 +1,15 @@
+{
+  "serie": "matrix",
+  "episodio": "Vídeo 7 — Replays (peça visual, sem narração)",
+  "roteiro": "roteiro-base.md §3 (Vídeo 7); versão final em roteiro.md",
+  "fase": "validacao",
+  "voz": "nenhuma · provedor 'silencio' só para cronometrar as legendas",
+  "musica": "original, scripts/gerar_trilha.py (96 bpm, semente 7), +10 dB com limitador antes da mixagem (peça sem voz); MP4 a −13 dB médio",
+  "replays": "viz/replays/*.gif → quadros/ (ffmpeg -i <gif> -vsync 0 quadros/<nome>/%03d.png; fora do git), desenhados por floor((t − início)/duração do quadro): 0,11 s no bimodal, 0,06 s no colapso",
+  "resolucao": "1920x1080@30",
+  "pendencias": [],
+  "historico": [
+    "2026-10-25 Legendas mínimas (frase de contexto com pausa para a legenda principal cair quando o fenômeno aparece: vale do bimodal ~tick 14 800, imposto no tick 2 000); render 59 s, conferência OK",
+    "2026-10-25 Aprovado pelo André ('ficaram ótimos'); publicação no YouTube iniciada por ele"
+  ]
+}

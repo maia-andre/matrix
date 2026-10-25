@@ -1,0 +1,16 @@
+{
+  "serie": "matrix",
+  "episodio": "Vídeo 6 — Como eu quase me enganei",
+  "roteiro": "roteiro-base.md §3 (Vídeo 6); fontes: notas 30, 32–38 e ROADMAP §4.3–§4.11; versão final em roteiro.md",
+  "fase": "validacao",
+  "voz": "fish free · voz 'Morpheus' (95a171ec7eb84829a20f718475d6522a) · velocidade 1.0",
+  "musica": "original, scripts/gerar_trilha.py (96 bpm, semente 6), mixada a -24 dB",
+  "resolucao": "1920x1080@30",
+  "pendencias": [],
+  "historico": [
+    "2026-10-25 Roteiro a partir das notas 30 e 32–38; o terminal do gancho e o trecho do classificador (wA/wB) transcritos da nota 33; fecha a série (cartão 'fim da série')",
+    "2026-10-25 Narrado (49/49 no Whisper); 'Refiz só a conta' saía 'Refi sua conta' e 'Pelo critério' perdia o começo → frases reescritas; quadros revisados no fim de cada frase",
+    "2026-10-25 Render 272,9 s (4 min 33 s), conferência OK: sincronia, 48 frames-chave, áudio −17,8 dB médio",
+    "2026-10-25 Aprovado pelo André ('ficaram ótimos'); publicação no YouTube iniciada por ele"
+  ]
+}

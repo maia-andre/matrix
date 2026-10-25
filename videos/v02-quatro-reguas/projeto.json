@@ -1,0 +1,16 @@
+{
+  "serie": "matrix",
+  "episodio": "Vídeo 2 — Quatro modos de uma régua mentir",
+  "roteiro": "roteiro-base.md §3 (Vídeo 2); fontes: Paper 1 e notas 01, 03, 04, 05, 10, 11; versão final em roteiro.md",
+  "fase": "validacao",
+  "voz": "fish free · voz 'Morpheus' (95a171ec7eb84829a20f718475d6522a) · velocidade 1.0",
+  "musica": "original, scripts/gerar_trilha.py (96 bpm, semente 2), mixada a -24 dB",
+  "resolucao": "1920x1080@30",
+  "pendencias": [],
+  "historico": [
+    "2026-10-25 Roteiro final a partir do Paper 1 (números do §4–§7 marcados como '3 seeds, main.c da época'; número robusto = nota 11); gráficos desenhados a partir das tabelas do paper, sem as PNGs",
+    "2026-10-25 Narrado (81/81 no Whisper; 'zerou o fi' emendava em 'Zerof' e 'três seeds' saía 'CDs' → frases reescritas); quadros revisados no fim de cada frase",
+    "2026-10-25 Render 413,4 s (6 min 53 s), conferência OK: sincronia, 80 frames-chave, áudio −18 dB médio (v04: −17,6)",
+    "2026-10-25 Aprovado pelo André ('ficaram ótimos'); publicação no YouTube iniciada por ele"
+  ]
+}

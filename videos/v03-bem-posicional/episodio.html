@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Matrix · Pensar demais é um bem posicional</title>
+<style>
+/* Identidade Matrix (videos/marca/): preto, verde fósforo, JetBrains Mono embutida.
+   Motor e GSAP vêm do repositório Treinamentos (../../../Treinamentos/lib), timeline PAUSADA:
+   o Motor chama tl.seek(t) quadro a quadro e as telas de canvas são desenhadas como função de t. */
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Regular.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Bold.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-ExtraBold.woff2") format("woff2");font-weight:800}
+:root{--bg:#000;--g:#00FF41;--g2:#00B82E;--g3:#0B5A1F;--g4:#062A10;--ink:#D8FFE0;--mute:#5FAF74;--red:#FF3B3B;--amb:#E8FF8A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow:hidden;background:#000;font-family:"JBM",monospace;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1300px 900px at 50% 45%,#031207 0%,#000 70%)}
+canvas{position:absolute;left:0;top:0}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.g{color:var(--g)} .red{color:var(--red)} .mute{color:var(--mute)} .ink{color:var(--ink)} .amb{color:var(--amb)}
+.glow{text-shadow:0 0 18px rgba(0,255,65,.55),0 0 2px rgba(0,255,65,.9)}
+.h1{font-weight:800;font-size:96px;line-height:1.05;letter-spacing:-.02em}
+.h2{font-weight:800;font-size:68px;line-height:1.12;letter-spacing:-.01em}
+.h3{font-weight:700;font-size:46px;line-height:1.2}
+.p{font-weight:500;font-size:32px;line-height:1.35;color:var(--mute)}
+.term{position:absolute;border:2px solid var(--g3);border-radius:14px;background:rgba(0,10,3,.88);box-shadow:0 0 60px rgba(0,255,65,.08)}
+.term .bar{height:38px;border-bottom:2px solid var(--g3);display:flex;align-items:center;gap:10px;padding:0 16px;font-size:18px;color:var(--mute)}
+.term .bar i{width:12px;height:12px;border-radius:50%;background:var(--g3)}
+.code{padding:28px 34px;font-size:40px;line-height:1.55;white-space:pre}
+.code .ln{opacity:0}
+.code .c{color:var(--mute)}
+.hl{background:rgba(0,255,65,.16);outline:2px solid var(--g);border-radius:6px}
+.fonte{position:absolute;right:60px;bottom:40px;font-size:20px;color:var(--mute);opacity:0;letter-spacing:.06em}
+.chip{display:inline-block;padding:10px 22px;border:2px solid var(--g3);border-radius:999px;font-size:28px;font-weight:700;color:var(--g)}
+.lbl{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.cursor{display:inline-block;width:.6em;height:1.1em;vertical-align:-.15em;background:var(--g);margin-left:4px}
+/* barras */
+.barra{position:absolute;height:64px;border-radius:8px;transform-origin:left center;transform:scaleX(0)}
+.barra.f{background:var(--g)} .barra.d{background:var(--g3)} .barra.s{background:repeating-linear-gradient(135deg,var(--g2) 0 10px,var(--g3) 10px 20px)}
+.vb{position:absolute;font-size:38px;font-weight:800;opacity:0}
+/* slider sigma */
+.trilho{position:absolute;left:460px;top:520px;width:1000px;height:8px;border-radius:4px;background:var(--g3)}
+.knob{position:absolute;left:460px;top:524px;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--g);box-shadow:0 0 24px rgba(0,255,65,.7)}
+.tk{position:absolute;top:560px;font-size:30px;font-weight:700;color:var(--mute);transform:translateX(-50%)}
+/* passos (b7) */
+.passo{position:absolute;top:420px;width:200px;height:120px;border:2px solid var(--g3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;opacity:0}
+.strike{position:absolute;left:-10px;top:50%;height:8px;width:0;background:var(--red);border-radius:4px}
+.autor{width:300px;height:300px;border-radius:24px;overflow:hidden;border:3px solid var(--g3);box-shadow:0 0 50px rgba(0,255,65,.18)}
+.autor img{width:100%;height:100%;object-fit:cover;display:block}
+/* ---- classes do vídeo 2, reaproveitadas ---- */
+.mod{position:absolute;width:440px;height:190px;border:2px solid var(--g3);border-radius:16px;background:rgba(0,10,3,.85);padding:26px 30px;opacity:0}
+.mod .n{font-size:40px;font-weight:800;color:var(--g)}
+.mod .d{font-size:22px;color:var(--mute);margin-top:10px;line-height:1.3}
+.mod .x{position:absolute;right:22px;top:20px;font-size:26px;font-weight:800;color:var(--red);opacity:0;letter-spacing:.08em}
+.cab{position:absolute;left:160px;top:110px;opacity:0}
+.cab .lbl{color:var(--g2)}
+.cab .h2{margin-top:6px}
+.lin{position:absolute;left:160px;width:1600px;height:64px;display:flex;align-items:center;opacity:0}
+.lin .k{width:440px;font-size:28px;font-weight:700}
+.lin .trk{position:relative;width:760px;height:44px}
+.lin .bar{position:absolute;left:0;top:0;height:44px;border-radius:6px;background:var(--g);transform-origin:left center;transform:scaleX(0)}
+.lin .v{width:150px;padding-left:24px;font-size:30px;font-weight:800}
+.lin .pop{width:250px;text-align:right;font-size:28px;font-weight:700;color:var(--mute)}
+.card2{position:absolute;top:330px;width:700px;padding:36px 40px;border:2px solid var(--g3);border-radius:18px;background:rgba(0,10,3,.88);opacity:0}
+.card2 .h3{margin-top:12px}
+.seta2{position:absolute;top:720px;font-size:90px;font-weight:800;color:var(--g);opacity:0}
+.eixo{position:absolute;left:360px;top:520px;width:1200px;height:6px;border-radius:3px;background:var(--g3)}
+.pt{position:absolute;top:523px;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--g);box-shadow:0 0 22px rgba(0,255,65,.7);opacity:0}
+.amostra{position:absolute;top:500px;width:4px;height:46px;background:var(--g2);opacity:0}
+.duelo{position:absolute;left:360px;width:1200px;height:70px;border-radius:10px;overflow:hidden;display:flex;opacity:0}
+.duelo div{height:100%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#000}
+.tagq{position:absolute;left:160px;font-size:30px;font-weight:700;opacity:0}
+.tagq b{color:var(--g)}
+.eu{position:absolute;font-size:64px;font-weight:800;color:var(--ink)}
+.vis{font-size:30px;font-weight:800}
+.quadro{position:absolute;left:160px;top:330px;width:1600px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.quadro>div{border:2px solid var(--g3);border-radius:14px;padding:22px 26px;font-size:28px;font-weight:700;opacity:0}
+.moral{position:absolute;left:200px;width:1520px;display:flex;gap:30px;align-items:baseline;opacity:0}
+.moral i{font-style:normal;font-size:56px;font-weight:800;color:var(--g);width:60px;flex:none}
+.moral span{font-size:40px;font-weight:700;line-height:1.25}
+/* ---- só do vídeo 3 ---- */
+.caixa{position:absolute;width:104px;height:84px;border:2px solid var(--g3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:var(--mute);opacity:0}
+.tr2{position:absolute;width:760px;padding:30px 36px;border:2px solid var(--g3);border-radius:18px;background:rgba(0,10,3,.88);opacity:0}
+.tr2 .h3{margin-top:10px}
+.vtab{position:absolute;left:160px;font-size:32px;font-weight:700}
+.vtab .r{display:grid;grid-template-columns:200px 420px 420px;padding:12px 0;border-bottom:1px solid var(--g4);opacity:0}
+.vtab .r.h{font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.hip{position:absolute;top:300px;width:760px;padding:30px 36px;border:2px solid var(--g3);border-radius:18px;opacity:0}
+</style>
+</head>
+<body>
+<div id="palco"><div id="stage">
+<canvas id="chuva" width="1920" height="1080"></canvas>
+
+<!-- ===== b1 · GANCHO ===== -->
+<div class="scene" id="s-b1">
+  <div id="b1-plano" data-frase="b1.1" style="position:absolute;left:0;right:0;top:300px;height:100px"></div>
+  <div class="h3" id="b1-evo" data-frase="b1.2" style="position:absolute;left:0;right:0;top:470px;text-align:center;opacity:0">e deixei a <span class="g">evolução</span> escolher quantos</div>
+  <div class="h2 g glow" id="b1-max" data-frase="b1.3" style="position:absolute;left:0;right:0;top:580px;text-align:center;opacity:0">o máximo que podiam</div>
+  <div class="h2" id="b1-pob" data-frase="b1.4" style="position:absolute;left:0;right:0;top:720px;text-align:center;opacity:0">e todo mundo ficou <span class="red">mais pobre</span></div>
+</div>
+<div class="scene" id="s-tit">
+  <div class="center" style="flex-direction:row;gap:70px">
+    <div class="autor" id="tit-foto"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="lbl">matrix · vídeo 3</div>
+      <div class="h1 g glow" id="tit-t" style="margin-top:16px;font-size:84px">Pensar demais é<br>um bem posicional</div>
+      <div class="p" id="tit-a" style="margin-top:22px;color:var(--ink)">André Maia</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== b2 · OS DOIS TRAÇOS ===== -->
+<div class="scene" id="s-b2">
+  <div class="h3" id="b2-her" data-frase="b2.1" style="position:absolute;left:160px;top:130px;opacity:0">dois traços herdados, com mutação</div>
+  <div class="tr2" id="b2-h" data-frase="b2.2" style="left:160px;top:230px"><div class="lbl">horizonte · h</div><div class="h3">quantos passos à frente: <span class="g">1 a 12</span></div></div>
+  <div class="tr2" id="b2-d" data-frase="b2.3" style="left:1000px;top:230px"><div class="lbl">desconto · δ</div><div class="h3">quanto vale a comida de daqui a k passos: <span class="g">δᵏ</span></div></div>
+  <div id="b2-pac" data-frase="b2.4" style="position:absolute;left:1000px;top:440px;display:flex;gap:20px;opacity:0"><span class="chip">δ alto · paciente</span><span class="chip" style="color:var(--amb);border-color:#4d5a1a">δ baixo · quer tudo agora</span></div>
+  <div class="h3" id="b2-comp" data-frase="b2.5" style="position:absolute;left:160px;top:580px;opacity:0">h = 11 e δ = 0,66 · o 3º passo pesa <span class="g">0,29</span> · o 11º pesa <span class="red">0,01</span></div>
+  <div class="p" id="b2-dec" style="position:absolute;left:160px;top:660px;opacity:0;color:var(--ink)">declara um plano fundo · <span class="amb">pensa raso</span> · correlação entre os dois até −0,93</div>
+  <div class="h2 g glow" id="b2-par" data-frase="b2.6" style="position:absolute;left:0;right:0;top:800px;text-align:center;opacity:0">sempre o par: (h, δ)</div>
+  <div class="fonte" id="f-b2">fonte: Paper 2 §1–§2</div>
+</div>
+
+<!-- ===== b3 · A CORRIDA ===== -->
+<div class="scene" id="s-b3a">
+  <div class="cab" id="b3-cab" data-frase="b3.1"><div class="lbl">primeira camada</div><div class="h2">horizonte pregado · <span class="g">quantos cabem?</span></div></div>
+  <svg id="b3-pop" width="1100" height="520" viewBox="0 0 1100 520" style="position:absolute;left:160px;top:280px;overflow:visible">
+    <line x1="0" y1="420" x2="1060" y2="420" stroke="#0B5A1F" stroke-width="3"/>
+    <text x="0" y="470" fill="#5FAF74" font-size="20" font-family="JBM">h →</text>
+    <text x="1060" y="470" fill="#5FAF74" font-size="20" font-family="JBM" text-anchor="end">eixo a partir de 285 blocos</text>
+  </svg>
+  <div class="chip" id="b3-ot" data-frase="b3.3" style="position:absolute;left:160px;top:232px;opacity:0">ótimo do grupo: <b>h = 1</b></div>
+  <div id="b3-duel" data-frase="b3.4" style="position:absolute;left:1300px;top:300px;width:460px;opacity:0">
+    <div class="lbl">duelo 50/50 · sem mutação</div>
+    <div class="duelo" style="position:relative;left:0;width:460px;margin-top:16px;opacity:1"><div id="b3-d9" style="width:50%;background:var(--g)">h 9</div><div id="b3-d3" style="width:50%;background:var(--g3);color:var(--ink)">h 3</div></div>
+    <div class="h3" id="b3-v" data-frase="b3.5" style="margin-top:20px;font-size:34px;opacity:0"><span class="g glow">0,91 · 0,87 · 0,85</span></div>
+    <div class="p" id="b3-vl" style="opacity:0">frequência do h = 9 em 4 000 ticks · 3 seeds</div>
+  </div>
+  <div class="fonte" id="f-b3a">fonte: Paper 2 §3 · 3 seeds</div>
+</div>
+<div class="scene" id="s-b3b">
+  <div class="h2" id="b3-bp" data-frase="b3.6" style="position:absolute;left:0;right:0;top:200px;text-align:center;opacity:0"><span class="g">bom para o indivíduo</span> · <span class="red">ruim para o grupo</span></div>
+  <div class="h1 g glow" id="b3-bpn" style="position:absolute;left:0;right:0;top:330px;text-align:center;opacity:0">bem posicional</div>
+  <div class="h3" id="b3-rv" data-frase="b3.7" style="position:absolute;left:0;right:0;top:500px;text-align:center;opacity:0">Rainha Vermelha: <span class="mute">correr cada vez mais para ficar no mesmo lugar</span></div>
+  <div class="chip" id="b3-comp" data-frase="b3.8" style="position:absolute;left:50%;top:640px;transform:translateX(-50%);white-space:nowrap;opacity:0">competição = 0 ⇒ horizontes mais rasos · a competição <b>alimenta</b> o pensamento</div>
+  <div class="fonte" id="f-b3b">fonte: Paper 2 §3</div>
+</div>
+<div class="scene" id="s-b3c">
+  <div class="h3" id="b3-tor" data-frase="b3.9" style="position:absolute;left:160px;top:140px;opacity:0">o torneio: <span class="g">66 pares × 8 seeds × 6 000 ticks</span> <span class="mute" style="font-size:28px">· δ pregado em 0,80</span></div>
+  <canvas id="torneio" width="520" height="520" style="left:160px;top:240px"></canvas>
+  <div class="p" id="b3-leg" style="position:absolute;left:720px;top:260px;opacity:0;color:var(--ink)">linha vence coluna?<br><span class="g">■ sim</span> &nbsp; <span style="color:#3a1010">■</span> não</div>
+  <div class="h3" id="b3-tran" data-frase="b3.10" style="position:absolute;left:760px;top:440px;opacity:0">dominância <span class="g">transitiva e perfeita</span><br><span class="mute" style="font-size:32px">o 12 vence os 11 · o 1 perde os 11</span></div>
+  <div class="h2 red" id="b3-sf" data-frase="b3.11" style="position:absolute;left:760px;top:660px;opacity:0">uma corrida sem freio</div>
+  <div class="fonte" id="f-b3c">fonte: Paper 2 §4 · nota 14</div>
+</div>
+
+<!-- ===== b4 · O HORIZONTE NÃO PRODUZ NADA ===== -->
+<div class="scene" id="s-b4">
+  <div class="cab" id="b4-cab" data-frase="b4.1"><div class="lbl">segunda camada</div><div class="h2"><span class="g">produção</span> ou <span class="red">tomar do vizinho</span>?</div></div>
+  <div class="h3" id="b4-tu" data-frase="b4.2" style="position:absolute;left:160px;top:280px;font-size:36px;opacity:0">mundos de <span class="g">tipo único</span>: todos com o mesmo h · nenhum rival de outro tipo</div>
+  <div class="p" id="b4-se" data-frase="b4.3" style="position:absolute;left:160px;top:360px;opacity:0">se pensar fundo produz, esses mundos colhem mais</div>
+  <div class="lbl" id="b4-lbl" data-frase="b4.4" style="position:absolute;left:160px;top:450px;opacity:0">comida que sobra em pé, contra h = 1 · δ = 0,80</div>
+  <div style="position:absolute;left:899px;top:490px;width:3px;height:330px;background:var(--g3)"></div>
+  <div class="lin" id="c2" style="top:510px"><div class="k">h = 2</div><div style="position:relative;width:760px;height:44px"><div class="bar" style="left:248px;width:52px;background:var(--g);transform-origin:right center"></div></div><div class="v g">−2,3</div></div>
+  <div class="lin" id="c6" style="top:620px"><div class="k">h = 6</div><div style="position:relative;width:760px;height:44px"><div class="bar" style="left:300px;width:248px;background:var(--red)"></div></div><div class="v red">+11,0</div></div>
+  <div class="lin" id="c12" style="top:730px"><div class="k">h = 12</div><div style="position:relative;width:760px;height:44px"><div class="bar" style="left:300px;width:458px;background:var(--red)"></div></div><div class="v red">+20,3</div></div>
+  <div class="p" id="b4-pico" data-frase="b4.5" style="position:absolute;left:160px;top:840px;opacity:0;color:var(--ink)"><span class="g">h = 2 é o pico de colheita</span> · do h = 3 em diante, cada passo a mais piora</div>
+  <div class="h2 g glow" id="b4-nada" data-frase="b4.6" style="position:absolute;left:0;right:0;top:920px;text-align:center;font-size:52px;opacity:0;text-shadow:0 0 30px #000,0 0 14px rgba(0,255,65,.55)">não produz nada · tudo o que compra é tomado de um vizinho</div>
+  <div class="fonte" id="f-b4">fonte: Paper 2 §5 · nota 17 · 8 seeds</div>
+</div>
+
+<!-- ===== b5 · O ERRO, E O FREIO ===== -->
+<div class="scene" id="s-b5a">
+  <div class="cab" id="b5-cab" data-frase="b5.1"><div class="lbl">terceira camada</div><div class="h2">aqui eu <span class="red">errei</span></div></div>
+  <div class="h3" id="b5-ess" data-frase="b5.2" style="position:absolute;left:160px;top:280px;opacity:0"><span style="position:relative">"o equilíbrio é o teto: h = 12"<span class="strike" id="b5-st"></span></span></div>
+  <div class="chip" id="b5-um" data-frase="b5.3" style="position:absolute;left:160px;top:370px;opacity:0;color:var(--amb);border-color:#4d5a1a">medido num único desconto: δ = 0,80</div>
+  <div class="lbl" id="b5-esc" data-frase="b5.4" style="position:absolute;left:160px;top:470px;opacity:0">δ = 0,95 · frequência de h vencer h − 1</div>
+  <svg id="b5-inv" width="760" height="360" viewBox="0 0 760 360" style="position:absolute;left:160px;top:510px;opacity:0;overflow:visible">
+    <line x1="0" y1="300" x2="740" y2="300" stroke="#0B5A1F" stroke-width="3"/>
+    <line x1="0" y1="100" x2="740" y2="100" stroke="#E8FF8A" stroke-width="3" stroke-dasharray="10 8"/>
+    <text x="740" y="90" fill="#E8FF8A" font-size="22" font-family="JBM" text-anchor="end">0,5 · empate</text>
+    <rect class="ib" x="60" y="162" width="140" height="138" fill="#FF3B3B"/><text x="130" y="150" fill="#D8FFE0" font-size="28" font-family="JBM" font-weight="700" text-anchor="middle">0,344</text><text x="130" y="340" fill="#5FAF74" font-size="22" font-family="JBM" text-anchor="middle">10 × 9</text>
+    <rect class="ib" x="300" y="204" width="140" height="96" fill="#FF3B3B"/><text x="370" y="192" fill="#D8FFE0" font-size="28" font-family="JBM" font-weight="700" text-anchor="middle">0,240</text><text x="370" y="340" fill="#5FAF74" font-size="22" font-family="JBM" text-anchor="middle">11 × 10</text>
+    <rect class="ib" x="540" y="219" width="140" height="81" fill="#FF3B3B"/><text x="610" y="207" fill="#D8FFE0" font-size="28" font-family="JBM" font-weight="700" text-anchor="middle">0,202</text><text x="610" y="340" fill="#5FAF74" font-size="22" font-family="JBM" text-anchor="middle">12 × 11</text>
+  </svg>
+  <div id="b5-raso" data-frase="b5.5" style="position:absolute;left:1060px;top:520px;opacity:0">
+    <div class="h3">9 vence 12 <span class="mute" style="font-size:28px">t = −11</span></div>
+    <div class="h3" style="margin-top:14px">6 vence 12 <span class="mute" style="font-size:28px">t = −4,4</span></div>
+    <div class="h2 g glow" style="margin-top:30px">o raso vence</div>
+  </div>
+  <div class="fonte" id="f-b5a">fonte: Paper 2 §4(c) · nota 16 · 8 seeds</div>
+</div>
+<div class="scene" id="s-b5b">
+  <div class="hip" id="b5-ru" data-frase="b5.6" style="left:160px;top:150px"><div class="lbl">ruído</div><div class="h3" style="margin-top:10px">o fundo <span class="g">prevê pior</span> · déficit contra o mundo</div></div>
+  <div class="hip" id="b5-po" style="left:1000px;top:150px"><div class="lbl">posição</div><div class="h3" style="margin-top:10px">alguém <span class="amb">chega antes</span> · sem rival, some</div></div>
+  <div class="vtab" id="b5-tab" style="top:390px">
+    <div class="r h" data-frase="b5.7"><div>δ</div><div>pop(h12) − pop(h8)</div><div>comida em pé</div></div>
+    <div class="r"><div>0,80</div><div>+2,04 <span class="mute" style="font-size:24px">t +1,6</span></div><div>+2,54</div></div>
+    <div class="r"><div>0,90</div><div>−1,08 <span class="mute" style="font-size:24px">t −0,9</span></div><div>+13,55</div></div>
+    <div class="r" id="b5-095" data-frase="b5.8"><div class="g">0,95</div><div class="red">−5,51 <span style="font-size:24px">t −4,3</span></div><div class="red">+31,45</div></div>
+  </div>
+  <div class="h3" id="b5-ning" data-frase="b5.9" style="position:absolute;left:160px;top:720px;opacity:0">tipo único: <span class="g">ninguém de fora</span> para tomar a comida ⇒ o déficit é <span class="g glow">contra o mundo</span></div>
+  <div class="fonte" id="f-b5b">fonte: Paper 2 §5 · nota 17 · 8 seeds, diferença pareada</div>
+</div>
+<div class="scene" id="s-b5c">
+  <div class="h2" id="b5-alu" data-frase="b5.10" style="position:absolute;left:0;right:0;top:130px;text-align:center;opacity:0">a ponta do plano é <span class="red">alucinação</span> · o desconto decide o peso dela</div>
+  <canvas id="pesos" data-frase="b5.11" width="1600" height="420" style="left:160px;top:290px;opacity:0"></canvas>
+  <div class="h3" id="b5-reg" data-frase="b5.12" style="position:absolute;left:160px;right:160px;top:780px;text-align:center;opacity:0">o desconto não é impaciência: é <span class="g glow">um regularizador</span><br><span class="mute" style="font-size:32px">o bloco se recusando a confiar numa previsão que não consegue fazer</span></div>
+  <div class="fonte" id="f-b5c">fonte: Paper 2 §5</div>
+</div>
+
+<!-- ===== b6 · MAIS PACIÊNCIA ===== -->
+<div class="scene" id="s-b6">
+  <div class="h3 mute" id="b6-est" data-frase="b6.1" style="position:absolute;left:0;right:0;top:150px;text-align:center;opacity:0">o resultado mais estranho do trabalho</div>
+  <div class="h1 g glow" id="b6-res" data-frase="b6.2" style="position:absolute;left:0;right:0;top:260px;text-align:center;font-size:84px;opacity:0">mais paciência ⇒<br>horizonte ótimo mais raso</div>
+  <div id="b6-tab" data-frase="b6.3" style="position:absolute;left:0;right:0;top:560px;display:flex;justify-content:center;gap:40px;opacity:0">
+    <div class="tr2" style="position:relative;width:420px;opacity:1"><div class="lbl">δ = 0,80</div><div class="h2 g">h* ≥ 12</div></div>
+    <div class="tr2" style="position:relative;width:420px;opacity:1"><div class="lbl">δ = 0,90</div><div class="h2 g">h* ≈ 10</div></div>
+    <div class="tr2" style="position:relative;width:420px;opacity:1"><div class="lbl">δ = 0,95</div><div class="h2 g">h* ≈ 7–8</div></div>
+  </div>
+  <div class="p" id="b6-env" data-frase="b6.4" style="position:absolute;left:200px;right:200px;top:830px;text-align:center;opacity:0;color:var(--ink)">quanto mais peso ao futuro distante, menos longe se pode olhar sem ser envenenado pela própria previsão</div>
+  <div class="fonte" id="f-b6">fonte: Paper 2 §4(c) · nota 19</div>
+</div>
+
+<!-- ===== b7 · O PLANO ===== -->
+<div class="scene" id="s-b7">
+  <div class="h3" id="b7-med" data-frase="b7.1" style="position:absolute;left:160px;top:140px;opacity:0">a previsão, passo a passo, contra o que <span class="g">de fato aconteceu</span></div>
+  <div id="b7-plano" style="position:absolute;left:0;right:0;top:260px;height:100px"></div>
+  <div class="p" id="b7-c" data-frase="b7.2" style="position:absolute;left:160px;top:400px;opacity:0;color:var(--ink)">passo 1: correlação <span class="g">0,60–0,73</span> · do passo 2 em diante: <span class="red">≤ 0,19</span> · 8/8 seeds</div>
+  <div class="h2 g glow" id="b7-cau" data-frase="b7.3" style="position:absolute;left:0;right:0;top:500px;text-align:center;opacity:0">o plano é um passo com uma cauda<br>que nunca é vivida</div>
+  <div id="b7-vir" data-frase="b7.4" style="position:absolute;left:0;right:0;top:720px;display:flex;justify-content:center;gap:30px;opacity:0"><span class="chip" style="color:var(--red);border-color:#5a1414">✗ como previsão</span><span class="chip">✓ como ordem</span></div>
+  <div class="p" id="b7-ord" data-frase="b7.5" style="position:absolute;left:0;right:0;top:820px;text-align:center;opacity:0;color:var(--ink)">acerta a melhor célula <span class="g">3,8 a 4,5×</span> mais que o acaso</div>
+  <div class="fonte" id="f-b7">fonte: notas 18 e 22 · 8 seeds</div>
+</div>
+
+<!-- ===== b8 · O IMPOSTO ===== -->
+<div class="scene" id="s-b8">
+  <div class="term" id="b8-for" data-frase="b8.1" style="left:160px;top:130px;width:1000px;opacity:0"><div class="code" style="font-size:38px;padding:22px 30px">METABOLISMO + <span class="g">c</span> · profundidade</div></div>
+  <div class="chip" id="b8-ef" data-frase="b8.2" style="position:absolute;left:1200px;top:160px;opacity:0;color:var(--amb);border-color:#4d5a1a">cobra a profundidade efetiva</div>
+  <div class="lbl" id="b8-l1" data-frase="b8.3" style="position:absolute;left:160px;top:310px;opacity:0">profundidade evoluída</div>
+  <div class="lin" id="i0" style="top:350px"><div class="k">c = 0</div><div class="trk"><div class="bar" style="width:700px;background:var(--g2)"></div></div><div class="v">3,31</div></div>
+  <div class="lin" id="i15" style="top:420px"><div class="k">c = 0,15</div><div class="trk"><div class="bar" style="width:220px"></div></div><div class="v g">1,04</div></div>
+  <div class="chip" id="b8-ali" style="position:absolute;left:1580px;top:415px;white-space:nowrap;opacity:0">= ótimo do grupo</div>
+  <div class="lbl" id="b8-l2" data-frase="b8.4" style="position:absolute;left:160px;top:530px;opacity:0">população em c = 0,15, contra o baseline sem imposto</div>
+  <div class="lin" id="iq" style="top:570px"><div class="k">queimado</div><div class="trk"><div class="bar" style="width:440px;background:var(--red)"></div></div><div class="v red">66%</div></div>
+  <div class="lin" id="ir" data-frase="b8.6" style="top:640px"><div class="k">devolvido</div><div class="trk"><div class="bar" style="width:680px"></div></div><div class="v g glow">102%</div></div>
+  <div class="h3" id="b8-err" data-frase="b8.5" style="position:absolute;left:160px;top:740px;opacity:0"><span style="position:relative">"alinhar a escolha não é restaurar o bem-estar"<span class="strike" id="b8-st"></span></span></div>
+  <div class="h2 g glow" id="b8-din" data-frase="b8.7" style="position:absolute;left:0;right:0;top:850px;text-align:center;opacity:0">o problema era queimar o dinheiro</div>
+  <div class="fonte" id="f-b8">fonte: Paper 2 §7 · notas 15 e 21 · 8 seeds × 30 000 ticks</div>
+</div>
+
+<!-- ===== b9 · DUAS LINHAGENS ===== -->
+<div class="scene" id="s-b9">
+  <div class="h3 mute" id="b9-ult" data-frase="b9.1" style="position:absolute;left:160px;top:130px;opacity:0">último andar</div>
+  <div class="h2" id="b9-ram" data-frase="b9.2" style="position:absolute;left:160px;top:190px;opacity:0">o ótimo é um <span class="g glow">ponto de ramificação</span></div>
+  <svg id="b9-hist" data-frase="b9.3" width="900" height="380" viewBox="0 0 900 380" style="position:absolute;left:160px;top:330px;opacity:0;overflow:visible">
+    <line x1="0" y1="320" x2="880" y2="320" stroke="#0B5A1F" stroke-width="3"/>
+    <path id="b9-dois" pathLength="1" d="M0 320 C80 320 120 90 210 90 C300 90 330 300 440 300 C550 300 590 70 680 70 C770 70 810 320 880 320" stroke="#00FF41" stroke-width="7" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+    <text x="210" y="70" fill="#00FF41" font-size="26" font-family="JBM" font-weight="700" text-anchor="middle">rasa</text>
+    <text x="680" y="50" fill="#00FF41" font-size="26" font-family="JBM" font-weight="700" text-anchor="middle">funda</text>
+    <text x="0" y="360" fill="#5FAF74" font-size="20" font-family="JBM">h = 1</text><text x="880" y="360" fill="#5FAF74" font-size="20" font-family="JBM" text-anchor="end">h = 12 · esquema</text>
+  </svg>
+  <div class="p" id="b9-pre" style="position:absolute;left:1120px;top:360px;width:640px;opacity:0;color:var(--ink)">fundo pregado, δ ≥ 0,90:<br><span class="g">8/8 seeds bimodais</span></div>
+  <div class="p" id="b9-liv" data-frase="b9.4" style="position:absolute;left:1120px;top:500px;width:640px;opacity:0;color:var(--ink)">evolução livre: <span class="amb">um pico por mundo</span><br>moda de 3 a 9 entre seeds</div>
+  <div class="p" id="b9-080" data-frase="b9.5" style="position:absolute;left:1120px;top:640px;width:640px;opacity:0;color:var(--ink)">δ = 0,80: <span class="mute">6/8 ruído de mutação</span> · <span class="g">2/8 duas linhagens de verdade</span></div>
+  <div class="fonte" id="f-b9">fonte: notas 20, 23 e 28</div>
+</div>
+
+<!-- ===== b10 · FECHO ===== -->
+<div class="scene" id="s-b10">
+  <div class="h2 g glow" id="b10-a" data-frase="b10.1" style="position:absolute;left:0;right:0;top:170px;text-align:center;opacity:0">pensar demais é um bem posicional</div>
+  <div class="moral" id="b10-m1" data-frase="b10.2" style="top:330px"><i>≤</i><span>onde o desconto protege: <span class="g">não produz nada</span>, e mesmo assim é preciso tê-lo para não ser deslocado</span></div>
+  <div class="moral" id="b10-m2" data-frase="b10.3" style="top:500px"><i>&gt;</i><span>acima disso: não é um bem caro. <span class="red">é um erro</span>, e a seleção corrige</span></div>
+  <div class="p" id="b10-p" data-frase="b10.4" style="position:absolute;left:290px;top:680px;opacity:0">e a corrida por modelos cada vez maiores? <span style="color:var(--ink)">fica como pergunta, não como conclusão</span></div>
+  <div class="h3" id="b10-prox" data-frase="b10.5" style="position:absolute;left:0;right:0;top:860px;text-align:center;opacity:0"><span class="lbl">próximo</span> &nbsp; o self que já estava <span class="g glow">no código</span></div>
+  <div class="fonte" id="f-b10">fonte: Paper 2 §6</div>
+</div>
+<div class="scene" id="s-fim">
+  <div class="center" style="flex-direction:row;gap:60px">
+    <div class="autor" style="width:220px;height:220px"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="h2 g glow">matrix</div>
+      <div class="p" style="margin-top:10px;color:var(--ink)">André Maia</div>
+      <div class="p" style="margin-top:6px;font-size:24px">fontes: Paper 2 (preprint) · papers/notes 14–23, 28</div>
+    </div>
+  </div>
+</div>
+
+</div></div>
+
+<script src="audio/timing.js"></script>
+<script src="../../../Treinamentos/lib/vendor/gsap-3.15.0.min.js"></script>
+<script src="../../../Treinamentos/lib/motor.js"></script>
+<script>
+Motor.config({ fps: 30, pad: 0.9 });
+Motor.cena('b1', { extra: 3.2 });
+['b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9'].forEach((b) => Motor.cena(b, {}));
+Motor.cena('b10', { extra: 4 });
+
+const PLANO = Object.fromEntries(Motor.plano().map((c) => [c.bloco, c]));
+const DURACAO = Motor.duracao();
+function frase(id) {
+  const [b, k] = id.split('.');
+  const f = (window.TIMING || {})[b]?.frases?.[k - 1];
+  if (!f) throw new Error(`TIMING sem a frase ${id} — rode python -m tts.narrar`);
+  return { t0: PLANO[b].inicio + f.t, dur: f.dur };
+}
+const at = (id) => frase(id).t0;
+const end = (id) => frase(id).t0 + frase(id).dur;
+const durF = (id) => frase(id).dur;
+const em = (id, k) => at(id) + durF(id) * k;
+const fimBloco = (b) => PLANO[b].inicio + PLANO[b].dur;
+
+const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+const EFEITOS = (window.EFEITOS = []);
+gsap.set('.scene', { autoAlpha: 0 });
+function show(sel, t, d = 0.4) { tl.to(sel, { autoAlpha: 1, duration: d }, t); }
+function hide(sel, t, d = 0.4) { tl.to(sel, { autoAlpha: 0, duration: d, ease: 'power2.in' }, t); }
+const rise = (sel, t, dy = 24, d = 0.5) => tl.fromTo(sel, { y: dy, opacity: 0 }, { y: 0, opacity: 1, duration: d }, t);
+const pop = (sel, t, d = 0.5) => tl.fromTo(sel, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: d, ease: 'back.out(1.7)' }, t);
+const fade = (sel, t, d = 0.5, v = 1) => tl.to(sel, { opacity: v, duration: d }, t);
+const barra = (sel, t, d = 0.9) => tl.fromTo(sel, { scaleX: 0 }, { scaleX: 1, duration: d, ease: 'power2.out' }, t);
+const traco = (sel, t, d = 1.2) => tl.fromTo(sel, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: d, ease: 'power1.inOut' }, t);
+const risca = (sel, t) => tl.to(sel, { width: '105%', duration: 0.35, ease: 'power2.inOut' }, t);
+const linha = (sel, t) => { rise(sel, t, 16, 0.4); barra(sel + ' .bar', t + 0.15, 0.8); };
+const fx = { chuva: 1, torneio: 0, pesos: 0 };
+
+// caixas de plano: "agora +1 +2 … +12" (usadas no gancho e no b7)
+function caixas(id, n, x0, passo) {
+  const box = document.getElementById(id), out = [];
+  for (let k = 0; k <= n; k++) {
+    const d = document.createElement('div'); d.className = 'caixa';
+    d.style.left = (x0 + k * passo) + 'px'; d.style.top = '0px';
+    d.textContent = k ? '+' + k : 'agora';
+    if (!k) { d.style.borderColor = '#00FF41'; d.style.color = '#00FF41'; }
+    box.appendChild(d); out.push(d);
+  }
+  return out;
+}
+
+// ---------- b1 · Gancho ----------
+const cx1 = caixas('b1-plano', 12, 165, 122);
+show('#s-b1', 0.05, 0.3);
+tl.to(fx, { chuva: 0.3, duration: 1.2, ease: 'none' }, at('b1.1') - 0.2);
+cx1.slice(0, 4).forEach((c, i) => pop(c, em('b1.1', 0.3) + i * 0.15, 0.35));
+rise('#b1-evo', at('b1.2'));
+cx1.slice(4).forEach((c, i) => pop(c, at('b1.3') + i * 0.08, 0.3));
+rise('#b1-max', at('b1.3') + 0.1);
+tl.to(cx1, { borderColor: '#FF3B3B', duration: 0.3, stagger: 0.03 }, at('b1.4'));
+rise('#b1-pob', at('b1.4'));
+hide('#s-b1', end('b1.4') + 0.9);
+show('#s-tit', end('b1.4') + 1.2, 0.5);
+tl.fromTo('#tit-foto', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 }, end('b1.4') + 1.3);
+rise('#tit-t', end('b1.4') + 1.5, 30, 0.7);
+rise('#tit-a', end('b1.4') + 1.9);
+tl.to(fx, { chuva: 0.1, duration: 1.0, ease: 'none' }, fimBloco('b1') - 1.2);
+hide('#s-tit', fimBloco('b1') - 0.5);
+
+// ---------- b2 · Os dois traços ----------
+show('#s-b2', at('b2.1') - 0.2, 0.3);
+rise('#b2-her', at('b2.1'));
+rise('#b2-h', at('b2.2'), 30);
+rise('#b2-d', at('b2.3'), 30);
+rise('#b2-pac', at('b2.4'));
+rise('#b2-comp', at('b2.5'));
+rise('#b2-dec', em('b2.5', 0.55));
+pop('#b2-par', at('b2.6'), 0.6);
+fade('#f-b2', at('b2.5'));
+hide('#s-b2', at('b3.1') - 0.4);
+
+// ---------- b3 · A corrida ----------
+// população de equilíbrio com h pregado (Paper 2 §3); eixo de 285 a 297
+const POP = [[1, 295.9], [2, 295.0], [3, 293.6], [4, 292.7], [6, 290.6], [8, 289.8], [10, 289.4], [12, 289.3]];
+const svgPop = document.getElementById('b3-pop'), NS = 'http://www.w3.org/2000/svg';
+POP.forEach(([hh, v], i) => {
+  const alt = (v - 285) * 30, x = 30 + i * 128;
+  const r = document.createElementNS(NS, 'rect');
+  Object.entries({ x, y: 420 - alt, width: 86, height: alt, fill: i ? '#00B82E' : '#00FF41', class: 'pb' }).forEach(([k, val]) => r.setAttribute(k, val));
+  r.style.transformOrigin = `${x}px 420px`; r.style.transformBox = 'view-box';
+  const tv = document.createElementNS(NS, 'text');
+  Object.entries({ x: x + 43, y: 420 - alt - 12, fill: '#D8FFE0', 'font-size': 22, 'font-family': 'JBM', 'font-weight': 700, 'text-anchor': 'middle', class: 'pv' }).forEach(([k, val]) => tv.setAttribute(k, val));
+  tv.textContent = String(v).replace('.', ',');
+  const th = document.createElementNS(NS, 'text');
+  Object.entries({ x: x + 43, y: 452, fill: '#5FAF74', 'font-size': 24, 'font-family': 'JBM', 'text-anchor': 'middle' }).forEach(([k, val]) => th.setAttribute(k, val));
+  th.textContent = hh;
+  svgPop.append(r, tv, th);
+});
+show('#s-b3a', at('b3.1') - 0.2, 0.3);
+rise('#b3-cab', at('b3.1'));
+tl.fromTo('#b3-pop .pb', { scaleY: 0 }, { scaleY: 1, duration: 0.5, stagger: 0.12, ease: 'power2.out' }, em('b3.1', 0.5));
+tl.fromTo('#b3-pop .pv', { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.12 }, em('b3.1', 0.5) + 0.4);
+tl.fromTo('#b3-pop .pb', { opacity: 1 }, { opacity: 0.55, duration: 0.3 }, at('b3.3'));
+tl.to('#b3-pop .pb:first-of-type', { opacity: 1, duration: 0.3 }, at('b3.3'));
+pop('#b3-ot', at('b3.3'));
+rise('#b3-duel', at('b3.4'), 30);
+tl.to('#b3-d9', { width: '91%', duration: durF('b3.5') * 0.6, ease: 'power1.inOut' }, at('b3.5'));
+tl.to('#b3-d3', { width: '9%', fontSize: 0, duration: durF('b3.5') * 0.6, ease: 'power1.inOut' }, at('b3.5'));
+rise('#b3-v', at('b3.5') + 0.2); fade('#b3-vl', em('b3.5', 0.5));
+fade('#f-b3a', at('b3.1'));
+hide('#s-b3a', at('b3.6') - 0.4);
+show('#s-b3b', at('b3.6') - 0.2, 0.3);
+rise('#b3-bp', at('b3.6'));
+pop('#b3-bpn', em('b3.6', 0.6), 0.7);
+rise('#b3-rv', at('b3.7'));
+tl.fromTo('#b3-comp', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, at('b3.8'));
+fade('#f-b3b', at('b3.6'));
+hide('#s-b3b', at('b3.9') - 0.4);
+show('#s-b3c', at('b3.9') - 0.2, 0.3);
+rise('#b3-tor', at('b3.9'));
+fade('#b3-leg', em('b3.9', 0.4));
+tl.fromTo(fx, { torneio: 0 }, { torneio: 1, duration: Math.max(1.5, durF('b3.9') * 0.8), ease: 'none' }, em('b3.9', 0.2));
+rise('#b3-tran', at('b3.10'));
+pop('#b3-sf', at('b3.11'), 0.6);
+fade('#f-b3c', at('b3.9'));
+hide('#s-b3c', at('b4.1') - 0.4);
+
+// ---------- b4 · Não produz nada ----------
+show('#s-b4', at('b4.1') - 0.2, 0.3);
+rise('#b4-cab', at('b4.1'));
+rise('#b4-tu', at('b4.2'));
+rise('#b4-se', at('b4.3'));
+fade('#b4-lbl', at('b4.4'));
+linha('#c12', at('b4.4') + 0.1); linha('#c6', em('b4.4', 0.3)); linha('#c2', em('b4.4', 0.5));
+rise('#b4-pico', at('b4.5'));
+tl.to('#c2', { backgroundColor: 'rgba(0,255,65,.08)', duration: 0.3 }, at('b4.5'));
+pop('#b4-nada', at('b4.6'), 0.6);
+tl.to(['#c2', '#c6', '#c12', '#b4-lbl', '#b4-pico'], { opacity: 0.35, duration: 0.4 }, at('b4.6'));
+fade('#f-b4', at('b4.2'));
+hide('#s-b4', at('b5.1') - 0.4);
+
+// ---------- b5 · O erro, e o freio ----------
+show('#s-b5a', at('b5.1') - 0.2, 0.3);
+rise('#b5-cab', at('b5.1'));
+rise('#b5-ess', at('b5.2'));
+pop('#b5-um', at('b5.3'));
+risca('#b5-st', end('b5.3') - 0.2);
+fade('#b5-esc', at('b5.4'));
+fade('#b5-inv', at('b5.4') + 0.1, 0.3);
+tl.fromTo('#b5-inv .ib', { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 0.5, stagger: 0.25 }, em('b5.4', 0.4));
+rise('#b5-raso', at('b5.5'));
+fade('#f-b5a', at('b5.3'));
+hide('#s-b5a', at('b5.6') - 0.4);
+show('#s-b5b', at('b5.6') - 0.2, 0.3);
+rise('#b5-ru', at('b5.6') + 0.1, 30); rise('#b5-po', em('b5.6', 0.55), 30);
+document.querySelectorAll('#b5-tab .r').forEach((r, i) => rise(r, (i === 3 ? at('b5.8') : at('b5.7') + i * 0.25), 12, 0.4));
+tl.to('#b5-095', { backgroundColor: 'rgba(255,59,59,.10)', duration: 0.3 }, at('b5.8') + 0.4);
+rise('#b5-ning', at('b5.9'));
+tl.to('#b5-ru', { borderColor: '#00FF41', boxShadow: '0 0 40px rgba(0,255,65,.25)', duration: 0.4 }, em('b5.9', 0.5));
+tl.to('#b5-po', { opacity: 0.3, duration: 0.4 }, em('b5.9', 0.5));
+fade('#f-b5b', at('b5.6'));
+hide('#s-b5b', at('b5.10') - 0.4);
+show('#s-b5c', at('b5.10') - 0.2, 0.3);
+rise('#b5-alu', at('b5.10'));
+fade('#pesos', at('b5.11') - 0.1, 0.3);
+tl.fromTo(fx, { pesos: 0 }, { pesos: 1, duration: 1.6, ease: 'power2.out' }, at('b5.11'));
+rise('#b5-reg', at('b5.12'));
+fade('#f-b5c', at('b5.10'));
+hide('#s-b5c', at('b6.1') - 0.4);
+
+// ---------- b6 · Mais paciência ----------
+show('#s-b6', at('b6.1') - 0.2, 0.3);
+rise('#b6-est', at('b6.1'));
+tl.fromTo('#b6-res', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.4)' }, at('b6.2'));
+rise('#b6-tab', at('b6.3'), 30);
+rise('#b6-env', at('b6.4'));
+fade('#f-b6', at('b6.2'));
+hide('#s-b6', at('b7.1') - 0.4);
+
+// ---------- b7 · O plano ----------
+const cx7 = caixas('b7-plano', 11, 220, 132);
+show('#s-b7', at('b7.1') - 0.2, 0.3);
+rise('#b7-med', at('b7.1'));
+cx7.forEach((c, i) => pop(c, em('b7.1', 0.4) + i * 0.06, 0.3));
+tl.to(cx7.slice(1, 2), { borderColor: '#00FF41', color: '#00FF41', boxShadow: '0 0 24px rgba(0,255,65,.5)', duration: 0.3 }, at('b7.2') + 0.2);
+tl.to(cx7.slice(2), { borderStyle: 'dashed', opacity: 0.35, duration: 0.4, stagger: 0.04 }, em('b7.2', 0.45));
+rise('#b7-c', at('b7.2'));
+pop('#b7-cau', at('b7.3'), 0.7);
+rise('#b7-vir', at('b7.4'));
+rise('#b7-ord', at('b7.5'));
+fade('#f-b7', at('b7.2'));
+hide('#s-b7', at('b8.1') - 0.4);
+
+// ---------- b8 · O imposto ----------
+show('#s-b8', at('b8.1') - 0.2, 0.3);
+fade('#b8-for', at('b8.1'));
+pop('#b8-ef', at('b8.2'));
+fade('#b8-l1', at('b8.3'));
+linha('#i0', at('b8.3') + 0.1); linha('#i15', em('b8.3', 0.4));
+pop('#b8-ali', em('b8.3', 0.7));
+fade('#b8-l2', at('b8.4'));
+linha('#iq', at('b8.4') + 0.2);
+rise('#b8-err', at('b8.5'));
+linha('#ir', at('b8.6'));
+risca('#b8-st', em('b8.6', 0.6));
+pop('#b8-din', at('b8.7'), 0.6);
+fade('#f-b8', at('b8.1'));
+hide('#s-b8', at('b9.1') - 0.4);
+
+// ---------- b9 · Duas linhagens ----------
+show('#s-b9', at('b9.1') - 0.2, 0.3);
+rise('#b9-ult', at('b9.1'));
+rise('#b9-ram', at('b9.2'));
+fade('#b9-hist', at('b9.3'), 0.3);
+traco('#b9-dois', at('b9.3') + 0.1, 1.6);
+fade('#b9-pre', em('b9.3', 0.5));
+rise('#b9-liv', at('b9.4'));
+rise('#b9-080', at('b9.5'));
+fade('#f-b9', at('b9.2'));
+hide('#s-b9', at('b10.1') - 0.4);
+
+// ---------- b10 · Fecho ----------
+show('#s-b10', at('b10.1') - 0.2, 0.3);
+pop('#b10-a', at('b10.1'), 0.6);
+rise('#b10-m1', at('b10.2'), 20);
+rise('#b10-m2', at('b10.3'), 20);
+rise('#b10-p', at('b10.4'));
+tl.to(fx, { chuva: 0.3, duration: 1.5, ease: 'none' }, at('b10.5') - 0.5);
+rise('#b10-prox', at('b10.5'));
+fade('#f-b10', at('b10.2'));
+hide('#s-b10', end('b10.5') + 2.0, 0.6);
+tl.to(fx, { chuva: 0.6, duration: 1.0, ease: 'none' }, end('b10.5') + 2.0);
+show('#s-fim', end('b10.5') + 2.6, 0.7);
+hide('#s-fim', DURACAO - 0.8, 0.7);
+tl.to(fx, { chuva: 0, duration: 0.8, ease: 'none' }, DURACAO - 0.8);
+tl.to({}, { duration: 0.01 }, DURACAO);
+
+// ---------- canvas: tudo é função pura de t ----------
+function h(a, b, c) {
+  let x = Math.imul(a | 0, 374761393) ^ Math.imul(b | 0, 668265263) ^ Math.imul(c | 0, 1274126177);
+  x = Math.imul(x ^ (x >>> 13), 1274126177);
+  return ((x ^ (x >>> 16)) >>> 0) / 4294967296;
+}
+const GLIFOS = '0123456789ABCDEFXZ:;=+*<>|¦#@%&$?';
+const chuva = document.getElementById('chuva').getContext('2d');
+const CW = 24, CH = 28, COLS = 80, ROWS = 39;
+function desenharChuva(t, alfa) {
+  chuva.clearRect(0, 0, 1920, 1080);
+  if (alfa <= 0.001) return;
+  chuva.font = '500 24px JBM';
+  chuva.textBaseline = 'top';
+  for (let c = 0; c < COLS; c++) {
+    const vel = 7 + 14 * h(c, 1, 7), rastro = 10 + Math.floor(18 * h(c, 2, 7)), ciclo = ROWS + rastro + Math.floor(20 * h(c, 3, 7));
+    const cabeca = Math.floor((t * vel + h(c, 4, 7) * ciclo)) % ciclo;
+    for (let k = 0; k < rastro; k++) {
+      const r = cabeca - k;
+      if (r < 0 || r >= ROWS) continue;
+      const g = GLIFOS[Math.floor(h(c, r, Math.floor(t * 9 + h(c, r, 5) * 9)) * GLIFOS.length)];
+      const a = (1 - k / rastro) * alfa;
+      chuva.fillStyle = k === 0 ? `rgba(200,255,210,${a})` : `rgba(0,255,65,${a * 0.75})`;
+      chuva.fillText(g, c * CW, r * CH);
+    }
+  }
+}
+// torneio 12×12: linha = horizonte que desafia, coluna = adversário. Só o padrão de quem vence (sem valores por célula).
+const tor = document.getElementById('torneio').getContext('2d');
+function desenharTorneio(p) {
+  tor.clearRect(0, 0, 520, 520);
+  if (p <= 0) return;
+  const n = Math.floor(p * 144);
+  tor.font = '700 16px JBM'; tor.textBaseline = 'middle'; tor.textAlign = 'center';
+  for (let i = 0; i < 12; i++) {
+    tor.fillStyle = '#5FAF74';
+    tor.fillText(12 - i, 14, 40 + i * 40 + 18);
+    tor.fillText(i + 1, 48 + i * 40 + 18, 508);
+  }
+  for (let k = 0; k < n; k++) {
+    const i = Math.floor(k / 12), j = k % 12, hr = 12 - i, hc = j + 1;
+    tor.fillStyle = hr === hc ? '#062A10' : hr > hc ? '#00FF41' : '#3a1010';
+    tor.globalAlpha = hr > hc ? 0.85 : 1;
+    tor.fillRect(30 + j * 40, 40 + i * 40, 36, 36);
+  }
+  tor.globalAlpha = 1;
+}
+// peso de cada passo do plano, δᵏ, para δ = 0,80 e 0,95 (k = 0..11)
+const pes = document.getElementById('pesos').getContext('2d');
+function desenharPesos(p) {
+  pes.clearRect(0, 0, 1600, 420);
+  if (p <= 0) return;
+  pes.font = '700 24px JBM'; pes.textBaseline = 'alphabetic';
+  [[0.80, 40, '#00B82E', 'δ = 0,80'], [0.95, 230, '#00FF41', 'δ = 0,95']].forEach(([d, y0, cor, rot]) => {
+    pes.fillStyle = '#5FAF74'; pes.textAlign = 'left'; pes.fillText(rot, 0, y0 + 110);
+    for (let k = 0; k < 12; k++) {
+      const w = Math.pow(d, k), alt = 150 * w * Math.min(1, p * 1.2 - k * 0.02);
+      pes.fillStyle = k === 11 ? (d > 0.9 ? '#FF3B3B' : cor) : cor;
+      pes.fillRect(220 + k * 112, y0 + 150 - Math.max(0, alt), 80, Math.max(0, alt));
+    }
+    pes.fillStyle = d > 0.9 ? '#FF3B3B' : '#D8FFE0'; pes.textAlign = 'center';
+    if (p > 0.6) pes.fillText(Math.pow(d, 11).toFixed(2).replace('.', ','), 220 + 11 * 112 + 40, y0 + 140 - 150 * Math.pow(d, 11) - 6);
+  });
+  pes.fillStyle = '#5FAF74'; pes.font = '500 20px JBM'; pes.textAlign = 'left';
+  pes.fillText('peso do passo k = δᵏ  ·  k = 0 … 11', 220, 412);
+}
+Motor.aoQuadro = (t) => {
+  tl.seek(Math.min(t, tl.duration()), false);
+  desenharChuva(t, fx.chuva);
+  desenharTorneio(fx.torneio);
+  desenharPesos(fx.pesos);
+};
+document.fonts.load('500 24px JBM').then(() => document.fonts.ready).then(() => {
+  const img = [...document.images].map((i) => (i.complete ? Promise.resolve() : new Promise((ok) => { i.onload = i.onerror = ok; })));
+  return Promise.all(img);
+}).then(() => Motor.iniciar());
+</script>
+</body>
+</html>

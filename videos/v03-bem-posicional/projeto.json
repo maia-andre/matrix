@@ -1,0 +1,16 @@
+{
+  "serie": "matrix",
+  "episodio": "Vídeo 3 — Pensar demais é um bem posicional",
+  "roteiro": "roteiro-base.md §3 (Vídeo 3); fontes: Paper 2 e adendos, notas 14–23 e 28; versão final em roteiro.md",
+  "fase": "validacao",
+  "voz": "fish free · voz 'Morpheus' (95a171ec7eb84829a20f718475d6522a) · velocidade 1.0",
+  "musica": "original, scripts/gerar_trilha.py (96 bpm, semente 3), mixada a -24 dB",
+  "resolucao": "1920x1080@30",
+  "pendencias": [],
+  "historico": [
+    "2026-10-25 Roteiro a partir do Paper 2 (três camadas) e adendos (notas 18, 19, 20, 21, 22, 23, 28); erro antes do conserto: o 'ESS = teto' do δ = 0,80 e o 'alinhar ≠ restaurar o bem-estar'; gráficos desenhados a partir das tabelas; histograma de duas linhagens marcado como esquema",
+    "2026-10-25 Narrado (65/65 no Whisper; 'Último andar' perdia o R → 'Agora, o último andar.'); sincronia ajustada em b1.3 e b5.6; quadros revisados no fim de cada frase",
+    "2026-10-25 Render 366,0 s (6 min 6 s), conferência OK: sincronia, 64 frames-chave, áudio −17,5 dB médio",
+    "2026-10-25 Aprovado pelo André ('ficaram ótimos'); publicação no YouTube iniciada por ele"
+  ]
+}

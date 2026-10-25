@@ -1,0 +1,301 @@
+{
+ "b1": {
+  "dur": 10.22,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 6.263,
+    "texto": "Depois de duas horas e catorze minutos de simulação, meu script imprimiu: confirma."
+   },
+   {
+    "t": 6.913,
+    "dur": 2.107,
+    "texto": "Estava errado. E eu quase publiquei."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b2": {
+  "dur": 36.025,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 2.025,
+    "texto": "A pergunta era sobre arrependimento."
+   },
+   {
+    "t": 2.675,
+    "dur": 5.976,
+    "texto": "Quando um bloco perde uma disputa, às vezes a segunda melhor casa estava livre. Ele podia mesmo ter ido para lá."
+   },
+   {
+    "t": 9.151,
+    "dur": 4.853,
+    "texto": "Esse contrafactual é verificável. E eu dei aos blocos uma memória dele: o remorso."
+   },
+   {
+    "t": 14.504,
+    "dur": 5.385,
+    "texto": "Um traço herdado decide quanto o remorso pesa na decisão seguinte. E em que direção."
+   },
+   {
+    "t": 20.389,
+    "dur": 4.597,
+    "texto": "Eu apostei que a seleção ia premiar quem aprende com o erro: peso positivo."
+   },
+   {
+    "t": 25.486,
+    "dur": 4.938,
+    "texto": "Nas três seeds, a evolução foi para o outro lado. Peso negativo."
+   },
+   {
+    "t": 30.924,
+    "dur": 4.601,
+    "texto": "Então eu precisava saber: isso é seleção de verdade, ou só deriva?"
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b3": {
+  "dur": 27.188,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 6.958,
+    "texto": "O teste é um duelo. Metade da população com um valor, metade com o outro. E de novo, com os lados trocados."
+   },
+   {
+    "t": 7.608,
+    "dur": 7.987,
+    "texto": "Se o mesmo valor vence nas duas montagens, é sinal. Se vence sempre o mesmo lado, é efeito fundador: quem chegou primeiro domina."
+   },
+   {
+    "t": 16.095,
+    "dur": 3.231,
+    "texto": "Em cinco de seis corridas, venceu o mesmo lado."
+   },
+   {
+    "t": 19.826,
+    "dur": 6.862,
+    "texto": "Três seeds não decidem. Então eu pré-registrei dez, com o critério escrito antes: sete ou mais, confirma."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b4": {
+  "dur": 35.957,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 5.272,
+    "texto": "Duas horas e catorze minutos depois, o script disse: confirma. Nove de dez."
+   },
+   {
+    "t": 5.922,
+    "dur": 3.506,
+    "texto": "Revertia a conclusão anterior. E era o resultado que eu queria."
+   },
+   {
+    "t": 9.928,
+    "dur": 5.682,
+    "texto": "Antes de aceitar, eu conferi o classificador linha a linha, contra um caso que eu já tinha resolvido à mão."
+   },
+   {
+    "t": 16.11,
+    "dur": 3.784,
+    "texto": "A fórmula de uma das montagens estava invertida. Uma linha."
+   },
+   {
+    "t": 20.394,
+    "dur": 6.259,
+    "texto": "O mundo é determinístico. Então eu não rodei nada de novo: só refiz a conta, com os mesmos números."
+   },
+   {
+    "t": 27.153,
+    "dur": 5.104,
+    "texto": "O veredito virou o oposto exato. Um de dez. Efeito fundador puro."
+   },
+   {
+    "t": 33.256,
+    "dur": 2.2,
+    "texto": "Uma linha errada bastou para inverter tudo."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b5": {
+  "dur": 29.786,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 6.261,
+    "texto": "A outra comparação, peso negativo contra positivo, tinha ficado em seis de dez. Sem decidir."
+   },
+   {
+    "t": 6.911,
+    "dur": 4.981,
+    "texto": "Mais vinte seeds, com o critério escrito antes. O total ficou em vinte de trinta."
+   },
+   {
+    "t": 12.392,
+    "dur": 2.479,
+    "texto": "O corte era vinte e um. Faltou uma seed."
+   },
+   {
+    "t": 15.371,
+    "dur": 6.075,
+    "texto": "Então, pelo critério, não decide. E mover a régua depois de ver o placar é exatamente o que eu me proibi."
+   },
+   {
+    "t": 21.946,
+    "dur": 7.34,
+    "texto": "Mas havia um detalhe. Das vinte corridas que escaparam do efeito fundador, todas favoreciam o peso negativo. Nenhuma ao contrário."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b6": {
+  "dur": 38.674,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 5.678,
+    "texto": "Faltava a pergunta que três notas seguidas tinham adiado: quanto disso o próprio desenho fabrica?"
+   },
+   {
+    "t": 6.328,
+    "dur": 6.665,
+    "texto": "O nulo óbvio seria desligar o mecanismo. A álgebra, antes da máquina, mostrou que isso dá zero por identidade."
+   },
+   {
+    "t": 13.492,
+    "dur": 6.263,
+    "texto": "Sem o traço, as duas montagens viram a mesma simulação, e o classificador nunca pode dizer sinal."
+   },
+   {
+    "t": 20.255,
+    "dur": 6.185,
+    "texto": "O nulo certo é um traço ativo, mas sem direção. E duas moedas honestas concordam metade das vezes."
+   },
+   {
+    "t": 26.941,
+    "dur": 5.298,
+    "texto": "Medido, o desenho sozinho fabrica trinta por cento. Contra sessenta e sete medidos."
+   },
+   {
+    "t": 32.738,
+    "dur": 5.436,
+    "texto": "E eu tinha escrito, antes, que esperava não distinguir do nulo. Errei de novo. Para o lado bom."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b7": {
+  "dur": 30.287,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 1.739,
+    "texto": "Aí veio o embaraço maior."
+   },
+   {
+    "t": 2.389,
+    "dur": 5.007,
+    "texto": "O classificador decidia cada montagem separadamente, e só depois comparava os rótulos."
+   },
+   {
+    "t": 7.896,
+    "dur": 9.069,
+    "texto": "Mas as duas montagens existem para ser comparadas. A diferença entre elas é cega ao efeito fundador: o viés de lado entra nas duas, e cancela na subtração."
+   },
+   {
+    "t": 17.465,
+    "dur": 2.643,
+    "texto": "Essa régua pareada estava disponível desde o começo."
+   },
+   {
+    "t": 20.608,
+    "dur": 3.906,
+    "texto": "Com ela, vinte e oito de trinta na direção negativa. Contra um nulo de quinze."
+   },
+   {
+    "t": 25.014,
+    "dur": 4.773,
+    "texto": "E das dez corridas que o classificador tinha jogado fora, nove carregavam o mesmo sinal."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b8": {
+  "dur": 29.59,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 3.127,
+    "texto": "Restava o teste que não deixa espaço para eu me enganar."
+   },
+   {
+    "t": 3.777,
+    "dur": 7.84,
+    "texto": "Trinta seeds novas, que nenhuma nota tinha rodado. A régua pareada como primária. E a potência calculada antes de rodar."
+   },
+   {
+    "t": 12.117,
+    "dur": 1.22,
+    "texto": "Trinta de trinta."
+   },
+   {
+    "t": 14.137,
+    "dur": 5.656,
+    "texto": "A seleção favorece o peso negativo. Pré-registrado, primário, fora da amostra."
+   },
+   {
+    "t": 20.294,
+    "dur": 6.982,
+    "texto": "E uma coisa falhou: o nulo do classificador antigo, que era trinta por cento, foi a cinquenta e três nas seeds novas."
+   },
+   {
+    "t": 27.776,
+    "dur": 1.314,
+    "texto": "Isso também está publicado."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b9": {
+  "dur": 19.874,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 2.209,
+    "texto": "A cultura deste projeto cabe em três frases."
+   },
+   {
+    "t": 2.859,
+    "dur": 1.715,
+    "texto": "Pré-registre antes de rodar."
+   },
+   {
+    "t": 5.074,
+    "dur": 1.878,
+    "texto": "Meça o nulo antes de comemorar."
+   },
+   {
+    "t": 7.453,
+    "dur": 3.689,
+    "texto": "E não reescreva a nota antiga. Escreva uma errata."
+   },
+   {
+    "t": 11.642,
+    "dur": 2.842,
+    "texto": "As notas existem porque o conserto destrói a evidência."
+   },
+   {
+    "t": 14.983,
+    "dur": 3.691,
+    "texto": "No fim, a régua mais difícil de calibrar era a minha."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ }
+}

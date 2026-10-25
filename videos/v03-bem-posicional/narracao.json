@@ -1,0 +1,94 @@
+{
+  "episodio": "Matrix · Vídeo 3 — Pensar demais é um bem posicional",
+  "voz": { "provedor": "fish", "voz": "95a171ec7eb84829a20f718475d6522a", "velocidade": 1.0, "extenso": true, "opcoes": { "modo": "free" } },
+  "pausa_frase": 0.5,
+  "tentativas": 5,
+  "limiar": 0.85,
+  "blocos": [
+    { "id": "b1", "cena": "Gancho", "falas": [
+      { "texto": "Dei aos bloquinhos a capacidade de planejar alguns passos à frente." },
+      { "texto": "E deixei a evolução escolher quantos." },
+      { "texto": "Eles escolheram pensar o máximo que podiam." },
+      { "texto": "E isso deixou todo mundo mais pobre.", "pausa_depois": 1.2 }
+    ]},
+    { "id": "b2", "cena": "Os dois traços", "falas": [
+      { "texto": "Cada bloco herda dos pais dois traços, com mutação." },
+      { "texto": "O horizonte: quantos passos à frente ele planeja. De um a doze." },
+      { "texto": "E o desconto: quanto vale, para ele, uma comida que só vem daqui a alguns passos." },
+      { "texto": "Desconto alto é paciência. Desconto baixo quer tudo agora." },
+      { "texto": "E os dois se compensam. Um bloco pode declarar um plano longo e, com desconto baixo, pensar raso." },
+      { "texto": "Então qualquer frase sobre pensar fundo precisa do par: horizonte e desconto." }
+    ]},
+    { "id": "b3", "cena": "A corrida", "falas": [
+      { "texto": "Primeira medida: pregar o horizonte na população inteira, e ver quantos blocos o mundo sustenta." },
+      { "texto": "A cada passo a mais de plano, a população encolhe. Pouco, mas sempre." },
+      { "texto": "O ótimo do grupo é pensar o mínimo: um passo." },
+      { "texto": "Segunda medida: um duelo. Metade da população planeja três passos. A outra metade, nove." },
+      { "texto": "O planejador fundo vence. Nas três seeds, em quatro mil passos, ele chega a oitenta e cinco por cento da população ou mais." },
+      { "texto": "Bom para o indivíduo, ruim para o grupo. Isso tem nome: bem posicional." },
+      { "texto": "É a Rainha Vermelha. Correr cada vez mais, só para ficar no mesmo lugar." },
+      { "texto": "E desligar a competição deixa os horizontes mais rasos. A competição não freia o pensamento. Ela alimenta." },
+      { "texto": "Depois, o torneio inteiro: todos os horizontes contra todos. Sessenta e seis duelos, oito seeds cada." },
+      { "texto": "Cada horizonte maior vence todos os menores. O doze vence os onze." },
+      { "texto": "Uma corrida sem freio." }
+    ]},
+    { "id": "b4", "cena": "Não produz nada", "falas": [
+      { "texto": "Mas quanto desse pensamento é produção, e quanto é só tomar do vizinho?" },
+      { "texto": "Para separar, eu rodei mundos de um tipo só. Todo mundo com o mesmo horizonte. Ninguém de outro tipo para disputar." },
+      { "texto": "Se pensar fundo produz comida, esses mundos deviam colher mais." },
+      { "texto": "Colhem menos. Com doze passos de plano, sobram vinte unidades a mais de comida em pé do que com um passo só. Comida que ninguém colheu." },
+      { "texto": "Só um passo de plano paga: o segundo. Do terceiro em diante, cada passo a mais piora a colheita." },
+      { "texto": "O horizonte não produz nada. Tudo o que ele compra é tomado de um vizinho.", "pausa_depois": 1.0 }
+    ]},
+    { "id": "b5", "cena": "O erro e o freio", "falas": [
+      { "texto": "E aqui eu errei. O erro precisa aparecer." },
+      { "texto": "Eu tinha escrito que o doze era o fim da corrida: o equilíbrio era pensar o máximo possível." },
+      { "texto": "Só que eu tinha medido isso num único desconto: zero vírgula oitenta." },
+      { "texto": "Varri outros descontos. Em zero vírgula noventa e cinco, a escada inverte." },
+      { "texto": "O nove vence o doze. O seis vence o doze. O raso vence." },
+      { "texto": "A pergunta passou a ser: o fundo perde porque prevê pior, ou só porque alguém chega antes na comida dele?" },
+      { "texto": "O mundo de um tipo só decide." },
+      { "texto": "Com desconto alto, um mundo inteiro de blocos com doze passos sustenta cinco blocos e meio a menos que um mundo com oito." },
+      { "texto": "E ali não tem ninguém de fora para tomar a comida. O déficit é contra o mundo." },
+      { "texto": "A ponta do plano é uma alucinação. E o desconto decide quanto peso ela recebe." },
+      { "texto": "Com desconto zero vírgula oitenta, o último passo entra com nove por cento do peso. Com zero vírgula noventa e cinco, com mais da metade." },
+      { "texto": "O desconto não é impaciência. É o bloco se recusando a confiar numa previsão que ele não consegue fazer.", "pausa_depois": 1.0 }
+    ]},
+    { "id": "b6", "cena": "Mais paciência", "falas": [
+      { "texto": "Daí sai o resultado mais estranho do trabalho." },
+      { "texto": "Mais paciência, horizonte ótimo mais raso." },
+      { "texto": "Com desconto zero vírgula noventa, o melhor é planejar uns dez passos. Com zero vírgula noventa e cinco, uns sete ou oito." },
+      { "texto": "Quanto mais peso você dá ao futuro distante, menos longe pode olhar sem ser envenenado pela própria previsão." }
+    ]},
+    { "id": "b7", "cena": "O plano", "falas": [
+      { "texto": "Depois eu medi a previsão passo a passo, contra o que de fato aconteceu." },
+      { "texto": "Só o primeiro passo do plano carrega informação. Do segundo em diante, a previsão já não acerta. Em oito de oito seeds." },
+      { "texto": "O plano é um passo, com uma cauda que nunca é vivida." },
+      { "texto": "Mas tem uma virada. Como previsão, o plano falha. Como ordem, ele funciona." },
+      { "texto": "Ele ainda põe as opções na ordem certa, e acerta a melhor cerca de quatro vezes mais que o acaso." }
+    ]},
+    { "id": "b8", "cena": "O imposto", "falas": [
+      { "texto": "Se pensar fundo impõe um custo ao grupo, a receita clássica é cobrar por ele. Um imposto sobre pensar." },
+      { "texto": "Cobrei pela profundidade efetiva, e não pelo horizonte declarado. Senão o bloco escapava baixando o desconto." },
+      { "texto": "Funciona. Com o imposto certo, a profundidade evoluída cai de três vírgula três para um. Encosta no ótimo do grupo." },
+      { "texto": "Mas, queimando a arrecadação, o imposto custou um terço da população." },
+      { "texto": "Eu escrevi que alinhar a escolha não é restaurar o bem-estar. E isso também estava errado." },
+      { "texto": "Devolvendo a arrecadação como dividendo, igual para todos, o alinhamento continua. E a população vai a cento e dois por cento do original." },
+      { "texto": "O problema não era o imposto. Era queimar o dinheiro." }
+    ]},
+    { "id": "b9", "cena": "Duas linhagens", "falas": [
+      { "texto": "Agora, o último andar." },
+      { "texto": "O horizonte ótimo não é um equilíbrio estável. É um ponto de ramificação: a população pode se dividir ali." },
+      { "texto": "Com desconto alto e os outros traços pregados, ela se divide de fato, em duas linhagens: uma rasa, outra funda." },
+      { "texto": "Na evolução livre, cada mundo escolhe um pico só. E cada mundo escolhe um diferente." },
+      { "texto": "E onde o desconto é zero vírgula oitenta, a resposta é mista. Em seis de oito seeds era ruído de mutação. Em duas, eram duas linhagens de verdade." }
+    ]},
+    { "id": "b10", "cena": "Fecho", "falas": [
+      { "texto": "Então, pensar demais é um bem posicional." },
+      { "texto": "Onde o desconto protege, é um bem que não produz nada. E mesmo assim você precisa dele, para não ser deslocado." },
+      { "texto": "Acima disso, não é um bem caro. É um erro. E a seleção corrige." },
+      { "texto": "Dá vontade de comparar com a corrida por modelos cada vez maiores. Eu deixo isso como pergunta, não como conclusão." },
+      { "texto": "Na próxima: o self que já estava no código.", "pausa_depois": 1.0 }
+    ]}
+  ]
+}

@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Matrix · O dedo do espectador</title>
+<style>
+/* Identidade Matrix (videos/marca/): preto, verde fósforo, JetBrains Mono embutida.
+   Motor e GSAP vêm do repositório Treinamentos (../../../Treinamentos/lib), timeline PAUSADA:
+   o Motor chama tl.seek(t) quadro a quadro e as telas de canvas são desenhadas como função de t. */
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Regular.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Bold.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-ExtraBold.woff2") format("woff2");font-weight:800}
+:root{--bg:#000;--g:#00FF41;--g2:#00B82E;--g3:#0B5A1F;--g4:#062A10;--ink:#D8FFE0;--mute:#5FAF74;--red:#FF3B3B;--amb:#E8FF8A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow:hidden;background:#000;font-family:"JBM",monospace;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1300px 900px at 50% 45%,#031207 0%,#000 70%)}
+canvas{position:absolute;left:0;top:0}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.g{color:var(--g)} .red{color:var(--red)} .mute{color:var(--mute)} .ink{color:var(--ink)} .amb{color:var(--amb)}
+.glow{text-shadow:0 0 18px rgba(0,255,65,.55),0 0 2px rgba(0,255,65,.9)}
+.h1{font-weight:800;font-size:96px;line-height:1.05;letter-spacing:-.02em}
+.h2{font-weight:800;font-size:68px;line-height:1.12;letter-spacing:-.01em}
+.h3{font-weight:700;font-size:46px;line-height:1.2}
+.p{font-weight:500;font-size:32px;line-height:1.35;color:var(--mute)}
+.term{position:absolute;border:2px solid var(--g3);border-radius:14px;background:rgba(0,10,3,.88);box-shadow:0 0 60px rgba(0,255,65,.08)}
+.term .bar{height:38px;border-bottom:2px solid var(--g3);display:flex;align-items:center;gap:10px;padding:0 16px;font-size:18px;color:var(--mute)}
+.term .bar i{width:12px;height:12px;border-radius:50%;background:var(--g3)}
+.code{padding:28px 34px;font-size:40px;line-height:1.55;white-space:pre}
+.code .ln{opacity:0}
+.code .c{color:var(--mute)}
+.hl{background:rgba(0,255,65,.16);outline:2px solid var(--g);border-radius:6px}
+.fonte{position:absolute;right:60px;bottom:40px;font-size:20px;color:var(--mute);opacity:0;letter-spacing:.06em}
+.chip{display:inline-block;padding:10px 22px;border:2px solid var(--g3);border-radius:999px;font-size:28px;font-weight:700;color:var(--g)}
+.lbl{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.cursor{display:inline-block;width:.6em;height:1.1em;vertical-align:-.15em;background:var(--g);margin-left:4px}
+/* barras */
+.barra{position:absolute;height:64px;border-radius:8px;transform-origin:left center;transform:scaleX(0)}
+.barra.f{background:var(--g)} .barra.d{background:var(--g3)} .barra.s{background:repeating-linear-gradient(135deg,var(--g2) 0 10px,var(--g3) 10px 20px)}
+.vb{position:absolute;font-size:38px;font-weight:800;opacity:0}
+/* slider sigma */
+.trilho{position:absolute;left:460px;top:520px;width:1000px;height:8px;border-radius:4px;background:var(--g3)}
+.knob{position:absolute;left:460px;top:524px;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--g);box-shadow:0 0 24px rgba(0,255,65,.7)}
+.tk{position:absolute;top:560px;font-size:30px;font-weight:700;color:var(--mute);transform:translateX(-50%)}
+/* passos (b7) */
+.passo{position:absolute;top:420px;width:200px;height:120px;border:2px solid var(--g3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;opacity:0}
+.strike{position:absolute;left:-10px;top:50%;height:8px;width:0;background:var(--red);border-radius:4px}
+.autor{width:300px;height:300px;border-radius:24px;overflow:hidden;border:3px solid var(--g3);box-shadow:0 0 50px rgba(0,255,65,.18)}
+.autor img{width:100%;height:100%;object-fit:cover;display:block}
+/* ---- classes do vídeo 2, reaproveitadas ---- */
+.mod{position:absolute;width:440px;height:190px;border:2px solid var(--g3);border-radius:16px;background:rgba(0,10,3,.85);padding:26px 30px;opacity:0}
+.mod .n{font-size:40px;font-weight:800;color:var(--g)}
+.mod .d{font-size:22px;color:var(--mute);margin-top:10px;line-height:1.3}
+.mod .x{position:absolute;right:22px;bottom:18px;font-size:26px;font-weight:800;color:var(--red);opacity:0;letter-spacing:.08em}
+.cab{position:absolute;left:160px;top:110px;opacity:0}
+.cab .lbl{color:var(--g2)}
+.cab .h2{margin-top:6px}
+.lin{position:absolute;left:160px;width:1600px;height:64px;display:flex;align-items:center;opacity:0}
+.lin .k{width:440px;font-size:28px;font-weight:700}
+.lin .trk{position:relative;width:760px;height:44px}
+.lin .bar{position:absolute;left:0;top:0;height:44px;border-radius:6px;background:var(--g);transform-origin:left center;transform:scaleX(0)}
+.lin .v{width:200px;padding-left:24px;font-size:30px;font-weight:800}
+.lin .pop{width:200px;text-align:right;font-size:28px;font-weight:700;color:var(--mute)}
+.card2{position:absolute;top:330px;width:700px;padding:36px 40px;border:2px solid var(--g3);border-radius:18px;background:rgba(0,10,3,.88);opacity:0}
+.card2 .h3{margin-top:12px}
+.seta2{position:absolute;top:720px;font-size:90px;font-weight:800;color:var(--g);opacity:0}
+.eixo{position:absolute;left:360px;top:520px;width:1200px;height:6px;border-radius:3px;background:var(--g3)}
+.pt{position:absolute;top:523px;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--g);box-shadow:0 0 22px rgba(0,255,65,.7);opacity:0}
+.amostra{position:absolute;top:500px;width:4px;height:46px;background:var(--g2);opacity:0}
+.duelo{position:absolute;left:360px;width:1200px;height:70px;border-radius:10px;overflow:hidden;display:flex;opacity:0}
+.duelo div{height:100%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#000}
+.tagq{position:absolute;left:160px;font-size:30px;font-weight:700;opacity:0}
+.tagq b{color:var(--g)}
+.eu{position:absolute;font-size:64px;font-weight:800;color:var(--ink)}
+.vis{font-size:30px;font-weight:800}
+.quadro{position:absolute;left:160px;top:330px;width:1600px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.quadro>div{border:2px solid var(--g3);border-radius:14px;padding:22px 26px;font-size:28px;font-weight:700;opacity:0}
+.moral{position:absolute;left:200px;width:1520px;display:flex;gap:30px;align-items:baseline;opacity:0}
+.moral i{font-style:normal;font-size:56px;font-weight:800;color:var(--g);width:60px;flex:none}
+.moral span{font-size:40px;font-weight:700;line-height:1.25}
+/* ---- só do vídeo 5 ---- */
+.g3{position:absolute;display:grid;grid-template-columns:repeat(3,96px);grid-template-rows:repeat(3,96px);gap:6px;opacity:0}
+.g3 div{border:2px solid var(--g3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;color:var(--mute)}
+.g3 .mim{color:var(--g);border-color:var(--g2)}
+.balao{position:absolute;padding:22px 30px;border:2px solid var(--g2);border-radius:22px;background:rgba(0,10,3,.92);font-size:32px;font-weight:700;opacity:0}
+.balao small{display:block;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.arq{position:absolute;top:300px;width:500px;padding:30px 32px;border:2px solid var(--g3);border-radius:18px;background:rgba(0,10,3,.9);opacity:0}
+.arq .lt{font-size:72px;font-weight:800;color:var(--g)}
+.arq .le{font-size:26px;color:var(--mute);margin-top:4px}
+.arq .res{font-size:32px;font-weight:800;margin-top:22px;opacity:0}
+.arq .num{font-size:24px;color:var(--ink);margin-top:10px;opacity:0}
+.passo3{position:absolute;top:360px;width:460px;padding:26px 30px;border:2px solid var(--g3);border-radius:16px;font-size:30px;font-weight:700;opacity:0}
+.passo3 .lbl{margin-bottom:10px}
+.estr{position:absolute;top:300px;width:500px;padding:26px 30px;border:2px solid var(--g3);border-radius:16px;opacity:0}
+.estr .n{font-size:40px;font-weight:800}
+.estr .d{font-size:24px;color:var(--mute);margin-top:8px;line-height:1.35}
+</style>
+</head>
+<body>
+<div id="palco"><div id="stage">
+<canvas id="chuva" width="1920" height="1080"></canvas>
+
+<!-- ===== b1 · GANCHO ===== -->
+<div class="scene" id="s-b1">
+  <div class="g3" id="b1-g" data-frase="b1.1" style="left:810px;top:300px"><div></div><div></div><div></div><div id="b1-alvo"><span id="b1-sa" style="opacity:0">←</span></div><div class="mim" id="b1-eu">@</div><div id="b1-plan"><span id="b1-sp" style="opacity:0">→</span></div><div></div><div></div><div></div></div>
+  <svg id="b1-dedo" width="120" height="140" viewBox="0 0 120 140" style="position:absolute;left:1300px;top:120px;opacity:0"><path d="M10 10 L10 110 L36 86 L56 130 L76 120 L56 78 L92 78 Z" fill="#E8FF8A" stroke="#000" stroke-width="4"/></svg>
+  <div class="balao" id="b1-por" data-frase="b1.2" style="left:1150px;top:640px">por que você fez isso?</div>
+  <div class="balao" id="b1-resp" style="left:520px;top:700px;border-color:var(--amb)"><small>o bloco</small>…</div>
+</div>
+<div class="scene" id="s-tit">
+  <div class="center" style="flex-direction:row;gap:70px">
+    <div class="autor" id="tit-foto"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="lbl">matrix · vídeo 5</div>
+      <div class="h1 g glow" id="tit-t" style="margin-top:16px;font-size:84px">O dedo do<br>espectador</div>
+      <div class="p" id="tit-a" style="margin-top:22px;color:var(--ink)">confabulação e Bandersnatch · André Maia</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== b2 · O INTÉRPRETE ===== -->
+<div class="scene" id="s-b2">
+  <div class="cab" id="b2-cab" data-frase="b2.1"><div class="lbl">o mostrador relato</div><div class="h2">uma voz que <span class="g glow">pode errar</span></div></div>
+  <div class="g3" id="b2-g" data-frase="b2.2" style="left:200px;top:330px"><div></div><div>@</div><div></div><div></div><div class="mim">@</div><div id="b2-ac" style="border-color:var(--g)">→</div><div></div><div></div><div></div></div>
+  <div class="p" id="b2-ve" style="position:absolute;left:200px;top:660px;width:330px;opacity:0;color:var(--ink)">vê o 3×3 e a ação executada · <span class="red">não lê a mente</span></div>
+  <div class="balao" id="b2-mot" data-frase="b2.3" style="left:640px;top:360px;width:1100px"><small>o intérprete adivinha o motivo</small><span class="chip">fome</span> <span class="chip">espaço</span> <span class="chip">ambos</span> <span class="chip" style="color:var(--mute)">não sei</span></div>
+  <div class="h3" id="b2-nw" data-frase="b2.4" style="position:absolute;left:640px;top:560px;width:1120px;opacity:0">introspecção = <span class="g">percepção do próprio comportamento</span> <span class="mute" style="font-size:28px">· Nisbett & Wilson</span></div>
+  <div class="chip" id="b2-pre" data-frase="b2.5" style="position:absolute;left:640px;top:700px;opacity:0">pré-registro antes do código · ROADMAP §2.0 · commit eee9511</div>
+  <div class="h2 g glow" id="b2-ment" data-frase="b2.6" style="position:absolute;left:0;right:0;top:830px;text-align:center;opacity:0">um relato que não pode mentir não relata</div>
+  <div class="fonte" id="f-b2">fonte: nota 06</div>
+</div>
+
+<!-- ===== b3 · A CONFABULAÇÃO SELVAGEM ===== -->
+<div class="scene" id="s-b3">
+  <div class="g3" id="b3-g" data-frase="b3.1" style="left:200px;top:200px"><div></div><div></div><div></div><div class="mim">@</div><div id="b3-casa" style="border-color:var(--amb);color:var(--amb)">★</div><div style="color:var(--ink)">@</div><div></div><div></div><div></div></div>
+  <div class="p" id="b3-bar" data-frase="b3.2" style="position:absolute;left:200px;top:530px;width:330px;opacity:0;color:var(--ink)">um é <span class="red">barrado</span>: fica parado, numa ação que não escolheu</div>
+  <div class="lbl" id="b3-l" data-frase="b3.3" style="position:absolute;left:640px;top:210px;opacity:0">o intérprete, sobre os negados</div>
+  <div class="lin" id="b3-ns" style="left:640px;width:1120px;top:260px"><div class="k" style="width:300px">"não sei"</div><div class="trk" style="width:560px"><div class="bar" style="width:442px;background:var(--g2)"></div></div><div class="v">~79%</div></div>
+  <div class="lin" id="b3-cf" data-frase="b3.4" style="left:640px;width:1120px;top:340px"><div class="k" style="width:300px">confabula</div><div class="trk" style="width:560px"><div class="bar" style="width:118px;background:var(--red)"></div></div><div class="v red">~21%</div></div>
+  <div class="balao" id="b3-fic" style="left:640px;top:440px;border-color:var(--red)"><small>o intérprete, com convicção</small>"fiquei porque aqui é o melhor"</div>
+  <div class="h3" id="b3-gaz" data-frase="b3.5" style="position:absolute;left:200px;top:740px;opacity:0">Gazzaniga <span class="g glow">em estado selvagem</span> <span class="mute" style="font-size:28px">· ninguém instalou a racionalização</span></div>
+  <div class="p" id="b3-35" data-frase="b3.6" style="position:absolute;left:200px;top:840px;opacity:0;color:var(--ink)">e nas escolhas livres: <span class="amb">35% recebem "não sei"</span> · o bloco não entende as próprias decisões mais sofisticadas</div>
+  <div class="fonte" id="f-b3">fonte: nota 06 · 3 seeds, ~940 mil relatos</div>
+</div>
+
+<!-- ===== b4 · O EREMITA MUDO ===== -->
+<div class="scene" id="s-b4">
+  <div class="h3" id="b4-ap" data-frase="b4.1" style="position:absolute;left:160px;top:150px;opacity:0"><span style="position:relative">aposta: o relato sobrevive à solidão<span class="strike" id="b4-st"></span></span> <span class="red">✗ falhou</span></div>
+  <div class="g3" id="b4-g" style="left:200px;top:290px"><div></div><div></div><div></div><div></div><div class="mim">@</div><div></div><div></div><div></div><div></div></div>
+  <div id="b4-k" data-frase="b4.2" style="position:absolute;left:640px;top:300px;opacity:0"><span class="lbl">relato no eremita · κ</span><div class="h1 red" style="font-size:120px">≈ 0,005</div></div>
+  <div class="h3" id="b4-fome" data-frase="b4.3" style="position:absolute;left:640px;top:500px;opacity:0">sozinho: <span class="g">um motivo só</span> · tudo vira fome</div>
+  <div class="p" id="b4-inf" data-frase="b4.4" style="position:absolute;left:640px;top:580px;opacity:0;color:var(--ink)">o intérprete acerta sempre · <span class="amb">o que falta é informação</span></div>
+  <div class="h2 g glow" id="b4-bio" data-frase="b4.5" style="position:absolute;left:0;right:0;top:760px;text-align:center;opacity:0">o eremita não tem biografia</div>
+  <div class="fonte" id="f-b4">fonte: nota 06 §4 · 3 seeds</div>
+</div>
+
+<!-- ===== b5 · O DEDO ===== -->
+<div class="scene" id="s-b5a">
+  <div class="cab" id="b5-cab" data-frase="b5.1"><div class="lbl">bandersnatch forçado</div><div class="h2">o <span class="g glow">dedo do espectador</span></div></div>
+  <canvas id="dedos" data-frase="b5.2" width="1000" height="420" style="left:160px;top:290px;opacity:0"></canvas>
+  <div class="p" id="b5-25" style="position:absolute;left:160px;top:720px;opacity:0;color:var(--ink)"><span class="amb">■</span> ~25% das escolhas sobrescritas de fora</div>
+  <div class="chip" id="b5-det" data-frase="b5.3" style="position:absolute;left:160px;top:790px;opacity:0">hash(x, y, tick) · sem tocar o RNG · o mundo continua f(seed)</div>
+  <div class="lbl" id="b5-dl" data-frase="b5.4" style="position:absolute;left:1240px;top:300px;opacity:0">relato (κ) × fração forçada · seed 7</div>
+  <div class="lin" id="d0" style="left:1240px;width:600px;top:350px"><div class="k" style="width:110px">0</div><div class="trk" style="width:330px"><div class="bar" style="width:221px"></div></div><div class="v" style="width:140px">0,670</div></div>
+  <div class="lin" id="d16" style="left:1240px;width:600px;top:430px"><div class="k" style="width:110px">1/16</div><div class="trk" style="width:330px"><div class="bar" style="width:206px"></div></div><div class="v" style="width:140px">0,625</div></div>
+  <div class="lin" id="d4" style="left:1240px;width:600px;top:510px"><div class="k" style="width:110px">1/4</div><div class="trk" style="width:330px"><div class="bar" style="width:159px;background:var(--amb)"></div></div><div class="v" style="width:140px">0,483</div></div>
+  <div class="lin" id="d2" style="left:1240px;width:600px;top:590px"><div class="k" style="width:110px">1/2</div><div class="trk" style="width:330px"><div class="bar" style="width:97px;background:var(--red)"></div></div><div class="v red" style="width:140px">0,295</div></div>
+  <div class="fonte" id="f-b5a">fonte: nota 07 §2 · 3 seeds</div>
+</div>
+<div class="scene" id="s-b5b">
+  <div class="h3" id="b5-tres" data-frase="b5.5" style="position:absolute;left:160px;top:150px;opacity:0">três jeitos de olhar para dentro · <span class="mute">a mesma vida, o mesmo dedo</span></div>
+  <div class="arq" id="aA" style="left:160px"><div class="lt">A</div><div class="le">lê a ação</div><div class="res red" data-frase="b5.6">confabula</div><div class="num">dá motivo a ~26% das ações que nunca escolheu</div></div>
+  <div class="arq" id="aB" style="left:710px"><div class="lt">B</div><div class="le">lê o plano</div><div class="res amb" data-frase="b5.7">não percebe</div><div class="num">descreve, convicta, um passo que não aconteceu</div></div>
+  <div class="arq" id="aC" style="left:1260px"><div class="lt">C</div><div class="le">lê os dois</div><div class="res g" data-frase="b5.8">detecta</div><div class="num">99,0% dos dedos · 0 alarme falso</div></div>
+  <div class="h3" id="b5-aut" data-frase="b5.9" style="position:absolute;left:160px;top:740px;opacity:0">C detecta a discrepância · <span class="red">nunca a autoria</span></div>
+  <div class="h2 g glow" id="b5-mov" data-frase="b5.10" style="position:absolute;left:0;right:0;top:850px;text-align:center;opacity:0">de dentro: "algo me moveu"</div>
+  <div class="fonte" id="f-b5b">fonte: nota 07 §3 · 3 seeds, ~1M relatos por seed</div>
+</div>
+
+<!-- ===== b6 · O DEDO SEM RASTRO ===== -->
+<div class="scene" id="s-b6">
+  <div id="b6-1" data-frase="b6.1" style="position:absolute;left:160px;top:130px;opacity:0"><span class="h1 g glow" style="font-size:110px">~1%</span> <span class="h3 mute" style="margin-left:24px">que nem o monitor vê</span></div>
+  <div class="passo3" id="p1" data-frase="b6.2" style="left:160px"><div class="lbl">1</div>o dedo <span class="amb">impõe um alvo</span></div>
+  <div class="passo3" id="p2" style="left:730px"><div class="lbl">2</div>a física <span class="red">barra</span></div>
+  <div class="passo3" id="p3" style="left:1300px"><div class="lbl">3</div>o bloco fica <span class="g">onde o plano mandava</span></div>
+  <div class="h2" id="b6-ras" data-frase="b6.3" style="position:absolute;left:0;right:0;top:560px;text-align:center;opacity:0">a intervenção existiu · <span class="red">sem rastro</span></div>
+  <div class="h3" id="b6-nada" data-frase="b6.4" style="position:absolute;left:0;right:0;top:680px;text-align:center;opacity:0">um dedo sem consequência é, de dentro, <span class="g glow">indistinguível de nada</span></div>
+  <div class="p" id="b6-lib" data-frase="b6.5" style="position:absolute;left:200px;right:200px;top:810px;text-align:center;opacity:0;color:var(--ink)">cérebro · Libet · Matrix: "algo me moveu", sozinho, não separa a física de dentro da intervenção de fora</div>
+  <div class="fonte" id="f-b6">fonte: nota 07 §4–§5</div>
+</div>
+
+<!-- ===== b7 · O SINAL E A MENTIRA ===== -->
+<div class="scene" id="s-b7a">
+  <div class="cab" id="b7-cab" data-frase="b7.1"><div class="lbl">o relato deixa de ser epifenomenal</div><div class="h2">o sinal e <span class="g glow">a mentira</span></div></div>
+  <div class="h3" id="b7-tel" data-frase="b7.2" style="position:absolute;left:160px;top:280px;opacity:0"><span style="position:relative">telepatia: ler a intenção do vizinho<span class="strike" id="b7-st"></span></span> → <span class="g">conversa</span></div>
+  <div class="estr" id="e1" data-frase="b7.3" style="left:160px;top:380px"><div class="n g">honesto</div><div class="d">sinal = a intenção</div></div>
+  <div class="estr" id="e2" style="left:710px;top:380px"><div class="n mute">mudo</div><div class="d">não afasta ninguém do que quer</div></div>
+  <div class="estr" id="e3" style="left:1260px;top:380px"><div class="n amb">blefe</div><div class="d">gasta o aviso numa casa que não vai ocupar · o alvo fica desprotegido</div></div>
+  <div class="chip" id="b7-mul" data-frase="b7.4" style="position:absolute;left:160px;top:620px;opacity:0">nenhuma multa · o sinal só afasta os vizinhos da casa sinalizada</div>
+  <div class="p" id="b7-mb" data-frase="b7.5" style="position:absolute;left:160px;top:700px;opacity:0;color:var(--ink)">o custo da mentira é geométrico: ninguém programou "mentir é ruim"</div>
+  <div class="fonte" id="f-b7a">fonte: nota 08 §1</div>
+</div>
+<div class="scene" id="s-b7b">
+  <div class="h3" id="b7-apo" data-frase="b7.6" style="position:absolute;left:160px;top:140px;opacity:0"><span style="position:relative">aposta: canal aberto ⇒ população maior<span class="strike" id="b7-st2"></span></span> <span class="red">✗ direção errada</span></div>
+  <div class="h3" id="b7-en" data-frase="b7.7" style="position:absolute;left:160px;top:230px;opacity:0">população ≈ igual · <span class="amb">energia ~15% menor</span> · mais apertado</div>
+  <div class="lbl" id="b7-inv" data-frase="b7.8" style="position:absolute;left:160px;top:340px;opacity:0">invasão 50/50 · frequência final do honesto · 3 seeds</div>
+  <div class="lin" id="v1" style="top:390px"><div class="k">contra o mudo</div><div class="trk"><div class="bar" style="width:722px"></div></div><div class="v g">0,95–0,97</div></div>
+  <div class="lin" id="v2" style="top:470px"><div class="k">contra o blefe</div><div class="trk"><div class="bar" style="width:616px"></div></div><div class="v g">0,81–0,96</div></div>
+  <div class="h3" id="b7-50" data-frase="b7.9" style="position:absolute;left:160px;top:580px;opacity:0">50 seeds × 30 000 ticks: honesto <span class="g glow">0,898 ± 0,028</span> <span class="mute" style="font-size:28px">· domina 50/50 · fixa 0/50</span></div>
+  <div class="p" id="b7-raro" data-frase="b7.10" style="position:absolute;left:160px;top:680px;opacity:0;color:var(--ink)">blefe raro engana barato · blefe comum se estraga sozinho · <span class="amb">equilíbrio misto</span></div>
+  <div class="h2 g glow" id="b7-geo" data-frase="b7.11" style="position:absolute;left:0;right:0;top:820px;text-align:center;opacity:0">ninguém decretou. a geometria cobrou.</div>
+  <div class="fonte" id="f-b7b">fonte: nota 08 · nota 12 (50 seeds)</div>
+</div>
+
+<!-- ===== b8 · FECHO ===== -->
+<div class="scene" id="s-b8">
+  <div class="moral" id="b8-a" data-frase="b8.1" style="top:200px"><i>A</i><span>lê o corpo · <span class="red">confabula</span></span></div>
+  <div class="moral" id="b8-b" style="top:300px"><i>B</i><span>lê o plano · <span class="amb">mente sem saber</span></span></div>
+  <div class="moral" id="b8-c" style="top:400px"><i>C</i><span>lê os dois · <span class="g">percebe, mas nunca sabe quem foi</span></span></div>
+  <div class="h3" id="b8-mora" data-frase="b8.2" style="position:absolute;left:0;right:0;top:590px;text-align:center;opacity:0">a confabulação não mora só nos blocos</div>
+  <div class="h2 g glow" id="b8-med" data-frase="b8.3" style="position:absolute;left:0;right:0;top:690px;text-align:center;opacity:0">mora também em quem mede</div>
+  <div class="h3" id="b8-prox" style="position:absolute;left:0;right:0;top:860px;text-align:center;opacity:0"><span class="lbl">próximo</span> &nbsp; como eu <span class="g glow">quase me enganei</span></div>
+  <div class="fonte" id="f-b8">fonte: notas 06, 07, 08 · FILOSOFIA_v3 §4–§5</div>
+</div>
+<div class="scene" id="s-fim">
+  <div class="center" style="flex-direction:row;gap:60px">
+    <div class="autor" style="width:220px;height:220px"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="h2 g glow">matrix</div>
+      <div class="p" style="margin-top:10px;color:var(--ink)">André Maia</div>
+      <div class="p" style="margin-top:6px;font-size:24px">fontes: papers/notes 06, 07, 08, 12 · FILOSOFIA_v3 §4–§5</div>
+    </div>
+  </div>
+</div>
+
+</div></div>
+
+<script src="audio/timing.js"></script>
+<script src="../../../Treinamentos/lib/vendor/gsap-3.15.0.min.js"></script>
+<script src="../../../Treinamentos/lib/motor.js"></script>
+<script>
+Motor.config({ fps: 30, pad: 0.9 });
+Motor.cena('b1', { extra: 3.2 });
+['b2', 'b3', 'b4', 'b5', 'b6', 'b7'].forEach((b) => Motor.cena(b, {}));
+Motor.cena('b8', { extra: 4 });
+
+const PLANO = Object.fromEntries(Motor.plano().map((c) => [c.bloco, c]));
+const DURACAO = Motor.duracao();
+function frase(id) {
+  const [b, k] = id.split('.');
+  const f = (window.TIMING || {})[b]?.frases?.[k - 1];
+  if (!f) throw new Error(`TIMING sem a frase ${id} — rode python -m tts.narrar`);
+  return { t0: PLANO[b].inicio + f.t, dur: f.dur };
+}
+const at = (id) => frase(id).t0;
+const end = (id) => frase(id).t0 + frase(id).dur;
+const durF = (id) => frase(id).dur;
+const em = (id, k) => at(id) + durF(id) * k;
+const fimBloco = (b) => PLANO[b].inicio + PLANO[b].dur;
+
+const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+const EFEITOS = (window.EFEITOS = []);
+gsap.set('.scene', { autoAlpha: 0 });
+function show(sel, t, d = 0.4) { tl.to(sel, { autoAlpha: 1, duration: d }, t); }
+function hide(sel, t, d = 0.4) { tl.to(sel, { autoAlpha: 0, duration: d, ease: 'power2.in' }, t); }
+const rise = (sel, t, dy = 24, d = 0.5) => tl.fromTo(sel, { y: dy, opacity: 0 }, { y: 0, opacity: 1, duration: d }, t);
+const pop = (sel, t, d = 0.5) => tl.fromTo(sel, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: d, ease: 'back.out(1.7)' }, t);
+const fade = (sel, t, d = 0.5, v = 1) => tl.to(sel, { opacity: v, duration: d }, t);
+const barra = (sel, t, d = 0.9) => tl.fromTo(sel, { scaleX: 0 }, { scaleX: 1, duration: d, ease: 'power2.out' }, t);
+const risca = (sel, t) => tl.to(sel, { width: '105%', duration: 0.35, ease: 'power2.inOut' }, t);
+const linha = (sel, t) => { rise(sel, t, 16, 0.4); barra(sel + ' .bar', t + 0.15, 0.8); };
+const fx = { chuva: 1, dedos: 0 };
+
+// ---------- b1 · Gancho: o dedo empurra o bloco para onde ele não ia ----------
+show('#s-b1', 0.05, 0.3);
+tl.to(fx, { chuva: 0.3, duration: 1.2, ease: 'none' }, at('b1.1') - 0.2);
+pop('#b1-g', at('b1.1'), 0.5);
+tl.to('#b1-plan', { borderColor: '#00FF41', duration: 0.3 }, em('b1.1', 0.3));
+fade('#b1-sp', em('b1.1', 0.3), 0.3);
+tl.fromTo('#b1-dedo', { x: 120, y: -80, opacity: 0 }, { x: -300, y: 260, opacity: 1, duration: 1.0, ease: 'power2.inOut' }, em('b1.1', 0.45));
+tl.to('#b1-plan', { borderColor: '#0B5A1F', color: '#5FAF74', duration: 0.2 }, em('b1.1', 0.45) + 1.0);
+tl.to('#b1-alvo', { borderColor: '#E8FF8A', color: '#E8FF8A', duration: 0.2 }, em('b1.1', 0.45) + 1.0);
+fade('#b1-sa', em('b1.1', 0.45) + 1.0, 0.2);
+tl.to('#b1-sp', { opacity: 0.3, duration: 0.2 }, em('b1.1', 0.45) + 1.0);
+tl.to('#b1-dedo', { opacity: 0, duration: 0.4 }, em('b1.1', 0.45) + 1.3);
+rise('#b1-por', at('b1.2'));
+rise('#b1-resp', end('b1.2') - 0.2);
+hide('#s-b1', end('b1.2') + 1.2);
+show('#s-tit', end('b1.2') + 1.5, 0.5);
+tl.fromTo('#tit-foto', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 }, end('b1.2') + 1.6);
+rise('#tit-t', end('b1.2') + 1.8, 30, 0.7);
+rise('#tit-a', end('b1.2') + 2.2);
+tl.to(fx, { chuva: 0.1, duration: 1.0, ease: 'none' }, fimBloco('b1') - 1.2);
+hide('#s-tit', fimBloco('b1') - 0.5);
+
+// ---------- b2 · O intérprete ----------
+show('#s-b2', at('b2.1') - 0.2, 0.3);
+rise('#b2-cab', at('b2.1'));
+pop('#b2-g', at('b2.2'), 0.5);
+rise('#b2-ve', em('b2.2', 0.55));
+rise('#b2-mot', at('b2.3'));
+rise('#b2-nw', at('b2.4'));
+pop('#b2-pre', at('b2.5'));
+pop('#b2-ment', at('b2.6'), 0.6);
+fade('#f-b2', at('b2.2'));
+hide('#s-b2', at('b3.1') - 0.4);
+
+// ---------- b3 · A confabulação selvagem ----------
+show('#s-b3', at('b3.1') - 0.2, 0.3);
+pop('#b3-g', at('b3.1'), 0.5);
+tl.fromTo('#b3-casa', { scale: 1 }, { scale: 1.2, duration: 0.25, yoyo: true, repeat: 3 }, em('b3.1', 0.6));
+rise('#b3-bar', at('b3.2'));
+fade('#b3-l', at('b3.3'));
+linha('#b3-ns', at('b3.3') + 0.1);
+linha('#b3-cf', at('b3.4'));
+rise('#b3-fic', em('b3.4', 0.55));
+rise('#b3-gaz', at('b3.5'));
+rise('#b3-35', at('b3.6'));
+fade('#f-b3', at('b3.3'));
+hide('#s-b3', at('b4.1') - 0.4);
+
+// ---------- b4 · O eremita mudo ----------
+show('#s-b4', at('b4.1') - 0.2, 0.3);
+rise('#b4-ap', at('b4.1'));
+risca('#b4-st', em('b4.1', 0.8));
+tl.fromTo('#b4-ap .red', { opacity: 0 }, { opacity: 1, duration: 0.3 }, em('b4.1', 0.85));
+pop('#b4-g', at('b4.1') + 0.3, 0.5);
+pop('#b4-k', at('b4.2'));
+rise('#b4-fome', at('b4.3'));
+rise('#b4-inf', at('b4.4'));
+pop('#b4-bio', at('b4.5'), 0.7);
+fade('#f-b4', at('b4.2'));
+hide('#s-b4', at('b5.1') - 0.4);
+
+// ---------- b5 · O dedo ----------
+show('#s-b5a', at('b5.1') - 0.2, 0.3);
+rise('#b5-cab', at('b5.1'));
+fade('#dedos', at('b5.2'), 0.3);
+tl.fromTo(fx, { dedos: 0 }, { dedos: 1, duration: 1.4, ease: 'power1.out' }, at('b5.2') + 0.2);
+fade('#b5-25', em('b5.2', 0.5));
+pop('#b5-det', at('b5.3'));
+fade('#b5-dl', at('b5.4'));
+['#d0', '#d16', '#d4', '#d2'].forEach((d, i) => linha(d, at('b5.4') + 0.1 + i * 0.35));
+fade('#f-b5a', at('b5.2'));
+hide('#s-b5a', at('b5.5') - 0.4);
+show('#s-b5b', at('b5.5') - 0.2, 0.3);
+rise('#b5-tres', at('b5.5'));
+tl.fromTo(['#aA', '#aB', '#aC'], { y: 40, opacity: 0 }, { y: 0, opacity: 0.5, duration: 0.5, stagger: 0.15 }, em('b5.5', 0.4));
+[['#aA', 'b5.6'], ['#aB', 'b5.7'], ['#aC', 'b5.8']].forEach(([a, f]) => {
+  tl.to(a, { opacity: 1, borderColor: '#00B82E', duration: 0.3 }, at(f));
+  pop(a + ' .res', at(f) + 0.1, 0.4);
+  fade(a + ' .num', em(f, 0.4));
+});
+rise('#b5-aut', at('b5.9'));
+pop('#b5-mov', at('b5.10'), 0.6);
+fade('#f-b5b', at('b5.5'));
+hide('#s-b5b', at('b6.1') - 0.4);
+
+// ---------- b6 · O dedo sem rastro ----------
+show('#s-b6', at('b6.1') - 0.2, 0.3);
+rise('#b6-1', at('b6.1'));
+rise('#p1', at('b6.2'), 30); rise('#p2', em('b6.2', 0.35), 30); rise('#p3', em('b6.2', 0.62), 30);
+pop('#b6-ras', at('b6.3'), 0.6);
+rise('#b6-nada', at('b6.4'));
+rise('#b6-lib', at('b6.5'));
+fade('#f-b6', at('b6.1'));
+hide('#s-b6', at('b7.1') - 0.4);
+
+// ---------- b7 · O sinal e a mentira ----------
+show('#s-b7a', at('b7.1') - 0.2, 0.3);
+rise('#b7-cab', at('b7.1'));
+rise('#b7-tel', at('b7.2'));
+risca('#b7-st', em('b7.2', 0.55));
+rise('#e1', at('b7.3'), 30); rise('#e2', em('b7.3', 0.75), 30); rise('#e3', em('b7.3', 0.88), 30);
+pop('#b7-mul', at('b7.4'));
+tl.to('#e2', { borderColor: '#5FAF74', duration: 0.3 }, at('b7.5'));
+tl.to('#e3', { borderColor: '#E8FF8A', duration: 0.3 }, em('b7.5', 0.4));
+rise('#b7-mb', at('b7.5') + 0.1);
+fade('#f-b7a', at('b7.3'));
+hide('#s-b7a', at('b7.6') - 0.4);
+show('#s-b7b', at('b7.6') - 0.2, 0.3);
+rise('#b7-apo', at('b7.6'));
+tl.set('#b7-apo .red', { opacity: 0 }, 0);
+risca('#b7-st2', em('b7.6', 0.85));
+fade('#b7-apo .red', em('b7.6', 0.9), 0.3);
+rise('#b7-en', at('b7.7'));
+fade('#b7-inv', at('b7.8'));
+linha('#v1', at('b7.8') + 0.1); linha('#v2', em('b7.8', 0.5));
+rise('#b7-50', at('b7.9'));
+rise('#b7-raro', at('b7.10'));
+pop('#b7-geo', at('b7.11'), 0.6);
+fade('#f-b7b', at('b7.6'));
+hide('#s-b7b', at('b8.1') - 0.4);
+
+// ---------- b8 · Fecho ----------
+show('#s-b8', at('b8.1') - 0.2, 0.3);
+rise('#b8-a', at('b8.1'), 20); rise('#b8-b', em('b8.1', 0.33), 20); rise('#b8-c', em('b8.1', 0.62), 20);
+rise('#b8-mora', at('b8.2'));
+tl.to(fx, { chuva: 0.3, duration: 1.5, ease: 'none' }, at('b8.3') - 0.5);
+pop('#b8-med', at('b8.3'), 0.6);
+rise('#b8-prox', em('b8.3', 0.45));
+fade('#f-b8', at('b8.1'));
+hide('#s-b8', end('b8.3') + 2.0, 0.6);
+tl.to(fx, { chuva: 0.6, duration: 1.0, ease: 'none' }, end('b8.3') + 2.0);
+show('#s-fim', end('b8.3') + 2.6, 0.7);
+hide('#s-fim', DURACAO - 0.8, 0.7);
+tl.to(fx, { chuva: 0, duration: 0.8, ease: 'none' }, DURACAO - 0.8);
+tl.to({}, { duration: 0.01 }, DURACAO);
+
+// ---------- canvas: tudo é função pura de t ----------
+function h(a, b, c) {
+  let x = Math.imul(a | 0, 374761393) ^ Math.imul(b | 0, 668265263) ^ Math.imul(c | 0, 1274126177);
+  x = Math.imul(x ^ (x >>> 13), 1274126177);
+  return ((x ^ (x >>> 16)) >>> 0) / 4294967296;
+}
+const GLIFOS = '0123456789ABCDEFXZ:;=+*<>|¦#@%&$?';
+const chuva = document.getElementById('chuva').getContext('2d');
+const CW = 24, CH = 28, COLS = 80, ROWS = 39;
+function desenharChuva(t, alfa) {
+  chuva.clearRect(0, 0, 1920, 1080);
+  if (alfa <= 0.001) return;
+  chuva.font = '500 24px JBM';
+  chuva.textBaseline = 'top';
+  for (let c = 0; c < COLS; c++) {
+    const vel = 7 + 14 * h(c, 1, 7), rastro = 10 + Math.floor(18 * h(c, 2, 7)), ciclo = ROWS + rastro + Math.floor(20 * h(c, 3, 7));
+    const cabeca = Math.floor((t * vel + h(c, 4, 7) * ciclo)) % ciclo;
+    for (let k = 0; k < rastro; k++) {
+      const r = cabeca - k;
+      if (r < 0 || r >= ROWS) continue;
+      const g = GLIFOS[Math.floor(h(c, r, Math.floor(t * 9 + h(c, r, 5) * 9)) * GLIFOS.length)];
+      const a = (1 - k / rastro) * alfa;
+      chuva.fillStyle = k === 0 ? `rgba(200,255,210,${a})` : `rgba(0,255,65,${a * 0.75})`;
+      chuva.fillText(g, c * CW, r * CH);
+    }
+  }
+}
+// população de blocos; ~1 em 4 com a escolha sobrescrita (amarelo), escolhidos por hash, como no patch da nota 07
+const dd = document.getElementById('dedos').getContext('2d');
+function desenharDedos(p, t) {
+  dd.clearRect(0, 0, 1000, 420);
+  if (p <= 0) return;
+  dd.font = '700 30px JBM'; dd.textBaseline = 'top';
+  const passo = Math.floor(t * 2);
+  for (let i = 0; i < 120; i++) {
+    const c = i % 20, r = Math.floor(i / 20);
+    if (h(c, r, 3) > p) continue;
+    const forcado = h(c, r, passo) < 0.25;
+    dd.fillStyle = forcado ? '#E8FF8A' : '#00B82E';
+    dd.fillText('@', c * 50, r * 70);
+  }
+}
+Motor.aoQuadro = (t) => {
+  tl.seek(Math.min(t, tl.duration()), false);
+  desenharChuva(t, fx.chuva);
+  desenharDedos(fx.dedos, t);
+};
+document.fonts.load('500 24px JBM').then(() => document.fonts.ready).then(() => {
+  const img = [...document.images].map((i) => (i.complete ? Promise.resolve() : new Promise((ok) => { i.onload = i.onerror = ok; })));
+  return Promise.all(img);
+}).then(() => Motor.iniciar());
+</script>
+</body>
+</html>

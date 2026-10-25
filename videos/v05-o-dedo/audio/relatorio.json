@@ -1,0 +1,482 @@
+[
+ {
+  "bloco": "b1",
+  "frase": 1,
+  "texto": "O que acontece quando alguém de fora mexe na decisão de um bloco?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O que acontece quando alguém de fora mexe na decisão de um bloco?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 2,
+  "texto": "E depois pergunta a ele por que fez aquilo?",
+  "ok": true,
+  "nota": 0.933,
+  "faltando": [],
+  "transcricao": "E depois, pergunta ele por que fez aquilo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 1,
+  "texto": "Primeiro, eu dei aos blocos uma voz que pode errar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Primeiro eu dei aos blocos uma voz que pode errar",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 2,
+  "texto": "Um intérprete que não lê a mente do bloco. Ele vê o que um vizinho veria: as casas em volta, e a ação executada.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Um intérprete que não lê a mente do bloco. Ele vê o que um vizinho veria. As casas em volta e a ação executada.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 3,
+  "texto": "E dali adivinha o motivo. Fome, espaço, os dois, ou não sei.",
+  "ok": true,
+  "nota": 0.957,
+  "faltando": [],
+  "transcricao": "E dali adivinha motivo. Fome, espaço, os dois, ou não sei.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 4,
+  "texto": "É a tese de Nisbett e Wilson, virada código: a introspecção é a percepção do próprio comportamento.",
+  "ok": true,
+  "nota": 0.914,
+  "faltando": [],
+  "transcricao": "é a tese de Nisbet e Wilson virada a código. A introspecção é a percepção do próprio comportamento.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 5,
+  "texto": "Antes de escrever uma linha, eu registrei o que esperava, com data.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Antes de escrever uma linha, eu registrei o que esperava com data.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 6,
+  "texto": "Porque um relato que não pode mentir não relata.",
+  "ok": true,
+  "nota": 0.947,
+  "faltando": [],
+  "transcricao": "porque é um relato que não pode mentir, não relata",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 1,
+  "texto": "O mundo já faz um experimento sozinho. Quando dois blocos disputam a mesma casa, um deles é barrado.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O mundo já faz um experimento sozinho. Quando dois blocos disputam a mesma casa, um deles é barrado.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 2,
+  "texto": "Ele fica parado, numa ação que não escolheu. E o intérprete não tem como saber.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Ele fica parado numa ação que não escolheu, e o intérprete não tem como saber.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 3,
+  "texto": "Na maioria das vezes, ele admite: não sei.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Na maioria das vezes, ele admite. Não sei.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 4,
+  "texto": "Mas em cerca de um quinto dos casos, ele inventa. Diz, com convicção, um motivo que não operou.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "mas em cerca de um quinto dos casos, ele inventa. Diz, com convicção, um motivo que não operou.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 5,
+  "texto": "É Gazzaniga em estado selvagem. Ninguém instalou a racionalização. Bastou um intérprete que lê comportamento, num mundo que às vezes desobedece o plano.",
+  "ok": true,
+  "nota": 0.957,
+  "faltando": [],
+  "transcricao": "É Ghazanir em estado selvagem. Ninguém instalou a racionalização. Bastou um intérprete que lê comportamento num mundo que às vezes desobedece o plano.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 6,
+  "texto": "E tem o outro lado: um terço das escolhas livres recebe um não sei. O bloco não entende justamente as suas decisões mais sofisticadas.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E tem o outro lado. Um terço das escolhas livres recebe um não sei. O Bloco não entende justamente as suas decisões mais sofisticadas.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 1,
+  "texto": "Eu tinha apostado que o relato seria o primeiro mostrador a sobreviver à solidão. Errei.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Eu tinha apostado que o relato seria o primeiro mostrador a sobreviver à solidão. Errei.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 2,
+  "texto": "No eremita, ele cai quase a zero.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "No erimita, ele cai quase a zero.",
+  "tentativa": 3
+ },
+ {
+  "bloco": "b4",
+  "frase": 3,
+  "texto": "Sozinho, o bloco só tem um motivo. Toda decisão vira fome.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Sozinho. O bloco só tem um motivo. Toda decisão vira fome.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 4,
+  "texto": "O intérprete acerta o tempo todo. O que falta é informação.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O intérprete acerta o tempo todo, o que falta é informação.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 5,
+  "texto": "Não é que o eremita não saiba falar. É que ele não tem biografia.",
+  "ok": true,
+  "nota": 0.929,
+  "faltando": [],
+  "transcricao": "Não é que o Erimita não saiba falar, é que ele não tem biografia.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 1,
+  "texto": "Então eu coloquei o dedo do espectador.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então eu coloquei o dedo do espectador.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 2,
+  "texto": "Em cerca de um quarto dos blocos, alguém de fora sobrescreve a escolha. Como em Bandersnatch: quem assiste decide.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Em cerca de um quarto dos blocos, alguém de fora sobre escreve a escolha. Como em Bandersnatch, quem assiste decide.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 3,
+  "texto": "Tudo determinístico. A mesma seed, o mesmo dedo.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Tudo determinístico. A mesma sídia, o mesmo dedo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 4,
+  "texto": "Quanto mais dedo, pior o relato. Com metade das escolhas forçadas, ele vale menos da metade.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Quanto mais dedo, pior o relato. Com metade das escolhas forçadas, ele vale menos da metade.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 5,
+  "texto": "Aí eu comparei três jeitos de olhar para dentro, sob a mesma intervenção.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Aí eu comparei três jeitos de olhar pra dentro sob a mesma intervenção.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 6,
+  "texto": "O que lê a ação confabula. Nomeia um motivo para um quarto das ações que o bloco nunca escolheu.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "O que lê a ação com fabula. Nomeia um motivo para um quarto das ações que o bloco nunca escolheu.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b5",
+  "frase": 7,
+  "texto": "O que lê só o plano não percebe nada. Descreve, convicto, um passo que não aconteceu.",
+  "ok": true,
+  "nota": 0.938,
+  "faltando": [],
+  "transcricao": "O que ler só o plano não percebe nada. Descreve, convicto, um passo que não aconteceu.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 8,
+  "texto": "E o que lê tanto a ação quanto o plano detecta. Noventa e nove por cento dos dedos, e nenhum alarme falso.",
+  "ok": true,
+  "nota": 0.933,
+  "faltando": [],
+  "transcricao": "e o que lhe é tanto a ação quanto o plano detecta, 99% dos dedos e nenhum alarme falso.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 9,
+  "texto": "Mas nem ele sabe de quem é o dedo. Detecta a discrepância. Nunca a autoria.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Mas nem ele sabe de quem é o dedo. Detecta a discrepância. Nunca a autoria",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 10,
+  "texto": "De dentro, a física e o espectador são a mesma coisa: algo me moveu.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "De dentro, a física e o espectador são a mesma coisa. Algo me moveu.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 1,
+  "texto": "E sobra um por cento que nem esse monitor vê.",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "que sobra 1% que nem esse monitor vê.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 2,
+  "texto": "O dedo impôs um alvo, a física barrou, e o bloco terminou exatamente onde o próprio plano mandava.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O dedo impôs um alvo, a física barrou, e o bloco terminou exatamente onde o próprio plano mandava.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 3,
+  "texto": "A intervenção existiu, e não deixou rastro.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A intervenção existiu e não deixou rastro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 4,
+  "texto": "Um dedo sem consequência é, de dentro, indistinguível de nada.",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "Um dedo sem consequência é de dentro indesquimgível de nada.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 5,
+  "texto": "Num cérebro, num experimento de Libet, numa Matrix: a sensação de que algo me moveu, sozinha, não separa a física de dentro da intervenção de fora.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Num cérebro, num experimento de Libet, numa Matrix, a sensação de que algo me moveu sozinha não separa a física de dentro da intervenção de fora.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 1,
+  "texto": "Até aqui, o relato só era medido. Ninguém o ouvia.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Até aqui, o relato só era medido, ninguém o ouvia.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 2,
+  "texto": "E os blocos tinham telepatia: liam direto a intenção dos vizinhos. Troquei a telepatia por conversa.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e os blocos tinham telepatia. Liam direto a intenção dos vizinhos. Troquei a telepatia por conversa.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 3,
+  "texto": "Cada bloco emite um sinal sobre o que pretende fazer, e os vizinhos leem. A estratégia de fala passa a ser herdada: honesto, mudo ou blefe.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Cada bloco emite um sinal sobre o que pretende fazer e os vizinhos leem. A estratégia de fala passa a ser herdada. Honesto, mudo ou blefe.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 4,
+  "texto": "Nenhuma multa para quem mente. O sinal só afasta os vizinhos da casa sinalizada.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Nenhuma multa para quem mente. O sinal só afasta os vizinhos da casa sinalizada.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 5,
+  "texto": "O mudo abre mão de afastar alguém. O blefe gasta o aviso numa casa que não vai ocupar, e deixa o alvo verdadeiro desprotegido.",
+  "ok": true,
+  "nota": 0.939,
+  "faltando": [],
+  "transcricao": "O Mudo abre mão de afastar alguém. O Bleff gasta o aviso numa casa que não vai ocupar e deixa o alvo verdadeiro e desprotegido.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 6,
+  "texto": "Uma das minhas apostas errou de direção. Eu achei que a conversa aumentaria a população. Não aumentou.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Uma das minhas apostas errou de direção. Eu achei que a conversa aumentaria a população. Não aumentou.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 7,
+  "texto": "O que mudou foi a energia. Com o canal aberto, todo mundo vive mais apertado.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O que mudou foi a energia. Com o canal aberto, todo mundo vive mais apertado.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 8,
+  "texto": "E a honestidade venceu. Contra o silêncio e contra o blefe, nas três seeds.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "e a honestidade venceu. Contra o silêncio e contra o BLEF nas três SIDS.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 9,
+  "texto": "Mas não fixou. Em cinquenta seeds de trinta mil passos, os honestos ficam em torno de noventa por cento. E o resto não some.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Mas não fixou. Em 50 seeds de 30 mil passos, os honestos ficam em torno de 90%. E o resto não some.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 10,
+  "texto": "Num mar de honestos, um blefe raro engana barato. Comum, ele se estraga sozinho.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "No Mar de Honestos, um brefe raro engana barato. Comum, ele se estraga sozinho.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b7",
+  "frase": 11,
+  "texto": "Ninguém decretou que mentir é errado. A geometria cobrou.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "Ninguém decretou que mentira é errado. A geometria cobrou.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 1,
+  "texto": "Quem lê o corpo confabula. Quem lê o plano mente sem saber. Quem lê os dois percebe, mas nunca sabe quem foi.",
+  "ok": true,
+  "nota": 0.933,
+  "faltando": [],
+  "transcricao": "Quem lê o corpo com fabula. Quem lê o plano mente sem saber. Quem lê os dois percebe, mas nunca sabe quem foi.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 2,
+  "texto": "E a confabulação não mora só nos blocos.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e a confabulação não mora só nos blocos",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 3,
+  "texto": "Ela também mora em quem mede. Na próxima: como eu quase me enganei.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Ela também mora em quem mede. Na próxima, como eu quase me enganei.",
+  "tentativa": 1
+ }
+]

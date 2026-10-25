@@ -1,0 +1,73 @@
+{
+  "episodio": "Matrix · Vídeo 5 — O dedo do espectador: confabulação e Bandersnatch",
+  "voz": { "provedor": "fish", "voz": "95a171ec7eb84829a20f718475d6522a", "velocidade": 1.0, "extenso": true, "opcoes": { "modo": "free" } },
+  "pausa_frase": 0.5,
+  "tentativas": 5,
+  "limiar": 0.85,
+  "blocos": [
+    { "id": "b1", "cena": "Gancho", "falas": [
+      { "texto": "O que acontece quando alguém de fora mexe na decisão de um bloco?" },
+      { "texto": "E depois pergunta a ele por que fez aquilo?", "pausa_depois": 1.2 }
+    ]},
+    { "id": "b2", "cena": "O intérprete", "falas": [
+      { "texto": "Primeiro, eu dei aos blocos uma voz que pode errar." },
+      { "texto": "Um intérprete que não lê a mente do bloco. Ele vê o que um vizinho veria: as casas em volta, e a ação executada." },
+      { "texto": "E dali adivinha o motivo. Fome, espaço, os dois, ou não sei." },
+      { "texto": "É a tese de Nisbett e Wilson, virada código: a introspecção é a percepção do próprio comportamento." },
+      { "texto": "Antes de escrever uma linha, eu registrei o que esperava, com data." },
+      { "texto": "Porque um relato que não pode mentir não relata." }
+    ]},
+    { "id": "b3", "cena": "A confabulação selvagem", "falas": [
+      { "texto": "O mundo já faz um experimento sozinho. Quando dois blocos disputam a mesma casa, um deles é barrado." },
+      { "texto": "Ele fica parado, numa ação que não escolheu. E o intérprete não tem como saber." },
+      { "texto": "Na maioria das vezes, ele admite: não sei." },
+      { "texto": "Mas em cerca de um quinto dos casos, ele inventa. Diz, com convicção, um motivo que não operou." },
+      { "texto": "É Gazzaniga em estado selvagem. Ninguém instalou a racionalização. Bastou um intérprete que lê comportamento, num mundo que às vezes desobedece o plano." },
+      { "texto": "E tem o outro lado: um terço das escolhas livres recebe um não sei. O bloco não entende justamente as suas decisões mais sofisticadas." }
+    ]},
+    { "id": "b4", "cena": "O eremita mudo", "falas": [
+      { "texto": "Eu tinha apostado que o relato seria o primeiro mostrador a sobreviver à solidão. Errei." },
+      { "texto": "No eremita, ele cai quase a zero." },
+      { "texto": "Sozinho, o bloco só tem um motivo. Toda decisão vira fome." },
+      { "texto": "O intérprete acerta o tempo todo. O que falta é informação." },
+      { "texto": "Não é que o eremita não saiba falar. É que ele não tem biografia.", "pausa_depois": 1.0 }
+    ]},
+    { "id": "b5", "cena": "O dedo", "falas": [
+      { "texto": "Então eu coloquei o dedo do espectador." },
+      { "texto": "Em cerca de um quarto dos blocos, alguém de fora sobrescreve a escolha. Como em Bandersnatch: quem assiste decide." },
+      { "texto": "Tudo determinístico. A mesma seed, o mesmo dedo." },
+      { "texto": "Quanto mais dedo, pior o relato. Com metade das escolhas forçadas, ele vale menos da metade." },
+      { "texto": "Aí eu comparei três jeitos de olhar para dentro, sob a mesma intervenção." },
+      { "texto": "O que lê a ação confabula. Nomeia um motivo para um quarto das ações que o bloco nunca escolheu." },
+      { "texto": "O que lê só o plano não percebe nada. Descreve, convicto, um passo que não aconteceu." },
+      { "texto": "E o que lê tanto a ação quanto o plano detecta. Noventa e nove por cento dos dedos, e nenhum alarme falso." },
+      { "texto": "Mas nem ele sabe de quem é o dedo. Detecta a discrepância. Nunca a autoria." },
+      { "texto": "De dentro, a física e o espectador são a mesma coisa: algo me moveu." }
+    ]},
+    { "id": "b6", "cena": "O dedo sem rastro", "falas": [
+      { "texto": "E sobra um por cento que nem esse monitor vê." },
+      { "texto": "O dedo impôs um alvo, a física barrou, e o bloco terminou exatamente onde o próprio plano mandava." },
+      { "texto": "A intervenção existiu, e não deixou rastro." },
+      { "texto": "Um dedo sem consequência é, de dentro, indistinguível de nada." },
+      { "texto": "Num cérebro, num experimento de Libet, numa Matrix: a sensação de que algo me moveu, sozinha, não separa a física de dentro da intervenção de fora.", "pausa_depois": 1.0 }
+    ]},
+    { "id": "b7", "cena": "O sinal e a mentira", "falas": [
+      { "texto": "Até aqui, o relato só era medido. Ninguém o ouvia." },
+      { "texto": "E os blocos tinham telepatia: liam direto a intenção dos vizinhos. Troquei a telepatia por conversa." },
+      { "texto": "Cada bloco emite um sinal sobre o que pretende fazer, e os vizinhos leem. A estratégia de fala passa a ser herdada: honesto, mudo ou blefe." },
+      { "texto": "Nenhuma multa para quem mente. O sinal só afasta os vizinhos da casa sinalizada." },
+      { "texto": "O mudo abre mão de afastar alguém. O blefe gasta o aviso numa casa que não vai ocupar, e deixa o alvo verdadeiro desprotegido." },
+      { "texto": "Uma das minhas apostas errou de direção. Eu achei que a conversa aumentaria a população. Não aumentou." },
+      { "texto": "O que mudou foi a energia. Com o canal aberto, todo mundo vive mais apertado." },
+      { "texto": "E a honestidade venceu. Contra o silêncio e contra o blefe, nas três seeds." },
+      { "texto": "Mas não fixou. Em cinquenta seeds de trinta mil passos, os honestos ficam em torno de noventa por cento. E o resto não some." },
+      { "texto": "Num mar de honestos, um blefe raro engana barato. Comum, ele se estraga sozinho." },
+      { "texto": "Ninguém decretou que mentir é errado. A geometria cobrou." }
+    ]},
+    { "id": "b8", "cena": "Fecho", "falas": [
+      { "texto": "Quem lê o corpo confabula. Quem lê o plano mente sem saber. Quem lê os dois percebe, mas nunca sabe quem foi." },
+      { "texto": "E a confabulação não mora só nos blocos." },
+      { "texto": "Ela também mora em quem mede. Na próxima: como eu quase me enganei.", "pausa_depois": 1.0 }
+    ]}
+  ]
+}

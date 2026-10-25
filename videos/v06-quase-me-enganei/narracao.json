@@ -1,0 +1,76 @@
+{
+  "episodio": "Matrix · Vídeo 6 — Como eu quase me enganei",
+  "voz": { "provedor": "fish", "voz": "95a171ec7eb84829a20f718475d6522a", "velocidade": 1.0, "extenso": true, "opcoes": { "modo": "free" } },
+  "pausa_frase": 0.5,
+  "tentativas": 5,
+  "limiar": 0.85,
+  "blocos": [
+    { "id": "b1", "cena": "Gancho", "falas": [
+      { "texto": "Depois de duas horas e catorze minutos de simulação, meu script imprimiu: confirma." },
+      { "texto": "Estava errado. E eu quase publiquei.", "pausa_depois": 1.2 }
+    ]},
+    { "id": "b2", "cena": "O arrependimento", "falas": [
+      { "texto": "A pergunta era sobre arrependimento." },
+      { "texto": "Quando um bloco perde uma disputa, às vezes a segunda melhor casa estava livre. Ele podia mesmo ter ido para lá." },
+      { "texto": "Esse contrafactual é verificável. E eu dei aos blocos uma memória dele: o remorso." },
+      { "texto": "Um traço herdado decide quanto o remorso pesa na decisão seguinte. E em que direção." },
+      { "texto": "Eu apostei que a seleção ia premiar quem aprende com o erro: peso positivo." },
+      { "texto": "Nas três seeds, a evolução foi para o outro lado. Peso negativo." },
+      { "texto": "Então eu precisava saber: isso é seleção de verdade, ou só deriva?" }
+    ]},
+    { "id": "b3", "cena": "O efeito fundador", "falas": [
+      { "texto": "O teste é um duelo. Metade da população com um valor, metade com o outro. E de novo, com os lados trocados." },
+      { "texto": "Se o mesmo valor vence nas duas montagens, é sinal. Se vence sempre o mesmo lado, é efeito fundador: quem chegou primeiro domina." },
+      { "texto": "Em cinco de seis corridas, venceu o mesmo lado." },
+      { "texto": "Três seeds não decidem. Então eu pré-registrei dez, com o critério escrito antes: sete ou mais, confirma." }
+    ]},
+    { "id": "b4", "cena": "O bug", "falas": [
+      { "texto": "Duas horas e catorze minutos depois, o script disse: confirma. Nove de dez." },
+      { "texto": "Revertia a conclusão anterior. E era o resultado que eu queria." },
+      { "texto": "Antes de aceitar, eu conferi o classificador linha a linha, contra um caso que eu já tinha resolvido à mão." },
+      { "texto": "A fórmula de uma das montagens estava invertida. Uma linha." },
+      { "texto": "O mundo é determinístico. Então eu não rodei nada de novo: só refiz a conta, com os mesmos números." },
+      { "texto": "O veredito virou o oposto exato. Um de dez. Efeito fundador puro.", "pausa_depois": 1.0 },
+      { "texto": "Uma linha errada bastou para inverter tudo." }
+    ]},
+    { "id": "b5", "cena": "A uma seed", "falas": [
+      { "texto": "A outra comparação, peso negativo contra positivo, tinha ficado em seis de dez. Sem decidir." },
+      { "texto": "Mais vinte seeds, com o critério escrito antes. O total ficou em vinte de trinta." },
+      { "texto": "O corte era vinte e um. Faltou uma seed." },
+      { "texto": "Então, pelo critério, não decide. E mover a régua depois de ver o placar é exatamente o que eu me proibi." },
+      { "texto": "Mas havia um detalhe. Das vinte corridas que escaparam do efeito fundador, todas favoreciam o peso negativo. Nenhuma ao contrário." }
+    ]},
+    { "id": "b6", "cena": "O nulo", "falas": [
+      { "texto": "Faltava a pergunta que três notas seguidas tinham adiado: quanto disso o próprio desenho fabrica?" },
+      { "texto": "O nulo óbvio seria desligar o mecanismo. A álgebra, antes da máquina, mostrou que isso dá zero por identidade." },
+      { "texto": "Sem o traço, as duas montagens viram a mesma simulação, e o classificador nunca pode dizer sinal." },
+      { "texto": "O nulo certo é um traço ativo, mas sem direção. E duas moedas honestas concordam metade das vezes." },
+      { "texto": "Medido, o desenho sozinho fabrica trinta por cento. Contra sessenta e sete medidos." },
+      { "texto": "E eu tinha escrito, antes, que esperava não distinguir do nulo. Errei de novo. Para o lado bom." }
+    ]},
+    { "id": "b7", "cena": "A régua pareada", "falas": [
+      { "texto": "Aí veio o embaraço maior." },
+      { "texto": "O classificador decidia cada montagem separadamente, e só depois comparava os rótulos." },
+      { "texto": "Mas as duas montagens existem para ser comparadas. A diferença entre elas é cega ao efeito fundador: o viés de lado entra nas duas, e cancela na subtração." },
+      { "texto": "Essa régua pareada estava disponível desde o começo." },
+      { "texto": "Com ela, vinte e oito de trinta na direção negativa. Contra um nulo de quinze." },
+      { "texto": "E das dez corridas que o classificador tinha jogado fora, nove carregavam o mesmo sinal." }
+    ]},
+    { "id": "b8", "cena": "Fora da amostra", "falas": [
+      { "texto": "Restava o teste que não deixa espaço para eu me enganar." },
+      { "texto": "Trinta seeds novas, que nenhuma nota tinha rodado. A régua pareada como primária. E a potência calculada antes de rodar." },
+      { "texto": "Trinta de trinta.", "pausa_depois": 0.8 },
+      { "texto": "A seleção favorece o peso negativo. Pré-registrado, primário, fora da amostra." },
+      { "texto": "E uma coisa falhou: o nulo do classificador antigo, que era trinta por cento, foi a cinquenta e três nas seeds novas." },
+      { "texto": "Isso também está publicado." }
+    ]},
+    { "id": "b9", "cena": "Fecho", "falas": [
+      { "texto": "A cultura deste projeto cabe em três frases." },
+      { "texto": "Pré-registre antes de rodar." },
+      { "texto": "Meça o nulo antes de comemorar." },
+      { "texto": "E não reescreva a nota antiga. Escreva uma errata." },
+      { "texto": "As notas existem porque o conserto destrói a evidência." },
+      { "texto": "No fim, a régua mais difícil de calibrar era a minha.", "pausa_depois": 1.2 }
+    ]}
+  ]
+}

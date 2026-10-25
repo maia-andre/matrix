@@ -1,0 +1,108 @@
+{
+  "episodio": "Matrix · Vídeo 2 — Quatro modos de uma régua mentir",
+  "voz": { "provedor": "fish", "voz": "95a171ec7eb84829a20f718475d6522a", "velocidade": 1.0, "extenso": true, "opcoes": { "modo": "free" } },
+  "pausa_frase": 0.5,
+  "tentativas": 5,
+  "limiar": 0.85,
+  "blocos": [
+    { "id": "b1", "cena": "Gancho", "falas": [
+      { "texto": "Eu construí seis medidores de mente." },
+      { "texto": "Depois, tentei quebrá-los." },
+      { "texto": "Os quatro primeiros quebraram. Cada um de um jeito diferente." },
+      { "texto": "E nenhuma das falhas era visível sem tentar quebrar.", "pausa_depois": 1.2 }
+    ]},
+    { "id": "b2", "cena": "O problema", "falas": [
+      { "texto": "Suponha que você queira saber se um agente tem um modelo de mundo." },
+      { "texto": "Você cria um número de zero a um, que sobe quando o agente prevê bem. Pronto?" },
+      { "texto": "Não. Falta a pergunta que quase ninguém faz: o que esse número lê quando o agente não tem modelo nenhum?" },
+      { "texto": "Se ele não despenca, ele nunca leu o modelo. Leu outra coisa, que por acaso andava junto." },
+      { "texto": "No mundo real, quase nunca dá para responder. Ninguém arranca uma faculdade de um cérebro e roda o mesmo dia de novo." },
+      { "texto": "Aqui dá. O universo dos bloquinhos é função da seed: mesmo ruído, mesma comida, mesma ordem de eventos." },
+      { "texto": "Então eu tenho dois jeitos de testar uma régua." },
+      { "texto": "A calibração pergunta: isto acerta?" },
+      { "texto": "A ablação arranca a faculdade e pergunta: isto carrega o comportamento?" },
+      { "texto": "Parecem a mesma pergunta. Não são. E elas podem apontar para lados opostos." }
+    ]},
+    { "id": "b3", "cena": "Modo 1", "falas": [
+      { "texto": "Primeiro modo: a régua que aplaudia a extinção." },
+      { "texto": "O mostrador de modelo de mundo dava zero vírgula noventa e sete. Parecia ótimo." },
+      { "texto": "Aí eu fiz as ablações. Na época, com três seeds." },
+      { "texto": "Encurtei o plano do bloco para um passo só. A nota subiu." },
+      { "texto": "Arranquei o modelo de mundo inteiro. A nota foi a um. Perfeita." },
+      { "texto": "E a população que ganhou essa nota perfeita estava extinta." },
+      { "texto": "A ablação disse a verdade: sem modelo, a população morre. A calibração deu nota máxima a um cadáver." },
+      { "texto": "O defeito estava numa linha. A previsão lia o mapa do mundo, e não o mapa do bloco." },
+      { "texto": "E uma fotocópia do território não pode discordar dele." },
+      { "texto": "Um mapa que não pode errar não é um mapa.", "pausa_depois": 1.0 },
+      { "texto": "No conserto, a previsão passa a sair da cabeça do bloco. Sem modelo, a nota cai a zero exato." },
+      { "texto": "E o controle passa a ler zero vírgula sessenta e três. Agora o mapa pode errar. E erra." }
+    ]},
+    { "id": "b4", "cena": "Modo 2", "falas": [
+      { "texto": "Segundo modo: a âncora que andava junto." },
+      { "texto": "O mostrador de agência pergunta se a fome do bloco muda a decisão dele." },
+      { "texto": "Para medir, ele clonava o bloco em dois pontos de fome. Só que um desses pontos dependia de um traço que evolui." },
+      { "texto": "A régua se movia junto com o que ela media." },
+      { "texto": "Isso eu consertei: a sonda passou a varrer o eixo inteiro." },
+      { "texto": "Mas a agência continuava despencando ao longo da evolução. E eu pensei: a régua está contaminada." },
+      { "texto": "Antes de acusar a régua, eu congelei o traço." },
+      { "texto": "Com o traço livre, a agência cai de zero vírgula quarenta e três para zero vírgula zero cinco." },
+      { "texto": "Com o traço congelado, ela fica plana." },
+      { "texto": "A régua estava certa. Quem desaparecia era o objeto." },
+      { "texto": "Num duelo entre reflexo e agente, o reflexo toma a população inteira em uns seis mil passos." },
+      { "texto": "Os blocos continuam sentindo fome. O que a evolução apagou foi o uso da fome na decisão." },
+      { "texto": "E o registro mais desconfortável é este: minha primeira reação a uma leitura incômoda foi acusar a régua.", "pausa_depois": 1.0 }
+    ]},
+    { "id": "b5", "cena": "Modo 3", "falas": [
+      { "texto": "Terceiro modo: o nome que mentia." },
+      { "texto": "Eu tinha um mostrador chamado automodelo. Ele contava quando antecipar os rivais mudava a escolha do bloco." },
+      { "texto": "Primeiro problema: ele não intervinha em nada. Só relia o que a simulação já tinha calculado." },
+      { "texto": "Segundo: dependia de uma constante escondida." },
+      { "texto": "Variando essa força, a leitura desenha uma curva. E o valor de sempre era só um ponto no meio da subida." },
+      { "texto": "O terceiro é o que importa. Tire os rivais. Deixe o bloco sozinho." },
+      { "texto": "A leitura dá zero. Exato." },
+      { "texto": "Uma faculdade que some quando o outro some não é uma posse do bloco." },
+      { "texto": "O conserto foi trocar o nome: modelo do outro." },
+      { "texto": "E daí sai um protocolo que serve para qualquer métrica: o teste do eremita." },
+      { "texto": "Rode a medida num agente sozinho. Se ela zerar, ela mediu uma relação, não uma posse.", "pausa_depois": 1.0 }
+    ]},
+    { "id": "b6", "cena": "Modo 4", "falas": [
+      { "texto": "Quarto modo: a régua que nunca dizia não." },
+      { "texto": "O fi, minha caricatura de integração, devia dizer o quanto a decisão é mais que a soma dos motivos." },
+      { "texto": "Eu fiz quatro ablações. Encurtei o plano, apaguei o modelo, ceguei o bloco para os rivais, desliguei a competição." },
+      { "texto": "Nenhuma ablação levou o fi a zero. Uma até fez ele subir." },
+      { "texto": "Uma régua que nenhum teste obriga a dizer não, não está medindo nada." },
+      { "texto": "Na redefinição, eu comparo a decisão com cada motivo isolado: a comida de agora, o espaço, o mapa." },
+      { "texto": "Se um motivo sozinho reproduz a escolha, fi é zero. Integrar uma coisa só não é integrar." },
+      { "texto": "Agora há três ablações que zeram o fi, e dá para demonstrar isso antes de rodar." },
+      { "texto": "E a régua nova conta uma história: ao longo da evolução, o fi cai quase a zero." },
+      { "texto": "A seleção não apaga só a agência. Apaga a irredutibilidade da decisão." }
+    ]},
+    { "id": "b7", "cena": "O quinto modo", "falas": [
+      { "texto": "E teve um quinto modo, que eu só descobri tarde. Não era de desenho. Era de aritmética." },
+      { "texto": "No eremita, a agência tinha que dar zero. A prova algébrica estava certa." },
+      { "texto": "Mas a régua rodava em ponto flutuante de trinta e dois bits, e ali apareceu um piso." },
+      { "texto": "Recalculei a comparação em precisão dupla. Zero exato." },
+      { "texto": "Um visto da minha tabela era falso. Não por erro de conceito, mas de arredondamento." },
+      { "texto": "E o piso tinha alvo. O arredondamento não inverte ordens. Ele cria empates." },
+      { "texto": "E só vaza na régua que dá significado a um empate." }
+    ]},
+    { "id": "b8", "cena": "A prova", "falas": [
+      { "texto": "Até aqui, todos os números nasceram de três seeds. E uma seed não é um resultado." },
+      { "texto": "Então eu publiquei esses valores como pré-registro. E rodei tudo de novo, com cinquenta seeds em cada condição." },
+      { "texto": "Dez condições que tinham de dar zero. Quinhentas corridas." },
+      { "texto": "Zero violações." },
+      { "texto": "A replicação também mexeu nos números. E é para isso que ela serve." },
+      { "texto": "A extinção sem mapa, que eu tinha medido entre setenta e quatro e cento e cinco passos, foi de cinquenta e um a cento e vinte e um." },
+      { "texto": "E as minhas seeds favoritas, a sete e a quarenta e dois, eram sorteios altos em mais de um mostrador." }
+    ]},
+    { "id": "b9", "cena": "Fecho", "falas": [
+      { "texto": "Nada disso depende de o mundo ser pequeno." },
+      { "texto": "Primeiro: uma métrica de calibração pode ser satisfeita lendo o ambiente, em vez da mente do agente." },
+      { "texto": "Pergunte sempre: o que esta régua lê quando não há nada para ler?" },
+      { "texto": "Segundo: o teste do eremita. A medida que zera na solidão mediu uma relação." },
+      { "texto": "E terceiro: quando a calibração e a ablação discordam, a ablação ganha." },
+      { "texto": "Isso vale para quem mede modelos de linguagem, animais ou pacientes. Não como resposta. Como a pergunta a fazer antes." },
+      { "texto": "Na próxima: por que pensar demais deixou todo mundo mais pobre.", "pausa_depois": 1.0 }
+    ]}
+  ]
+}

@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Matrix · Quatro modos de uma régua mentir</title>
+<style>
+/* Identidade Matrix (videos/marca/): preto, verde fósforo, JetBrains Mono embutida.
+   Motor e GSAP vêm do repositório Treinamentos (../../../Treinamentos/lib), timeline PAUSADA:
+   o Motor chama tl.seek(t) quadro a quadro e as telas de canvas são desenhadas como função de t. */
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Regular.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Bold.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-ExtraBold.woff2") format("woff2");font-weight:800}
+:root{--bg:#000;--g:#00FF41;--g2:#00B82E;--g3:#0B5A1F;--g4:#062A10;--ink:#D8FFE0;--mute:#5FAF74;--red:#FF3B3B;--amb:#E8FF8A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow:hidden;background:#000;font-family:"JBM",monospace;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1300px 900px at 50% 45%,#031207 0%,#000 70%)}
+canvas{position:absolute;left:0;top:0}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.g{color:var(--g)} .red{color:var(--red)} .mute{color:var(--mute)} .ink{color:var(--ink)} .amb{color:var(--amb)}
+.glow{text-shadow:0 0 18px rgba(0,255,65,.55),0 0 2px rgba(0,255,65,.9)}
+.h1{font-weight:800;font-size:96px;line-height:1.05;letter-spacing:-.02em}
+.h2{font-weight:800;font-size:68px;line-height:1.12;letter-spacing:-.01em}
+.h3{font-weight:700;font-size:46px;line-height:1.2}
+.p{font-weight:500;font-size:32px;line-height:1.35;color:var(--mute)}
+.term{position:absolute;border:2px solid var(--g3);border-radius:14px;background:rgba(0,10,3,.88);box-shadow:0 0 60px rgba(0,255,65,.08)}
+.term .bar{height:38px;border-bottom:2px solid var(--g3);display:flex;align-items:center;gap:10px;padding:0 16px;font-size:18px;color:var(--mute)}
+.term .bar i{width:12px;height:12px;border-radius:50%;background:var(--g3)}
+.code{padding:28px 34px;font-size:40px;line-height:1.55;white-space:pre}
+.code .ln{opacity:0}
+.code .c{color:var(--mute)}
+.hl{background:rgba(0,255,65,.16);outline:2px solid var(--g);border-radius:6px}
+.fonte{position:absolute;right:60px;bottom:40px;font-size:20px;color:var(--mute);opacity:0;letter-spacing:.06em}
+.chip{display:inline-block;padding:10px 22px;border:2px solid var(--g3);border-radius:999px;font-size:28px;font-weight:700;color:var(--g)}
+.lbl{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.cursor{display:inline-block;width:.6em;height:1.1em;vertical-align:-.15em;background:var(--g);margin-left:4px}
+/* barras */
+.barra{position:absolute;height:64px;border-radius:8px;transform-origin:left center;transform:scaleX(0)}
+.barra.f{background:var(--g)} .barra.d{background:var(--g3)} .barra.s{background:repeating-linear-gradient(135deg,var(--g2) 0 10px,var(--g3) 10px 20px)}
+.vb{position:absolute;font-size:38px;font-weight:800;opacity:0}
+/* slider sigma */
+.trilho{position:absolute;left:460px;top:520px;width:1000px;height:8px;border-radius:4px;background:var(--g3)}
+.knob{position:absolute;left:460px;top:524px;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--g);box-shadow:0 0 24px rgba(0,255,65,.7)}
+.tk{position:absolute;top:560px;font-size:30px;font-weight:700;color:var(--mute);transform:translateX(-50%)}
+/* passos (b7) */
+.passo{position:absolute;top:420px;width:200px;height:120px;border:2px solid var(--g3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;opacity:0}
+.strike{position:absolute;left:-10px;top:50%;height:8px;width:0;background:var(--red);border-radius:4px}
+.autor{width:300px;height:300px;border-radius:24px;overflow:hidden;border:3px solid var(--g3);box-shadow:0 0 50px rgba(0,255,65,.18)}
+.autor img{width:100%;height:100%;object-fit:cover;display:block}
+/* ---- só do vídeo 2 ---- */
+.mod{position:absolute;width:440px;height:190px;border:2px solid var(--g3);border-radius:16px;background:rgba(0,10,3,.85);padding:26px 30px;opacity:0}
+.mod .n{font-size:40px;font-weight:800;color:var(--g)}
+.mod .d{font-size:22px;color:var(--mute);margin-top:10px;line-height:1.3}
+.mod .x{position:absolute;right:22px;bottom:18px;font-size:26px;font-weight:800;color:var(--red);opacity:0;letter-spacing:.08em}
+.cab{position:absolute;left:160px;top:110px;opacity:0}
+.cab .lbl{color:var(--g2)}
+.cab .h2{margin-top:6px}
+.lin{position:absolute;left:160px;width:1600px;height:64px;display:flex;align-items:center;opacity:0}
+.lin .k{width:440px;font-size:28px;font-weight:700}
+.lin .trk{position:relative;width:760px;height:44px}
+.lin .bar{position:absolute;left:0;top:0;height:44px;border-radius:6px;background:var(--g);transform-origin:left center;transform:scaleX(0)}
+.lin .v{width:200px;padding-left:24px;font-size:30px;font-weight:800}
+.lin .pop{width:200px;text-align:right;font-size:28px;font-weight:700;color:var(--mute)}
+.card2{position:absolute;top:330px;width:700px;padding:36px 40px;border:2px solid var(--g3);border-radius:18px;background:rgba(0,10,3,.88);opacity:0}
+.card2 .h3{margin-top:12px}
+.seta2{position:absolute;top:720px;font-size:90px;font-weight:800;color:var(--g);opacity:0}
+.eixo{position:absolute;left:360px;top:520px;width:1200px;height:6px;border-radius:3px;background:var(--g3)}
+.pt{position:absolute;top:523px;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--g);box-shadow:0 0 22px rgba(0,255,65,.7);opacity:0}
+.amostra{position:absolute;top:500px;width:4px;height:46px;background:var(--g2);opacity:0}
+.duelo{position:absolute;left:360px;width:1200px;height:70px;border-radius:10px;overflow:hidden;display:flex;opacity:0}
+.duelo div{height:100%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#000}
+.tagq{position:absolute;left:160px;font-size:30px;font-weight:700;opacity:0}
+.tagq b{color:var(--g)}
+.eu{position:absolute;font-size:64px;font-weight:800;color:var(--ink)}
+.vis{font-size:30px;font-weight:800}
+.quadro{position:absolute;left:160px;top:330px;width:1600px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.quadro>div{border:2px solid var(--g3);border-radius:14px;padding:22px 26px;font-size:28px;font-weight:700;opacity:0}
+.moral{position:absolute;left:200px;width:1520px;display:flex;gap:30px;align-items:baseline;opacity:0}
+.moral i{font-style:normal;font-size:56px;font-weight:800;color:var(--g);width:60px;flex:none}
+.moral span{font-size:40px;font-weight:700;line-height:1.25}
+</style>
+</head>
+<body>
+<div id="palco"><div id="stage">
+<canvas id="chuva" width="1920" height="1080"></canvas>
+
+<!-- ===== b1 · GANCHO: seis mostradores, quatro quebram ===== -->
+<div class="scene" id="s-b1">
+  <div class="mod" id="m1" data-frase="b1.1" style="left:260px;top:250px"><div class="n">modelo</div><div class="d">o bloco tem um modelo de mundo?</div><div class="x">✗ quebrou</div></div>
+  <div class="mod" id="m2" style="left:740px;top:250px"><div class="n">agencia</div><div class="d">a fome muda a decisão?</div><div class="x">✗ quebrou</div></div>
+  <div class="mod" id="m3" style="left:1220px;top:250px"><div class="n">automodelo</div><div class="d">o bloco se modela?</div><div class="x">✗ quebrou</div></div>
+  <div class="mod" id="m4" style="left:260px;top:480px"><div class="n">phi</div><div class="d">a decisão integra os motivos?</div><div class="x">✗ quebrou</div></div>
+  <div class="mod" id="m5" style="left:740px;top:480px"><div class="n">relato</div><div class="d">o que ele diz bate com o que fez?</div></div>
+  <div class="mod" id="m6" style="left:1220px;top:480px"><div class="n">autocausa</div><div class="d">ele se vê mudando o mundo?</div></div>
+  <div class="h3" id="b1-q" data-frase="b1.2" style="position:absolute;left:0;right:0;top:120px;text-align:center;opacity:0">depois, <span class="red">tentei quebrá-los</span></div>
+  <div class="h3" id="b1-inv" data-frase="b1.4" style="position:absolute;left:0;right:0;top:780px;text-align:center;opacity:0">nenhuma falha era visível <span class="g glow">sem tentar quebrar</span></div>
+  <div class="fonte" id="f-b1">fonte: Paper 1, resumo</div>
+</div>
+<div class="scene" id="s-tit">
+  <div class="center" style="flex-direction:row;gap:70px">
+    <div class="autor" id="tit-foto"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="lbl">matrix · vídeo 2</div>
+      <div class="h1 g glow" id="tit-t" style="margin-top:16px;font-size:84px">Quatro modos de<br>uma régua mentir</div>
+      <div class="p" id="tit-a" style="margin-top:22px;color:var(--ink)">André Maia</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== b2 · O PROBLEMA ===== -->
+<div class="scene" id="s-b2a">
+  <div class="h2" id="b2-q" data-frase="b2.1" style="position:absolute;left:0;right:0;top:170px;text-align:center;opacity:0">o agente tem um <span class="g glow">modelo de mundo</span>?</div>
+  <div id="b2-num" data-frase="b2.2" style="position:absolute;left:0;right:0;top:320px;text-align:center;opacity:0">
+    <span class="lbl">modelo</span>
+    <div class="h1 g glow" style="font-size:140px;margin-top:6px">0,97</div>
+    <div class="p" id="b2-pronto">pronto?</div>
+  </div>
+  <div class="h3" id="b2-per" data-frase="b2.3" style="position:absolute;left:200px;right:200px;top:660px;text-align:center;opacity:0">o que esse número lê quando o agente <span class="g glow">não tem modelo nenhum</span>?</div>
+  <div class="p" id="b2-desp" data-frase="b2.4" style="position:absolute;left:0;right:0;top:820px;text-align:center;opacity:0;color:var(--ink)">não despenca ⇒ <span class="red">nunca leu o modelo</span>: leu outra coisa que andava junto</div>
+</div>
+<div class="scene" id="s-b2b">
+  <div class="h3" id="b2-real" data-frase="b2.5" style="position:absolute;left:0;right:0;top:170px;text-align:center;opacity:0">mundo real: <span class="red">não dá</span> para arrancar uma faculdade e rodar o mesmo dia de novo</div>
+  <canvas id="mundo" width="1536" height="612" style="left:192px;top:270px;opacity:0"></canvas>
+  <div class="h3" id="b2-seed" data-frase="b2.6" style="position:absolute;left:0;right:0;top:900px;text-align:center;opacity:0">aqui dá: <span class="g glow">universo = f(seed)</span> <span class="mute" style="font-size:30px">· mesmo ruído · mesma comida · mesma ordem</span></div>
+  <div class="h3" id="b2-dois" data-frase="b2.7" style="position:absolute;left:0;right:0;top:190px;text-align:center;opacity:0">dois jeitos de testar uma régua</div>
+  <div class="card2" id="b2-cal" data-frase="b2.8" style="left:200px"><div class="lbl">calibração</div><div class="h3">isto <span class="g">acerta</span>?</div><div class="p" style="margin-top:12px">compara a previsão com o que aconteceu</div></div>
+  <div class="card2" id="b2-abl" data-frase="b2.9" style="left:1020px"><div class="lbl">ablação</div><div class="h3">isto <span class="g">carrega o comportamento</span>?</div><div class="p" style="margin-top:12px">arranca a faculdade e roda o mesmo mundo</div></div>
+  <div class="seta2" id="b2-s1" data-frase="b2.10" style="left:500px">←</div>
+  <div class="seta2" id="b2-s2" style="left:1330px">→</div>
+  <div class="h3" id="b2-op" style="position:absolute;left:0;right:0;top:860px;text-align:center;opacity:0">podem apontar para <span class="red">lados opostos</span></div>
+  <div class="fonte" id="f-b2">fonte: Paper 1 §1–§3</div>
+</div>
+
+<!-- ===== b3 · MODO 1: a régua que aplaudia a extinção ===== -->
+<div class="scene" id="s-b3a">
+  <div class="cab" id="b3-cab" data-frase="b3.1"><div class="lbl">modo 1 · modelo</div><div class="h2">a régua que <span class="g glow">aplaudia a extinção</span></div></div>
+  <div class="chip" id="b3-3s" data-frase="b3.3" style="position:absolute;right:160px;top:250px;opacity:0;color:var(--amb);border-color:#4d5a1a">3 seeds · main.c da época</div>
+  <div class="lin" id="r-ctl" data-frase="b3.2" style="top:340px"><div class="k">controle</div><div class="trk"><div class="bar" style="width:713px"></div></div><div class="v g">0,973</div><div class="pop">312 blocos</div></div>
+  <div class="lin" id="r-sol" style="top:440px"><div class="k">cego aos rivais</div><div class="trk"><div class="bar" style="width:578px;background:var(--g2)"></div></div><div class="v">0,789</div><div class="pop">314 blocos</div></div>
+  <div class="lin" id="r-h1" data-frase="b3.4" style="top:540px"><div class="k">plano de 1 passo</div><div class="trk"><div class="bar" style="width:728px"></div></div><div class="v g">0,994 ↑</div><div class="pop">321 blocos</div></div>
+  <div class="lin" id="r-pv0" data-frase="b3.5" style="top:640px"><div class="k">sem modelo de mundo</div><div class="trk"><div class="bar" style="width:733px"></div></div><div class="v g glow">1,000 ↑↑</div><div class="pop" id="r-ext" data-frase="b3.6" style="color:var(--red);font-size:36px;font-weight:800">extinta</div></div>
+  <div class="h3" id="b3-cad" data-frase="b3.7" style="position:absolute;left:160px;right:160px;top:800px;opacity:0">ablação: <span class="red">a população morre</span> · calibração: <span class="g">nota máxima a um cadáver</span></div>
+  <div class="fonte" id="f-b3a">fonte: Paper 1 §4 · nota 01 · 3 seeds, main.c da época</div>
+</div>
+<div class="scene" id="s-b3b">
+  <div class="term" id="b3-cod" data-frase="b3.8" style="left:260px;top:150px;width:1400px;opacity:0">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">main.c · a sonda antiga</span></div>
+    <div class="code" style="font-size:36px">pred = menor(<span id="b3-com">comida[y][x]</span>, INGESTAO);</div>
+  </div>
+  <div class="p" id="b3-mund" style="position:absolute;left:260px;top:340px;opacity:0;color:var(--ink)"><span class="g">comida[][]</span> é o mundo, <span class="red">não a cabeça do bloco</span></div>
+  <div class="p" id="b3-foto" data-frase="b3.9" style="position:absolute;left:260px;top:400px;opacity:0">uma fotocópia do território não pode discordar dele</div>
+  <div class="h2 g glow" id="b3-mapa" data-frase="b3.10" style="position:absolute;left:0;right:0;top:500px;text-align:center;opacity:0">um mapa que não pode errar<br>não é um mapa</div>
+  <div class="term" id="b3-fix" data-frase="b3.11" style="left:260px;top:700px;width:1400px;opacity:0">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">o conserto</span></div>
+    <div class="code" style="font-size:34px;padding:20px 34px">pred = <span class="g">prever_valor(alvo, bloco)</span>;  <span class="c">// sem modelo ⇒ 0,000 exato</span></div>
+  </div>
+  <div class="h3" id="b3-063" data-frase="b3.12" style="position:absolute;left:0;right:0;top:900px;text-align:center;opacity:0">controle: <span class="g">0,63</span> · o mapa agora pode errar. <span class="g glow">e erra.</span></div>
+  <div class="fonte" id="f-b3b">fonte: Paper 1 §4 · nota 01</div>
+</div>
+
+<!-- ===== b4 · MODO 2: a âncora que andava junto ===== -->
+<div class="scene" id="s-b4a">
+  <div class="cab" id="b4-cab" data-frase="b4.1"><div class="lbl">modo 2 · agencia</div><div class="h2">a âncora que <span class="g glow">andava junto</span></div></div>
+  <div class="h3" id="b4-q" data-frase="b4.2" style="position:absolute;left:160px;top:300px;opacity:0">a <span class="g">fome</span> do bloco muda a decisão?</div>
+  <div class="eixo" id="b4-eixo" data-frase="b4.3" style="opacity:0"></div>
+  <div class="p" id="b4-el" style="position:absolute;left:360px;top:560px;opacity:0">faminto</div>
+  <div class="p" id="b4-er" style="position:absolute;left:1450px;top:560px;opacity:0">saciado</div>
+  <div class="pt" id="b4-p1" style="left:1560px"></div>
+  <div class="pt" id="b4-p2" style="left:470px;background:var(--amb);box-shadow:0 0 22px rgba(232,255,138,.7)"></div>
+  <div class="p" id="b4-urg" style="position:absolute;left:360px;top:420px;opacity:0;color:var(--amb)">este ponto depende de <b>urgencia</b>, um traço que evolui</div>
+  <div class="h3" id="b4-mov" data-frase="b4.4" style="position:absolute;left:160px;top:660px;opacity:0">a régua se movia <span class="red">junto com o que media</span></div>
+  <div class="h3" id="b4-fix" data-frase="b4.5" style="position:absolute;left:160px;top:780px;opacity:0">conserto: <span class="g">varrer o eixo inteiro</span> <span class="mute" style="font-size:30px">· 33 amostras · controle 0,388 → 0,435</span></div>
+  <div class="fonte" id="f-b4a">fonte: Paper 1 §5 · nota 03 · 3 seeds</div>
+</div>
+<div class="scene" id="s-b4b">
+  <div class="h3" id="b4-cont" data-frase="b4.6" style="position:absolute;left:160px;top:120px;font-size:36px;opacity:0">a agência despencava · <span class="amb">+0,98</span> com um traço que evolui ⇒ <span class="red">contaminada?</span></div>
+  <div class="chip" id="b4-r4" data-frase="b4.7" style="position:absolute;left:160px;top:200px;opacity:0">regra 4 · antes de acusar a régua, congele o traço</div>
+  <svg id="b4-graf" data-frase="b4.8" width="1200" height="480" viewBox="0 0 1200 480" style="position:absolute;left:160px;top:290px;opacity:0;overflow:visible">
+    <line x1="80" y1="420" x2="1100" y2="420" stroke="#0B5A1F" stroke-width="3"/>
+    <line x1="80" y1="20" x2="80" y2="420" stroke="#0B5A1F" stroke-width="3"/>
+    <text x="40" y="34" fill="#5FAF74" font-size="22" font-family="JBM" text-anchor="end">0,5</text>
+    <text x="40" y="426" fill="#5FAF74" font-size="22" font-family="JBM" text-anchor="end">0</text>
+    <text x="100" y="460" fill="#5FAF74" font-size="22" font-family="JBM">500</text><text x="420" y="460" fill="#5FAF74" font-size="22" font-family="JBM">5 000</text><text x="740" y="460" fill="#5FAF74" font-size="22" font-family="JBM">15 000</text><text x="1020" y="460" fill="#5FAF74" font-size="22" font-family="JBM">29 999 ticks</text>
+    <path id="b4-livre" pathLength="1" d="M100 76 L420 132 L740 373 L1060 381" stroke="#FF3B3B" stroke-width="7" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+    <path id="b4-cong" pathLength="1" d="M100 49 L420 31 L740 62 L1060 68" stroke="#00FF41" stroke-width="8" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+    <text id="b4-livre-t" x="1080" y="390" fill="#FF3B3B" font-size="28" font-family="JBM" font-weight="700" opacity="0">traço livre · 0,430 → 0,049</text>
+    <text id="b4-cong-t" data-frase="b4.9" x="1080" y="74" fill="#00FF41" font-size="28" font-family="JBM" font-weight="700" opacity="0">congelado · 0,464 → 0,440</text>
+  </svg>
+  <div class="h2 g glow" id="b4-obj" data-frase="b4.10" style="position:absolute;left:0;right:0;top:830px;text-align:center;opacity:0">a régua estava certa. quem sumia era o objeto.</div>
+  <div class="fonte" id="f-b4b">fonte: Paper 1 §5 · nota 03 · 3 seeds, 30 000 ticks</div>
+</div>
+<div class="scene" id="s-b4c">
+  <div class="h3" id="b4-duel" data-frase="b4.11" style="position:absolute;left:360px;top:200px;opacity:0">invasão · 50% reflexo × 50% agente</div>
+  <div class="duelo" id="b4-dl" style="top:300px"><div id="b4-ref" style="width:50%;background:var(--red)">reflexo</div><div id="b4-age" style="width:50%;background:var(--g)">agente</div></div>
+  <div class="p" id="b4-6000" style="position:absolute;left:360px;top:390px;opacity:0;color:var(--ink)">o reflexo fixa em ~6 000 ticks · frequência final 0,997 / 1,000 / 1,000</div>
+  <div id="b4-uso" data-frase="b4.12" style="position:absolute;left:360px;top:500px;display:flex;gap:30px;opacity:0"><span class="chip">✓ a fome continua</span><span class="chip" style="color:var(--red);border-color:#5a1414">✗ o uso da fome na decisão</span></div>
+  <div class="h2" id="b4-acu" data-frase="b4.13" style="position:absolute;left:200px;right:200px;top:660px;text-align:center;opacity:0">minha primeira reação a uma leitura incômoda<br>foi <span class="red">acusar a régua</span>.</div>
+  <div class="fonte" id="f-b4c">fonte: Paper 1 §5 · nota 03</div>
+</div>
+
+<!-- ===== b5 · MODO 3: o nome que mentia ===== -->
+<div class="scene" id="s-b5a">
+  <div class="cab" id="b5-cab" data-frase="b5.1"><div class="lbl">modo 3 · automodelo</div><div class="h2">o nome que <span class="g glow">mentia</span></div></div>
+  <div class="h3" id="b5-def" data-frase="b5.2" style="position:absolute;left:160px;top:290px;opacity:0">conta quando <span class="g">antecipar os rivais</span> muda a escolha</div>
+  <div class="tagq" id="b5-t1" data-frase="b5.3" style="top:400px"><b>1</b> · observação, não intervenção: <span class="mute">só relia o que o tick já tinha</span></div>
+  <div class="tagq" id="b5-t2" data-frase="b5.4" style="top:470px"><b>2</b> · uma constante escondida: <span class="amb">ANTECIPACAO = 0,5</span></div>
+  <svg id="b5-graf" data-frase="b5.5" width="1100" height="380" viewBox="0 0 1100 380" style="position:absolute;left:300px;top:560px;opacity:0;overflow:visible">
+    <line x1="60" y1="320" x2="1060" y2="320" stroke="#0B5A1F" stroke-width="3"/>
+    <text x="60" y="360" fill="#5FAF74" font-size="22" font-family="JBM">α = 0</text><text x="1000" y="360" fill="#5FAF74" font-size="22" font-family="JBM">α → ∞</text>
+    <path id="b5-curva" pathLength="1" d="M60 320 L190 97 L330 56 L500 46 L1060 45" stroke="#00FF41" stroke-width="7" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+    <line id="b5-ant" x1="330" y1="10" x2="330" y2="320" stroke="#E8FF8A" stroke-width="3" stroke-dasharray="10 8" opacity="0"/>
+    <text id="b5-ant-t" x="350" y="130" fill="#E8FF8A" font-size="26" font-family="JBM" font-weight="700" opacity="0">a sonda antiga: 0,34 · um ponto no meio da subida</text>
+  </svg>
+  <div class="fonte" id="f-b5a">fonte: Paper 1 §6 · nota 04 · seed 7</div>
+</div>
+<div class="scene" id="s-b5b">
+  <div class="h3" id="b5-so" data-frase="b5.6" style="position:absolute;left:160px;top:140px;opacity:0"><b class="g">3</b> · tire os rivais. <span class="g">deixe o bloco sozinho.</span></div>
+  <div id="b5-cena" style="position:absolute;left:560px;top:250px;width:800px;height:320px;border:2px solid var(--g3);border-radius:16px;opacity:0">
+    <span class="eu riv" style="left:110px;top:60px">@</span><span class="eu riv" style="left:620px;top:40px">@</span><span class="eu riv" style="left:180px;top:200px">@</span><span class="eu riv" style="left:560px;top:210px">@</span>
+    <span class="eu" id="b5-ere" style="left:375px;top:120px;color:var(--g)">@</span>
+  </div>
+  <div class="h1 g glow" id="b5-zero" data-frase="b5.7" style="position:absolute;left:0;right:0;top:600px;text-align:center;font-size:120px;opacity:0">0,0000</div>
+  <div class="p" id="b5-zl" style="position:absolute;left:0;right:0;top:740px;text-align:center;opacity:0">média e máximo · 3 seeds</div>
+  <div class="h3" id="b5-pos" data-frase="b5.8" style="position:absolute;left:0;right:0;top:820px;text-align:center;opacity:0">some quando o outro some ⇒ <span class="red">não é posse do bloco</span></div>
+  <div class="fonte" id="f-b5b">fonte: Paper 1 §6 · nota 04</div>
+</div>
+<div class="scene" id="s-b5c">
+  <div id="b5-nome" data-frase="b5.9" style="position:absolute;left:0;right:0;top:220px;text-align:center;opacity:0">
+    <span class="h2 mute" style="position:relative">automodelo<span class="strike" id="b5-st"></span></span>
+    <span class="h2" style="margin:0 30px">→</span>
+    <span class="h2 g glow" id="b5-novo">modelo_do_outro</span>
+  </div>
+  <div class="h2" id="b5-tere" data-frase="b5.10" style="position:absolute;left:0;right:0;top:440px;text-align:center;opacity:0">o <span class="g glow">teste do eremita</span></div>
+  <div class="h3" id="b5-reg" data-frase="b5.11" style="position:absolute;left:200px;right:200px;top:600px;text-align:center;opacity:0">rode a medida num agente sozinho.<br>zerou? ela mediu <span class="g">uma relação</span>, não <span class="red">uma posse</span>.</div>
+  <div class="fonte" id="f-b5c">fonte: Paper 1 §6 e §10</div>
+</div>
+
+<!-- ===== b6 · MODO 4: a régua que nunca dizia não ===== -->
+<div class="scene" id="s-b6a">
+  <div class="cab" id="b6-cab" data-frase="b6.1"><div class="lbl">modo 4 · phi</div><div class="h2">a régua que <span class="g glow">nunca dizia não</span></div></div>
+  <div class="h3" id="b6-def" data-frase="b6.2" style="position:absolute;left:160px;top:290px;opacity:0">Φ~ · a decisão é <span class="g">mais que a soma dos motivos</span>?</div>
+  <div class="lin" id="p1" data-frase="b6.3" style="top:380px"><div class="k">controle</div><div class="trk"><div class="bar" style="width:646px"></div></div><div class="v">0,255</div></div>
+  <div class="lin" id="p2" style="top:460px"><div class="k">plano de 1 passo</div><div class="trk"><div class="bar" style="width:666px;background:var(--amb)"></div></div><div class="v amb">0,263 ↑</div></div>
+  <div class="lin" id="p3" style="top:540px"><div class="k">sem modelo de mundo</div><div class="trk"><div class="bar" style="width:332px"></div></div><div class="v">0,131</div></div>
+  <div class="lin" id="p4" style="top:620px"><div class="k">cego aos rivais</div><div class="trk"><div class="bar" style="width:99px"></div></div><div class="v">0,039</div></div>
+  <div class="lin" id="p5" style="top:700px"><div class="k">sem competição</div><div class="trk"><div class="bar" style="width:486px"></div></div><div class="v">0,192</div></div>
+  <div class="chip" id="b6-nz" data-frase="b6.4" style="position:absolute;left:1580px;top:540px;opacity:0;color:var(--red);border-color:#5a1414">nenhuma zera</div>
+  <div class="h3" id="b6-nao" data-frase="b6.5" style="position:absolute;left:160px;right:160px;top:820px;opacity:0">nenhum teste a obriga a dizer não ⇒ <span class="red">não está medindo nada</span></div>
+  <div class="fonte" id="f-b6a">fonte: Paper 1 §7 · nota 05 · 3 seeds, main.c da época</div>
+</div>
+<div class="scene" id="s-b6b">
+  <div class="term" id="b6-cod" data-frase="b6.6" style="left:260px;top:150px;width:1400px;opacity:0">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">a redefinição</span></div>
+    <div class="code" style="font-size:40px">phi = min( d(u, <span class="g" id="b6-m1">comida</span>), d(u, <span class="g" id="b6-m2">espaco</span>), d(u, <span class="g" id="b6-m3">mapa</span>) )</div>
+  </div>
+  <div class="h3" id="b6-um" data-frase="b6.7" style="position:absolute;left:0;right:0;top:380px;text-align:center;opacity:0">um motivo sozinho reproduz a escolha ⇒ <span class="g glow">Φ~ = 0</span></div>
+  <div id="b6-zeros" data-frase="b6.8" style="position:absolute;left:0;right:0;top:500px;display:flex;justify-content:center;gap:24px;opacity:0">
+    <span class="chip">✓ eremita</span><span class="chip">✓ peso_espaco ≡ 0</span><span class="chip">✓ sem modelo</span><span class="chip" style="color:var(--amb);border-color:#4d5a1a">zeros demonstráveis antes de rodar</span>
+  </div>
+  <div class="h3" id="b6-cai" data-frase="b6.9" style="position:absolute;left:0;right:0;top:640px;text-align:center;opacity:0">30 000 ticks · Φ~ <span class="g">0,044</span> → <span class="red">0,005</span></div>
+  <div class="h2 g glow" id="b6-irr" data-frase="b6.10" style="position:absolute;left:150px;right:150px;top:770px;text-align:center;opacity:0">a seleção apaga a irredutibilidade da decisão</div>
+  <div class="fonte" id="f-b6b">fonte: Paper 1 §7 · nota 05</div>
+</div>
+
+<!-- ===== b7 · O QUINTO MODO: aritmética ===== -->
+<div class="scene" id="s-b7">
+  <div class="cab" id="b7-cab" data-frase="b7.1"><div class="lbl">o quinto modo</div><div class="h2">não era desenho. era <span class="g glow">aritmética</span>.</div></div>
+  <div class="h3" id="b7-prova" data-frase="b7.2" style="position:absolute;left:160px;top:300px;opacity:0">eremita ⇒ agencia = 0 <span class="g">· a prova em ℝ está certa ✓</span></div>
+  <div id="b7-f32" data-frase="b7.3" style="position:absolute;left:160px;top:400px;opacity:0"><span class="lbl">float32</span><div class="h1 red" style="font-size:96px">≈ 0,003–0,005</div></div>
+  <div id="b7-dbl" data-frase="b7.4" style="position:absolute;left:1000px;top:400px;opacity:0"><span class="lbl">double</span><div class="h1 g glow" style="font-size:96px">0,0000</div></div>
+  <div class="h3" id="b7-vis" data-frase="b7.5" style="position:absolute;left:160px;top:600px;opacity:0">um <span class="g">✅</span> da tabela era falso · <span class="mute">arredondamento, não conceito</span></div>
+  <div class="h2" id="b7-emp" data-frase="b7.6" style="position:absolute;left:0;right:0;top:720px;text-align:center;opacity:0">não inverte ordens. <span class="g glow">cria empates.</span></div>
+  <div class="p" id="b7-vaza" data-frase="b7.7" style="position:absolute;left:0;right:0;top:850px;text-align:center;opacity:0;color:var(--ink)">só vaza na régua que dá significado a um empate · daí a regra 6: recompute em double</div>
+  <div class="fonte" id="f-b7">fonte: Paper 1 §8 · nota 10</div>
+</div>
+
+<!-- ===== b8 · A PROVA: 50 seeds ===== -->
+<div class="scene" id="s-b8">
+  <div class="h3" id="b8-3" data-frase="b8.1" style="position:absolute;left:160px;top:120px;opacity:0">tudo isso: <span class="amb">3 seeds</span> · e <span class="g">uma seed não é um resultado</span></div>
+  <div class="chip" id="b8-pre" data-frase="b8.2" style="position:absolute;left:160px;top:200px;opacity:0">pré-registro: valores de 3 seeds publicados antes · 50 seeds por condição</div>
+  <canvas id="grade" data-frase="b8.3" width="1600" height="330" style="left:160px;top:290px;opacity:0"></canvas>
+  <div class="p" id="b8-gl" style="position:absolute;left:160px;top:630px;opacity:0">10 condições que têm de dar zero × 50 seeds = 500 corridas</div>
+  <div class="h1 g glow" id="b8-zero" data-frase="b8.4" style="position:absolute;left:0;right:0;top:420px;text-align:center;font-size:130px;opacity:0;text-shadow:0 0 40px #000,0 0 18px rgba(0,255,65,.55)">0 violações</div>
+  <div class="h3" id="b8-mex" data-frase="b8.5" style="position:absolute;left:160px;top:720px;opacity:0">a replicação também <span class="g">mexeu nos números</span>:</div>
+  <div class="p" id="b8-ext" data-frase="b8.6" style="position:absolute;left:200px;top:800px;opacity:0;color:var(--ink)">extinção sem mapa: <span class="mute" style="position:relative">74–105 ticks<span class="strike" id="b8-st"></span></span> → <span class="g">51–121 ticks</span></div>
+  <div class="p" id="b8-sort" data-frase="b8.7" style="position:absolute;left:200px;top:860px;opacity:0;color:var(--ink)">seeds 7 e 42, as canônicas: <span class="amb">sorteios altos</span></div>
+  <div class="fonte" id="f-b8">fonte: Paper 1 §9 · nota 11</div>
+</div>
+
+<!-- ===== b9 · FECHO ===== -->
+<div class="scene" id="s-b9">
+  <div class="h3 mute" id="b9-peq" data-frase="b9.1" style="position:absolute;left:200px;top:140px;opacity:0">nada disso depende de o mundo ser pequeno</div>
+  <div class="moral" id="b9-m1" data-frase="b9.2" style="top:250px"><i>1</i><span>calibração pode ser satisfeita lendo o <span class="g">ambiente</span>, não a mente</span></div>
+  <div class="p" id="b9-per" data-frase="b9.3" style="position:absolute;left:290px;top:390px;opacity:0;color:var(--amb)">o que esta régua lê quando não há nada para ler?</div>
+  <div class="moral" id="b9-m2" data-frase="b9.4" style="top:470px"><i>2</i><span>teste do eremita: zerou na solidão ⇒ <span class="g">mediu uma relação</span></span></div>
+  <div class="moral" id="b9-m3" data-frase="b9.5" style="top:600px"><i>3</i><span>calibração × ablação discordam ⇒ <span class="g glow">a ablação ganha</span></span></div>
+  <div class="p" id="b9-pont" data-frase="b9.6" style="position:absolute;left:290px;top:740px;opacity:0">modelos de linguagem · animais · pacientes — <span style="color:var(--ink)">não como resposta: como a pergunta a fazer antes</span></div>
+  <div class="h3" id="b9-prox" data-frase="b9.7" style="position:absolute;left:0;right:0;top:880px;text-align:center;opacity:0"><span class="lbl">próximo</span> &nbsp; pensar demais é um <span class="g glow">bem posicional</span></div>
+  <div class="fonte" id="f-b9">fonte: Paper 1 §10</div>
+</div>
+<div class="scene" id="s-fim">
+  <div class="center" style="flex-direction:row;gap:60px">
+    <div class="autor" style="width:220px;height:220px"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="h2 g glow">matrix</div>
+      <div class="p" style="margin-top:10px;color:var(--ink)">André Maia</div>
+      <div class="p" style="margin-top:6px;font-size:24px">fontes: Paper 1 (preprint) · papers/notes 01, 03, 04, 05, 10, 11</div>
+    </div>
+  </div>
+</div>
+
+</div></div>
+
+<script src="audio/timing.js"></script>
+<script src="../../../Treinamentos/lib/vendor/gsap-3.15.0.min.js"></script>
+<script src="../../../Treinamentos/lib/motor.js"></script>
+<script>
+Motor.config({ fps: 30, pad: 0.9 });
+Motor.cena('b1', { extra: 3.2 });
+['b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8'].forEach((b) => Motor.cena(b, {}));
+Motor.cena('b9', { extra: 4 });
+
+const PLANO = Object.fromEntries(Motor.plano().map((c) => [c.bloco, c]));
+const DURACAO = Motor.duracao();
+function frase(id) {
+  const [b, k] = id.split('.');
+  const f = (window.TIMING || {})[b]?.frases?.[k - 1];
+  if (!f) throw new Error(`TIMING sem a frase ${id} — rode python -m tts.narrar`);
+  return { t0: PLANO[b].inicio + f.t, dur: f.dur };
+}
+const at = (id) => frase(id).t0;
+const end = (id) => frase(id).t0 + frase(id).dur;
+const durF = (id) => frase(id).dur;
+const em = (id, k) => at(id) + durF(id) * k;
+const fimBloco = (b) => PLANO[b].inicio + PLANO[b].dur;
+
+const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+const EFEITOS = (window.EFEITOS = []);
+gsap.set('.scene', { autoAlpha: 0 });
+function show(sel, t, d = 0.4) { tl.to(sel, { autoAlpha: 1, duration: d }, t); }
+function hide(sel, t, d = 0.4) { tl.to(sel, { autoAlpha: 0, duration: d, ease: 'power2.in' }, t); }
+const rise = (sel, t, dy = 24, d = 0.5) => tl.fromTo(sel, { y: dy, opacity: 0 }, { y: 0, opacity: 1, duration: d }, t);
+const pop = (sel, t, d = 0.5) => tl.fromTo(sel, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: d, ease: 'back.out(1.7)' }, t);
+const fade = (sel, t, d = 0.5, v = 1) => tl.to(sel, { opacity: v, duration: d }, t);
+const barra = (sel, t, d = 0.9) => tl.fromTo(sel, { scaleX: 0 }, { scaleX: 1, duration: d, ease: 'power2.out' }, t);
+const traco = (sel, t, d = 1.2) => tl.fromTo(sel, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: d, ease: 'power1.inOut' }, t);
+const risca = (sel, t) => tl.to(sel, { width: '105%', duration: 0.35, ease: 'power2.inOut' }, t);
+// uma linha da tabela: o rótulo entra, a barra cresce, o valor aparece
+const linha = (sel, t) => { rise(sel, t, 16, 0.4); barra(sel + ' .bar', t + 0.15, 0.8); };
+
+// estado lido pelos canvas
+const fx = { chuva: 1, mundo: 0, grade: 0 };
+
+// ---------- b1 · Gancho ----------
+show('#s-b1', 0.05, 0.3);
+tl.to(fx, { chuva: 0.3, duration: 1.2, ease: 'none' }, at('b1.1') - 0.2);
+['#m1', '#m2', '#m3', '#m4', '#m5', '#m6'].forEach((m, i) => pop(m, at('b1.1') + i * 0.12, 0.45));
+rise('#b1-q', at('b1.2'));
+tl.to(['#m1', '#m2', '#m3', '#m4', '#m5', '#m6'], { x: 6, duration: 0.05, yoyo: true, repeat: 5, ease: 'none' }, em('b1.2', 0.5));
+['#m1', '#m2', '#m3', '#m4'].forEach((m, i) => {
+  const t = at('b1.3') + 0.2 + i * 0.35;
+  tl.to(m, { borderColor: '#FF3B3B', duration: 0.2 }, t);
+  tl.fromTo(m + ' .x', { scale: 2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: 'power4.in' }, t);
+  tl.to(m + ' .n', { color: '#FF3B3B', duration: 0.2 }, t);
+});
+rise('#b1-inv', at('b1.4'));
+fade('#f-b1', at('b1.1'));
+hide('#s-b1', end('b1.4') + 0.9);
+show('#s-tit', end('b1.4') + 1.2, 0.5);
+tl.fromTo('#tit-foto', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 }, end('b1.4') + 1.3);
+rise('#tit-t', end('b1.4') + 1.5, 30, 0.7);
+rise('#tit-a', end('b1.4') + 1.9);
+tl.to(fx, { chuva: 0.1, duration: 1.0, ease: 'none' }, fimBloco('b1') - 1.2);
+hide('#s-tit', fimBloco('b1') - 0.5);
+
+// ---------- b2 · O problema ----------
+show('#s-b2a', at('b2.1') - 0.2, 0.3);
+rise('#b2-q', at('b2.1'));
+pop('#b2-num', at('b2.2'), 0.6);
+tl.fromTo('#b2-pronto', { opacity: 0 }, { opacity: 1, duration: 0.3 }, em('b2.2', 0.85));
+rise('#b2-per', at('b2.3'));
+tl.to('#b2-num', { opacity: 0.25, duration: 0.4 }, at('b2.4'));
+rise('#b2-desp', at('b2.4'));
+hide('#s-b2a', at('b2.5') - 0.4);
+show('#s-b2b', at('b2.5') - 0.2, 0.3);
+rise('#b2-real', at('b2.5'));
+tl.to('#b2-real', { opacity: 0, duration: 0.3 }, at('b2.6') - 0.3);
+tl.to('#mundo', { opacity: 1, duration: 0.6 }, at('b2.6') - 0.2);
+tl.to(fx, { mundo: 1, duration: 0.6, ease: 'none' }, at('b2.6') - 0.2);
+rise('#b2-seed', at('b2.6'));
+tl.to(['#mundo', '#b2-seed'], { opacity: 0, duration: 0.4 }, at('b2.7') - 0.4);
+tl.set(fx, { mundo: 0 }, at('b2.7'));
+rise('#b2-dois', at('b2.7'));
+rise('#b2-cal', at('b2.8'), 40);
+rise('#b2-abl', at('b2.9'), 40);
+tl.fromTo('#b2-s1', { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, at('b2.10') + 0.2);
+tl.fromTo('#b2-s2', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, at('b2.10') + 0.2);
+rise('#b2-op', em('b2.10', 0.6));
+fade('#f-b2', at('b2.5'));
+hide('#s-b2b', at('b3.1') - 0.4);
+
+// ---------- b3 · Modo 1 ----------
+show('#s-b3a', at('b3.1') - 0.2, 0.3);
+rise('#b3-cab', at('b3.1'));
+linha('#r-ctl', at('b3.2'));
+pop('#b3-3s', at('b3.3'));
+linha('#r-sol', em('b3.3', 0.5));
+linha('#r-h1', at('b3.4'));
+linha('#r-pv0', at('b3.5'));
+tl.set('#r-ext', { opacity: 0 }, 0);
+tl.fromTo('#r-ext', { scale: 2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'power4.in' }, at('b3.6') + 0.1);
+tl.to('#r-pv0', { backgroundColor: 'rgba(255,59,59,.10)', duration: 0.4 }, at('b3.6') + 0.1);
+rise('#b3-cad', at('b3.7'));
+fade('#f-b3a', at('b3.3'));
+hide('#s-b3a', at('b3.8') - 0.4);
+show('#s-b3b', at('b3.8') - 0.2, 0.3);
+fade('#b3-cod', at('b3.8'));
+tl.to('#b3-com', { backgroundColor: 'rgba(255,59,59,.25)', duration: 0.3 }, em('b3.8', 0.5));
+rise('#b3-mund', em('b3.8', 0.55));
+rise('#b3-foto', at('b3.9'));
+pop('#b3-mapa', at('b3.10'), 0.7);
+tl.to(['#b3-cod', '#b3-mund', '#b3-foto'], { opacity: 0.3, duration: 0.4 }, at('b3.10'));
+tl.to('#b3-mapa', { opacity: 0.45, duration: 0.4 }, at('b3.11') - 0.2);
+rise('#b3-fix', at('b3.11'));
+rise('#b3-063', at('b3.12'));
+fade('#f-b3b', at('b3.8'));
+hide('#s-b3b', at('b4.1') - 0.4);
+
+// ---------- b4 · Modo 2 ----------
+show('#s-b4a', at('b4.1') - 0.2, 0.3);
+rise('#b4-cab', at('b4.1'));
+rise('#b4-q', at('b4.2'));
+fade('#b4-eixo', at('b4.3'), 0.4); fade(['#b4-el', '#b4-er'], at('b4.3') + 0.1);
+pop('#b4-p1', em('b4.3', 0.15), 0.4); pop('#b4-p2', em('b4.3', 0.25), 0.4);
+rise('#b4-urg', em('b4.3', 0.6));
+// o ponto da fome "faminto" anda com a urgência: a âncora coevolui
+tl.to('#b4-p2', { left: 640, duration: 0.9, yoyo: true, repeat: 3, ease: 'sine.inOut' }, em('b4.3', 0.65));
+rise('#b4-mov', at('b4.4'));
+const amostras = document.getElementById('s-b4a');
+for (let i = 0; i < 33; i++) {
+  const d = document.createElement('div'); d.className = 'amostra'; d.style.left = (360 + i * 1200 / 32 - 2) + 'px'; amostras.appendChild(d);
+  tl.to(d, { opacity: 1, duration: 0.15 }, at('b4.5') + 0.2 + i * 0.03);
+}
+tl.to(['#b4-p1', '#b4-p2', '#b4-urg'], { opacity: 0.2, duration: 0.3 }, at('b4.5') + 0.2);
+rise('#b4-fix', at('b4.5'));
+fade('#f-b4a', at('b4.3'));
+hide('#s-b4a', at('b4.6') - 0.4);
+show('#s-b4b', at('b4.6') - 0.2, 0.3);
+rise('#b4-cont', at('b4.6'));
+pop('#b4-r4', at('b4.7'));
+fade('#b4-graf', at('b4.8') - 0.1, 0.3);
+traco('#b4-livre', at('b4.8') + 0.1, 1.8); fade('#b4-livre-t', at('b4.8') + 1.6);
+traco('#b4-cong', at('b4.9'), 1.4); fade('#b4-cong-t', at('b4.9') + 0.05);
+pop('#b4-obj', at('b4.10'), 0.6);
+fade('#f-b4b', at('b4.6'));
+hide('#s-b4b', at('b4.11') - 0.4);
+show('#s-b4c', at('b4.11') - 0.2, 0.3);
+rise('#b4-duel', at('b4.11'));
+fade('#b4-dl', at('b4.11') + 0.1, 0.3);
+tl.to('#b4-ref', { width: '99.7%', duration: durF('b4.11') * 0.7, ease: 'power1.inOut' }, em('b4.11', 0.25));
+tl.to('#b4-age', { width: '0.3%', fontSize: 0, duration: durF('b4.11') * 0.7, ease: 'power1.inOut' }, em('b4.11', 0.25));
+fade('#b4-6000', end('b4.11') - 0.3);
+rise('#b4-uso', at('b4.12'));
+pop('#b4-acu', at('b4.13'), 0.7);
+fade('#f-b4c', at('b4.11'));
+hide('#s-b4c', at('b5.1') - 0.4);
+
+// ---------- b5 · Modo 3 ----------
+show('#s-b5a', at('b5.1') - 0.2, 0.3);
+rise('#b5-cab', at('b5.1'));
+rise('#b5-def', at('b5.2'));
+rise('#b5-t1', at('b5.3'));
+rise('#b5-t2', at('b5.4'));
+fade('#b5-graf', at('b5.5') - 0.1, 0.3);
+traco('#b5-curva', at('b5.5') + 0.1, 1.8);
+tl.to('#b5-ant', { opacity: 1, duration: 0.3 }, em('b5.5', 0.6));
+fade('#b5-ant-t', em('b5.5', 0.65));
+fade('#f-b5a', at('b5.3'));
+hide('#s-b5a', at('b5.6') - 0.4);
+show('#s-b5b', at('b5.6') - 0.2, 0.3);
+rise('#b5-so', at('b5.6'));
+fade('#b5-cena', at('b5.6') + 0.1, 0.3);
+tl.to('#b5-cena .riv', { opacity: 0, duration: 0.5, stagger: 0.15 }, em('b5.6', 0.6));
+pop('#b5-zero', at('b5.7'), 0.6);
+fade('#b5-zl', em('b5.7', 0.5));
+rise('#b5-pos', at('b5.8'));
+fade('#f-b5b', at('b5.6'));
+hide('#s-b5b', at('b5.9') - 0.4);
+show('#s-b5c', at('b5.9') - 0.2, 0.3);
+fade('#b5-nome', at('b5.9'), 0.3);
+tl.set('#b5-novo', { opacity: 0 }, 0);
+risca('#b5-st', em('b5.9', 0.3));
+pop('#b5-novo', em('b5.9', 0.5), 0.5);
+rise('#b5-tere', at('b5.10'));
+rise('#b5-reg', at('b5.11'));
+fade('#f-b5c', at('b5.9'));
+hide('#s-b5c', at('b6.1') - 0.4);
+
+// ---------- b6 · Modo 4 ----------
+show('#s-b6a', at('b6.1') - 0.2, 0.3);
+rise('#b6-cab', at('b6.1'));
+rise('#b6-def', at('b6.2'));
+linha('#p1', at('b6.3'));
+['#p2', '#p3', '#p4', '#p5'].forEach((p, i) => linha(p, em('b6.3', [0.3, 0.48, 0.66, 0.86][i])));
+pop('#b6-nz', at('b6.4'));
+tl.to('#p2', { backgroundColor: 'rgba(232,255,138,.08)', duration: 0.3 }, em('b6.4', 0.55));
+rise('#b6-nao', at('b6.5'));
+fade('#f-b6a', at('b6.3'));
+hide('#s-b6a', at('b6.6') - 0.4);
+show('#s-b6b', at('b6.6') - 0.2, 0.3);
+fade('#b6-cod', at('b6.6'));
+['#b6-m1', '#b6-m2', '#b6-m3'].forEach((m, i) => tl.fromTo(m, { backgroundColor: 'rgba(0,255,65,0)' }, { backgroundColor: 'rgba(0,255,65,.22)', duration: 0.25, yoyo: true, repeat: 1 }, em('b6.6', [0.58, 0.75, 0.9][i])));
+rise('#b6-um', at('b6.7'));
+rise('#b6-zeros', at('b6.8'));
+rise('#b6-cai', at('b6.9'));
+pop('#b6-irr', at('b6.10'), 0.6);
+fade('#f-b6b', at('b6.6'));
+hide('#s-b6b', at('b7.1') - 0.4);
+
+// ---------- b7 · O quinto modo ----------
+show('#s-b7', at('b7.1') - 0.2, 0.3);
+rise('#b7-cab', at('b7.1'));
+rise('#b7-prova', at('b7.2'));
+pop('#b7-f32', at('b7.3') + 0.1);
+pop('#b7-dbl', at('b7.4'));
+tl.to('#b7-f32', { opacity: 0.4, duration: 0.3 }, at('b7.4') + 0.4);
+rise('#b7-vis', at('b7.5'));
+pop('#b7-emp', at('b7.6'), 0.6);
+rise('#b7-vaza', at('b7.7'));
+fade('#f-b7', at('b7.2'));
+hide('#s-b7', at('b8.1') - 0.4);
+
+// ---------- b8 · A prova ----------
+show('#s-b8', at('b8.1') - 0.2, 0.3);
+rise('#b8-3', at('b8.1'));
+pop('#b8-pre', at('b8.2'));
+fade('#grade', at('b8.3') - 0.1, 0.3);
+tl.fromTo(fx, { grade: 0 }, { grade: 500, duration: Math.max(1.2, durF('b8.3') - 0.2), ease: 'power1.in' }, at('b8.3'));
+fade('#b8-gl', em('b8.3', 0.4));
+tl.to('#grade', { opacity: 0.35, duration: 0.3 }, at('b8.4'));
+tl.fromTo('#b8-zero', { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: 'power4.in' }, at('b8.4'));
+tl.to(['#b8-zero'], { opacity: 0.0, duration: 0.4 }, at('b8.5') - 0.2);
+tl.to('#grade', { opacity: 0.6, duration: 0.4 }, at('b8.5') - 0.2);
+rise('#b8-mex', at('b8.5'));
+rise('#b8-ext', at('b8.6'));
+risca('#b8-st', em('b8.6', 0.55));
+rise('#b8-sort', at('b8.7'));
+fade('#f-b8', at('b8.1'));
+hide('#s-b8', at('b9.1') - 0.4);
+
+// ---------- b9 · Fecho ----------
+show('#s-b9', at('b9.1') - 0.2, 0.3);
+rise('#b9-peq', at('b9.1'));
+rise('#b9-m1', at('b9.2'), 20);
+rise('#b9-per', at('b9.3'));
+rise('#b9-m2', at('b9.4'), 20);
+rise('#b9-m3', at('b9.5'), 20);
+rise('#b9-pont', at('b9.6'));
+tl.to(fx, { chuva: 0.3, duration: 1.5, ease: 'none' }, at('b9.7') - 0.5);
+rise('#b9-prox', at('b9.7'));
+fade('#f-b9', at('b9.2'));
+hide('#s-b9', end('b9.7') + 2.0, 0.6);
+tl.to(fx, { chuva: 0.6, duration: 1.0, ease: 'none' }, end('b9.7') + 2.0);
+show('#s-fim', end('b9.7') + 2.6, 0.7);
+hide('#s-fim', DURACAO - 0.8, 0.7);
+tl.to(fx, { chuva: 0, duration: 0.8, ease: 'none' }, DURACAO - 0.8);
+tl.to({}, { duration: 0.01 }, DURACAO);
+
+// ---------- canvas: tudo é função pura de t ----------
+function h(a, b, c) {
+  let x = Math.imul(a | 0, 374761393) ^ Math.imul(b | 0, 668265263) ^ Math.imul(c | 0, 1274126177);
+  x = Math.imul(x ^ (x >>> 13), 1274126177);
+  return ((x ^ (x >>> 16)) >>> 0) / 4294967296;
+}
+const GLIFOS = '0123456789ABCDEFXZ:;=+*<>|¦#@%&$?';
+const chuva = document.getElementById('chuva').getContext('2d');
+const CW = 24, CH = 28, COLS = 80, ROWS = 39;
+function desenharChuva(t, alfa) {
+  chuva.clearRect(0, 0, 1920, 1080);
+  if (alfa <= 0.001) return;
+  chuva.font = '500 24px JBM';
+  chuva.textBaseline = 'top';
+  for (let c = 0; c < COLS; c++) {
+    const vel = 7 + 14 * h(c, 1, 7), rastro = 10 + Math.floor(18 * h(c, 2, 7)), ciclo = ROWS + rastro + Math.floor(20 * h(c, 3, 7));
+    const cabeca = Math.floor((t * vel + h(c, 4, 7) * ciclo)) % ciclo;
+    for (let k = 0; k < rastro; k++) {
+      const r = cabeca - k;
+      if (r < 0 || r >= ROWS) continue;
+      const g = GLIFOS[Math.floor(h(c, r, Math.floor(t * 9 + h(c, r, 5) * 9)) * GLIFOS.length)];
+      const a = (1 - k / rastro) * alfa;
+      chuva.fillStyle = k === 0 ? `rgba(200,255,210,${a})` : `rgba(0,255,65,${a * 0.75})`;
+      chuva.fillText(g, c * CW, r * CH);
+    }
+  }
+}
+const mundo = document.getElementById('mundo').getContext('2d');
+const MW = 64, MH = 18, MX = 24, MY = 34, DENS = ' .:-=+*#';
+function ruido(x, y) {
+  const gx = Math.floor(x / 8), gy = Math.floor(y / 6), fx_ = (x % 8) / 8, fy = (y % 6) / 6;
+  const v = (i, j) => h(gx + i, gy + j, 20260628);
+  const a = v(0, 0) + (v(1, 0) - v(0, 0)) * fx_, b = v(0, 1) + (v(1, 1) - v(0, 1)) * fx_;
+  return a + (b - a) * fy;
+}
+function desenharMundo(t, alfa) {
+  mundo.clearRect(0, 0, 1536, 612);
+  if (alfa <= 0.001) return;
+  mundo.font = '500 26px JBM';
+  mundo.textBaseline = 'top';
+  mundo.globalAlpha = alfa;
+  const passo = Math.floor(t * 3);
+  for (let y = 0; y < MH; y++) for (let x = 0; x < MW; x++) {
+    const n = ruido(x, y), d = DENS[Math.min(DENS.length - 1, Math.floor(n * n * DENS.length * 1.3))];
+    mundo.fillStyle = `rgba(0,184,46,${0.25 + 0.5 * n})`;
+    mundo.fillText(d, x * MX, y * MY);
+  }
+  mundo.fillStyle = '#D8FFE0';
+  for (let i = 0; i < 14; i++) {
+    const x0 = Math.floor(h(i, 9, 1) * MW), y0 = Math.floor(h(i, 9, 2) * MH);
+    const x = (x0 + Math.round(4 * Math.sin(passo * 0.31 + i * 1.7)) + MW) % MW, y = (y0 + Math.round(2 * Math.cos(passo * 0.23 + i)) + MH) % MH;
+    mundo.fillText('@', x * MX, y * MY);
+  }
+  mundo.globalAlpha = 1;
+}
+// 10 linhas (condições) × 50 colunas (seeds): cada célula acende verde quando a corrida termina sem violar o zero
+const grade = document.getElementById('grade').getContext('2d');
+function desenharGrade(n) {
+  grade.clearRect(0, 0, 1600, 330);
+  for (let i = 0; i < 500; i++) {
+    const r = Math.floor(i / 50), c = i % 50, ok = i < n;
+    grade.fillStyle = ok ? '#00FF41' : '#062A10';
+    grade.globalAlpha = ok ? 0.55 + 0.45 * h(r, c, 3) : 1;
+    grade.fillRect(c * 32, r * 33, 26, 27);
+  }
+  grade.globalAlpha = 1;
+}
+Motor.aoQuadro = (t) => {
+  tl.seek(Math.min(t, tl.duration()), false);
+  desenharChuva(t, fx.chuva);
+  desenharMundo(t, fx.mundo);
+  desenharGrade(Math.floor(fx.grade));
+};
+document.fonts.load('500 24px JBM').then(() => document.fonts.ready).then(() => {
+  const img = [...document.images].map((i) => (i.complete ? Promise.resolve() : new Promise((ok) => { i.onload = i.onerror = ok; })));
+  return Promise.all(img);
+}).then(() => Motor.iniciar());
+</script>
+</body>
+</html>

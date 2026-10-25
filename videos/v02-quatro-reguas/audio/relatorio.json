@@ -1,0 +1,812 @@
+[
+ {
+  "bloco": "b1",
+  "frase": 1,
+  "texto": "Eu construí seis medidores de mente.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "eu construí seis medidores de mente.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b1",
+  "frase": 2,
+  "texto": "Depois, tentei quebrá-los.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "depois tentei quebrá-los.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 3,
+  "texto": "Os quatro primeiros quebraram. Cada um de um jeito diferente.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Os quatro primeiros quebraram. Cada um de um jeito diferente.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 4,
+  "texto": "E nenhuma das falhas era visível sem tentar quebrar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e nenhuma das falhas era visível sem tentar quebrar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 1,
+  "texto": "Suponha que você queira saber se um agente tem um modelo de mundo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "suponha que você queira saber se um agente tem um modelo de mundo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 2,
+  "texto": "Você cria um número de zero a um, que sobe quando o agente prevê bem. Pronto?",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Você cria um número de 0 a 1, que sobe quando a gente prevê bem. Pronto?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 3,
+  "texto": "Não. Falta a pergunta que quase ninguém faz: o que esse número lê quando o agente não tem modelo nenhum?",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "Não. Falta a pergunta que quase ninguém faz. O que esse número lê quando a gente não tem modelo nenhum?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 4,
+  "texto": "Se ele não despenca, ele nunca leu o modelo. Leu outra coisa, que por acaso andava junto.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Se ele não despenca, ele nunca leu o modelo. Leu outra coisa, que por acaso andava junto.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 5,
+  "texto": "No mundo real, quase nunca dá para responder. Ninguém arranca uma faculdade de um cérebro e roda o mesmo dia de novo.",
+  "ok": true,
+  "nota": 0.955,
+  "faltando": [],
+  "transcricao": "No mundo real, quase nunca dá para responder. Ninguém arranca uma faculdade de um cérebro e roda ao mesmo dia de novo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 6,
+  "texto": "Aqui dá. O universo dos bloquinhos é função da seed: mesmo ruído, mesma comida, mesma ordem de eventos.",
+  "ok": true,
+  "nota": 0.919,
+  "faltando": [],
+  "transcricao": "Aqui dá o universo dos bloquinhos é a função da SID. Mesmo ruído, mesma comida, mesma ordem de eventos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 7,
+  "texto": "Então eu tenho dois jeitos de testar uma régua.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então eu tenho dois jeitos de testar uma régua.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 8,
+  "texto": "A calibração pergunta: isto acerta?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A calibração pergunta. Isto acerta?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 9,
+  "texto": "A ablação arranca a faculdade e pergunta: isto carrega o comportamento?",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "Ablação arranca faculdade e pergunta Isto carrega o comportamento?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 10,
+  "texto": "Parecem a mesma pergunta. Não são. E elas podem apontar para lados opostos.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "parecem a mesma pergunta. Não são. E elas podem apontar para lá dos opostos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 1,
+  "texto": "Primeiro modo: a régua que aplaudia a extinção.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Primeiro modo, arrego a que aplaudia a extinção.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b3",
+  "frase": 2,
+  "texto": "O mostrador de modelo de mundo dava zero vírgula noventa e sete. Parecia ótimo.",
+  "ok": true,
+  "nota": 0.929,
+  "faltando": [],
+  "transcricao": "O amostrador de modelo de mundo dava 0,97. Parecia ótimo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 3,
+  "texto": "Aí eu fiz as ablações. Na época, com três seeds.",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "Aí eu fiz as ablações na época com três sites.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 4,
+  "texto": "Encurtei o plano do bloco para um passo só. A nota subiu.",
+  "ok": true,
+  "nota": 0.917,
+  "faltando": [],
+  "transcricao": "Encortei o plano do bloco para um passo só. A nota subiu.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 5,
+  "texto": "Arranquei o modelo de mundo inteiro. A nota foi a um. Perfeita.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Arranquei o modelo de mundo inteiro. A nota foi a 1. Perfeita.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 6,
+  "texto": "E a população que ganhou essa nota perfeita estava extinta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e a população que ganhou essa nota perfeita estava extinta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 7,
+  "texto": "A ablação disse a verdade: sem modelo, a população morre. A calibração deu nota máxima a um cadáver.",
+  "ok": true,
+  "nota": 0.914,
+  "faltando": [],
+  "transcricao": "A ablação disse a verdade. Sem modelo, a população morre, a calibração deu nota máxima ao cadáver.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 8,
+  "texto": "O defeito estava numa linha. A previsão lia o mapa do mundo, e não o mapa do bloco.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O defeito estava numa linha. A previsão lia o mapa do mundo e não o mapa do bloco.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 9,
+  "texto": "E uma fotocópia do território não pode discordar dele.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E uma fotocópia do território não pode discordar dele.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 10,
+  "texto": "Um mapa que não pode errar não é um mapa.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "um mapa que não pode errar não é um mapa.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b3",
+  "frase": 11,
+  "texto": "No conserto, a previsão passa a sair da cabeça do bloco. Sem modelo, a nota cai a zero exato.",
+  "ok": true,
+  "nota": 0.947,
+  "faltando": [],
+  "transcricao": "No concerto, a previsão passa a sair da cabeça do bloco. Sem modelo, a nota cai a zero exato.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 12,
+  "texto": "E o controle passa a ler zero vírgula sessenta e três. Agora o mapa pode errar. E erra.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e o controle passa a ler 0,63. Agora o mapa pode errar e erra.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 1,
+  "texto": "Segundo modo: a âncora que andava junto.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Segundo modo, a âncora que andava junto.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 2,
+  "texto": "O mostrador de agência pergunta se a fome do bloco muda a decisão dele.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O mostrador de agência pergunta se a fome do bloco muda a decisão dele",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 3,
+  "texto": "Para medir, ele clonava o bloco em dois pontos de fome. Só que um desses pontos dependia de um traço que evolui.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Para medir, ele clonava o bloco em dois pontos de fome. Só que um desses pontos dependia de um traço que evolui.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 4,
+  "texto": "A régua se movia junto com o que ela media.",
+  "ok": true,
+  "nota": 0.947,
+  "faltando": [],
+  "transcricao": "A régua se movia junto com que ela media.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 5,
+  "texto": "Isso eu consertei: a sonda passou a varrer o eixo inteiro.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Isso eu consertei. A sonda passou a varrer o eixo inteiro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 6,
+  "texto": "Mas a agência continuava despencando ao longo da evolução. E eu pensei: a régua está contaminada.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "mas a agência continuava despencando ao longo da evolução. E eu pensei, a régua está contaminada.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 7,
+  "texto": "Antes de acusar a régua, eu congelei o traço.",
+  "ok": true,
+  "nota": 0.941,
+  "faltando": [],
+  "transcricao": "Antes de acusar a régua, congelei o traço",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 8,
+  "texto": "Com o traço livre, a agência cai de zero vírgula quarenta e três para zero vírgula zero cinco.",
+  "ok": true,
+  "nota": 0.971,
+  "faltando": [],
+  "transcricao": "Com o traço livre, a agência cai de 0,43 para 0,05.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 9,
+  "texto": "Com o traço congelado, ela fica plana.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "com o traço congelado, ela fica plana.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 10,
+  "texto": "A régua estava certa. Quem desaparecia era o objeto.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A régua estava certa. Quem desaparecia era o objeto.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 11,
+  "texto": "Num duelo entre reflexo e agente, o reflexo toma a população inteira em uns seis mil passos.",
+  "ok": true,
+  "nota": 0.938,
+  "faltando": [],
+  "transcricao": "Num duelo entre reflexo e agente, o reflexo toma a população inteira em os 6 mil passos.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b4",
+  "frase": 12,
+  "texto": "Os blocos continuam sentindo fome. O que a evolução apagou foi o uso da fome na decisão.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "os blocos continuam sentindo fome, o que a evolução apagou foi o uso da fome na decisão.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 13,
+  "texto": "E o registro mais desconfortável é este: minha primeira reação a uma leitura incômoda foi acusar a régua.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E o registro mais desconfortável é este. Minha primeira reação a uma leitura incômoda foi acusar a régua.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 1,
+  "texto": "Terceiro modo: o nome que mentia.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Terceiro modo, o nome que mentia.",
+  "tentativa": 3
+ },
+ {
+  "bloco": "b5",
+  "frase": 2,
+  "texto": "Eu tinha um mostrador chamado automodelo. Ele contava quando antecipar os rivais mudava a escolha do bloco.",
+  "ok": true,
+  "nota": 0.914,
+  "faltando": [],
+  "transcricao": "Eu tinha um mostrador chamado \"Auto Modelo\". Ele contava quando antecipar os rivais, mudava a escolha do bloco.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 3,
+  "texto": "Primeiro problema: ele não intervinha em nada. Só relia o que a simulação já tinha calculado.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Primeiro problema, ele não intervenha em nada. Só relia ao que a simulação já tinha calculado.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 4,
+  "texto": "Segundo: dependia de uma constante escondida.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Segundo, dependia de uma constante escondida.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 5,
+  "texto": "Variando essa força, a leitura desenha uma curva. E o valor de sempre era só um ponto no meio da subida.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Variando essa força, a leitura desenha uma curva e o valor de sempre era só um ponto no meio da subida.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 6,
+  "texto": "O terceiro é o que importa. Tire os rivais. Deixe o bloco sozinho.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O terceiro é o que importa. Tire os rivais. Deixe o bloco sozinho.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 7,
+  "texto": "A leitura dá zero. Exato.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A leitura da zero. Exato.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 8,
+  "texto": "Uma faculdade que some quando o outro some não é uma posse do bloco.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Uma faculdade que some quando o outro some não é uma posse do bloco.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 9,
+  "texto": "O conserto foi trocar o nome: modelo do outro.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O conserto foi trocar o nome, modelo do outro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 10,
+  "texto": "E daí sai um protocolo que serve para qualquer métrica: o teste do eremita.",
+  "ok": true,
+  "nota": 0.929,
+  "faltando": [],
+  "transcricao": "E daí saiu um protocolo que serve para qualquer métrica. O teste do Eremita.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 11,
+  "texto": "Rode a medida num agente sozinho. Se ela zerar, ela mediu uma relação, não uma posse.",
+  "ok": true,
+  "nota": 0.938,
+  "faltando": [],
+  "transcricao": "Rode a medida num agente sozinho. Se ela zerar, ela medir uma relação. Não uma posse.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 1,
+  "texto": "Quarto modo: a régua que nunca dizia não.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Quarto modo. A régua que nunca dizia não.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 2,
+  "texto": "O fi, minha caricatura de integração, devia dizer o quanto a decisão é mais que a soma dos motivos.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O FI, minha caricatura de integração, devia dizer o quanto a decisão é mais que a soma dos motivos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 3,
+  "texto": "Eu fiz quatro ablações. Encurtei o plano, apaguei o modelo, ceguei o bloco para os rivais, desliguei a competição.",
+  "ok": true,
+  "nota": 0.895,
+  "faltando": [],
+  "transcricao": "Eu fiz quatro aplações. Encortei o plano, apaguei o modelo, ceguei o bloco para os rivais, desliguei a competição",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 4,
+  "texto": "Nenhuma ablação levou o fi a zero. Uma até fez ele subir.",
+  "ok": true,
+  "nota": 0.87,
+  "faltando": [],
+  "transcricao": "Nenhuma ablação levou o FIA-0. Uma até fez ele subir.",
+  "tentativa": 3
+ },
+ {
+  "bloco": "b6",
+  "frase": 5,
+  "texto": "Uma régua que nenhum teste obriga a dizer não, não está medindo nada.",
+  "ok": true,
+  "nota": 0.96,
+  "faltando": [],
+  "transcricao": "Uma régua que nenhum teste obriga dizer \"Não, não está medindo nada\".",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 6,
+  "texto": "Na redefinição, eu comparo a decisão com cada motivo isolado: a comida de agora, o espaço, o mapa.",
+  "ok": true,
+  "nota": 0.971,
+  "faltando": [],
+  "transcricao": "Na redefinição, eu comparo decisão com cada motivo isolado. A comida de agora, o espaço, o mapa...",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 7,
+  "texto": "Se um motivo sozinho reproduz a escolha, fi é zero. Integrar uma coisa só não é integrar.",
+  "ok": true,
+  "nota": 0.941,
+  "faltando": [],
+  "transcricao": "Se um motivo sozinho reproduza a escolha, FI é zero. Integrar uma coisa só não é integrar.",
+  "tentativa": 5
+ },
+ {
+  "bloco": "b6",
+  "frase": 8,
+  "texto": "Agora há três ablações que zeram o fi, e dá para demonstrar isso antes de rodar.",
+  "ok": true,
+  "nota": 0.968,
+  "faltando": [],
+  "transcricao": "Agora três ablações que zeram o FI e dá para demonstrar isso antes de rodar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 9,
+  "texto": "E a régua nova conta uma história: ao longo da evolução, o fi cai quase a zero.",
+  "ok": true,
+  "nota": 0.941,
+  "faltando": [],
+  "transcricao": "E a regua nova conta uma história. Ao longo da evolução, o FI cae quase a zero.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 10,
+  "texto": "A seleção não apaga só a agência. Apaga a irredutibilidade da decisão.",
+  "ok": true,
+  "nota": 0.917,
+  "faltando": [],
+  "transcricao": "A seleção não apaga a sua agência. Apaga a irredutibilidade da decisão.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b7",
+  "frase": 1,
+  "texto": "E teve um quinto modo, que eu só descobri tarde. Não era de desenho. Era de aritmética.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e teve um quinto modo, que eu só descobri tarde. Não era de desenho, era de aritmética.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 2,
+  "texto": "No eremita, a agência tinha que dar zero. A prova algébrica estava certa.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "No Aremita, a agência tinha que dar zero. A prova algébrica estava certa.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 3,
+  "texto": "Mas a régua rodava em ponto flutuante de trinta e dois bits, e ali apareceu um piso.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Mas a régua rodava em ponto flutuante de 32 bits e ali apareceu um piso.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 4,
+  "texto": "Recalculei a comparação em precisão dupla. Zero exato.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Recalculei a comparação em precisão dupla. Zero exato.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 5,
+  "texto": "Um visto da minha tabela era falso. Não por erro de conceito, mas de arredondamento.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Um visto da minha tabela era falso. Não por erro de conceito, mas de arredondamento.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 6,
+  "texto": "E o piso tinha alvo. O arredondamento não inverte ordens. Ele cria empates.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E o piso tinha alvo. O arredondamento não inverte ordens. Ele cria empates.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 7,
+  "texto": "E só vaza na régua que dá significado a um empate.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e só vaza na régua que dá significado a um empate.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 1,
+  "texto": "Até aqui, todos os números nasceram de três seeds. E uma seed não é um resultado.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Até aqui, todos os números nasceram de três seeds, e uma seed não é um resultado.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 2,
+  "texto": "Então eu publiquei esses valores como pré-registro. E rodei tudo de novo, com cinquenta seeds em cada condição.",
+  "ok": true,
+  "nota": 0.895,
+  "faltando": [],
+  "transcricao": "Então eu publiquei esses valores como pré-registo e rodei tudo de novo com 50 CDs em cada condição.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 3,
+  "texto": "Dez condições que tinham de dar zero. Quinhentas corridas.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "10 condições que tinham de dar 0 500 corridas",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 4,
+  "texto": "Zero violações.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Zero violações.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 5,
+  "texto": "A replicação também mexeu nos números. E é para isso que ela serve.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "A replica também mexeu nos números. E é para isso que ela serve.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 6,
+  "texto": "A extinção sem mapa, que eu tinha medido entre setenta e quatro e cento e cinco passos, foi de cinquenta e um a cento e vinte e um.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A extinção sem mapa, que eu tinha medido entre 74 e 105 passos, foi de 51 a 121.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 7,
+  "texto": "E as minhas seeds favoritas, a sete e a quarenta e dois, eram sorteios altos em mais de um mostrador.",
+  "ok": true,
+  "nota": 0.95,
+  "faltando": [],
+  "transcricao": "E as minhas sedes favoritas, a 7 e a 42, eram sorteios altos em mais de um mostrador.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 1,
+  "texto": "Nada disso depende de o mundo ser pequeno.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Nada disso depende de um mundo ser pequeno.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 2,
+  "texto": "Primeiro: uma métrica de calibração pode ser satisfeita lendo o ambiente, em vez da mente do agente.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Primeiro, uma métrica de calibração pode ser satisfeita lendo o ambiente em vez da mente do agente.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 3,
+  "texto": "Pergunte sempre: o que esta régua lê quando não há nada para ler?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Pergunte sempre, o que esta regua lê quando não há nada para ler?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 4,
+  "texto": "Segundo: o teste do eremita. A medida que zera na solidão mediu uma relação.",
+  "ok": true,
+  "nota": 0.929,
+  "faltando": [],
+  "transcricao": "Segundo, o teste do Eremita, a medida que ela na solidão mediu uma relação.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 5,
+  "texto": "E terceiro: quando a calibração e a ablação discordam, a ablação ganha.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E terceiro, quando a calibração e a ablação discordam, a ablação ganha.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 6,
+  "texto": "Isso vale para quem mede modelos de linguagem, animais ou pacientes. Não como resposta. Como a pergunta a fazer antes.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Isso vale para quem mede modelos de linguagem, animais ou pacientes, não como resposta, como a pergunta a fazer antes.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 7,
+  "texto": "Na próxima: por que pensar demais deixou todo mundo mais pobre.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Na próxima, por que pensar demais deixou todo mundo mais pobre?",
+  "tentativa": 1
+ }
+]

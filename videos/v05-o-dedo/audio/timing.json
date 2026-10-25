@@ -1,0 +1,290 @@
+{
+ "b1": {
+  "dur": 7.989,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 3.937,
+    "texto": "O que acontece quando alguém de fora mexe na decisão de um bloco?"
+   },
+   {
+    "t": 4.587,
+    "dur": 2.202,
+    "texto": "E depois pergunta a ele por que fez aquilo?"
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b2": {
+  "dur": 30.788,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 2.207,
+    "texto": "Primeiro, eu dei aos blocos uma voz que pode errar."
+   },
+   {
+    "t": 2.857,
+    "dur": 7.255,
+    "texto": "Um intérprete que não lê a mente do bloco. Ele vê o que um vizinho veria: as casas em volta, e a ação executada."
+   },
+   {
+    "t": 10.613,
+    "dur": 4.464,
+    "texto": "E dali adivinha o motivo. Fome, espaço, os dois, ou não sei."
+   },
+   {
+    "t": 15.576,
+    "dur": 7.469,
+    "texto": "É a tese de Nisbett e Wilson, virada código: a introspecção é a percepção do próprio comportamento."
+   },
+   {
+    "t": 23.545,
+    "dur": 3.773,
+    "texto": "Antes de escrever uma linha, eu registrei o que esperava, com data."
+   },
+   {
+    "t": 27.818,
+    "dur": 2.47,
+    "texto": "Porque um relato que não pode mentir não relata."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b3": {
+  "dur": 38.716,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 5.084,
+    "texto": "O mundo já faz um experimento sozinho. Quando dois blocos disputam a mesma casa, um deles é barrado."
+   },
+   {
+    "t": 5.734,
+    "dur": 4.663,
+    "texto": "Ele fica parado, numa ação que não escolheu. E o intérprete não tem como saber."
+   },
+   {
+    "t": 10.896,
+    "dur": 2.689,
+    "texto": "Na maioria das vezes, ele admite: não sei."
+   },
+   {
+    "t": 14.086,
+    "dur": 6.55,
+    "texto": "Mas em cerca de um quinto dos casos, ele inventa. Diz, com convicção, um motivo que não operou."
+   },
+   {
+    "t": 21.135,
+    "dur": 9.193,
+    "texto": "É Gazzaniga em estado selvagem. Ninguém instalou a racionalização. Bastou um intérprete que lê comportamento, num mundo que às vezes desobedece o plano."
+   },
+   {
+    "t": 30.828,
+    "dur": 7.388,
+    "texto": "E tem o outro lado: um terço das escolhas livres recebe um não sei. O bloco não entende justamente as suas decisões mais sofisticadas."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b4": {
+  "dur": 19.83,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 4.305,
+    "texto": "Eu tinha apostado que o relato seria o primeiro mostrador a sobreviver à solidão. Errei."
+   },
+   {
+    "t": 4.955,
+    "dur": 1.972,
+    "texto": "No eremita, ele cai quase a zero."
+   },
+   {
+    "t": 7.427,
+    "dur": 3.603,
+    "texto": "Sozinho, o bloco só tem um motivo. Toda decisão vira fome."
+   },
+   {
+    "t": 11.53,
+    "dur": 3.203,
+    "texto": "O intérprete acerta o tempo todo. O que falta é informação."
+   },
+   {
+    "t": 15.234,
+    "dur": 3.597,
+    "texto": "Não é que o eremita não saiba falar. É que ele não tem biografia."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b5": {
+  "dur": 53.435,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 2.01,
+    "texto": "Então eu coloquei o dedo do espectador."
+   },
+   {
+    "t": 2.66,
+    "dur": 7.092,
+    "texto": "Em cerca de um quarto dos blocos, alguém de fora sobrescreve a escolha. Como em Bandersnatch: quem assiste decide."
+   },
+   {
+    "t": 10.252,
+    "dur": 3.219,
+    "texto": "Tudo determinístico. A mesma seed, o mesmo dedo."
+   },
+   {
+    "t": 13.971,
+    "dur": 5.828,
+    "texto": "Quanto mais dedo, pior o relato. Com metade das escolhas forçadas, ele vale menos da metade."
+   },
+   {
+    "t": 20.299,
+    "dur": 4.175,
+    "texto": "Aí eu comparei três jeitos de olhar para dentro, sob a mesma intervenção."
+   },
+   {
+    "t": 24.973,
+    "dur": 5.211,
+    "texto": "O que lê a ação confabula. Nomeia um motivo para um quarto das ações que o bloco nunca escolheu."
+   },
+   {
+    "t": 30.684,
+    "dur": 6.31,
+    "texto": "O que lê só o plano não percebe nada. Descreve, convicto, um passo que não aconteceu."
+   },
+   {
+    "t": 37.494,
+    "dur": 5.805,
+    "texto": "E o que lê tanto a ação quanto o plano detecta. Noventa e nove por cento dos dedos, e nenhum alarme falso."
+   },
+   {
+    "t": 43.8,
+    "dur": 4.103,
+    "texto": "Mas nem ele sabe de quem é o dedo. Detecta a discrepância. Nunca a autoria."
+   },
+   {
+    "t": 48.403,
+    "dur": 4.532,
+    "texto": "De dentro, a física e o espectador são a mesma coisa: algo me moveu."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b6": {
+  "dur": 27.016,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 2.717,
+    "texto": "E sobra um por cento que nem esse monitor vê."
+   },
+   {
+    "t": 3.367,
+    "dur": 5.702,
+    "texto": "O dedo impôs um alvo, a física barrou, e o bloco terminou exatamente onde o próprio plano mandava."
+   },
+   {
+    "t": 9.569,
+    "dur": 2.515,
+    "texto": "A intervenção existiu, e não deixou rastro."
+   },
+   {
+    "t": 12.584,
+    "dur": 4.298,
+    "texto": "Um dedo sem consequência é, de dentro, indistinguível de nada."
+   },
+   {
+    "t": 17.382,
+    "dur": 8.635,
+    "texto": "Num cérebro, num experimento de Libet, numa Matrix: a sensação de que algo me moveu, sozinha, não separa a física de dentro da intervenção de fora."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b7": {
+  "dur": 65.721,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 3.789,
+    "texto": "Até aqui, o relato só era medido. Ninguém o ouvia."
+   },
+   {
+    "t": 4.439,
+    "dur": 5.74,
+    "texto": "E os blocos tinham telepatia: liam direto a intenção dos vizinhos. Troquei a telepatia por conversa."
+   },
+   {
+    "t": 10.679,
+    "dur": 8.049,
+    "texto": "Cada bloco emite um sinal sobre o que pretende fazer, e os vizinhos leem. A estratégia de fala passa a ser herdada: honesto, mudo ou blefe."
+   },
+   {
+    "t": 19.228,
+    "dur": 4.556,
+    "texto": "Nenhuma multa para quem mente. O sinal só afasta os vizinhos da casa sinalizada."
+   },
+   {
+    "t": 24.284,
+    "dur": 8.044,
+    "texto": "O mudo abre mão de afastar alguém. O blefe gasta o aviso numa casa que não vai ocupar, e deixa o alvo verdadeiro desprotegido."
+   },
+   {
+    "t": 32.828,
+    "dur": 5.689,
+    "texto": "Uma das minhas apostas errou de direção. Eu achei que a conversa aumentaria a população. Não aumentou."
+   },
+   {
+    "t": 39.017,
+    "dur": 4.222,
+    "texto": "O que mudou foi a energia. Com o canal aberto, todo mundo vive mais apertado."
+   },
+   {
+    "t": 43.739,
+    "dur": 4.845,
+    "texto": "E a honestidade venceu. Contra o silêncio e contra o blefe, nas três seeds."
+   },
+   {
+    "t": 49.083,
+    "dur": 7.05,
+    "texto": "Mas não fixou. Em cinquenta seeds de trinta mil passos, os honestos ficam em torno de noventa por cento. E o resto não some."
+   },
+   {
+    "t": 56.634,
+    "dur": 4.889,
+    "texto": "Num mar de honestos, um blefe raro engana barato. Comum, ele se estraga sozinho."
+   },
+   {
+    "t": 62.023,
+    "dur": 3.198,
+    "texto": "Ninguém decretou que mentir é errado. A geometria cobrou."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ },
+ "b8": {
+  "dur": 15.07,
+  "frases": [
+   {
+    "t": 0.15,
+    "dur": 6.741,
+    "texto": "Quem lê o corpo confabula. Quem lê o plano mente sem saber. Quem lê os dois percebe, mas nunca sabe quem foi."
+   },
+   {
+    "t": 7.391,
+    "dur": 2.226,
+    "texto": "E a confabulação não mora só nos blocos."
+   },
+   {
+    "t": 10.117,
+    "dur": 3.953,
+    "texto": "Ela também mora em quem mede. Na próxima: como eu quase me enganei."
+   }
+  ],
+  "voz": "fish:free:95a171ec7eb84829a20f718475d6522a v=1.0"
+ }
+}
