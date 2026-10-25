@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Matrix · Construí uma Matrix num arquivo de C</title>
+<style>
+/* Identidade Matrix (../marca/). Motor e GSAP do Treinamentos (../../../Treinamentos/lib), timeline PAUSADA.
+   A simulação é texto capturado (sim/*.js, scripts/capturar_sim.py), redesenhado como função de t. */
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Regular.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Bold.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-ExtraBold.woff2") format("woff2");font-weight:800}
+:root{--g:#00FF41;--g2:#00B82E;--g3:#0B5A1F;--ink:#D8FFE0;--mute:#5FAF74;--red:#FF3B3B;--amb:#E8FF8A;--cy:#7FDBFF}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow:hidden;background:#000;font-family:"JBM",monospace;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1300px 900px at 50% 45%,#031207 0%,#000 70%)}
+canvas{position:absolute;left:0;top:0}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.g{color:var(--g)} .red{color:var(--red)} .mute{color:var(--mute)} .ink{color:var(--ink)} .amb{color:var(--amb)} .cy{color:var(--cy)}
+.glow{text-shadow:0 0 18px rgba(0,255,65,.55),0 0 2px rgba(0,255,65,.9)}
+.h1{font-weight:800;font-size:92px;line-height:1.05;letter-spacing:-.02em}
+.h2{font-weight:800;font-size:64px;line-height:1.12}
+.h3{font-weight:700;font-size:44px;line-height:1.22}
+.p{font-weight:500;font-size:32px;line-height:1.35;color:var(--mute)}
+.lbl{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.chip{display:inline-block;padding:10px 22px;border:2px solid var(--g3);border-radius:999px;font-size:28px;font-weight:700;color:var(--g);background:rgba(0,10,3,.7)}
+.fonte{position:absolute;right:60px;bottom:36px;font-size:20px;color:var(--mute);opacity:0;letter-spacing:.06em}
+.abs{position:absolute}
+.oculto{opacity:0}
+.strike{position:absolute;left:-10px;top:52%;height:8px;width:0;background:var(--red);border-radius:4px}
+/* terminal com a simulação */
+.term{position:absolute;border:2px solid var(--g3);border-radius:14px;background:rgba(0,8,2,.93);box-shadow:0 0 70px rgba(0,255,65,.08);overflow:hidden;transform-origin:0 0}
+.term .bar{height:40px;border-bottom:2px solid var(--g3);display:flex;align-items:center;gap:10px;padding:0 16px;font-size:18px;color:var(--mute)}
+.term .bar i{width:12px;height:12px;border-radius:50%;background:var(--g3)}
+.tela{position:relative;padding:16px 22px;font-size:22px;line-height:28px;white-space:pre;color:#9FDFAE}
+.c{color:#138F33}.gg{color:#00FF41}.y{color:#E8FF8A;text-shadow:0 0 8px rgba(232,255,138,.6)}.r{color:#FF5A5A}.a{color:#7FDBFF}.i{font-style:italic;color:#D8FFE0}
+.foco3{position:absolute;border:3px solid var(--amb);border-radius:6px;box-shadow:0 0 0 4000px rgba(0,0,0,.72),0 0 24px rgba(232,255,138,.6);opacity:0}
+/* escada */
+.deg{position:absolute;width:230px;border:2px solid var(--g3);border-radius:10px;background:rgba(0,14,4,.9);padding:14px 16px;opacity:0}
+.deg .n{font-size:40px;font-weight:800;color:var(--g)}
+.deg .t{font-size:24px;font-weight:700;margin-top:4px}
+.deg .h{font-size:17px;color:var(--mute);margin-top:6px}
+/* portas */
+.porta{position:absolute;top:300px;width:400px;height:480px;border:3px solid var(--g3);border-radius:18px 18px 4px 4px;background:linear-gradient(180deg,rgba(0,30,9,.9),rgba(0,8,2,.9));padding:30px 26px;opacity:0}
+.porta .n{font-size:22px;font-weight:800;color:var(--mute);letter-spacing:.14em}
+.porta .t{font-size:34px;font-weight:800;color:var(--g);margin-top:10px;line-height:1.15}
+.porta .d{font-size:24px;font-weight:500;color:var(--ink);margin-top:18px;line-height:1.35}
+.porta .m{position:absolute;right:22px;top:230px;width:16px;height:16px;border-radius:50%;background:var(--g3)}
+/* mostradores */
+.most{position:absolute;left:460px;width:1000px;height:56px;opacity:0}
+.most .nm{position:absolute;left:0;top:10px;width:300px;font-size:28px;font-weight:700}
+.most .tr{position:absolute;left:320px;top:20px;width:560px;height:16px;border-radius:8px;background:var(--g3)}
+.most .fl{position:absolute;left:320px;top:20px;width:560px;height:16px;border-radius:8px;background:var(--g);transform-origin:left center}
+.most .v{position:absolute;left:900px;top:6px;font-size:30px;font-weight:800;color:var(--g)}
+/* tabela bloco × nós */
+.lin2{position:absolute;left:240px;width:1440px;display:grid;grid-template-columns:1fr 1fr;gap:40px;font-size:32px;font-weight:600;opacity:0}
+.lin2 div{padding:16px 22px;border:2px solid var(--g3);border-radius:12px;background:rgba(0,10,3,.85)}
+/* matrioska de mundos */
+.caixa{position:absolute;border:3px solid var(--g2);border-radius:16px;opacity:0;display:flex;align-items:flex-start;justify-content:flex-start;padding:12px 18px;font-size:24px;font-weight:700;color:var(--mute)}
+.freio{position:absolute;top:470px;width:760px;border:2px solid var(--g3);border-radius:16px;background:rgba(0,10,3,.9);padding:28px 30px;opacity:0}
+.freio .n{font-size:22px;font-weight:800;color:var(--amb);letter-spacing:.14em}
+.freio .t{font-size:36px;font-weight:800;margin-top:10px}
+.freio .d{font-size:26px;color:var(--mute);margin-top:12px;line-height:1.35}
+/* régua quebrada */
+.gauge{position:absolute;left:260px;top:300px;width:620px;height:340px;border:2px solid var(--g3);border-radius:18px;background:rgba(0,10,3,.9);padding:30px;opacity:0}
+.autor{width:300px;height:300px;border-radius:24px;overflow:hidden;border:3px solid var(--g3);box-shadow:0 0 50px rgba(0,255,65,.18)}
+.autor img{width:100%;height:100%;object-fit:cover;display:block}
+.dissolve{position:absolute;left:260px;width:1400px;display:flex;align-items:baseline;gap:30px;font-size:44px;font-weight:800;opacity:0}
+.dissolve .de{position:relative}
+</style>
+</head>
+<body>
+<div id="palco"><div id="stage">
+<canvas id="chuva" width="1920" height="1080"></canvas>
+
+<!-- b1 · GANCHO -->
+<div class="scene" id="s-b1">
+  <div class="term" id="t1" data-frase="b1.1" style="left:180px;top:120px;width:1560px;opacity:0">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">./matrix 7</span></div>
+    <div class="tela" id="tela1"></div>
+  </div>
+  <div class="abs" id="b1-dias" data-frase="b1.4" style="left:0;right:0;top:960px;text-align:center;opacity:0"><span class="chip">28/06 → 15/08/2026 · 49 dias · 131 commits</span></div>
+</div>
+<div class="scene" id="s-tit">
+  <div class="center" style="flex-direction:row;gap:70px">
+    <div class="autor" id="tit-foto"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left;max-width:1100px">
+      <div class="lbl">matrix · vídeo 1</div>
+      <div class="h1 g glow" id="tit-t" style="margin-top:16px;font-size:68px">Construí uma Matrix<br>num arquivo de C</div>
+      <div class="h3" id="tit-s" style="margin-top:14px;font-weight:600">e tentei medir se os bloquinhos sentem</div>
+      <div class="p" id="tit-a" style="margin-top:22px;color:var(--ink)">André Maia</div>
+    </div>
+  </div>
+</div>
+
+<!-- b2 · O MUNDO -->
+<div class="scene" id="s-b2">
+  <div class="term" id="t2" style="left:180px;top:90px;width:1560px">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">./matrix 7 · visão de deus</span></div>
+    <div class="tela" id="tela2"><div class="foco3" id="foco3"></div></div>
+  </div>
+  <div class="abs" id="b2-dim" data-frase="b2.1" style="left:0;right:0;top:930px;text-align:center;opacity:0"><span class="chip">64 × 22 casas · comida em cada uma</span></div>
+  <div class="abs" id="b2-f" data-frase="b2.2" style="left:0;right:0;top:930px;text-align:center;opacity:0"><span class="chip">comida = f(seed, x, y)</span></div>
+  <div class="abs" id="b2-seed" data-frase="b2.3" style="left:0;right:0;top:930px;text-align:center;opacity:0"><span class="chip">seed 7 ⇒ mundo 7 · bit a bit</span></div>
+  <div class="abs" id="b2-oito" data-frase="b2.4" style="left:0;right:0;top:930px;text-align:center;opacity:0"><span class="chip" style="color:var(--amb);border-color:#5d6a1e">só as 8 casas em volta</span></div>
+  <div class="abs" id="b2-grupo" data-frase="b2.5" style="left:0;right:0;top:930px;text-align:center;opacity:0"><span class="chip">disputa · ocupação · fronteiras</span></div>
+  <div class="abs h3 g glow" id="b2-em" data-frase="b2.6" style="left:0;right:0;top:990px;text-align:center;font-size:40px;opacity:0">ninguém programou isso. emergiu.</div>
+  <div class="fonte" id="f-b2">main.c: LARG 64 · ALT 22 · percepção 3×3</div>
+</div>
+
+<!-- b3 · A ESCADA -->
+<div class="scene" id="s-b3">
+  <div class="h3 abs" id="b3-t" data-frase="b3.1" style="left:160px;top:110px;opacity:0">a escada de senciência · <span class="g">7 degraus</span></div>
+  <div class="deg" id="d0" data-frase="b3.2" style="left:160px;top:780px"><div class="n">0</div><div class="t">reatividade</div><div class="h">ff8b0ef</div></div>
+  <div class="deg" id="d1" style="left:400px;top:690px"><div class="n">1</div><div class="t">memória</div><div class="h">ff8b0ef</div></div>
+  <div class="deg" id="d2" data-frase="b3.3" style="left:640px;top:600px"><div class="n">2</div><div class="t">valência</div><div class="h">ff8b0ef</div></div>
+  <div class="deg" id="d3" data-frase="b3.6" style="left:880px;top:510px"><div class="n">3</div><div class="t">modelo de mundo</div><div class="h">702aacc</div></div>
+  <div class="deg" id="d4" data-frase="b3.7" style="left:1120px;top:420px"><div class="n">4</div><div class="t">agência</div><div class="h">ed16786</div></div>
+  <div class="deg" id="d5" data-frase="b3.8" style="left:1360px;top:330px"><div class="n">5</div><div class="t">auto-modelo</div><div class="h">721bc13</div></div>
+  <div class="deg" id="d6" data-frase="b3.9" style="left:1600px;top:240px;width:220px"><div class="n">6</div><div class="t">aprendizado</div><div class="h">721bc13</div></div>
+  <div class="abs" id="b3-q" data-frase="b3.4" style="left:0;right:0;top:300px;text-align:center;opacity:0">
+    <div class="h2">sofrer <span class="mute">×</span> manter um <span class="g">float</span> alto</div>
+    <div class="h3 amb" id="b3-q2" data-frase="b3.5" style="margin-top:22px;opacity:0">qual é a diferença?</div>
+  </div>
+  <div class="abs" id="b3-dia" data-frase="b3.10" style="left:160px;top:180px;opacity:0"><span class="chip">28/06/2026 · ff8b0ef → 721bc13 · um dia</span></div>
+  <div class="abs h3" id="b3-nen" data-frase="b3.11" style="left:160px;top:960px;opacity:0">nenhum degrau <span class="g">decide</span> a pergunta</div>
+  <div class="fonte" id="f-b3">FILOSOFIA.md §1–2 · git log</div>
+</div>
+
+<!-- b4 · A PÍLULA VERMELHA -->
+<div class="scene" id="s-b4">
+  <div class="term" id="t4" data-frase="b4.2" style="left:240px;top:60px;width:1440px;opacity:0">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">./matrix 7 · tecla p · dentro do bloco #0</span></div>
+    <div class="tela" id="tela4"></div>
+  </div>
+  <div class="abs h2" id="b4-ja" data-frase="b4.1" style="left:0;right:0;top:470px;text-align:center;opacity:0">uma segunda janela para o mesmo mundo</div>
+  <div class="abs" id="b4-ins" data-frase="b4.7" style="left:0;right:0;top:950px;text-align:center;opacity:0"><span class="chip">números: a gente inspeciona</span> <span class="chip" style="color:var(--amb)">"eu": a gente escuta</span></div>
+  <div class="abs" id="b4-zumbi" data-frase="b4.8" style="left:0;right:0;top:950px;text-align:center;opacity:0"><span class="chip">o teste do zumbi · no seu terminal</span></div>
+  <div class="scene" id="s-b4b" style="z-index:3">
+    <div class="center">
+      <div class="h3 mute" id="b4-inf" data-frase="b4.9" style="opacity:0">você nunca acessou a mente de ninguém. você <span class="g">infere</span>.</div>
+      <div class="h3" id="b4-mesmo" data-frase="b4.10" style="margin-top:26px;opacity:0">bloco · eu · seu vizinho: <span class="g">o mesmo tipo</span> de evidência</div>
+      <div class="h1" id="b4-linha" data-frase="b4.11" style="margin-top:60px;opacity:0">humano <span class="g">sim</span>, bloco <span class="red">não</span>?</div>
+      <div class="h3 amb" id="b4-teoria" data-frase="b4.12" style="margin-top:40px;opacity:0">a sua resposta é a sua teoria da consciência</div>
+    </div>
+  </div>
+  <div class="fonte" id="f-b4">FILOSOFIA.md §3–4 · frases do auto_relato (main.c), tick 155+</div>
+</div>
+
+<!-- b5 · AS QUATRO PORTAS -->
+<div class="scene" id="s-b5">
+  <div class="h3 abs" id="b5-t" data-frase="b5.1" style="left:0;right:0;top:150px;text-align:center;opacity:0">quatro portas para a mesma pergunta</div>
+  <div class="porta" id="p1" data-frase="b5.2" style="left:100px"><div class="n">PORTA 1</div><div class="t">funcionalismo</div><div class="d">não há linha: função rica o bastante já é mente</div><i class="m"></i></div>
+  <div class="porta" id="p2" data-frase="b5.3" style="left:540px"><div class="n">PORTA 2</div><div class="t">Searle</div><div class="d">simulação não é duplicação: tempestade simulada não molha</div><i class="m"></i></div>
+  <div class="porta" id="p3" data-frase="b5.4" style="left:980px"><div class="n">PORTA 3</div><div class="t">ilusionismo</div><div class="d">não há fato extra: explicou o que faz, inclusive dizer "sinto", acabou</div><i class="m"></i></div>
+  <div class="porta" id="p4" data-frase="b5.5" style="left:1420px"><div class="n">PORTA 4</div><div class="t">informação integrada</div><div class="d">consciência = o quanto o todo é mais que a soma das partes</div><i class="m"></i></div>
+  <div class="abs h3" id="b5-pq" data-frase="b5.6" style="left:0;right:0;top:860px;text-align:center;opacity:0">o projeto não escolhe. <span class="g">você tem que dizer por quê.</span></div>
+  <div class="fonte" id="f-b5">FILOSOFIA.md §3</div>
+</div>
+
+<!-- b6 · A PERGUNTA TROCADA -->
+<div class="scene" id="s-b6">
+  <div class="abs h2 mute" id="b6-a" data-frase="b6.1" style="left:0;right:0;top:170px;text-align:center;opacity:0"><span style="position:relative">o bloco é consciente?<span class="strike" id="b6-s" data-frase="b6.2" style="opacity:0"></span></span></div>
+  <div class="abs h2 g glow" id="b6-b" style="left:0;right:0;top:270px;text-align:center;opacity:0">até onde a palavra estica?</div>
+  <div class="abs lbl" id="b6-bat" data-frase="b6.4" style="left:460px;top:430px;opacity:0">bateria de desbotamento · cada mostrador em [0, 1]</div>
+  <div class="most" id="m1" style="top:480px"><div class="nm">modelo</div><div class="tr"></div><div class="fl"></div><div class="v">0,63</div></div>
+  <div class="most" id="m2" style="top:550px"><div class="nm">agencia</div><div class="tr"></div><div class="fl"></div><div class="v">0,42</div></div>
+  <div class="most" id="m3" style="top:620px"><div class="nm">modelo_do_outro</div><div class="tr"></div><div class="fl"></div><div class="v">0,27</div></div>
+  <div class="most" id="m4" style="top:690px"><div class="nm">relato</div><div class="tr"></div><div class="fl"></div><div class="v">0,63</div></div>
+  <div class="most" id="m5" style="top:760px"><div class="nm">autocausa</div><div class="tr"></div><div class="fl"></div><div class="v">0,14</div></div>
+  <div class="abs h3" id="b6-abl" data-frase="b6.6" style="left:460px;top:860px;opacity:0"><span class="red">✂</span> ablação: <span class="g">apaga a faculdade, mede o efeito</span></div>
+  <div class="abs h3" id="b6-reg" data-frase="b6.8" style="left:460px;top:950px;opacity:0">a palavra só fica se <span class="amb">alguma ablação a zera</span></div>
+  <div class="fonte" id="f-b6">FILOSOFIA_v2.md §0, §3 · valores: nota 11 (50 seeds)</div>
+</div>
+
+<!-- b7 · A LUZ ACESA (Φ) -->
+<div class="scene" id="s-b7">
+  <div class="abs" id="b7-phi" data-frase="b7.1" style="left:0;right:0;top:140px;text-align:center;opacity:0"><span class="h1 g glow" style="font-size:150px">Φ</span></div>
+  <div class="abs p" id="b7-car" data-frase="b7.2" style="left:0;right:0;top:330px;text-align:center;opacity:0">o Φ de verdade é incomputável aqui · <span class="g">Φ~ é uma caricatura honesta</span></div>
+  <div class="abs" id="b7-cmp" data-frase="b7.3" style="left:0;right:0;top:430px;display:flex;justify-content:center;gap:80px;opacity:0">
+    <div class="chip" style="font-size:30px">decisão integrada<br><span class="mute" style="font-size:22px">mundo + agência + auto-modelo + traços</span></div>
+    <div class="h2 mute">×</div>
+    <div class="chip" style="font-size:30px;color:var(--ink)">reflexo puro<br><span class="mute" style="font-size:22px">a casa com mais comida agora</span></div>
+  </div>
+  <div class="abs h3" id="b7-conc" data-frase="b7.4" style="left:0;right:0;top:640px;text-align:center;opacity:0">concordam ⇒ Φ~ ≈ 0 · discordam ⇒ <span class="g">entrou trabalho ali</span></div>
+  <div class="abs h3" id="b7-luz" data-frase="b7.5" style="left:0;right:0;top:760px;text-align:center;opacity:0">aceita? <span class="amb">as luzes se acendem</span></div>
+  <div class="abs h3" id="b7-rec" data-frase="b7.6" style="left:0;right:0;top:760px;text-align:center;opacity:0">recusa? <span class="amb">qual régua no lugar?</span></div>
+  <div class="abs h2 g glow" id="b7-mapa" data-frase="b7.7" style="left:0;right:0;top:880px;text-align:center;opacity:0">Φ~ é um mapa, não o território</div>
+  <div class="fonte" id="f-b7">FILOSOFIA.md §5</div>
+</div>
+
+<!-- b8 · O DETERMINISMO -->
+<div class="scene" id="s-b8">
+  <div class="term" id="t8a" style="left:60px;top:40px;width:980px;opacity:0;transform:scale(.88)">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">rodada 1 · seed 7</span></div><div class="tela" id="tela8a"></div>
+  </div>
+  <div class="term" id="t8b" style="left:1000px;top:40px;width:980px;opacity:0;transform:scale(.88)">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">rodada 2 · seed 7</span></div><div class="tela" id="tela8b"></div>
+  </div>
+  <div class="abs" id="b8-cmp" data-frase="b8.2" style="left:0;right:0;top:800px;text-align:center;opacity:0"><div class="lbl">cmp rodada1 rodada2</div><div class="chip" id="b8-bytes" style="margin-top:14px"></div></div>
+  <div class="abs" id="b8-pod" data-frase="b8.3" style="left:0;right:0;top:960px;text-align:center;opacity:0"><span class="chip">⏪ rebobinar</span> <span class="chip">⏸ pausar</span> <span class="chip">↘ entrar</span> <span class="chip">{ } ler o código</span></div>
+  <div class="scene" id="s-b8b" style="z-index:3">
+    <div class="abs h3" id="b8-pod2" data-frase="b8.4" style="left:0;right:0;top:150px;text-align:center;opacity:0">todos os poderes que nos faltam sobre o nosso mundo</div>
+    <div class="lin2" style="top:270px;opacity:1"><div class="lbl" style="border:0;background:none">o bloco</div><div class="lbl" style="border:0;background:none">nós</div></div>
+    <div class="lin2" id="l1" data-frase="b8.5" style="top:330px"><div>só vê 3 × 3</div><div>só vemos até onde a luz chega</div></div>
+    <div class="lin2" id="l2" data-frase="b8.6" style="top:440px"><div>não lê o próprio código</div><div>não escrevemos as leis que obedecemos</div></div>
+    <div class="abs h3" id="b8-q" data-frase="b8.7" style="left:0;right:0;top:600px;text-align:center;opacity:0">com acesso total, o problema difícil do bloco se resolve?</div>
+    <div class="abs h1 red" id="b8-nao" data-frase="b8.8" style="left:0;right:0;top:700px;text-align:center;opacity:0">não resolve.</div>
+    <div class="abs h3 g glow" id="b8-lugar" data-frase="b8.10" style="left:0;right:0;top:880px;text-align:center;opacity:0">o acesso total não dissolve a pergunta: só muda de lugar</div>
+  </div>
+  <div class="fonte" id="f-b8">FILOSOFIA_v2.md §2, §6 · bytes: scripts/capturar_sim.py</div>
+</div>
+
+<!-- b9 · E A MATRIX? -->
+<div class="scene" id="s-b9">
+  <div class="caixa" id="k1" style="left:360px;top:120px;width:1200px;height:640px">o nosso mundo?</div>
+  <div class="caixa" id="k2" style="left:480px;top:200px;width:960px;height:500px">um mundo f(seed)</div>
+  <div class="caixa" id="k3" style="left:600px;top:280px;width:720px;height:360px;color:var(--g)">./matrix 7</div>
+  <div class="abs h1 g glow" id="k4" data-frase="b9.2" style="left:0;right:0;top:420px;text-align:center;font-size:60px;opacity:0">@</div>
+  <div class="abs h2" id="b9-conta" data-frase="b9.1" style="left:0;right:0;top:470px;text-align:center;opacity:0">e a Matrix?</div>
+  <div class="abs" id="b9-bos" data-frase="b9.3" style="left:0;right:0;top:820px;text-align:center;opacity:0"><span class="chip">o argumento da simulação · Nick Bostrom</span></div>
+  <div class="scene" id="s-b9b" style="z-index:3">
+    <div class="abs h2" id="b9-lente" data-frase="b9.4" style="left:0;right:0;top:220px;text-align:center;opacity:0">lente, <span class="mute">não tese</span> · dois freios</div>
+    <div class="freio" id="fr1" data-frase="b9.5" style="left:160px"><div class="n">FREIO 1</div><div class="t">a simetria não é de graça</div><div class="d">os bloquinhos são radicalmente mais simples do que nós</div></div>
+    <div class="freio" id="fr2" data-frase="b9.6" style="left:1000px"><div class="n">FREIO 2</div><div class="t">Bostrom prova demais</div><div class="d">"estamos numa simulação" escorrega para o que não dá para testar</div></div>
+    <div class="abs h3" id="b9-perg" data-frase="b9.7" style="left:160px;right:160px;top:820px;text-align:center;opacity:0">o que um observador <span class="g">de dentro</span> pode, em princípio, saber sobre o sistema que o roda?</div>
+  </div>
+  <div class="fonte" id="f-b9">FILOSOFIA.md §6 · FILOSOFIA_v2.md §2</div>
+</div>
+
+<!-- b10 · QUEBRAR A RÉGUA -->
+<div class="scene" id="s-b10">
+  <div class="abs h3" id="b10-t" data-frase="b10.1" style="left:0;right:0;top:140px;text-align:center;opacity:0">tentar quebrar os próprios medidores</div>
+  <div class="gauge" id="b10-g" data-frase="b10.2">
+    <div class="lbl">mostrador modelo · bloco SEM modelo de mundo</div>
+    <div class="h1 g glow" style="font-size:150px;margin-top:30px">1,000</div>
+    <div class="p" style="margin-top:6px">nota máxima</div>
+  </div>
+  <div class="gauge" id="b10-p" data-frase="b10.3" style="left:1040px">
+    <div class="lbl">população</div>
+    <div class="h1 red" style="font-size:150px;margin-top:30px" id="b10-pop">60</div>
+    <div class="p" style="margin-top:6px">extinta em 51–121 passos · 50/50 seeds</div>
+  </div>
+  <div class="abs h3" id="b10-mapa" data-frase="b10.4" style="left:0;right:0;top:720px;text-align:center;opacity:0">a régua lia o mapa <span class="red">do mundo</span>, não o do bloco · <span class="g">um mapa que não pode errar não é um mapa</span></div>
+  <div class="abs" id="b10-4" data-frase="b10.5" style="left:0;right:0;top:830px;text-align:center;opacity:0"><span class="chip">4 mostradores · 4 modos de quebrar</span></div>
+  <div class="scene" id="s-b10b" style="z-index:3">
+    <div class="abs h3" id="b10-ouvir" data-frase="b10.6" style="left:0;right:0;top:220px;text-align:center;opacity:0">quando a régua ficou boa, disse o que eu <span class="red">não queria ouvir</span></div>
+    <div class="abs h2 g glow" id="b10-corr" data-frase="b10.7" style="left:0;right:0;top:380px;text-align:center;opacity:0">pensar demais é uma corrida armamentista</div>
+    <div class="abs" id="b10-prox" data-frase="b10.8" style="left:0;right:0;top:600px;display:flex;justify-content:center;gap:40px;opacity:0">
+      <div class="freio" style="position:relative;top:0;opacity:1;width:640px"><div class="n">PRÓXIMO</div><div class="t">quatro modos de uma régua mentir</div></div>
+      <div class="freio" style="position:relative;top:0;opacity:1;width:640px"><div class="n">DEPOIS</div><div class="t">pensar demais é um bem posicional</div></div>
+    </div>
+  </div>
+  <div class="fonte" id="f-b10">FILOSOFIA_v3.md §0 · nota 01 · nota 11 · Paper 2</div>
+</div>
+
+<!-- b11 · A ESCOLHA -->
+<div class="scene" id="s-b11">
+  <div class="abs h1" id="b11-q" data-frase="b11.1" style="left:0;right:0;top:160px;text-align:center;opacity:0">os bloquinhos <span class="g">sentem</span>?</div>
+  <div class="abs p" id="b11-nr" data-frase="b11.2" style="left:0;right:0;top:300px;text-align:center;opacity:0">o projeto não responde · e não é falta de instrumento</div>
+  <div class="dissolve" id="dz1" data-frase="b11.3" style="top:430px"><span class="de">integração</span><span class="mute">→</span><span class="g" style="font-size:36px">o segundo motivo</span></div>
+  <div class="dissolve" id="dz2" data-frase="b11.4" style="top:530px"><span class="de">o self</span><span class="mute">→</span><span class="g" style="font-size:36px">food -= garfada;</span></div>
+  <div class="dissolve" id="dz3" style="top:630px"><span class="de">a voz de dentro</span><span class="mute">→</span><span class="g" style="font-size:36px">um intérprete que confabula</span></div>
+  <div class="scene" id="s-b11b" data-frase="b11.5" style="z-index:3">
+    <div class="center">
+      <div class="h1 amb" id="b11-sinto" style="opacity:0">"eu sei que sinto."</div>
+      <div class="h3 mute" id="b11-desm" data-frase="b11.6" style="margin-top:40px;opacity:0">o que este projeto mais aprendeu a desmontar</div>
+      <div class="h2 g glow" id="b11-org" data-frase="b11.8" style="margin-top:80px;opacity:0">feita pelo órgão errado.<br>e não temos outro.</div>
+    </div>
+  </div>
+  <div class="fonte" id="f-b11">FILOSOFIA_v3.md §6 · notas 04, 05, 06, 09</div>
+</div>
+
+<!-- b12 · FECHO -->
+<div class="scene" id="s-b12">
+  <div class="center">
+    <div class="h3 mute" id="b12-a" data-frase="b12.1" style="opacity:0">comecei querendo saber se os bloquinhos sentem.</div>
+    <div class="h1 g glow" id="b12-b" data-frase="b12.2" style="margin-top:40px;max-width:1600px;opacity:0">terminei medindo de que é feita<br>a frase "eu sinto".</div>
+    <div class="abs" id="b12-prox" data-frase="b12.3" style="left:0;right:0;top:860px;text-align:center;opacity:0"><span class="chip">próximo · quatro modos de uma régua mentir</span></div>
+  </div>
+</div>
+<div class="scene" id="s-fim">
+  <div class="center" style="flex-direction:row;gap:60px">
+    <div class="autor" style="width:220px;height:220px"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="h2 g glow">matrix</div>
+      <div class="p" style="margin-top:10px;color:var(--ink)">André Maia</div>
+      <div class="p" style="margin-top:6px;font-size:24px">fontes: FILOSOFIA v1–v3 · papers/notes · main.c</div>
+    </div>
+  </div>
+</div>
+
+</div></div>
+
+<script src="sim/deus.js"></script>
+<script src="sim/eu.js"></script>
+<script src="audio/timing.js"></script>
+<script src="../../../Treinamentos/lib/vendor/gsap-3.15.0.min.js"></script>
+<script src="../../../Treinamentos/lib/motor.js"></script>
+<script>
+Motor.config({ fps: 30, pad: 0.9 });
+const BLOCOS = ['b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11','b12'];
+BLOCOS.forEach((b) => Motor.cena(b, b === 'b1' ? { extra: 4 } : b === 'b12' ? { extra: 4.5 } : {}));
+const PLANO = Object.fromEntries(Motor.plano().map((c) => [c.bloco, c]));
+const DURACAO = Motor.duracao();
+function frase(id) {
+  const [b, k] = id.split('.');
+  const f = (window.TIMING || {})[b]?.frases?.[k - 1];
+  if (!f) throw new Error(`TIMING sem a frase ${id} — rode python -m tts.narrar`);
+  return { t0: PLANO[b].inicio + f.t, dur: f.dur };
+}
+const at = (id) => frase(id).t0, end = (id) => frase(id).t0 + frase(id).dur, durF = (id) => frase(id).dur;
+const em = (id, k) => at(id) + durF(id) * k;
+const ini = (b) => PLANO[b].inicio, fimB = (b) => PLANO[b].inicio + PLANO[b].dur;
+
+const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+window.EFEITOS = [];
+gsap.set('.scene', { autoAlpha: 0 });
+const show = (s, t, d = 0.4) => tl.to(s, { autoAlpha: 1, duration: d }, t);
+const hide = (s, t, d = 0.4) => tl.to(s, { autoAlpha: 0, duration: d, ease: 'power2.in' }, t);
+const rise = (s, t, dy = 24, d = 0.5) => tl.fromTo(s, { y: dy, opacity: 0 }, { y: 0, opacity: 1, duration: d }, t);
+const pop = (s, t, d = 0.5) => tl.fromTo(s, { scale: 0.75, opacity: 0 }, { scale: 1, opacity: 1, duration: d, ease: 'back.out(1.6)' }, t);
+const fade = (s, t, d = 0.5, v = 1) => tl.to(s, { opacity: v, duration: d }, t);
+const out = (s, t, d = 0.3) => tl.to(s, { opacity: 0, duration: d }, t);
+const cam = (s, t, v, d = 1.2) => tl.to(s, { ...v, duration: d, ease: 'power2.inOut' }, t);
+const fx = { chuva: 1 };
+const fonteBloco = (b, sel) => fade(sel, at(b + '.1') + 0.5);
+
+// ---------- b1 · Gancho ----------
+tl.to(fx, { chuva: 0.3, duration: 1.2, ease: 'none' }, at('b1.1') - 0.3);
+show('#s-b1', at('b1.1') - 0.4, 0.3);
+tl.fromTo('#t1', { opacity: 0, scale: 1.4, x: 0, y: 0 }, { opacity: 1, duration: 0.6 }, at('b1.1') - 0.2);
+cam('#t1', em('b1.2', 0.3), { scale: 1, x: 0, y: 0 }, 3);
+pop('#b1-dias', at('b1.4'));
+tl.to('#t1', { opacity: 0.35, duration: 0.6 }, at('b1.5'));
+hide('#s-b1', end('b1.5') + 0.6);
+show('#s-tit', end('b1.5') + 1.0, 0.5);
+tl.fromTo('#tit-foto', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 }, end('b1.5') + 1.1);
+rise('#tit-t', end('b1.5') + 1.3, 30, 0.7); rise('#tit-s', end('b1.5') + 1.8); rise('#tit-a', end('b1.5') + 2.2);
+tl.to(fx, { chuva: 0.1, duration: 1.0, ease: 'none' }, fimB('b1') - 1.2);
+hide('#s-tit', fimB('b1') - 0.5);
+
+// ---------- b2 · O mundo ----------
+show('#s-b2', ini('b2') - 0.2, 0.4);
+tl.set('#t2', { scale: 1.45, x: 0, y: 0 }, ini('b2') - 0.2);
+const rotulo = (sel, f, prox) => { rise(sel, at(f)); if (prox) out(sel, at(prox) - 0.3); };
+rotulo('#b2-dim', 'b2.1', 'b2.2'); rotulo('#b2-f', 'b2.2', 'b2.3'); rotulo('#b2-seed', 'b2.3', 'b2.4');
+rotulo('#b2-oito', 'b2.4', 'b2.5'); rotulo('#b2-grupo', 'b2.5');
+fade('#foco3', at('b2.4') + 0.2, 0.4); out('#foco3', end('b2.4') + 0.2, 0.4);
+cam('#t2', at('b2.5') - 0.3, { scale: 1, x: 0, y: 0 }, 2);
+rise('#b2-em', at('b2.6'));
+fonteBloco('b2', '#f-b2');
+hide('#s-b2', ini('b3') - 0.4);
+
+// ---------- b3 · A escada ----------
+show('#s-b3', ini('b3') - 0.2, 0.3);
+rise('#b3-t', at('b3.1'));
+pop('#d0', at('b3.2') + 0.1); pop('#d1', em('b3.2', 0.5));
+pop('#d2', at('b3.3'));
+tl.to(['#d0', '#d1', '#d2', '#b3-t'], { opacity: 0.15, duration: 0.4 }, at('b3.4') - 0.2);
+rise('#b3-q', at('b3.4')); rise('#b3-q2', at('b3.5'));
+out('#b3-q', at('b3.6') - 0.3);
+tl.to(['#d0', '#d1', '#d2', '#b3-t'], { opacity: 1, duration: 0.4 }, at('b3.6') - 0.2);
+pop('#d3', at('b3.6')); pop('#d4', at('b3.7')); pop('#d5', at('b3.8')); pop('#d6', at('b3.9'));
+rise('#b3-dia', at('b3.10'));
+rise('#b3-nen', at('b3.11'));
+fonteBloco('b3', '#f-b3');
+hide('#s-b3', ini('b4') - 0.4);
+
+// ---------- b4 · A pílula vermelha ----------
+show('#s-b4', ini('b4') - 0.2, 0.3);
+rise('#b4-ja', at('b4.1'));
+out('#b4-ja', at('b4.2') - 0.3);
+tl.fromTo('#t4', { opacity: 0, scale: 1.0, x: 0, y: 0 }, { opacity: 1, duration: 0.5 }, at('b4.2'));
+// zoom por partes: o que percebe (linhas 3–8) → como se sente e o que quer (10–22) → o que diz de si (24–27)
+cam('#t4', at('b4.3') - 0.2, { scale: 1.9, x: -300, y: -110 }, 1.0);
+cam('#t4', at('b4.4') - 0.2, { scale: 1.25, x: -110, y: -280 }, 1.2);
+cam('#t4', at('b4.5') - 0.2, { scale: 1.45, x: -170, y: -900 }, 1.2);
+cam('#t4', at('b4.7') - 0.2, { scale: 1, x: 0, y: 0 }, 1.2);
+rise('#b4-ins', at('b4.7')); out('#b4-ins', at('b4.8') - 0.3);
+rise('#b4-zumbi', at('b4.8'));
+tl.to('#t4', { opacity: 0.12, duration: 0.5 }, at('b4.9') - 0.3); out('#b4-zumbi', at('b4.9') - 0.3);
+show('#s-b4b', at('b4.9') - 0.3, 0.3);
+rise('#b4-inf', at('b4.9')); rise('#b4-mesmo', at('b4.10')); pop('#b4-linha', at('b4.11'), 0.6); rise('#b4-teoria', at('b4.12'));
+fonteBloco('b4', '#f-b4');
+hide('#s-b4', ini('b5') - 0.4);
+
+// ---------- b5 · As quatro portas ----------
+show('#s-b5', ini('b5') - 0.2, 0.3);
+rise('#b5-t', at('b5.1'));
+['#p1', '#p2', '#p3', '#p4'].forEach((p, i) => {
+  rise(p, at('b5.' + (i + 2)), 60, 0.6);
+  tl.to(p + ' .m', { backgroundColor: '#00FF41', boxShadow: '0 0 16px #00FF41', duration: 0.3 }, at('b5.' + (i + 2)) + 0.5);
+  if (i) tl.to(['#p1', '#p2', '#p3', '#p4'].slice(0, i), { opacity: 0.4, duration: 0.3 }, at('b5.' + (i + 2)));
+});
+tl.to(['#p1', '#p2', '#p3', '#p4'], { opacity: 1, duration: 0.4 }, at('b5.6'));
+rise('#b5-pq', at('b5.6'));
+fonteBloco('b5', '#f-b5');
+hide('#s-b5', ini('b6') - 0.4);
+
+// ---------- b6 · A pergunta trocada ----------
+show('#s-b6', ini('b6') - 0.2, 0.3);
+rise('#b6-a', at('b6.1'));
+tl.set('#b6-s', { opacity: 1 }, at('b6.2'));
+tl.to('#b6-s', { width: '105%', duration: 0.35, ease: 'power2.inOut' }, at('b6.2'));
+pop('#b6-b', em('b6.2', 0.45), 0.6);
+fade('#b6-bat', at('b6.4'), 0.4);
+['#m1', '#m2', '#m3', '#m4', '#m5'].forEach((m, i) => {
+  fade(m, em('b6.4', 0.15 + i * 0.12), 0.3);
+  tl.fromTo(m + ' .fl', { scaleX: 0 }, { scaleX: [0.63, 0.42, 0.27, 0.63, 0.14][i], duration: 0.8 }, em('b6.4', 0.15 + i * 0.12));
+});
+// a ablação: um mostrador é apagado e cai a zero
+tl.to('#m1 .fl', { scaleX: 0, duration: 0.7, ease: 'power2.in' }, at('b6.6') + 0.2);
+tl.to('#m1 .v', { color: '#FF3B3B', duration: 0.3 }, at('b6.6') + 0.2);
+rise('#b6-abl', at('b6.6'));
+rise('#b6-reg', at('b6.8'));
+fonteBloco('b6', '#f-b6');
+hide('#s-b6', ini('b7') - 0.4);
+
+// ---------- b7 · A luz acesa ----------
+show('#s-b7', ini('b7') - 0.2, 0.3);
+tl.fromTo('#b7-phi', { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: 'back.out(1.4)' }, at('b7.1'));
+rise('#b7-car', at('b7.2')); rise('#b7-cmp', at('b7.3'), 40); rise('#b7-conc', at('b7.4'));
+rise('#b7-luz', at('b7.5'));
+tl.to('#b7-phi', { textShadow: '0 0 80px rgba(0,255,65,1)', duration: 1.2 }, em('b7.5', 0.5));
+out('#b7-luz', at('b7.6') - 0.3); rise('#b7-rec', at('b7.6'));
+pop('#b7-mapa', at('b7.7'), 0.6);
+fonteBloco('b7', '#f-b7');
+hide('#s-b7', ini('b8') - 0.4);
+
+// ---------- b8 · O determinismo ----------
+show('#s-b8', ini('b8') - 0.2, 0.3);
+fade('#t8a', at('b8.1') + 0.2); fade('#t8b', at('b8.1') + 0.5);
+fade('#b8-cmp', at('b8.2') + 0.3);
+rise('#b8-pod', at('b8.3'));
+tl.to(['#t8a', '#t8b', '#b8-cmp', '#b8-pod'], { opacity: 0.08, duration: 0.5 }, at('b8.4') - 0.3);
+show('#s-b8b', at('b8.4') - 0.3, 0.3);
+rise('#b8-pod2', at('b8.4')); rise('#l1', at('b8.5')); rise('#l2', at('b8.6'));
+rise('#b8-q', at('b8.7'));
+tl.fromTo('#b8-nao', { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'power4.in' }, at('b8.8'));
+rise('#b8-lugar', at('b8.10'));
+fonteBloco('b8', '#f-b8');
+hide('#s-b8', ini('b9') - 0.4);
+
+// ---------- b9 · E a Matrix? ----------
+tl.to(fx, { chuva: 0.35, duration: 1, ease: 'none' }, ini('b9') - 0.3);
+show('#s-b9', ini('b9') - 0.2, 0.3);
+pop('#b9-conta', at('b9.1'));
+out('#b9-conta', at('b9.2') - 0.2);
+// mundos dentro de mundos: a caixa de fora é a pergunta
+pop('#k4', at('b9.2'), 0.4); pop('#k3', em('b9.2', 0.25)); pop('#k2', em('b9.2', 0.45)); pop('#k1', em('b9.2', 0.65));
+rise('#b9-bos', at('b9.3'));
+tl.to(['#k1', '#k2', '#k3', '#k4', '#b9-bos'], { opacity: 0.08, duration: 0.5 }, at('b9.4') - 0.3);
+tl.to(fx, { chuva: 0.1, duration: 0.8, ease: 'none' }, at('b9.4') - 0.3);
+show('#s-b9b', at('b9.4') - 0.3, 0.3);
+rise('#b9-lente', at('b9.4')); rise('#fr1', at('b9.5'), 40); rise('#fr2', at('b9.6'), 40); rise('#b9-perg', at('b9.7'));
+fonteBloco('b9', '#f-b9');
+hide('#s-b9', ini('b10') - 0.4);
+
+// ---------- b10 · Quebrar a régua ----------
+show('#s-b10', ini('b10') - 0.2, 0.3);
+rise('#b10-t', at('b10.1'));
+rise('#b10-g', at('b10.2'), 40);
+rise('#b10-p', at('b10.3'), 40);
+const pop10 = { v: 60 };
+tl.fromTo(pop10, { v: 60 }, { v: 0, duration: durF('b10.3') + 0.6, ease: 'power1.in', onUpdate: () => { document.getElementById('b10-pop').textContent = Math.round(pop10.v); } }, at('b10.3') + 0.3);
+rise('#b10-mapa', at('b10.4')); rise('#b10-4', at('b10.5'));
+tl.to(['#b10-t', '#b10-g', '#b10-p', '#b10-mapa', '#b10-4'], { opacity: 0.08, duration: 0.5 }, at('b10.6') - 0.3);
+show('#s-b10b', at('b10.6') - 0.3, 0.3);
+rise('#b10-ouvir', at('b10.6')); pop('#b10-corr', at('b10.7'), 0.6); rise('#b10-prox', at('b10.8'), 40);
+fonteBloco('b10', '#f-b10');
+hide('#s-b10', ini('b11') - 0.4);
+
+// ---------- b11 · A escolha ----------
+show('#s-b11', ini('b11') - 0.2, 0.3);
+pop('#b11-q', at('b11.1'), 0.6); rise('#b11-nr', at('b11.2'));
+rise('#dz1', at('b11.3')); rise('#dz2', at('b11.4')); rise('#dz3', em('b11.4', 0.6));
+tl.to(['#b11-q', '#b11-nr', '#dz1', '#dz2', '#dz3'], { opacity: 0.06, duration: 0.5 }, at('b11.5') - 0.3);
+show('#s-b11b', at('b11.5'), 0.3);
+tl.fromTo('#b11-sinto', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7 }, em('b11.5', 0.55));
+rise('#b11-desm', at('b11.6'));
+pop('#b11-org', at('b11.8'), 0.7);
+fonteBloco('b11', '#f-b11');
+hide('#s-b11', ini('b12') - 0.4);
+
+// ---------- b12 · Fecho ----------
+tl.to(fx, { chuva: 0.3, duration: 1.5, ease: 'none' }, ini('b12') - 0.5);
+show('#s-b12', ini('b12') - 0.2, 0.3);
+rise('#b12-a', at('b12.1'));
+tl.fromTo('#b12-b', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.4)' }, at('b12.2'));
+rise('#b12-prox', at('b12.3'));
+hide('#s-b12', end('b12.3') + 0.8, 0.6);
+tl.to(fx, { chuva: 0.6, duration: 1.0, ease: 'none' }, end('b12.3') + 0.8);
+show('#s-fim', end('b12.3') + 1.4, 0.7);
+hide('#s-fim', DURACAO - 0.8, 0.7);
+tl.to(fx, { chuva: 0, duration: 0.8, ease: 'none' }, DURACAO - 0.8);
+tl.to({}, { duration: 0.01 }, DURACAO);
+
+// ---------- canvas da chuva (função pura de t) ----------
+function h(a, b, c) {
+  let x = Math.imul(a | 0, 374761393) ^ Math.imul(b | 0, 668265263) ^ Math.imul(c | 0, 1274126177);
+  x = Math.imul(x ^ (x >>> 13), 1274126177);
+  return ((x ^ (x >>> 16)) >>> 0) / 4294967296;
+}
+const GLIFOS = '0123456789ABCDEFXZ:;=+*<>|¦#@%&$?';
+const cx = document.getElementById('chuva').getContext('2d');
+function chuva(t, alfa) {
+  cx.clearRect(0, 0, 1920, 1080);
+  if (alfa <= 0.001) return;
+  cx.font = '500 24px JBM'; cx.textBaseline = 'top';
+  for (let c = 0; c < 80; c++) {
+    const vel = 7 + 14 * h(c, 1, 7), rastro = 10 + Math.floor(18 * h(c, 2, 7)), ciclo = 39 + rastro + Math.floor(20 * h(c, 3, 7));
+    const cab = Math.floor(t * vel + h(c, 4, 7) * ciclo) % ciclo;
+    for (let k = 0; k < rastro; k++) {
+      const r = cab - k;
+      if (r < 0 || r >= 39) continue;
+      const a = (1 - k / rastro) * alfa;
+      cx.fillStyle = k === 0 ? `rgba(200,255,210,${a})` : `rgba(0,255,65,${a * 0.75})`;
+      cx.fillText(GLIFOS[Math.floor(h(c, r, Math.floor(t * 9 + h(c, r, 5) * 9)) * GLIFOS.length)], c * 24, r * 28);
+    }
+  }
+}
+
+// ---------- terminais: quadros capturados da simulação ----------
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const COR = { c: 'c', g: 'gg', y: 'y', r: 'r', a: 'a', i: 'i' };
+function html(quadro) {
+  return quadro.map(([txt, cor]) => {
+    let o = '', i = 0;
+    while (i < txt.length) {
+      let j = i + 1;
+      while (j < txt.length && cor[j] === cor[i]) j++;
+      const k = COR[cor[i]], p = esc(txt.slice(i, j));
+      o += k ? `<span class="${k}">${p}</span>` : p;
+      i = j;
+    }
+    return o;
+  }).join('\n');
+}
+const D = SIM.deus.quadros, E = SIM.eu.quadros;
+const mapa = (q) => q.slice(0, 26).map(([a, b]) => [a.slice(0, 70), b.slice(0, 70)]);
+const telas = {};
+['tela1', 'tela2', 'tela4', 'tela8a', 'tela8b'].forEach((id) => { telas[id] = { el: document.getElementById(id), ult: null }; });
+function pintar(id, quadro, chave) {
+  const t = telas[id];
+  if (t.ult === chave) return;
+  const foco = t.el.querySelector('.foco3');
+  t.el.innerHTML = html(quadro);
+  if (foco) t.el.append(foco);
+  t.ult = chave;
+}
+const idx = (t, desde, tps, ofs, n) => Math.max(0, Math.min(n - 1, Math.floor((t - desde) * tps) + ofs));
+// b2: o mundo pausa durante a frase das "oito casas" e o foco cai num bloco do centro do mapa
+const PAUSA2 = [at('b2.4') - 0.1, end('b2.4') + 0.3];
+const quadroB2 = (t) => {
+  const tt = t < PAUSA2[0] ? t : t < PAUSA2[1] ? PAUSA2[0] : t - (PAUSA2[1] - PAUSA2[0]);
+  return idx(tt, ini('b2') - 0.2, 4, 60, D.length);
+};
+const qPausa = quadroB2(PAUSA2[0] + 0.01);
+function posicionarFoco() {
+  const linhas = D[qPausa];
+  let alvo = null;
+  for (let r = 9; r < 16 && !alvo; r++) for (let c = 25; c < 45; c++) if (linhas[r] && linhas[r][0][c] === '@') { alvo = [r, c]; break; }
+  if (!alvo) alvo = [12, 34];
+  const cv = document.createElement('canvas').getContext('2d'); cv.font = '400 22px JBM';
+  const cw = cv.measureText('MMMMMMMMMM').width / 10, lh = 28;
+  const f = document.getElementById('foco3');
+  Object.assign(f.style, { left: 22 + (alvo[1] - 1) * cw - 3 + 'px', top: 16 + (alvo[0] - 1) * lh - 2 + 'px', width: 3 * cw + 6 + 'px', height: 3 * lh + 4 + 'px' });
+}
+document.getElementById('b8-bytes').textContent = 'idênticas · ' + (4434697).toLocaleString('pt-BR') + ' bytes · 600 ticks';
+
+Motor.aoQuadro = (t) => {
+  tl.seek(Math.min(t, tl.duration()), false);
+  chuva(t, fx.chuva);
+  if (t < fimB('b1')) pintar('tela1', D[idx(t, at('b1.1') - 0.2, 5, 0, D.length)], 'a' + idx(t, at('b1.1') - 0.2, 5, 0, D.length));
+  if (t >= ini('b2') - 0.5 && t < ini('b3')) { const q = quadroB2(t); pintar('tela2', D[q], q); }
+  if (t >= ini('b4') && t < ini('b5')) { const q = idx(t, at('b4.2'), 1.8, 155, 271); pintar('tela4', E[q], q); }
+  if (t >= ini('b8') - 0.5 && t < ini('b9')) { const q = idx(t, ini('b8'), 5, 300, D.length); const m = mapa(D[q]); pintar('tela8a', m, q); pintar('tela8b', m, q); }
+};
+document.fonts.load('400 22px JBM').then(() => document.fonts.load('500 24px JBM')).then(() => document.fonts.ready).then(() => {
+  posicionarFoco(); // a métrica do caractere só vale com a fonte carregada
+  const img = [...document.images].map((i) => (i.complete ? Promise.resolve() : new Promise((ok) => { i.onload = i.onerror = ok; })));
+  return Promise.all(img);
+}).then(() => Motor.iniciar());
+</script>
+</body>
+</html>

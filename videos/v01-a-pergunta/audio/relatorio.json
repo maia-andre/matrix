@@ -1,0 +1,912 @@
+[
+ {
+  "bloco": "b1",
+  "frase": 1,
+  "texto": "Esse mundo inteiro cabe em um arquivo de C.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "Nesse mundo inteiro cabe em um arquivo de C.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 2,
+  "texto": "Os bloquinhos comem, planejam, herdam traços dos pais e evoluem.",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "Os bloquinhos comem, planejam, erram traços dos pais e evoluem.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 3,
+  "texto": "Eu queria saber se algum deles sente alguma coisa.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Eu queria saber se algum deles sente alguma coisa.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 4,
+  "texto": "Passei quarenta e nove dias tentando medir isso.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Vassei 49 dias tentando medir isso.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 5,
+  "texto": "E a resposta que eu encontrei não era sobre eles.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E a resposta que eu encontrei não era sobre eles.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 1,
+  "texto": "O mundo tem sessenta e quatro por vinte e duas casas, e cada casa tem um pouco de comida.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O mundo tem 64 por 22 casas, e cada casa tem um pouco de comida.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 2,
+  "texto": "A comida não está espalhada ao acaso: ela nasce de uma função da semente, a seed.",
+  "ok": true,
+  "nota": 0.938,
+  "faltando": [],
+  "transcricao": "A comida não está espalhada ao acaso. Ela nasce de uma função da semente, a síria.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 3,
+  "texto": "Mesma seed, mesmo mundo. Bit a bit.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Mesma seed, mesmo mundo. Bit a bit.",
+  "tentativa": 5
+ },
+ {
+  "bloco": "b2",
+  "frase": 4,
+  "texto": "Cada bloco só enxerga as oito casas em volta dele. Ninguém lê o mapa inteiro.",
+  "ok": true,
+  "nota": 0.933,
+  "faltando": [],
+  "transcricao": "Cada bloco só enxerga as oito casas em volta dele. Ninguém leu o mapa inteiro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 5,
+  "texto": "E mesmo assim aparece comportamento de grupo: disputa, ocupação, fronteiras.",
+  "ok": true,
+  "nota": 0.952,
+  "faltando": [],
+  "transcricao": "E mesmo assim aparece o comportamento de grupo. Disputa, ocupação, fronteiras.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 6,
+  "texto": "Ninguém programou isso. Emergiu.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Ninguém programou isso. Emergiu.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 1,
+  "texto": "Para organizar a pergunta, eu montei uma escada. Sete degraus, do mais barato ao mais caro.",
+  "ok": true,
+  "nota": 0.909,
+  "faltando": [],
+  "transcricao": "Para organizar a pergunta, eu montei uma escada, 7 de graus do mais barato ao mais caro.",
+  "tentativa": 3
+ },
+ {
+  "bloco": "b3",
+  "frase": 2,
+  "texto": "Reatividade e memória: um termostato reage, uma planta lembra do inverno.",
+  "ok": true,
+  "nota": 0.952,
+  "faltando": [],
+  "transcricao": "Reatividade memória. Um termostato reage. Uma planta lembra do inverno.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 3,
+  "texto": "Valência: o bloco tem uma energia que, em zero, é morte.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Valência, o Bloco tem uma energia que, em zero, é morte.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 4,
+  "texto": "E aqui já aparece a fenda inteira. Qual é a diferença entre sofrer e manter um número alto?",
+  "ok": true,
+  "nota": 0.944,
+  "faltando": [],
+  "transcricao": "E aqui já aparece a fenda inteira. Qual é a diferença entre sofrer e manter o número alto?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 5,
+  "texto": "Você sabe que há uma. Consegue dizer qual?",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Você sabe que a Uma consegue dizer qual?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 6,
+  "texto": "Modelo de mundo: pela primeira vez, existe o mundo e o mundo segundo o bloco. E esse modelo pode errar.",
+  "ok": true,
+  "nota": 0.974,
+  "faltando": [],
+  "transcricao": "modelo de mundo. Pela primeira vez, existe o mundo e o mundo segundo bloco. E esse modelo pode errar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 7,
+  "texto": "Agência: dois blocos idênticos no código podem querer coisas opostas, porque a fome de cada um é só dele.",
+  "ok": true,
+  "nota": 0.974,
+  "faltando": [],
+  "transcricao": "A agência. Dois blocos idênticos no código podem querer coisas opostas, porque a fome de cada um é só dele.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 8,
+  "texto": "Auto-modelo: o bloco passa a contar que os outros também decidem.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Auto modelo. O Bloco passa a contar que os outros também decidem.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 9,
+  "texto": "E aprendizado: ninguém projeta as personalidades. Elas são selecionadas, geração após geração.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E aprendizado, ninguém projeta as personalidades. Elas são selecionadas geração após geração.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 10,
+  "texto": "A escada inteira subiu no primeiro dia.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A escada inteira subiu no primeiro dia.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 11,
+  "texto": "E nenhum degrau, sozinho ou somado aos outros, decide a pergunta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "e nenhum degrau, sozinho ou somado aos outros, decide a pergunta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 1,
+  "texto": "Aí eu fiz uma segunda janela para o mesmo mundo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Aí eu fiz uma segunda janela para o mesmo mundo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 2,
+  "texto": "Aperto uma tecla, e desço para dentro de um bloco.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Aperto uma tecla e desço para dentro de um bloco.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 3,
+  "texto": "O universo encolhe. Tudo o que ele percebe são as oito casas em volta.",
+  "ok": true,
+  "nota": 0.929,
+  "faltando": [],
+  "transcricao": "O universo encole. Tudo o que ele percebe são as oito casas em volta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 4,
+  "texto": "Ele sabe quanta energia tem, quanta fome sente, e imagina quanto rende cada jogada.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Ele sabe quanta energia tem, quanta fome sente e imagina quanto rende cada jogada.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b4",
+  "frase": 5,
+  "texto": "E ele fala de si, em primeira pessoa: a fome cutuca. Sigo de pé, mas penso em comer.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E ele fala de si, em primeira pessoa, a fome cutuca. Sigo de pé, mas penso em comer.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 6,
+  "texto": "Nada de novo aconteceu no mundo. É a mesma informação dos números, só que dita com eu.",
+  "ok": true,
+  "nota": 0.941,
+  "faltando": [],
+  "transcricao": "Nada de novo aconteceu no mundo. É a mesma informação dos números, só que dita com ele.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 7,
+  "texto": "E algo muda em quem lê. Um quadro de números a gente inspeciona. Uma frase que começa com eu, a gente escuta.",
+  "ok": true,
+  "nota": 0.955,
+  "faltando": [],
+  "transcricao": "E algo muda em quem ler. Um quadro de números a gente inspeciona. Uma frase que começa com eu, a gente escuta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 8,
+  "texto": "Esse é o teste do zumbi, rodando no seu terminal.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Esse é o teste do Zumbi rodando no seu terminal.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 9,
+  "texto": "Você nunca acessou a mente de ninguém. Você infere, pelo comportamento.",
+  "ok": true,
+  "nota": 0.909,
+  "faltando": [],
+  "transcricao": "Você nunca acessou a mente de ninguém. Você enfere pelo comportamento.",
+  "tentativa": 3
+ },
+ {
+  "bloco": "b4",
+  "frase": 10,
+  "texto": "E o comportamento deste bloco é do mesmo tipo que o meu, ou o do seu vizinho.",
+  "ok": true,
+  "nota": 0.97,
+  "faltando": [],
+  "transcricao": "e o comportamento deste bloco é do mesmo tipo que o meu ou do seu vizinho.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 11,
+  "texto": "Então, qual é a linha que diz: o humano sim, o bloco não?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então, qual é a linha que diz \"o humano sim, o bloco não\"?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 12,
+  "texto": "Qualquer resposta que você der é a sua teoria da consciência.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Qualquer resposta que você der é a sua teoria da consciência.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 1,
+  "texto": "A filosofia tem, grosso modo, quatro portas para essa pergunta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A filosofia tem, grosso modo, quatro portas para essa pergunta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 2,
+  "texto": "A primeira é o funcionalismo: não há linha. Função rica o bastante já é mente.",
+  "ok": true,
+  "nota": 0.933,
+  "faltando": [],
+  "transcricao": "A primeira é o funcionalismo. Não há linha. Função rica ou bastante já é mente.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b5",
+  "frase": 3,
+  "texto": "A segunda é a de Searle: simulação não é duplicação. Uma tempestade simulada não molha nada.",
+  "ok": true,
+  "nota": 0.903,
+  "faltando": [],
+  "transcricao": "A segunda é de series. Simulação não é duplicação. Uma tempestade simulada não molha nada.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b5",
+  "frase": 4,
+  "texto": "A terceira é o ilusionismo: não existe um fato extra. Explique tudo o que o sistema faz, inclusive dizer que sente, e acabou.",
+  "ok": true,
+  "nota": 0.889,
+  "faltando": [],
+  "transcricao": "até ser o ilusionismo. Não existe um fato extra. Explique tudo o que o sistema faz. Inclusive dizer que sente e acabou.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 5,
+  "texto": "E a quarta é a teoria da informação integrada: consciência seria o quanto o todo é mais que a soma das partes.",
+  "ok": true,
+  "nota": 0.977,
+  "faltando": [],
+  "transcricao": "E a quarta é a teoria da informação integrada. Consciência seria o quanto todo é mais que a soma das partes.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 6,
+  "texto": "O projeto não escolhe nenhuma. Ele só torna a escolha concreta. Você tem que dizer por quê.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O projeto não escolhe nenhuma. Ele só torna a escolha concreta. Você tem que dizer por quê.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 1,
+  "texto": "No segundo dia, eu troquei a pergunta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "No segundo dia, eu troquei a pergunta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 2,
+  "texto": "Em vez de: o bloco é consciente? Passei a perguntar: até onde a palavra estica?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Em vez de \"o bloco é consciente?\" passei a perguntar \"até onde a palavra estica?\"",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 3,
+  "texto": "Quanto do vocabulário da mente sobrevive quando a gente mede?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "quanto do vocabulário da mente sobrevive quando a gente mede.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 4,
+  "texto": "Para isso eu construí uma bateria de mostradores, cada um de zero a um.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Para isso eu construí uma bateria de mostradores, cada um de zero a um.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 5,
+  "texto": "E a ideia central é simples: apagar uma faculdade, e ver se o comportamento muda.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E a ideia central é simples, apagar uma faculdade e ver se o comportamento muda.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 6,
+  "texto": "Isso tem nome: ablação.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Isso tem nome, ablação.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 7,
+  "texto": "Se eu arranco o modelo de mundo e nada muda, aquilo nunca carregou nada.",
+  "ok": true,
+  "nota": 0.929,
+  "faltando": [],
+  "transcricao": "Se eu arranco um modelo de mundo e nada muda, aquilo nunca carregou nada.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 8,
+  "texto": "Uma palavra só fica se alguma ablação consegue zerá-la.",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "Uma palavra só fica se alguma blação consegue zerá-la.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b7",
+  "frase": 1,
+  "texto": "Das quatro portas, só a última ousa dar um número. Ela chama esse número de fi.",
+  "ok": true,
+  "nota": 0.903,
+  "faltando": [],
+  "transcricao": "das quatro portas, sua última ousa dar um número. Ela chama esse número de FI.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b7",
+  "frase": 2,
+  "texto": "O fi de verdade é incomputável aqui. Então eu fiz uma caricatura honesta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O FI de verdade é incomputável aqui. Então eu fiz uma caricatura honesta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 3,
+  "texto": "Comparo a decisão integrada do bloco com o reflexo puro: ir para onde tem mais comida agora.",
+  "ok": true,
+  "nota": 0.914,
+  "faltando": [],
+  "transcricao": "Eu compro a decisão integrada do bloco com o reflexo puro. Ir para onde tem mais comida agora.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 4,
+  "texto": "Se as duas concordam, nada foi integrado. Se discordam, entrou trabalho ali.",
+  "ok": true,
+  "nota": 0.96,
+  "faltando": [],
+  "transcricao": "Se as duas concordam, nada foi integrado. Se discordam, entrou o trabalho ali.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 5,
+  "texto": "Se você aceita fi como medida de experiência, ver esse número subir é ver as luzes se acenderem.",
+  "ok": true,
+  "nota": 0.944,
+  "faltando": [],
+  "transcricao": "Se você aceita FI como medida de experiência, ver esse número subir a ver as luzes se acenderem.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 6,
+  "texto": "Se recusa, diga que régua usaria no lugar.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "se recusa de que regua usaria no lugar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 7,
+  "texto": "De qualquer jeito, fi é um mapa. Não é o território.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "De qualquer jeito, fia um mapa. Não é o território.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 1,
+  "texto": "Tem uma propriedade deste mundo que muda tudo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "tem uma propriedade deste mundo que muda tudo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 2,
+  "texto": "Eu rodo a mesma seed duas vezes, e comparo os bytes. São idênticos.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Eu rodo a mesma cídee duas vezes e comparo os bytes. São idênticos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 3,
+  "texto": "Isso significa que eu posso rebobinar o universo deles, pausar, entrar em qualquer bloco, ler cada linha de código.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Isso significa que eu posso rebobinar o universo deles para usar, entrar em qualquer bloco, ler cada linha de código.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 4,
+  "texto": "Eu tenho, sobre eles, todos os poderes que nos faltam sobre o nosso mundo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Eu tenho sobre eles todos os poderes que nos faltam sobre o nosso mundo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 5,
+  "texto": "O bloco só vê três por três. Eu só vejo até onde a luz chega.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "O bloco só vê 3x3. Eu só vejo até onde a luz chega.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 6,
+  "texto": "O bloco não lê o próprio código. Eu não escrevi as leis que obedeço.",
+  "ok": true,
+  "nota": 0.929,
+  "faltando": [],
+  "transcricao": "O Bloco não leu o próprio código. Eu não escrevi as leis que obedeço.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 7,
+  "texto": "Então a pergunta vira: com acesso total, o problema difícil do bloco se resolve?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então a pergunta vira. Com acesso total, o problema difícil do bloco se resolve?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 8,
+  "texto": "Não resolve.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "não resolve.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 9,
+  "texto": "Saber cada número, cada regra, cada passo, não decide se há alguém lá.",
+  "ok": true,
+  "nota": 0.96,
+  "faltando": [],
+  "transcricao": "Saber cada número, cada regra, cada passo, não decide-se alguém lá.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 10,
+  "texto": "O acesso total não dissolve a pergunta. Só muda de lugar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O acesso total não dissolve a pergunta. Só muda de lugar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 1,
+  "texto": "E aqui o nome do projeto cobra a conta.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E aqui o nome do projeto cobra a conta.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 2,
+  "texto": "Se é fácil fazer um mundo fechado, habitado por agentes que não veem quem o fez, qual a chance de o nosso ser o único nível?",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Se é fácil fazer o mundo fechado, habitado por agentes que não veem quem eu fez, qual a chance de o nosso ser o único nível?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 3,
+  "texto": "É o argumento da simulação, de Nick Bostrom.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "é o argumento da simulação de Nick Bostrom.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 4,
+  "texto": "Eu uso isso como lente, não como tese. Com dois freios.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "Reuso isso como lente, não como tese, com dois freios.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 5,
+  "texto": "Primeiro: a simetria não é de graça. Os bloquinhos são radicalmente mais simples do que nós.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Primeiro, a simetria não é de graça. Os bloquinhos são radicalmente mais simples do que nós.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 6,
+  "texto": "Segundo: Bostrom prova demais. Estamos numa simulação escorrega para o que não dá para testar.",
+  "ok": true,
+  "nota": 0.933,
+  "faltando": [],
+  "transcricao": "Segundo, Bostron prova demais. Estamos numa simulação escorrega para o que não dá para testar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 7,
+  "texto": "A pergunta que eu mantenho é outra: o que um observador de dentro pode, em princípio, saber sobre o sistema que o roda?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A pergunta que eu mantenho é outra. O que um observador de dentro pode, em princípio, saber sobre o sistema que o roda?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 1,
+  "texto": "Aí eu fiz a coisa mais importante do projeto: tentei quebrar os meus próprios medidores.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Aí eu fiz a coisa mais importante do projeto. Tentei quebrar os meus próprios medidores.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 2,
+  "texto": "O de modelo de mundo deu nota máxima, um vírgula zero, para um bloco sem modelo de mundo nenhum.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "O de modelo de mundo deu nota máxima, um virro la zero, para um bloco sem modelo de mundo nenhum.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 3,
+  "texto": "Uma população que marchava para a extinção em cerca de cem passos.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "uma população que marchava para a extinção em cerca de 100 passos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 4,
+  "texto": "A régua lia o mapa do mundo, e não o mapa do bloco. E um mapa que não pode errar não é um mapa.",
+  "ok": true,
+  "nota": 0.917,
+  "faltando": [],
+  "transcricao": "A regua lia o mapa do mundo, e não o mapa do bloco. E o mapa que não pode errar não é o mapa",
+  "tentativa": 5
+ },
+ {
+  "bloco": "b10",
+  "frase": 5,
+  "texto": "Quatro mostradores quebraram, cada um de um jeito diferente.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Quatro mostradores quebraram, cada um de um jeito diferente.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 6,
+  "texto": "E quando a régua finalmente ficou boa, ela me disse coisas que eu não queria ouvir.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E quando a régua finalmente ficou boa, ela me disse coisas que eu não queria ouvir.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 7,
+  "texto": "Por exemplo: pensar demais é uma corrida armamentista. Bom para o indivíduo, ruim para o grupo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Por exemplo, pensar demais é uma corrida armamentista, bom para o indivíduo, ruim para o grupo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b10",
+  "frase": 8,
+  "texto": "Esses são os próximos vídeos.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Esses são os próximos vídeos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b11",
+  "frase": 1,
+  "texto": "Então, os bloquinhos sentem?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então, os bloquinhos sentem.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b11",
+  "frase": 2,
+  "texto": "O projeto não responde. E eu não acho que seja falta de instrumento.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O projeto não responde e eu não acho que seja falta de instrumento.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b11",
+  "frase": 3,
+  "texto": "Toda vez que uma palavra da experiência virou medida aqui dentro, ela virou função na minha mão.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Toda vez que uma palavra da experiência virou medida aqui dentro, ela virou função na minha mão.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b11",
+  "frase": 4,
+  "texto": "A integração virou o segundo motivo. O self virou uma linha que desconta a própria garfada.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A integração virou o segundo motivo. O Self virou uma linha que desconta a própria garfada.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b11",
+  "frase": 5,
+  "texto": "A última evidência que sobra para dizer que alguém sente é o relato. Eu sei que sinto.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A última evidência que sobra para dizer que alguém sente é o relato. Eu sei que sinto.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b11",
+  "frase": 6,
+  "texto": "E o relato foi justamente o que este projeto mais aprendeu a desmontar.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "E o relato foi justamente o que este projeto mais aprendeu a desmontar.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b11",
+  "frase": 7,
+  "texto": "Então a pergunta não está esperando um instrumento melhor.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Então a pergunta não está esperando um instrumento melhor.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b11",
+  "frase": 8,
+  "texto": "Ela é feita pelo órgão errado. E nós não temos outro.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Ela é feita pelo órgão errado e nós não temos outro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b12",
+  "frase": 1,
+  "texto": "Eu comecei querendo saber se os bloquinhos sentem.",
+  "ok": true,
+  "nota": 0.875,
+  "faltando": [],
+  "transcricao": "Eu comecei querendo saber se os bloquinhos sent",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b12",
+  "frase": 2,
+  "texto": "Terminei medindo de que é feita a frase: eu sinto.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Terminei medindo de que é feita a frase \"Eu Sinto\".",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b12",
+  "frase": 3,
+  "texto": "Na próxima: como quatro réguas da mente mentiram para mim, cada uma de um jeito diferente.",
+  "ok": true,
+  "nota": 0.938,
+  "faltando": [],
+  "transcricao": "A próxima, como quatro réguas da mente mentiram para mim, cada uma de um jeito diferente.",
+  "tentativa": 1
+ }
+]

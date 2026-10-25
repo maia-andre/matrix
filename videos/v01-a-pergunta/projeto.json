@@ -1,0 +1,17 @@
+{
+  "serie": "matrix",
+  "episodio": "Vídeo 1 — A pergunta (piloto e trailer)",
+  "roteiro": "roteiro-base.md §3 (Vídeo 1) + extensões (quatro portas, Φ, argumento da simulação); versão final em roteiro.md",
+  "fase": "validacao",
+  "voz": "fish free · voz 'Morpheus' (95a171ec7eb84829a20f718475d6522a) · velocidade 1.0",
+  "musica": "original, scripts/gerar_trilha.py (96 bpm, semente 1), mixada a -24 dB",
+  "simulacao": "quadros reais: sim/deus.js (seed 7, 600 ticks) e sim/eu.js (foco 0, 300 ticks), main.c 65e83f3",
+  "resolucao": "1920x1080@30",
+  "pendencias": [
+    "Escuta do André"
+  ],
+  "historico": [
+    "2026-10-24 Roteiro final com as três extensões; correções do roteiro-base (sem '56 KB'; escada inteira no primeiro dia)",
+    "2026-10-25 Narrado (91/91 no Whisper), 423,9 s de fala; marcadores b6.2, b8.2, b9.2 e b11.5 movidos para elementos que entram no início da frase; render 443,2 s"
+  ]
+}
