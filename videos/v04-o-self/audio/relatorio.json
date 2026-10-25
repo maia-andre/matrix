@@ -1,0 +1,412 @@
+[
+ {
+  "bloco": "b1",
+  "frase": 1,
+  "texto": "Uma linha de código.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "uma linha de código.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 2,
+  "texto": "Eu fui construir um modelo de si mesmo para os meus bloquinhos, e descobri que ele já existia.",
+  "ok": true,
+  "nota": 0.944,
+  "faltando": [],
+  "transcricao": "Eu fui construir um modelo de si mesmo para os meus bloquinhos e descobrir que ele já existia.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b1",
+  "frase": 3,
+  "texto": "Numa linha que ninguém tinha lido assim.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "numa linha que ninguém tinha lido assim",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 1,
+  "texto": "Os bloquinhos vivem num mundo de terminal, feito num único arquivo de C.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "os bloquinhos vivem no mundo de terminal, feito num único arquivo de C.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b2",
+  "frase": 2,
+  "texto": "Eles comem, planejam alguns passos à frente, herdam traços dos pais e evoluem.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Eles comem, planejam alguns passos à frente, erram traços dos pais e evoluem.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 3,
+  "texto": "Cada universo nasce de uma semente, a seed. Mesma seed, mesmo mundo, bit a bit.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Cada universo nasce de uma semente. A seed. Mesma seed. Mesmo mundo. Bit a bit.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 4,
+  "texto": "Para decidir para onde andar, cada bloco prevê quanta comida vai encontrar pelo caminho.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Para decidir para onde andar, cada bloco prevê quanta comida vai encontrar pelo caminho.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b2",
+  "frase": 5,
+  "texto": "Essa previsão mora numa função chamada prever valor.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Essa previsão mora numa função chamada \"prever valor\".",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b3",
+  "frase": 1,
+  "texto": "A pergunta era: algum desses bloquinhos tem um modelo de si mesmo?",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A pergunta era, algum desses bloquinhos tem um modelo de si mesmo?",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 2,
+  "texto": "O plano era separar, dentro da previsão, o que eu como do que os outros comem.",
+  "ok": true,
+  "nota": 0.938,
+  "faltando": [],
+  "transcricao": "ou plano era separar dentro da previsão o que eu como do que os outros comem.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 3,
+  "texto": "Escrevi esse plano antes de mexer no código, com data e tudo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Escrevi esse plano antes de mexer no código, com data e tudo.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 4,
+  "texto": "E o teste decisivo seria o eremita: um bloco que não percebe nenhum outro.",
+  "ok": true,
+  "nota": 0.929,
+  "faltando": [],
+  "transcricao": "E o teste decisivo seria o Erimita. Um bloco que não percebe nenhum outro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b3",
+  "frase": 5,
+  "texto": "Se ele tivesse algum self, esse self não seria só uma relação com os outros.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Se ele tivesse algum self, esse self não seria só uma relação com os outros.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 1,
+  "texto": "Fui fazer a edição. E ela já estava feita.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "fui fazer a edição e ela já estava feita.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 2,
+  "texto": "Essa linha diz: a célula vai estar mais pobre no próximo passo, porque eu vou ter comido dela.",
+  "ok": true,
+  "nota": 0.944,
+  "faltando": [],
+  "transcricao": "Nessa linha diz, a célula vai estar mais pobre no próximo passo, porque eu vou ter comido dela.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 3,
+  "texto": "É o único ponto do código em que a ação futura do bloco volta para a previsão do próprio bloco.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "É o único ponto do código em que a ação futura do bloco volta para a previsão do próprio bloco.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b4",
+  "frase": 4,
+  "texto": "Um modelo de si estreito, mas literal. O self como causa.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "um modelo de si estreito, mas literal. O Self como causa.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 1,
+  "texto": "Faltava medir. Criei um botão, sigma, que regula quanto de mim entra no meu modelo do futuro.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "Faltava a medida. Criei um botão Sigma e regula quanto de mim entra no meu modelo do futuro.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 2,
+  "texto": "Com sigma em zero, o bloco come e não percebe que come. Acha que a célula rica continua rica para sempre.",
+  "ok": true,
+  "nota": 0.977,
+  "faltando": [],
+  "transcricao": "com o sigma em zero, o bloco come e não percebe que come. Acha que a célula rica continua rica para sempre.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 3,
+  "texto": "Com sigma em um, é exatamente o código de sempre.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "com sigma em 1 é exatamente o código de sempre.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 4,
+  "texto": "Se a escolha do bloco muda em algum ponto entre zero e um, ele conta. O mostrador se chama autocausa.",
+  "ok": true,
+  "nota": 0.927,
+  "faltando": [],
+  "transcricao": "Se a escolha do bloco muda em algum ponto entre 0 e 1, ele conta. O mostrador se chama \"Auto Causa\".",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b5",
+  "frase": 5,
+  "texto": "Ele mede se o self carrega o comportamento. Não mede se o bloco sente alguma coisa.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Ele mede se o self carrega o comportamento. Não mede se o bloco sente alguma coisa.",
+  "tentativa": 5
+ },
+ {
+  "bloco": "b6",
+  "frase": 1,
+  "texto": "Primeiro, o eremita.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Primeiro o Eremita",
+  "tentativa": 4
+ },
+ {
+  "bloco": "b6",
+  "frase": 2,
+  "texto": "Sozinho, ele tem autocausa acima de zero. Em cinquenta de cinquenta seeds.",
+  "ok": true,
+  "nota": 0.88,
+  "faltando": [],
+  "transcricao": "Sozinho, ele tem alto causa acima de zero, em 50 de 50 seeds.",
+  "tentativa": 3
+ },
+ {
+  "bloco": "b6",
+  "frase": 3,
+  "texto": "É o primeiro mostrador da bateria que sobrevive à solidão.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "É o primeiro mostrador da bateria que sobrevive a solidão.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b6",
+  "frase": 4,
+  "texto": "Mas é pouco. Acompanhado, o bloco tem quase cinco vezes mais.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Mas é pouco. Acompanhado, o bloco tem quase cinco vezes mais.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b6",
+  "frase": 5,
+  "texto": "O self existe sozinho, mas quatro quintos dele são sociais.",
+  "ok": true,
+  "nota": 0.9,
+  "faltando": [],
+  "transcricao": "O Self existe sozinho, mas quatro quintos deles são sociais.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b6",
+  "frase": 6,
+  "texto": "O outro não cria o self. Amplifica.",
+  "ok": true,
+  "nota": 0.857,
+  "faltando": [],
+  "transcricao": "O outro não cria o selfie. Amplifica.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 1,
+  "texto": "Segundo teste, escrito antes de rodar: um bloco que só olha um passo à frente tem que dar zero.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Segundo teste escrito antes de rodar, um bloco que só olha um passo à frente tem que dar zero.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 2,
+  "texto": "Deu zero exato. Em todo passo, em todas as seeds.",
+  "ok": true,
+  "nota": 0.952,
+  "faltando": [],
+  "transcricao": "Deu zero exato em todo o passo, em todas as seeds.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 3,
+  "texto": "Quem não olha além da própria garfada não tem onde se ver.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Quem não olha além da própria garfada, não tem onde se ver.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b7",
+  "frase": 4,
+  "texto": "O self existe no tempo. O mínimo são dois passos.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O Self existe no tempo, o mínimo são dois passos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 1,
+  "texto": "Terceiro: ao longo da evolução, a autocausa quase dobra. Enquanto outra faculdade, a agência, cai.",
+  "ok": true,
+  "nota": 0.903,
+  "faltando": [],
+  "transcricao": "Terceiro, ao longo da evolução, a auto causa quase dobra, enquanto outra faculdade, a agência, cai.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 2,
+  "texto": "Na hora, eu escrevi o motivo: o horizonte sobe, e o self vai junto.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "Na hora, eu escrevi o motivo. O horizonte sobe e o Self vai junto.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 3,
+  "texto": "Estava errado.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "estava errado.",
+  "tentativa": 2
+ },
+ {
+  "bloco": "b8",
+  "frase": 4,
+  "texto": "Com o horizonte pregado em seis passos, o self cresceu mais, não menos.",
+  "ok": true,
+  "nota": 0.923,
+  "faltando": [],
+  "transcricao": "Com o horizonte pregada em seis passos, o self cresceu mais, não menos.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 5,
+  "texto": "O motor era outro: os bloquinhos foram estreitando os motivos, até decidir quase só pela comida.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "O motor era outro. Os bloquinhos foram estreitando os motivos, até decidir quase só pela comida.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 6,
+  "texto": "A prova veio desligando os dois de uma vez. O crescimento caiu a um quinto.",
+  "ok": true,
+  "nota": 0.933,
+  "faltando": [],
+  "transcricao": "Na prova veio desligando os dois de uma vez. O crescimento caiu a um quinto.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b8",
+  "frase": 7,
+  "texto": "A mesma seleção que apaga a agência constrói o self. Um processo só.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "A mesma seleção que apaga a agência constrói o Self. Um processo só.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 1,
+  "texto": "O self mais simples que eu achei não é um espelho.",
+  "ok": true,
+  "nota": 0.909,
+  "faltando": [],
+  "transcricao": "O selfie mais simples que eu achei não é um espelho.",
+  "tentativa": 1
+ },
+ {
+  "bloco": "b9",
+  "frase": 2,
+  "texto": "É uma previsão de que eu vou mudar o mundo.",
+  "ok": true,
+  "nota": 1.0,
+  "faltando": [],
+  "transcricao": "É uma previsão de que eu vou mudar o mundo",
+  "tentativa": 1
+ }
+]

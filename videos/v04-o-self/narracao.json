@@ -1,0 +1,95 @@
+{
+  "episodio": "Matrix · Vídeo 4 — O self já estava no código",
+  "voz": { "provedor": "fish", "voz": "95a171ec7eb84829a20f718475d6522a", "velocidade": 1.0, "extenso": true, "opcoes": { "modo": "free" } },
+  "pausa_frase": 0.5,
+  "tentativas": 5,
+  "limiar": 0.85,
+  "blocos": [
+    {
+      "id": "b1", "cena": "Gancho",
+      "falas": [
+        { "texto": "Uma linha de código." },
+        { "texto": "Eu fui construir um modelo de si mesmo para os meus bloquinhos, e descobri que ele já existia." },
+        { "texto": "Numa linha que ninguém tinha lido assim.", "pausa_depois": 1.2 }
+      ]
+    },
+    {
+      "id": "b2", "cena": "O mundo",
+      "falas": [
+        { "texto": "Os bloquinhos vivem num mundo de terminal, feito num único arquivo de C." },
+        { "texto": "Eles comem, planejam alguns passos à frente, herdam traços dos pais e evoluem." },
+        { "texto": "Cada universo nasce de uma semente, a seed. Mesma seed, mesmo mundo, bit a bit." },
+        { "texto": "Para decidir para onde andar, cada bloco prevê quanta comida vai encontrar pelo caminho." },
+        { "texto": "Essa previsão mora numa função chamada prever valor." }
+      ]
+    },
+    {
+      "id": "b3", "cena": "A edição planejada",
+      "falas": [
+        { "texto": "A pergunta era: algum desses bloquinhos tem um modelo de si mesmo?" },
+        { "texto": "O plano era separar, dentro da previsão, o que eu como do que os outros comem." },
+        { "texto": "Escrevi esse plano antes de mexer no código, com data e tudo." },
+        { "texto": "E o teste decisivo seria o eremita: um bloco que não percebe nenhum outro." },
+        { "texto": "Se ele tivesse algum self, esse self não seria só uma relação com os outros." }
+      ]
+    },
+    {
+      "id": "b4", "cena": "A descoberta",
+      "falas": [
+        { "texto": "Fui fazer a edição. E ela já estava feita." },
+        { "texto": "Essa linha diz: a célula vai estar mais pobre no próximo passo, porque eu vou ter comido dela." },
+        { "texto": "É o único ponto do código em que a ação futura do bloco volta para a previsão do próprio bloco." },
+        { "texto": "Um modelo de si estreito, mas literal. O self como causa.", "pausa_depois": 1.0 }
+      ]
+    },
+    {
+      "id": "b5", "cena": "A medida",
+      "falas": [
+        { "texto": "Faltava medir. Criei um botão, sigma, que regula quanto de mim entra no meu modelo do futuro." },
+        { "texto": "Com sigma em zero, o bloco come e não percebe que come. Acha que a célula rica continua rica para sempre." },
+        { "texto": "Com sigma em um, é exatamente o código de sempre." },
+        { "texto": "Se a escolha do bloco muda em algum ponto entre zero e um, ele conta. O mostrador se chama autocausa." },
+        { "texto": "Ele mede se o self carrega o comportamento. Não mede se o bloco sente alguma coisa." }
+      ]
+    },
+    {
+      "id": "b6", "cena": "O eremita",
+      "falas": [
+        { "texto": "Primeiro, o eremita." },
+        { "texto": "Sozinho, ele tem autocausa acima de zero. Em cinquenta de cinquenta seeds." },
+        { "texto": "É o primeiro mostrador da bateria que sobrevive à solidão." },
+        { "texto": "Mas é pouco. Acompanhado, o bloco tem quase cinco vezes mais." },
+        { "texto": "O self existe sozinho, mas quatro quintos dele são sociais." },
+        { "texto": "O outro não cria o self. Amplifica.", "pausa_depois": 1.0 }
+      ]
+    },
+    {
+      "id": "b7", "cena": "O self exige um futuro",
+      "falas": [
+        { "texto": "Segundo teste, escrito antes de rodar: um bloco que só olha um passo à frente tem que dar zero." },
+        { "texto": "Deu zero exato. Em todo passo, em todas as seeds." },
+        { "texto": "Quem não olha além da própria garfada não tem onde se ver." },
+        { "texto": "O self existe no tempo. O mínimo são dois passos." }
+      ]
+    },
+    {
+      "id": "b8", "cena": "O erro antes do conserto",
+      "falas": [
+        { "texto": "Terceiro: ao longo da evolução, a autocausa quase dobra. Enquanto outra faculdade, a agência, cai." },
+        { "texto": "Na hora, eu escrevi o motivo: o horizonte sobe, e o self vai junto." },
+        { "texto": "Estava errado.", "pausa_depois": 0.8 },
+        { "texto": "Com o horizonte pregado em seis passos, o self cresceu mais, não menos." },
+        { "texto": "O motor era outro: os bloquinhos foram estreitando os motivos, até decidir quase só pela comida." },
+        { "texto": "A prova veio desligando os dois de uma vez. O crescimento caiu a um quinto." },
+        { "texto": "A mesma seleção que apaga a agência constrói o self. Um processo só." }
+      ]
+    },
+    {
+      "id": "b9", "cena": "Fecho",
+      "falas": [
+        { "texto": "O self mais simples que eu achei não é um espelho." },
+        { "texto": "É uma previsão de que eu vou mudar o mundo.", "pausa_depois": 2.0 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "serie": "matrix",
+  "episodio": "Vídeo 4 — O self já estava no código",
+  "roteiro": "roteiro-base.md §3 (Vídeo 4); fontes: notas 09, 11, 12 e 13",
+  "fase": "validacao",
+  "voz": "fish free · voz 'Morpheus' (95a171ec7eb84829a20f718475d6522a) · velocidade 1.0",
+  "musica": "original, scripts/gerar_trilha.py (96 bpm, semente 7), mixada a -24 dB",
+  "resolucao": "1920x1080@30",
+  "pendencias": [
+    "Duração 3 min 24 s, abaixo dos 5–8 min do roteiro-base: decidir se cresce ou fica como piloto curto"
+  ],
+  "historico": [
+    "2026-10-24 Roteiro final escrito a partir do roteiro-base e das notas 09/11/12/13 (erro do mecanismo antes do conserto: errata da nota 12 e fatorial da nota 13)",
+    "2026-10-24 Narrado (41/41), cenas com chuva e mundo ASCII em canvas, trilha original; render 204,5 s e conferência OK",
+    "2026-10-24 Escuta do André: aprovado ('sensacional')"
+  ]
+}

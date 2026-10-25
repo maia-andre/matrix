@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Matrix · O self já estava no código</title>
+<style>
+/* Identidade Matrix (videos/marca/): preto, verde fósforo, JetBrains Mono embutida.
+   Motor e GSAP vêm do repositório Treinamentos (../../../Treinamentos/lib), timeline PAUSADA:
+   o Motor chama tl.seek(t) quadro a quadro e as telas de canvas são desenhadas como função de t. */
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Regular.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-Bold.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"JBM";src:url("../marca/fontes/JetBrainsMono-ExtraBold.woff2") format("woff2");font-weight:800}
+:root{--bg:#000;--g:#00FF41;--g2:#00B82E;--g3:#0B5A1F;--g4:#062A10;--ink:#D8FFE0;--mute:#5FAF74;--red:#FF3B3B;--amb:#E8FF8A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow:hidden;background:#000;font-family:"JBM",monospace;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1300px 900px at 50% 45%,#031207 0%,#000 70%)}
+canvas{position:absolute;left:0;top:0}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.g{color:var(--g)} .red{color:var(--red)} .mute{color:var(--mute)} .ink{color:var(--ink)} .amb{color:var(--amb)}
+.glow{text-shadow:0 0 18px rgba(0,255,65,.55),0 0 2px rgba(0,255,65,.9)}
+.h1{font-weight:800;font-size:96px;line-height:1.05;letter-spacing:-.02em}
+.h2{font-weight:800;font-size:68px;line-height:1.12;letter-spacing:-.01em}
+.h3{font-weight:700;font-size:46px;line-height:1.2}
+.p{font-weight:500;font-size:32px;line-height:1.35;color:var(--mute)}
+.term{position:absolute;border:2px solid var(--g3);border-radius:14px;background:rgba(0,10,3,.88);box-shadow:0 0 60px rgba(0,255,65,.08)}
+.term .bar{height:38px;border-bottom:2px solid var(--g3);display:flex;align-items:center;gap:10px;padding:0 16px;font-size:18px;color:var(--mute)}
+.term .bar i{width:12px;height:12px;border-radius:50%;background:var(--g3)}
+.code{padding:28px 34px;font-size:40px;line-height:1.55;white-space:pre}
+.code .ln{opacity:0}
+.code .c{color:var(--mute)}
+.hl{background:rgba(0,255,65,.16);outline:2px solid var(--g);border-radius:6px}
+.fonte{position:absolute;right:60px;bottom:40px;font-size:20px;color:var(--mute);opacity:0;letter-spacing:.06em}
+.chip{display:inline-block;padding:10px 22px;border:2px solid var(--g3);border-radius:999px;font-size:28px;font-weight:700;color:var(--g)}
+.lbl{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.cursor{display:inline-block;width:.6em;height:1.1em;vertical-align:-.15em;background:var(--g);margin-left:4px}
+/* barras */
+.barra{position:absolute;height:64px;border-radius:8px;transform-origin:left center;transform:scaleX(0)}
+.barra.f{background:var(--g)} .barra.d{background:var(--g3)} .barra.s{background:repeating-linear-gradient(135deg,var(--g2) 0 10px,var(--g3) 10px 20px)}
+.vb{position:absolute;font-size:38px;font-weight:800;opacity:0}
+/* slider sigma */
+.trilho{position:absolute;left:460px;top:520px;width:1000px;height:8px;border-radius:4px;background:var(--g3)}
+.knob{position:absolute;left:460px;top:524px;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--g);box-shadow:0 0 24px rgba(0,255,65,.7)}
+.tk{position:absolute;top:560px;font-size:30px;font-weight:700;color:var(--mute);transform:translateX(-50%)}
+/* passos (b7) */
+.passo{position:absolute;top:420px;width:200px;height:120px;border:2px solid var(--g3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;opacity:0}
+.strike{position:absolute;left:-10px;top:50%;height:8px;width:0;background:var(--red);border-radius:4px}
+.autor{width:300px;height:300px;border-radius:24px;overflow:hidden;border:3px solid var(--g3);box-shadow:0 0 50px rgba(0,255,65,.18)}
+.autor img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
+</head>
+<body>
+<div id="palco"><div id="stage">
+<canvas id="chuva" width="1920" height="1080"></canvas>
+
+<!-- ===== b1 · GANCHO ===== -->
+<div class="scene" id="s-b1">
+  <div class="term" id="b1-term" style="left:460px;top:400px;width:1000px;opacity:0">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">main.c</span></div>
+    <div class="code" style="font-size:64px;text-align:center"><span class="g glow" id="b1-linha" data-frase="b1.1"></span><span class="cursor" id="b1-cur"></span></div>
+  </div>
+  <div class="p" id="b1-nin" data-frase="b1.3" style="position:absolute;left:0;right:0;top:640px;text-align:center;opacity:0">uma linha que ninguém tinha lido assim</div>
+</div>
+<div class="scene" id="s-tit">
+  <div class="center" style="flex-direction:row;gap:70px">
+    <div class="autor" id="tit-foto"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="lbl">matrix · vídeo 4</div>
+      <div class="h1 g glow" id="tit-t" style="margin-top:16px;font-size:84px">O self já estava<br>no código</div>
+      <div class="p" id="tit-a" style="margin-top:22px;color:var(--ink)">André Maia</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== b2 · O MUNDO ===== -->
+<div class="scene" id="s-b2">
+  <canvas id="mundo" width="1536" height="612" style="left:192px;top:150px"></canvas>
+  <div class="lbl" id="b2-arq" data-frase="b2.1" style="position:absolute;left:192px;top:100px;opacity:0">main.c · um arquivo · só libc</div>
+  <div id="b2-verbos" data-frase="b2.2" style="position:absolute;left:0;right:0;top:800px;display:flex;justify-content:center;gap:22px;opacity:0">
+    <span class="chip">comem</span><span class="chip">planejam</span><span class="chip">herdam</span><span class="chip">evoluem</span>
+  </div>
+  <div class="h3" id="b2-seed" data-frase="b2.3" style="position:absolute;left:0;right:0;top:900px;text-align:center;opacity:0">seed <span class="g">7</span> ⇒ mundo <span class="g">7</span>, bit a bit</div>
+  <div class="h3" id="b2-pv" data-frase="b2.5" style="position:absolute;left:0;right:0;top:880px;text-align:center;opacity:0"><span class="g glow">prever_valor()</span> <span class="mute" style="font-size:32px">quanta comida no caminho?</span></div>
+</div>
+
+<!-- ===== b3 · A EDIÇÃO PLANEJADA ===== -->
+<div class="scene" id="s-b3">
+  <div class="h2" id="b3-q" data-frase="b3.1" style="position:absolute;left:0;right:0;top:170px;text-align:center;opacity:0">algum bloco tem um <span class="g glow">modelo de si</span>?</div>
+  <div id="b3-sep" data-frase="b3.2" style="position:absolute;left:0;right:0;top:350px;display:flex;justify-content:center;gap:60px;opacity:0">
+    <div class="term" style="position:relative;width:520px;padding:30px"><div class="lbl">dentro da previsão</div><div class="h3 g" style="margin-top:14px">o que EU como</div></div>
+    <div class="term" style="position:relative;width:520px;padding:30px"><div class="lbl">dentro da previsão</div><div class="h3" style="margin-top:14px">o que os OUTROS comem</div></div>
+  </div>
+  <div class="chip" id="b3-pre" data-frase="b3.3" style="position:absolute;left:50%;top:590px;transform:translateX(-50%);opacity:0;white-space:nowrap">pré-registro · ROADMAP §5.0 · commit 747e026</div>
+  <div id="b3-ere" data-frase="b3.4" style="position:absolute;left:0;right:0;top:730px;text-align:center;opacity:0">
+    <span class="h2 g glow">@</span> <span class="h3" style="margin-left:20px">o eremita</span> <span class="p" style="margin-left:14px">não percebe nenhum outro</span>
+  </div>
+  <div class="h3" id="b3-rel" data-frase="b3.5" style="position:absolute;left:0;right:0;top:860px;text-align:center;opacity:0">self no eremita ⇒ não é <span class="g">só uma relação</span></div>
+  <div class="fonte" id="f-b3">fonte: nota 09 · ROADMAP §5.0</div>
+</div>
+
+<!-- ===== b4 · A DESCOBERTA ===== -->
+<div class="scene" id="s-b4">
+  <div class="term" id="b4-term" data-frase="b4.1" style="left:260px;top:180px;width:1400px;opacity:0">
+    <div class="bar"><i></i><i></i><i></i><span style="margin-left:10px">main.c · prever_valor()</span></div>
+<div class="code"><span class="ln">float garfada = menor(food, INGESTAO) * partilha;</span>
+<span class="ln">valor += peso * garfada;</span>
+<span class="ln" id="b4-l3">food  -= garfada;</span>
+<span class="ln">food  += REGROW * (cap - food);</span></div>
+  </div>
+  <div class="h3" id="b4-diz" data-frase="b4.2" style="position:absolute;left:260px;right:260px;top:600px;opacity:0"><span class="mute">// </span>a célula vai estar mais pobre<br><span class="mute">// </span>porque <span class="g glow">EU</span> vou ter comido dela</div>
+  <div class="p" id="b4-uni" data-frase="b4.3" style="position:absolute;left:260px;right:260px;top:780px;opacity:0;color:var(--ink)">o único ponto em que a ação futura do bloco volta para a previsão do próprio bloco</div>
+  <div class="h1 g glow" id="b4-causa" data-frase="b4.4" style="position:absolute;left:0;right:0;top:880px;text-align:center;font-size:76px;opacity:0">o self como causa</div>
+  <div class="fonte" id="f-b4">fonte: nota 09 §0</div>
+</div>
+
+<!-- ===== b5 · A MEDIDA ===== -->
+<div class="scene" id="s-b5">
+  <div class="h2" id="b5-sig" data-frase="b5.1" style="position:absolute;left:0;right:0;top:170px;text-align:center;opacity:0"><span class="g glow">food -= σ · garfada</span></div>
+  <div class="p" id="b5-sub" style="position:absolute;left:0;right:0;top:270px;text-align:center;opacity:0">σ: quanto de mim entra no meu modelo do futuro</div>
+  <div id="b5-slider" style="opacity:0">
+    <div class="trilho"></div><div class="knob" id="b5-knob"></div>
+    <div class="tk" style="left:460px">0</div><div class="tk" style="left:1460px">1</div>
+  </div>
+  <div class="h3" id="b5-zero" data-frase="b5.2" style="position:absolute;left:0;right:0;top:680px;text-align:center;opacity:0">σ = 0 · come e <span class="red">não percebe que come</span></div>
+  <div class="h3" id="b5-um" data-frase="b5.3" style="position:absolute;left:0;right:0;top:680px;text-align:center;opacity:0">σ = 1 · <span class="g">o código de sempre</span></div>
+  <div class="h3" id="b5-ac" data-frase="b5.4" style="position:absolute;left:0;right:0;top:680px;text-align:center;opacity:0">a escolha mudou em algum σ? ⇒ <span class="g glow">autocausa</span></div>
+  <div id="b5-func" data-frase="b5.5" style="position:absolute;left:0;right:0;top:820px;display:flex;justify-content:center;gap:40px;opacity:0">
+    <span class="chip">✓ carrega o comportamento</span><span class="chip" style="color:var(--red);border-color:#5a1414">✗ não mede se sente</span>
+  </div>
+  <div class="fonte" id="f-b5">fonte: nota 09 §1</div>
+</div>
+
+<!-- ===== b6 · O EREMITA ===== -->
+<div class="scene" id="s-b6">
+  <div class="h2" id="b6-t" data-frase="b6.1" style="position:absolute;left:200px;top:150px;opacity:0">autocausa</div>
+  <div class="lbl" id="b6-l1" data-frase="b6.2" style="position:absolute;left:200px;top:330px;opacity:0">eremita</div>
+  <div class="barra f" id="b6-b1" style="left:520px;top:310px;width:130px"></div>
+  <div class="vb g" id="b6-v1" style="left:680px;top:314px">≈ 0,03 · &gt; 0 em 50/50 seeds</div>
+  <div class="lbl" id="b6-l2" data-frase="b6.4" style="position:absolute;left:200px;top:470px;opacity:0">acompanhado</div>
+  <div class="barra d" id="b6-b2" style="left:520px;top:450px;width:620px"></div>
+  <div class="barra s" id="b6-b2s" style="left:650px;top:450px;width:490px;transform:scaleX(1);opacity:0"></div>
+  <div class="vb ink" id="b6-v2" style="left:1170px;top:454px">0,138 · 4,78× ± 0,67</div>
+  <div class="h3" id="b6-sol" data-frase="b6.3" style="position:absolute;left:200px;top:620px;opacity:0">o 1º mostrador que <span class="g">sobrevive à solidão</span></div>
+  <div class="h3" id="b6-soc" data-frase="b6.5" style="position:absolute;left:200px;top:620px;opacity:0"><span class="g">1/5</span> próprio · <span class="mute">4/5 social</span></div>
+  <div class="h2 g glow" id="b6-amp" data-frase="b6.6" style="position:absolute;left:200px;top:760px;opacity:0">o outro não cria. amplifica.</div>
+  <div class="fonte" id="f-b6">fonte: nota 09 §3 · nota 11 (50 seeds)</div>
+</div>
+
+<!-- ===== b7 · O SELF EXIGE UM FUTURO ===== -->
+<div class="scene" id="s-b7">
+  <div class="h3" id="b7-t" data-frase="b7.1" style="position:absolute;left:0;right:0;top:180px;text-align:center;opacity:0">pré-registrado: <span class="g">horizonte = 1</span> ⇒ autocausa = 0</div>
+  <div class="passo" id="b7-p0" style="left:560px;border-color:var(--g);color:var(--g)">agora</div>
+  <div class="passo" id="b7-p1" style="left:860px">+1</div>
+  <div class="passo" id="b7-p2" style="left:1160px;border-style:dashed;color:var(--mute)">+2</div>
+  <div class="h1 g glow" id="b7-zero" data-frase="b7.2" style="position:absolute;left:0;right:0;top:600px;text-align:center;font-size:120px;opacity:0">0,0000</div>
+  <div class="p" id="b7-zero-l" style="position:absolute;left:0;right:0;top:740px;text-align:center;opacity:0">máximo, não só média · todas as seeds</div>
+  <div class="h3" id="b7-ver" data-frase="b7.3" style="position:absolute;left:0;right:0;top:850px;text-align:center;opacity:0">sem futuro, <span class="g">não há onde se ver</span></div>
+  <div class="h3" id="b7-min" data-frase="b7.4" style="position:absolute;left:0;right:0;top:850px;text-align:center;opacity:0">o self existe no tempo · mínimo: <span class="g glow">2 passos</span></div>
+  <div class="fonte" id="f-b7">fonte: nota 09 §2 · nota 11</div>
+</div>
+
+<!-- ===== b8 · O ERRO ANTES DO CONSERTO ===== -->
+<div class="scene" id="s-b8a">
+  <svg id="b8-graf" data-frase="b8.1" width="1000" height="520" viewBox="0 0 1000 520" style="position:absolute;left:160px;top:200px;opacity:0;overflow:visible">
+    <line x1="60" y1="460" x2="960" y2="460" stroke="#0B5A1F" stroke-width="3"/>
+    <text x="60" y="500" fill="#5FAF74" font-size="22" font-family="JBM">início</text><text x="880" y="500" fill="#5FAF74" font-size="22" font-family="JBM">3000 ticks</text>
+    <path id="b8-ag" pathLength="1" d="M60 80 L960 150" stroke="#5FAF74" stroke-width="6" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+    <path id="b8-ac" pathLength="1" d="M60 400 L960 280" stroke="#00FF41" stroke-width="8" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+    <text id="b8-ag-t" x="970" y="160" fill="#5FAF74" font-size="28" font-family="JBM" font-weight="700" opacity="0">agência 0,464 → 0,384</text>
+    <text id="b8-ac-t" x="970" y="290" fill="#00FF41" font-size="28" font-family="JBM" font-weight="700" opacity="0">autocausa 0,093 → 0,162</text>
+  </svg>
+  <div class="p" id="b8-5050" style="position:absolute;left:220px;top:760px;opacity:0">as duas direções, na mesma seed, em 50 de 50</div>
+  <div class="h3" id="b8-hip" data-frase="b8.2" style="position:absolute;left:220px;top:850px;opacity:0"><span style="position:relative">motivo: o horizonte sobe ⇒ o self sobe<span class="strike" id="b8-strike"></span></span></div>
+  <div class="h1 red" id="b8-err" data-frase="b8.3" style="position:absolute;left:0;right:0;top:420px;text-align:center;font-size:150px;opacity:0;text-shadow:0 0 30px rgba(255,59,59,.6)">ERRADO</div>
+  <div class="fonte" id="f-b8a">fonte: nota 09 §4 · nota 11</div>
+</div>
+<div class="scene" id="s-b8b">
+  <div class="h3" id="b8-preg" data-frase="b8.4" style="position:absolute;left:200px;top:170px;opacity:0">horizonte pregado em 6 → autocausa <span class="g">0,100 → 0,226</span> <span class="mute">(sobe mais)</span></div>
+  <div class="h3" id="b8-mot" data-frase="b8.5" style="position:absolute;left:200px;top:290px;opacity:0">o motor: <span class="g glow">peso_espaco → 0</span> <span class="mute">· decidir quase só pela comida</span></div>
+  <div class="lbl" id="b8-la" data-frase="b8.6" style="position:absolute;left:200px;top:470px;opacity:0">crescimento, tudo livre</div>
+  <div class="barra f" id="b8-ba" style="left:640px;top:450px;width:1000px"></div>
+  <div class="vb g" id="b8-va" style="left:1660px;top:454px">+0,112</div>
+  <div class="lbl" id="b8-lb" style="position:absolute;left:200px;top:590px;opacity:0">os dois pregados</div>
+  <div class="barra d" id="b8-bb" style="left:640px;top:570px;width:197px"></div>
+  <div class="vb ink" id="b8-vb" style="left:860px;top:574px">+0,022 · um quinto</div>
+  <div class="h2 g glow" id="b8-um" data-frase="b8.7" style="position:absolute;left:0;right:0;top:760px;text-align:center;opacity:0">a mesma seleção que apaga a agência<br>constrói o self</div>
+  <div class="fonte" id="f-b8b">fonte: nota 12 §4 · nota 13 (fatorial, 50 seeds)</div>
+</div>
+
+<!-- ===== b9 · FECHO ===== -->
+<div class="scene" id="s-b9">
+  <div class="center">
+    <div class="h3 mute" id="b9-a" data-frase="b9.1" style="opacity:0">o self mais simples que eu achei não é um espelho.</div>
+    <div class="h1 g glow" id="b9-b" data-frase="b9.2" style="margin-top:40px;max-width:1600px;opacity:0">é uma previsão de que<br>eu vou mudar o mundo.</div>
+  </div>
+</div>
+<div class="scene" id="s-fim">
+  <div class="center" style="flex-direction:row;gap:60px">
+    <div class="autor" style="width:220px;height:220px"><img src="../marca/autor.jpg" alt=""></div>
+    <div style="text-align:left">
+      <div class="h2 g glow">matrix</div>
+      <div class="p" style="margin-top:10px;color:var(--ink)">André Maia</div>
+      <div class="p" style="margin-top:6px;font-size:24px">fontes: papers/notes 09, 11, 12, 13</div>
+    </div>
+  </div>
+</div>
+
+</div></div>
+
+<script src="audio/timing.js"></script>
+<script src="../../../Treinamentos/lib/vendor/gsap-3.15.0.min.js"></script>
+<script src="../../../Treinamentos/lib/motor.js"></script>
+<script>
+Motor.config({ fps: 30, pad: 0.9 });
+Motor.cena('b1', { extra: 3.2 });
+['b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8'].forEach((b) => Motor.cena(b, {}));
+Motor.cena('b9', { extra: 4 });
+
+const PLANO = Object.fromEntries(Motor.plano().map((c) => [c.bloco, c]));
+const DURACAO = Motor.duracao();
+function frase(id) {
+  const [b, k] = id.split('.');
+  const f = (window.TIMING || {})[b]?.frases?.[k - 1];
+  if (!f) throw new Error(`TIMING sem a frase ${id} — rode python -m tts.narrar`);
+  return { t0: PLANO[b].inicio + f.t, dur: f.dur };
+}
+const at = (id) => frase(id).t0;
+const end = (id) => frase(id).t0 + frase(id).dur;
+const durF = (id) => frase(id).dur;
+const em = (id, k) => at(id) + durF(id) * k;
+const fimBloco = (b) => PLANO[b].inicio + PLANO[b].dur;
+
+const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+const EFEITOS = (window.EFEITOS = []);
+gsap.set('.scene', { autoAlpha: 0 });
+function show(sel, t, d = 0.4) { tl.to(sel, { autoAlpha: 1, duration: d }, t); }
+function hide(sel, t, d = 0.4) { tl.to(sel, { autoAlpha: 0, duration: d, ease: 'power2.in' }, t); }
+const rise = (sel, t, dy = 24, d = 0.5) => tl.fromTo(sel, { y: dy, opacity: 0 }, { y: 0, opacity: 1, duration: d }, t);
+const pop = (sel, t, d = 0.5) => tl.fromTo(sel, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: d, ease: 'back.out(1.7)' }, t);
+const fade = (sel, t, d = 0.5, v = 1) => tl.to(sel, { opacity: v, duration: d }, t);
+const barra = (sel, t, d = 0.9) => tl.fromTo(sel, { scaleX: 0 }, { scaleX: 1, duration: d, ease: 'power2.out' }, t);
+const traco = (sel, t, d = 1.2) => tl.fromTo(sel, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: d, ease: 'power1.inOut' }, t);
+
+// ---------- estado lido pelos canvas (tweenado pela timeline, desenhado depois do seek) ----------
+const fx = { chuva: 1, mundo: 0, foco: 0, eremita: 0, digitado: 0 };
+
+// ---------- b1 · Gancho: a chuva, depois a linha digitada ----------
+const LINHA = 'food -= garfada;';
+tl.to(fx, { chuva: 0.35, duration: 1.2, ease: 'none' }, at('b1.1') - 0.2);
+show('#s-b1', at('b1.1') - 0.3, 0.3);
+fade('#b1-term', at('b1.1') - 0.3, 0.3);
+tl.fromTo(fx, { digitado: 0 }, { digitado: LINHA.length, duration: 1.1, ease: 'none' }, at('b1.1'));
+tl.to('#b1-term', { scale: 1.06, duration: 0.6, yoyo: true, repeat: 1, ease: 'sine.inOut' }, at('b1.3'));
+rise('#b1-nin', at('b1.3'));
+hide('#s-b1', end('b1.3') + 0.9);
+// título com a foto do autor
+show('#s-tit', end('b1.3') + 1.2, 0.5);
+tl.fromTo('#tit-foto', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 }, end('b1.3') + 1.3);
+rise('#tit-t', end('b1.3') + 1.5, 30, 0.7);
+rise('#tit-a', end('b1.3') + 1.9);
+tl.to(fx, { chuva: 0.12, duration: 1.0, ease: 'none' }, fimBloco('b1') - 1.2);
+hide('#s-tit', fimBloco('b1') - 0.5);
+
+// ---------- b2 · O mundo ASCII ----------
+show('#s-b2', at('b2.1') - 0.2, 0.3);
+tl.to(fx, { mundo: 1, duration: 0.8, ease: 'none' }, at('b2.1'));
+fade('#b2-arq', at('b2.1') + 0.2);
+rise('#b2-verbos', at('b2.2'));
+tl.to('#b2-verbos', { opacity: 0, duration: 0.3 }, at('b2.3') - 0.3);
+rise('#b2-seed', at('b2.3'));
+tl.to('#b2-seed', { opacity: 0, duration: 0.3 }, at('b2.4') - 0.1);
+tl.to(fx, { foco: 1, duration: 0.6 }, at('b2.4'));
+rise('#b2-pv', at('b2.5'));
+hide('#s-b2', at('b3.1') - 0.4);
+tl.set(fx, { mundo: 0, foco: 0 }, at('b3.1'));
+
+// ---------- b3 · A edição planejada ----------
+show('#s-b3', at('b3.1') - 0.2, 0.3);
+rise('#b3-q', at('b3.1'));
+rise('#b3-sep', at('b3.2'), 40);
+pop('#b3-pre', at('b3.3'));
+rise('#b3-ere', at('b3.4'));
+rise('#b3-rel', at('b3.5'));
+fade('#f-b3', at('b3.3'));
+hide('#s-b3', at('b4.1') - 0.4);
+
+// ---------- b4 · A descoberta ----------
+show('#s-b4', at('b4.1') - 0.2, 0.3);
+fade('#b4-term', at('b4.1'));
+document.querySelectorAll('#b4-term .ln').forEach((l, i) => fade(l, at('b4.1') + 0.2 + i * 0.35, 0.3));
+tl.to('#b4-term .ln', { opacity: 0.35, duration: 0.4 }, em('b4.1', 0.85));
+tl.to('#b4-l3', { opacity: 1, duration: 0.3 }, em('b4.1', 0.85));
+rise('#b4-diz', at('b4.2'));
+rise('#b4-uni', at('b4.3'));
+pop('#b4-causa', at('b4.4'), 0.7);
+fade('#f-b4', at('b4.2'));
+hide('#s-b4', at('b5.1') - 0.4);
+
+// ---------- b5 · A medida: o botão σ ----------
+show('#s-b5', at('b5.1') - 0.2, 0.3);
+pop('#b5-sig', at('b5.1'));
+rise('#b5-sub', em('b5.1', 0.35));
+fade('#b5-slider', em('b5.1', 0.45));
+tl.fromTo('#b5-knob', { left: 960 }, { left: 460, duration: 0.6, ease: 'power2.inOut' }, at('b5.2') - 0.1);
+rise('#b5-zero', at('b5.2'));
+tl.to('#b5-zero', { opacity: 0, duration: 0.3 }, at('b5.3') - 0.3);
+tl.to('#b5-knob', { left: 1460, duration: 0.8, ease: 'power2.inOut' }, at('b5.3') - 0.1);
+rise('#b5-um', at('b5.3'));
+tl.to('#b5-um', { opacity: 0, duration: 0.3 }, at('b5.4') - 0.3);
+tl.fromTo('#b5-knob', { left: 460 }, { left: 1460, duration: durF('b5.4') * 0.7, ease: 'none' }, at('b5.4'));
+rise('#b5-ac', at('b5.4'));
+rise('#b5-func', at('b5.5'));
+fade('#f-b5', at('b5.1'));
+hide('#s-b5', at('b6.1') - 0.4);
+
+// ---------- b6 · O eremita ----------
+show('#s-b6', at('b6.1') - 0.2, 0.3);
+rise('#b6-t', at('b6.1'));
+fade('#b6-l1', at('b6.2'), 0.3); tl.set('#b6-b1', { opacity: 1 }, at('b6.2')); barra('#b6-b1', at('b6.2'), 0.6);
+fade('#b6-v1', em('b6.2', 0.5));
+rise('#b6-sol', at('b6.3'));
+tl.to('#b6-sol', { opacity: 0, duration: 0.3 }, at('b6.5') - 0.3);
+fade('#b6-l2', at('b6.4'), 0.3); barra('#b6-b2', at('b6.4'), 1.0);
+fade('#b6-v2', em('b6.4', 0.6));
+tl.to('#b6-b2s', { opacity: 1, duration: 0.5 }, at('b6.5'));
+rise('#b6-soc', at('b6.5'));
+pop('#b6-amp', at('b6.6'), 0.6);
+fade('#f-b6', at('b6.2'));
+hide('#s-b6', at('b7.1') - 0.4);
+
+// ---------- b7 · O self exige um futuro ----------
+show('#s-b7', at('b7.1') - 0.2, 0.3);
+rise('#b7-t', at('b7.1'));
+pop('#b7-p0', em('b7.1', 0.4), 0.4); pop('#b7-p1', em('b7.1', 0.55), 0.4);
+pop('#b7-zero', at('b7.2'), 0.6);
+fade('#b7-zero-l', em('b7.2', 0.5));
+rise('#b7-ver', at('b7.3'));
+tl.to('#b7-ver', { opacity: 0, duration: 0.3 }, at('b7.4') - 0.3);
+pop('#b7-p2', at('b7.4') + 0.2, 0.5);
+tl.to('#b7-p2', { borderColor: '#00FF41', color: '#00FF41', borderStyle: 'solid', duration: 0.3 }, em('b7.4', 0.6));
+rise('#b7-min', at('b7.4'));
+fade('#f-b7', at('b7.1'));
+hide('#s-b7', at('b8.1') - 0.4);
+
+// ---------- b8 · O erro antes do conserto ----------
+show('#s-b8a', at('b8.1') - 0.2, 0.3);
+fade('#b8-graf', at('b8.1'), 0.3);
+traco('#b8-ac', at('b8.1') + 0.2, 1.6); fade('#b8-ac-t', at('b8.1') + 1.6);
+traco('#b8-ag', em('b8.1', 0.6), 1.4); fade('#b8-ag-t', em('b8.1', 0.6) + 1.3);
+fade('#b8-5050', end('b8.1') - 0.3);
+rise('#b8-hip', at('b8.2'));
+tl.to('#b8-strike', { width: '105%', duration: 0.35, ease: 'power2.inOut' }, at('b8.3'));
+tl.to(['#b8-graf', '#b8-5050'], { opacity: 0.25, duration: 0.3 }, at('b8.3'));
+tl.fromTo('#b8-err', { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: 'power4.in' }, at('b8.3'));
+tl.to('#b8-err', { x: 8, duration: 0.05, yoyo: true, repeat: 5, ease: 'none' }, at('b8.3') + 0.25);
+fade('#f-b8a', at('b8.1'));
+hide('#s-b8a', at('b8.4') - 0.4);
+show('#s-b8b', at('b8.4') - 0.2, 0.3);
+rise('#b8-preg', at('b8.4'));
+rise('#b8-mot', at('b8.5'));
+fade('#b8-la', at('b8.6'), 0.3); barra('#b8-ba', at('b8.6') + 0.1, 0.8); fade('#b8-va', at('b8.6') + 0.8);
+fade('#b8-lb', em('b8.6', 0.5), 0.3); barra('#b8-bb', em('b8.6', 0.5), 0.6); fade('#b8-vb', em('b8.6', 0.5) + 0.6);
+pop('#b8-um', at('b8.7'), 0.7);
+fade('#f-b8b', at('b8.4'));
+hide('#s-b8b', at('b9.1') - 0.4);
+
+// ---------- b9 · Fecho ----------
+tl.to(fx, { chuva: 0.3, duration: 1.5, ease: 'none' }, at('b9.1') - 0.5);
+show('#s-b9', at('b9.1') - 0.2, 0.3);
+rise('#b9-a', at('b9.1'));
+tl.fromTo('#b9-b', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.4)' }, at('b9.2'));
+hide('#s-b9', end('b9.2') + 2.2, 0.6);
+tl.to(fx, { chuva: 0.6, duration: 1.0, ease: 'none' }, end('b9.2') + 2.2);
+show('#s-fim', end('b9.2') + 2.8, 0.7);
+hide('#s-fim', DURACAO - 0.8, 0.7);
+tl.to(fx, { chuva: 0, duration: 0.8, ease: 'none' }, DURACAO - 0.8);
+tl.to({}, { duration: 0.01 }, DURACAO);
+
+// ---------- canvas: tudo é função pura de t ----------
+function h(a, b, c) {
+  let x = Math.imul(a | 0, 374761393) ^ Math.imul(b | 0, 668265263) ^ Math.imul(c | 0, 1274126177);
+  x = Math.imul(x ^ (x >>> 13), 1274126177);
+  return ((x ^ (x >>> 16)) >>> 0) / 4294967296;
+}
+const GLIFOS = '0123456789ABCDEFXZ:;=+*<>|¦#@%&$?';
+const chuva = document.getElementById('chuva').getContext('2d');
+const CW = 24, CH = 28, COLS = 80, ROWS = 39;
+function desenharChuva(t, alfa) {
+  chuva.clearRect(0, 0, 1920, 1080);
+  if (alfa <= 0.001) return;
+  chuva.font = '500 24px JBM';
+  chuva.textBaseline = 'top';
+  for (let c = 0; c < COLS; c++) {
+    const vel = 7 + 14 * h(c, 1, 7), rastro = 10 + Math.floor(18 * h(c, 2, 7)), ciclo = ROWS + rastro + Math.floor(20 * h(c, 3, 7));
+    const cabeca = Math.floor((t * vel + h(c, 4, 7) * ciclo)) % ciclo;
+    for (let k = 0; k < rastro; k++) {
+      const r = cabeca - k;
+      if (r < 0 || r >= ROWS) continue;
+      const g = GLIFOS[Math.floor(h(c, r, Math.floor(t * 9 + h(c, r, 5) * 9)) * GLIFOS.length)];
+      const a = (1 - k / rastro) * alfa;
+      chuva.fillStyle = k === 0 ? `rgba(200,255,210,${a})` : `rgba(0,255,65,${a * 0.75})`;
+      chuva.fillText(g, c * CW, r * CH);
+    }
+  }
+}
+const mundo = document.getElementById('mundo').getContext('2d');
+const MW = 64, MH = 18, MX = 24, MY = 34, DENS = ' .:-=+*#';
+function ruido(x, y) { // value noise inteiro, como o main.c: suave entre cantos de uma grade 8×6
+  const gx = Math.floor(x / 8), gy = Math.floor(y / 6), fx_ = (x % 8) / 8, fy = (y % 6) / 6;
+  const v = (i, j) => h(gx + i, gy + j, 20260628);
+  const a = v(0, 0) + (v(1, 0) - v(0, 0)) * fx_, b = v(0, 1) + (v(1, 1) - v(0, 1)) * fx_;
+  return a + (b - a) * fy;
+}
+function desenharMundo(t, alfa, foco) {
+  mundo.clearRect(0, 0, 1536, 612);
+  if (alfa <= 0.001) return;
+  mundo.font = '500 26px JBM';
+  mundo.textBaseline = 'top';
+  mundo.globalAlpha = alfa;
+  const passo = Math.floor(t * 3);
+  const blocos = [];
+  for (let i = 0; i < 14; i++) {
+    const x0 = Math.floor(h(i, 9, 1) * MW), y0 = Math.floor(h(i, 9, 2) * MH);
+    blocos.push([(x0 + Math.round(4 * Math.sin(passo * 0.31 + i * 1.7)) + MW) % MW, (y0 + Math.round(2 * Math.cos(passo * 0.23 + i)) + MH) % MH]);
+  }
+  for (let y = 0; y < MH; y++) for (let x = 0; x < MW; x++) {
+    const n = ruido(x, y), d = DENS[Math.min(DENS.length - 1, Math.floor(n * n * DENS.length * 1.3))];
+    mundo.fillStyle = `rgba(0,184,46,${0.25 + 0.5 * n})`;
+    mundo.fillText(d, x * MX, y * MY);
+  }
+  blocos.forEach(([x, y], i) => {
+    const eu = i === 0;
+    mundo.fillStyle = eu && foco > 0 ? '#E8FF8A' : '#D8FFE0';
+    mundo.fillText('@', x * MX, y * MY);
+    if (eu && foco > 0) { // o caminho previsto: três passos à frente, com a comida esperada
+      mundo.globalAlpha = alfa * foco;
+      mundo.strokeStyle = '#E8FF8A'; mundo.lineWidth = 2;
+      mundo.strokeRect(x * MX - 4, y * MY - 2, MX + 6, MY);
+      for (let k = 1; k <= 3; k++) {
+        const px = (x + k) % MW;
+        mundo.fillStyle = '#00FF41';
+        mundo.fillText('›', px * MX, y * MY);
+        mundo.font = '700 18px JBM';
+        mundo.fillText('+' + (1 + Math.floor(5 * ruido(px, y))), px * MX, y * MY - 22);
+        mundo.font = '500 26px JBM';
+      }
+      mundo.globalAlpha = alfa;
+    }
+  });
+  mundo.globalAlpha = 1;
+}
+const linhaEl = document.getElementById('b1-linha'), curEl = document.getElementById('b1-cur'), l3 = document.getElementById('b4-l3');
+Motor.aoQuadro = (t) => {
+  tl.seek(Math.min(t, tl.duration()), false);
+  desenharChuva(t, fx.chuva);
+  desenharMundo(t, fx.mundo, fx.foco);
+  linhaEl.textContent = LINHA.slice(0, Math.round(fx.digitado));
+  curEl.style.opacity = Math.floor(t * 2) % 2 ? 0 : 1;
+  l3.classList.toggle('hl', t >= em('b4.1', 0.85));
+};
+document.fonts.load('500 24px JBM').then(() => document.fonts.ready).then(() => {
+  const img = [...document.images].map((i) => (i.complete ? Promise.resolve() : new Promise((ok) => { i.onload = i.onerror = ok; })));
+  return Promise.all(img);
+}).then(() => Motor.iniciar());
+</script>
+</body>
+</html>
