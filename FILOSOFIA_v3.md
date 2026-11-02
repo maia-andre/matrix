@@ -19,6 +19,12 @@
 > nomeou o que esta versão não teve como perguntar, que é por onde uma quarta
 > começaria.
 >
+> **Adendo pós-fechamento (2026-11-02).** O fio de Q5, que a §4 deixou aberto,
+> fechou depois da versão (notas 37–41). A §4 ganhou um bloco datado no fim, sem
+> reescrever o texto original: a régua pareada responde Q5, a hipótese mecânica está
+> medida (o peso negativo mira a comida disputada), e a frase do reflexo perde o
+> lastro. Nenhum veredito pré-registrado muda, e o Apêndice A não reabre.
+>
 > **A lista do Apêndice B fechou.** Os cinco itens que seguravam o rótulo estão
 > cumpridos: o `relato` existe, pré-registrado antes do código (nota 06); o
 > experimento do intérprete rodou (nota 07); o relato virou causal e a honestidade
@@ -518,6 +524,48 @@ física inteira cabe num arquivo, a herança fica registrada, e é
 desconfortável: um relato de "algo me moveu contra o meu plano" — num cérebro,
 num experimento de Libet, numa Matrix — jamais discrimina, sozinho, física de
 dentro de intervenção de fora.
+
+> **Adendo datado (2026-11-02, notas 37–41), escrito com a v3 já fechada.** O
+> texto acima fica como estava; este bloco registra o que o fio de Q5 mediu depois
+> do fechamento. Nenhum veredito pré-registrado desta seção muda: T1 segue
+> "fundador puro" pelo classificador binário (nota 33) e T2 segue "não decide"
+> (nota 34). O que mudou foi a régua. A diferença pareada entre as duas montagens
+> espelhadas, cega ao viés de paridade por construção, deu **58/60** para `−2,0`
+> contra `+2,0` em dois painéis independentes (notas 37/38), e **28/30** para
+> `−2,0` contra `0,0` (nota 40), o mesmo T1 que o binário chamava de fundador. O
+> parágrafo que dizia que este desenho "segue sem potência para separá-la do efeito
+> fundador" estava certo sobre o classificador e errado sobre o desenho: a potência
+> estava nas mesmas corridas, numa coluna que ninguém subtraiu.
+>
+> **A hipótese mecânica, que esta seção deixou "registrada, não provada", está
+> medida, e com uma correção de sentido.** Desligando o termo só na decisão do
+> próprio bloco (nota 41), o peso negativo redireciona para células **mais ricas e
+> mais lotadas** (30/30 nos dois), e o bloco `−2,0` **come mais** que o `0,0` apesar
+> de perder **mais** disputas. Um termo de mesma dose sem direção perde para todos e
+> perde **menos** disputas. Quem ordena os tipos é a comida no alvo, não a disputa.
+> O bloco não aprende a fugir da lotação que o barrou, como o §4.3 apostava: aprende
+> a usá-la como **pista** do que vale a pena, porque neste mundo a célula disputada é
+> a célula rica (a mesma geometria da §5). A frase "continua competindo pelo recurso
+> que valia a disputa" pode ficar. "Aprender com o arrependimento" não ganha nada com
+> isso: o mecanismo é um coeficiente deslocado, e a seleção o achou no sinal que o
+> desenho não esperava.
+>
+> **E uma frase desta seção perde o lastro: a do reflexo.** A nota 30 propôs, e o
+> §4.5 pré-registrou como T3, que o peso negativo aproximaria o bloco do reflexo.
+> T3 literal confirmou (24/30, nota 39), mas pela razão errada. A `agencia` do
+> `main.c` não tem canal para o termo do arrependimento, e a diferença é ecológica:
+> o bloco `−2,0` vive na lotação, onde há menos opções. Com o termo dentro da sonda,
+> o efeito tem o **sinal invertido**: o peso negativo **sobe** a agência (26/30) e o
+> positivo a baixa (30/30). Reflexo é fugir sempre da lotação. O peso negativo torna
+> a resposta ao espaço **condicional à fome**. Isso toca o compatibilismo do
+> parágrafo anterior: "um bloco como este, noutro estado, faria outra coisa" é
+> medido pela `agencia` sobre a fome, e não sobre o remorso. A afirmação sobre o
+> tipo sobrevive, e fica **mais** forte quando o eixo inteiro entra na varredura. O
+> 0,42 da nota 11 foi medido antes de o termo existir (§4.3 é da nota 30), e por
+> isso não é afetado. Mas toda leitura de `agencia` desde então, numa população com
+> o traço semeado, vem de uma régua que não vê este mecanismo. Nenhuma das três
+> condições que reabrem o Apêndice A se aplica: a condição de falseamento da
+> `agencia` (o eremita) não depende do termo, e nenhum ✅ ganhou contraexemplo.
 
 ## 5. A dobradiça da confabulação *(item 5 — selvagem ✅, forçada ✅, evolutiva instalada ✅ e o custo ligado ✅ — nota 31: misto isolado, claro na deriva)*
 
