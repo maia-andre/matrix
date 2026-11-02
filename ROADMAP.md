@@ -1807,6 +1807,10 @@ CPU, ~8 min de relógio com 12 processos, mais uma corrida de 30 000 ticks (S1, 
 
 **Reproduzir (script a escrever):** `sh papers/notes/40-decomposicao-do-arrependimento.sh`.
 
+> **Resultado (nota 40):** P1 e P2 confirmam. O `−2,0` ganha do zero (28/30) e o
+> `+2,0` perde (24/30), cerca de 3 : 1. P3 detecta efeito contra a expectativa: o termo
+> sem direção perde 29/30, mais que o positivo. A escada é `−2 > 0 > +2 > sem direção`.
+
 ---
 
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper *(a v3 **fechou** em 2026-08-09)*
