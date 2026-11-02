@@ -1884,6 +1884,12 @@ contrafactual soma uma chamada de `melhor_celula` por bloco `X` por tick (estimo
 
 **Reproduzir (script a escrever):** `sh papers/notes/41-mecanismo-do-arrependimento.sh`.
 
+> **Resultado (nota 41):** P1–P3 e P5 confirmam com 30/30 nas réguas de decisão e 27/30
+> na garfada. O negativo redireciona para comida mais rica e mais lotada, e come mais
+> apesar de perder mais disputas. P4 detecta efeito contra a expectativa: o termo sem
+> direção vai para o pobre e o aberto, e perde **menos** disputas. A comida no alvo
+> ordena a escada; as disputas não.
+
 ---
 
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper *(a v3 **fechou** em 2026-08-09)*
