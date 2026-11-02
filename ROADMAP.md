@@ -1719,6 +1719,94 @@ mais a sonda (três varreduras por bloco além da original; estimo +30–50%). O
 
 **Reproduzir (script a escrever):** `sh papers/notes/39-t3-agencia-do-arrependimento.sh`.
 
+> **Resultado (nota 39):** T3 literal **confirma** (24/30), mas por ecologia: a régua
+> do `main.c` não tem canal para o traço. O mecanismo cai **com o sinal invertido**: o
+> termo sobe a agência com `w = −2,0` (26/30) e a baixa com `w = +2,0` (30/30).
+
+## 4.13 Pré-registro da decomposição — `−2,0` ganha, ou `+2,0` perde? *(2026-11-02, antes de rodar)*
+
+**Por que existe.** Q5 tem resposta (notas 37/38: 58/60 pela régua pareada), mas a
+resposta é sobre um duelo, `−2,0 × +2,0`. "`−2,0` vence" é compatível com duas
+histórias diferentes: o negativo **paga** (vence também o `0,0`), ou o positivo
+**custa** (perde também para o `0,0`), e o negativo só aparece bem por comparação. As
+duas pedem mecanismos distintos, e a nota 39 acabou de mostrar que os dois sinais
+fazem coisas **opostas** na decisão. Antes de perguntar *por que* `−2,0` vence, é
+preciso saber **contra quem** ele vence.
+
+A régua pareada nunca foi aplicada a `−2,0 × 0,0` (o T1 das notas 32/33) nem a
+`+2,0 × 0,0` (o Q4 da nota 30). Os dois só foram lidos pelo classificador binário: T1
+deu FUNDADOR em 9/10 (nota 33) e Q4 deu 3×3 (nota 30). A regra 10 diz que, num desenho
+espelhado, a diferença pareada costuma estar disponível nas mesmas corridas e é cega ao
+viés de paridade. Aqui ela nem foi tentada.
+
+**A régua.** Para um duelo `X × 0,0` (X o valor não nulo), `f_X^M(t) = arrep_m^M(t)/X`
+é a fração da população com o traço X na montagem M. A régua pareada é
+`g(t) = (f_X^A(t) + f_X^B(t))/2 − 1/2`, e `ḡ_W` é a média dela em `[0, W)`. Como X fica
+nos pares em A e nos ímpares em B, um viés de paridade soma `+b` numa montagem e `−b`
+na outra e **cancela**. `ḡ > 0` quer dizer que X cresce independentemente de qual
+paridade o carrega. Para T2 (`X = −2,0` contra `+2,0`) a mesma conta dá `g = −d/2`
+na convenção das notas 37/38: a régua é a mesma, reescrita para um duelo contra o zero.
+
+**O desenho.** Três braços, invasão 50/50, sem mutação no traço, montagens A/B
+espelhadas, 30 seeds novas (**301–330**), **5 000 ticks**, 180 corridas:
+
+- **NEG**: `−2,0 × 0,0` (o binário T1 das notas 32/33, regenerado pelo mesmo `gen`).
+- **POS**: `+2,0 × 0,0` (o Q4 da nota 30).
+- **NUL**: `+2,0 × 0,0` com o termo multiplicado pelo campo `sinal_nulo` da nota 35
+  (patch copiado verbatim). O traço fica **ativo e sem direção**: prefere espaço aberto
+  em metade das células e lotação na outra metade. Ele pergunta se ter **qualquer**
+  termo de arrependimento já custa ou paga contra o `0,0`.
+
+**A álgebra do nulo (regra 9), antes da máquina.** Sob NUL, um bloco de peso `+2` no
+campo `s` se comporta como um de peso `−2` no campo `−s`. Como o ensemble de campos é
+simétrico sob complemento, NUL é **a mesma mistura** de "`−2,0` em metade do mundo,
+`+2,0` na outra" que se obteria partindo de `−2,0`. Diferente do N2 das notas 35–38,
+aqui o outro tipo é o `0,0`, e a involução **não** força `ḡ_NUL` a ser simétrico em
+torno de zero. Ele mede um efeito real, o da presença de um termo sem direção, e por
+isso o teste é bilateral.
+
+- **P1: NEG.** `ḡ_2000 > 0` (o `−2,0` cresce contra o `0,0`) em **≥ 21/30**.
+  Expectativa: confirma, confiança **moderada**. A nota 30 Q5 viu a média sob mutação
+  livre correr para negativo a partir de uma semeadura simétrica, o que um duelo contra
+  o zero deveria reproduzir. Mas o binário deu 1/10 REAL, e essa seed REAL favorecia
+  `0,0`.
+- **P2: POS.** `ḡ_2000 < 0` (o `+2,0` encolhe contra o `0,0`) em **≥ 21/30**.
+  Expectativa: **não decide**, confiança baixa. O 3×3 da nota 30 não diz nada sob a
+  régua binária.
+- **A tabela de leitura, escrita antes:**
+  - P1 ✓, P2 ✗: **`−2,0` paga.** O item 2 procura o mecanismo no negativo.
+  - P1 ✗, P2 ✓: **`+2,0` custa.** A vantagem de Q5 era o positivo perdendo, e a
+    pergunta "por que `−2,0` vence" estava mal posta.
+  - P1 ✓, P2 ✓: os dois contribuem. Os tamanhos das medianas dizem quanto de cada.
+  - P1 ✗, P2 ✗: o efeito de T2 só aparece no duelo direto. Isso é um achado, não
+    um nulo: a vantagem seria **relacional** (um tipo se aproveita do outro), não
+    absoluta.
+- **P3: NUL, bilateral.** `ḡ_2000 > 0` em ≤ 9/30 ou ≥ 21/30 quer dizer que um termo
+  sem direção já tem efeito contra o `0,0`; entre 10 e 20, **não detectado**.
+  Expectativa: não detectado. Se P3 detectar efeito **e** P1 ou P2 confirmar no mesmo
+  sentido, a nota tem de dizer que parte do efeito é presença do termo, não direção.
+- **Descritivo, sem corte:** as medianas de `ḡ` dos três braços, e a comparação com a
+  mediana de T2 publicada (nota 38: `d̄_2000 = −0,202`, ou seja, `ḡ = +0,101`). Se o
+  efeito fosse aditivo, `ḡ_NEG − ḡ_POS ≈ ḡ_T2`. A comparação é entre painéis com seeds
+  diferentes, e por isso é só descritiva. Sensibilidade nas janelas de 500 e 5000.
+  Companheiro: Wilcoxon signed-rank por permutação de sinais (10⁵ sorteios, semente
+  fixa).
+
+**Sanidade.** **S1 (regressão):** NEG/A da seed 1 a 30 000 ticks reproduz o
+`arrep_m = −0,026` publicado na nota 33. **S2 (paralelismo):** uma corrida repetida
+sozinha dá o mesmo md5. **S3 (a régua):** no tick 0, `f_X^A = f_X^B = 0,5` a menos da
+paridade de `n_blocos` inicial, e o script imprime o valor.
+
+**O que este pré-registro NÃO promete.** Não mede mecanismo: diz contra quem `−2,0`
+vence, não por quê. `ḡ` é composição em vantagem de crescimento cedo, não aptidão e
+não fixação. Não re-decide nada das notas 32–38: T1 e Q4 têm vereditos binários que
+ficam como estão. E 5 000 ticks não medem fixação.
+
+**Custo:** 27,6 s por corrida de 5 000 ticks (§4.11), ou seja, 180 corridas ≈ 83 min de
+CPU, ~8 min de relógio com 12 processos, mais uma corrida de 30 000 ticks (S1, ~3 min).
+
+**Reproduzir (script a escrever):** `sh papers/notes/40-decomposicao-do-arrependimento.sh`.
+
 ---
 
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper *(a v3 **fechou** em 2026-08-09)*
