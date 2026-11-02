@@ -1598,6 +1598,127 @@ o `main.c` do repo não é tocado e nenhum dataset congelado muda.
 **Reproduzir (script a escrever):** `sh papers/notes/38-painel-da-regua-pareada.sh`
 (`JOBS=12` por padrão; `JOBS=1` roda sequencial e deve produzir o mesmo painel).
 
+## 4.12 Pré-registro de T3 — o arrependimento negativo aproxima o bloco do reflexo? *(2026-11-02, antes de rodar)*
+
+**De onde vem, e o gate.** T3 nasceu no §4.5 como hipótese **condicional**: se a
+seleção favorecesse `peso_arrependimento` negativo em competição direta, valeria medir
+se blocos com o traço fortemente negativo mostram **menos `agencia`** que blocos com o
+traço em zero. A hipótese mecânica é da nota 30 §4: com `w < 0`, o remorso empurra
+**contra** o desejo de espaço, e "parar de responder ao espaço é, por definição,
+aproximar-se do reflexo". O gate ficou fechado por quatro notas (32–35) e a nota 38
+deixou escrito que abri-lo exigia **pré-registro próprio**, com corte novo, e **não** a
+fusão dos painéis. Este é esse pré-registro. A condição do §4.5 está cumprida pela
+régua que o fio adotou como primária: a direção de Q5 deu 30/30 fora da amostra
+(nota 38), pooled 58/60. Não invoco o binário: o §4.7 continua fechado em "não decide".
+
+**A álgebra antes da máquina (regra 9), e ela muda o desenho.** A sonda da `agencia`
+(`agencia_do_bloco`) foi escrita **antes** do §4.3 e varre `C + λ·E` sem o termo do
+arrependimento, enquanto a decisão real usa
+`C·(1+u·f) + P·E·(1−f) + w·r·E` (`u` = urgência, `f` = fome, `P` = `peso_espaco`,
+`r` = `remorso[i]`). Daí:
+
+- **Dado o mesmo estado, a `agencia` do `main.c` é idêntica para `w = −2,0` e
+  `w = 0,0`.** Ela não tem canal direto para o traço. T3 lido com ela, como o §4.5
+  escreveu, só pode medir um efeito **ecológico**: o traço muda onde os blocos estão,
+  e isso muda a leitura. Não é o mecanismo que a hipótese nomeia.
+- **A sonda completa tem forma fechada.** Dividindo a utilidade por `(1+u·f) > 0`, que
+  não muda o argmax, a nota de cada célula vira `(C + c·E)/K`, com coeficiente do espaço
+  `c = λ + ρ` e `ρ = w·r/(1+u·f)`. Usando `f = (P−λ)/(P+u·λ)` (a mesma bijeção que a
+  sonda original já usa), `ρ` sai **linear** em `λ`, e
+  `c(λ) = s·λ + w·r/(1+u)`, com `s = 1 + w·r·u / (P·(1+u))`.
+  A sonda completa, portanto, é a **sonda original sobre outro intervalo**: em vez de
+  `c ∈ [0, P]`, ela varre de `w·r/(1+u)` (fome total) até `P + w·r` (saciado). Com
+  `w < 0` e `r > 0`, o intervalo **desce** (entra em `c < 0`, onde a célula lotada passa
+  a valer mais) e, enquanto `|s| < 1`, **encolhe**. Com `w > 0`, sobe e **alarga**.
+- **A álgebra não decide o sinal.** Os dois intervalos não são aninhados, e a contagem
+  de trocas num envelope superior só é monótona sob aninhamento. "Encolher" sugere
+  menos trocas; "entrar em `c < 0`" pode criar trocas que a sonda original nunca viu.
+  O sentido é empírico, e por isso este experimento vale a pena.
+- **E ela entrega o nulo por identidade, que aqui serve de verificação e não de
+  controle.** Onde `w·r = 0` (todo bloco de `w = 0`, e todo bloco de `w ≠ 0` sem remorso
+  no tick), `ρ = 0` exato em `float`, `λ + ρ = λ` bit a bit, e a sonda completa **tem**
+  de devolver a leitura da original. Isso é a S2 abaixo. Pela regra 9, um nulo assim não
+  informa nada sobre a hipótese: o controle informativo é o **braço de sinal oposto**
+  (`w = +2,0`), em que a mesma álgebra aponta para o lado contrário.
+
+**O desenho.** Dois braços de invasão 50/50, **sem mutação** no traço, montagens
+espelhadas A/B por paridade de índice (o harness `invasao` das notas 30–38):
+**NEG** (`−2,0` × `0,0`, o T1 das notas 32/33) e **POS** (`+2,0` × `0,0`, o Q4 da
+nota 30). 30 seeds que nenhuma nota rodou (**201–230**), **5 000 ticks**, 120 corridas.
+Um patch temporário (tmpdir; o `main.c` do repo não é tocado) acrescenta, dentro de
+`medir_decisao`, ao lado da chamada de `agencia_do_bloco`, a sonda completa — mesma
+grade de 33 pontos em `λ`, mesmo desempate `>` estrito, mesmo critério de encurralado —
+e a repete em `double` (das mesmas entradas `float`, regra 6). A cada tick, por tipo
+(`X`: `w ≠ 0`; `Z`: `w = 0`), o patch escreve num fluxo à parte as somas: blocos com
+escolha `n`, leitura original `O`, leitura completa `F`, as duas em `double`, e quantos
+têm `r > 0`. O CSV do `--log` não ganha coluna.
+
+Numa janela `[0, W)`, por corrida: o **efeito direto**
+`δ = (F_X − O_X)/n_X` (o mesmo bloco, no mesmo tick, com e sem o termo na sonda: uma
+ablação, cega à ecologia por construção); o **T3 literal**
+`Δ_orig = O_X/n_X − O_Z/n_Z` (entre tipos, com a régua do `main.c`); e o **total**
+`Δ_full = F_X/n_X − F_Z/n_Z`. Por seed, a média de A e B (a diferença de tipos entre
+montagens espelhadas cancela o viés de paridade: regra 10). Janela primária
+**`W = 2000`** (herdada das notas 37/38, sem recalibrar); sensibilidade em 500 e 5000.
+
+- **P1 — primária: o mecanismo, braço NEG.** `δ < 0` em **≥ 21/30** seeds. Mesmo corte
+  do §4.6, α = 0,0214 sob a moeda (`p = 0,5`), 80% de potência a partir de `p = 0,749`.
+  Empate exato conta como **falha**. Expectativa declarada: confirma, com confiança
+  **moderada** (a álgebra sugere e não obriga).
+- **P2 — a contraprova de sinal, braço POS.** `δ > 0` em **≥ 21/30**. A tabela de
+  leitura, escrita antes:
+  - P1 ✓ e P2 ✓: o termo move a `agencia` **no sentido do sinal de `w`**. A hipótese
+    da nota 30 se confirma no mecanismo.
+  - P1 ✓ e P2 ✗: qualquer dose do termo baixa a `agencia`. O que tira o bloco da
+    escolha é o **deslocamento** do intervalo, não "parar de responder ao espaço", e a
+    frase da nota 30 cai mesmo com P1 confirmado.
+  - P1 ✗: a hipótese cai na forma mecânica, qualquer que seja P2.
+- **P3 — secundária: T3 literal.** Braço NEG, `Δ_orig < 0` (o sentido do §4.5):
+  ≥ 21/30 confirma; ≤ 9/30 inverte; entre os dois, **não decide**. Expectativa
+  declarada, com confiança **baixa**: não decide, porque a régua não tem canal direto.
+- **P4 — `double` (regra 6).** P1 e P2 recontadas com as sondas em `double`. Se o
+  veredito mudar de lado do corte entre as precisões, vale o de `double` e a nota
+  reporta o piso. Descritivo: em quantos blocos-tick a leitura muda entre `float` e
+  `double`, nas duas sondas.
+- **P5 — dose e forma (descritivo, sem corte).** A fração de blocos-tick de `X` com
+  `r > 0` (o efeito direto só pode morar ali), `δ` condicionado a `r > 0`, e a fração
+  desses com `|s| < 1` (o intervalo encolhe). Companheiro de P1/P2: Wilcoxon
+  signed-rank por permutação de sinais (10⁵ sorteios, semente fixa).
+
+**Sanidade — se qualquer uma falhar, o painel é nulo e a nota investiga a falha:**
+
+- **S1 (a sonda não toca o mundo, regra 3):** o CSV do binário com a sonda é **bit a
+  bit** igual ao do binário de invasão sem ela (o T1/Q4 das notas 30–33, regenerado
+  pelo mesmo `gen`), numa seed por braço e montagem.
+- **S2 (a identidade):** em todo o painel, zero blocos-tick com `w·r = 0` em que a
+  leitura completa difira da original, em `float` **e** em `double`.
+- **S3 (a extração):** a coluna `agencia` do CSV é igual, a `%.3f`, a
+  `(O_X + O_Z)/(n_X + n_Z)` do fluxo, tick a tick.
+- **S4 (paralelismo):** os md5 de CSV e fluxo de uma corrida repetida **sozinha** batem
+  com os do painel.
+
+**Se um tipo sumir** dentro da janela numa montagem, a seed usa só a outra; se sumir
+nas duas, ela conta como falha em P1/P2/P3 (conservador).
+
+**O que este pré-registro NÃO promete.**
+
+- **Não mexe no `main.c`, e não "conserta" a `agencia`.** A cegueira dela ao termo do
+  §4.3 é **achado**, não bug a corrigir aqui: trocar a sonda mudaria a coluna `agencia`
+  de todos os datasets congelados. Se um dia valer a pena, entra como **coluna nova no
+  fim** do CSV, em decisão separada (André, 2026-11-02: só registrar).
+- **Não responde por que `−2,0` vence.** Uma `agencia` mais baixa não é vantagem nem
+  desvantagem por si (o item 2 da fila mede isso).
+- **`agencia` é função, não experiência.** "Mais perto do reflexo" quer dizer, e só
+  quer dizer, que a decisão do bloco depende menos da fome.
+- **Não re-decide o §4.7 nem funde painéis.** As seeds 201–230 são novas e servem só a
+  este pré-registro.
+
+**Custo declarado:** 27,6 s por corrida de 5 000 ticks sem a sonda (medido no §4.11),
+mais a sonda (três varreduras por bloco além da original; estimo +30–50%). Ou seja,
+~75 min de CPU e ~8 min de relógio com 12 processos, mais 5 corridas de S1/S4.
+
+**Reproduzir (script a escrever):** `sh papers/notes/39-t3-agencia-do-arrependimento.sh`.
+
 ---
 
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper *(a v3 **fechou** em 2026-08-09)*
