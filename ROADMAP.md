@@ -1811,6 +1811,79 @@ CPU, ~8 min de relógio com 12 processos, mais uma corrida de 30 000 ticks (S1, 
 > `+2,0` perde (24/30), cerca de 3 : 1. P3 detecta efeito contra a expectativa: o termo
 > sem direção perde 29/30, mais que o positivo. A escada é `−2 > 0 > +2 > sem direção`.
 
+## 4.14 Pré-registro do mecanismo — o arrependimento negativo redireciona para a comida disputada? *(2026-11-02, antes de rodar)*
+
+**Por que existe.** A nota 40 respondeu *contra quem* `−2,0` vence: ganha do zero, e é
+o lado que pesa (3 : 1 sobre o custo do `+2,0`). A hipótese mecânica é a da nota 30
+§4, nunca testada: *depois de perder uma disputa, o bloco de peso negativo continua
+competindo pelo recurso que valia a disputa, em vez de fugir para uma célula pobre só
+porque está vazia.* Ela tem duas partes testáveis: **para onde** o termo manda o
+bloco (célula mais rica e mais lotada), e se isso **paga** (mais comida por tick, apesar
+de mais disputas perdidas).
+
+**A régua de decisão: uma ablação dentro do bloco (a técnica da nota 39).** A cada tick,
+depois de `decidir`, para cada bloco `X` (`w ≠ 0`), recalculo o alvo final com o termo
+**desligado** (`w = 0` só nessa chamada de `melhor_celula`, intenções dos vizinhos
+fixas) e comparo com o alvo real. Mesmo bloco, mesmo estado: a diferença é só o termo,
+e a ecologia não entra. Por bloco-tick `X`: `R_comida = comida(alvo) − comida(alvo sem
+termo)` (comida **real** da célula, o que ele comeria) e `R_rivais =
+rivais(alvo) − rivais(alvo sem termo)` (`rivais_em`, a lotação que a utilidade lê). Na
+corrida, a média sobre todos os blocos-tick `X` (zero onde o alvo não muda); por seed,
+a média de A e B.
+
+**A régua ecológica (entre tipos, montagens espelhadas, regra 10).** Taxas por
+bloco-tick, `X − Z`: comida no alvo (`E_comida`), lotação do alvo (`E_rivais`), fração
+de negados (`E_negado`, lido de `negado_tick` depois de `atualizar_remorso`) e
+**garfada** (`E_garfada`, a energia comida no tick, lida em `aplicar_e_comer`). A
+garfada é a moeda próxima da aptidão, e é ela que liga o mecanismo à escada da nota 40.
+
+**O desenho.** Os três braços da nota 40 (NEG `−2,0 × 0,0`; POS `+2,0 × 0,0`; NUL
+termo sem direção × `0,0`, os mesmos `gen`), 30 seeds novas (**401–430**), **5 000
+ticks**, janela primária **W = 2000** (sensibilidade em 500 e 5000), 180 corridas.
+Patch em tmpdir; o `main.c` não é tocado; as somas por tick saem num fluxo à parte.
+
+- **P1, primária: NEG redireciona para comida mais rica.** `R_comida > 0` em
+  **≥ 21/30**. Expectativa: confirma, confiança moderada.
+- **P2: NEG redireciona para lotação.** `R_rivais > 0` em **≥ 21/30**. É a parte
+  "continua competindo" da hipótese. Expectativa: confirma. A álgebra da nota 39 manda
+  nessa direção: com `w < 0` o coeficiente do espaço desce e pode ficar negativo.
+- **P3: POS é o espelho.** `R_comida < 0` **e** `R_rivais < 0`, cada um em ≥ 21/30.
+- **A tabela de leitura de P1/P2:**
+  - P1 ✓, P2 ✓: a nota 30 se confirma **na decisão**. O termo manda o bloco para a
+    comida disputada.
+  - P1 ✗, P2 ✓: o termo manda para a lotação **sem** comida melhor. "Competir pelo
+    recurso" cai, e a vantagem de `−2,0` precisa de outra explicação.
+  - P1 ✓, P2 ✗: comida melhor sem mais lotação. Não é "competir".
+  - P1 ✗, P2 ✗: a hipótese cai na decisão.
+- **P4: NUL, bilateral, nos dois `R`.** ≤ 9 ou ≥ 21 positivas = efeito. Expectativa
+  "não detectado" nos dois, com confiança **baixa**: o campo de sinal é independente da
+  comida, então os redirecionamentos para a lotação e para o espaço aberto deveriam se
+  anular. A nota 40 errou uma expectativa de nulo, e esta pode errar também.
+- **P5: a ponte para a aptidão.** NEG `E_garfada > 0` em ≥ 21/30 (o `−2,0` come mais
+  por bloco-tick que o `0,0` no mesmo mundo). Descritivo, com expectativa declarada:
+  a escada da nota 40 se repete na garfada (POS `< 0`, NUL `< 0`), e `E_negado > 0` em
+  NEG e NUL (mais disputas perdidas). Se NEG mostrar `E_negado > 0` **e**
+  `E_garfada > 0`, é o "paga apesar de perder mais disputas" da nota 30.
+
+**Sanidade.** **S1:** o CSV com o patch é bit a bit igual ao sem patch (uma seed, os
+três braços, as duas montagens). **S2:** o alvo recalculado com o termo **ligado** é
+igual ao alvo real em todo bloco-tick `X` (zero divergências), o que mostra que a
+chamada contrafactual reproduz `decidir`. **S3:** paralelismo (uma corrida repetida
+sozinha, mesmos md5 do CSV e do fluxo).
+
+**O que este pré-registro NÃO promete.** O contrafactual só desliga o termo na
+**decisão final**: a declaração do nível 5 (`declarar`) também usa o termo, e as
+intenções que os vizinhos leem ficam como estão. É uma ablação local, não um mundo sem
+o termo. `R_comida` mede para onde o bloco **mira**, não o que ele come (isso é a
+garfada, entre tipos). Nada aqui explica por que o termo sem direção custa tanto,
+embora `E_negado` em NUL vá ser lido. Comida é função, e "competir" é descrição de
+alvo, não intenção.
+
+**Custo:** a nota 40 levou 15 min 27 s de relógio para 180 corridas iguais a estas. O
+contrafactual soma uma chamada de `melhor_celula` por bloco `X` por tick (estimo +20%).
+
+**Reproduzir (script a escrever):** `sh papers/notes/41-mecanismo-do-arrependimento.sh`.
+
 ---
 
 # Fase 5 — Escrever: `FILOSOFIA_v3.md` e o paper *(a v3 **fechou** em 2026-08-09)*
